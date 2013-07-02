@@ -1,7 +1,7 @@
 class Lecturer < ActiveRecord::Base
-  attr_accessible :academic_degree, :academic_rank, :bio, :name, :patronymic, :photo, :surname
+  attr_accessible :academic_degree, :academic_rank, :name, :patronymic, :surname
 
-#  belongs_to :organization
+  belongs_to :organization
 
   def full_name
     "#{surname} #{name} #{patronymic}"

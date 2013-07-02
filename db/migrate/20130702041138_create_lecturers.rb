@@ -6,8 +6,6 @@ class CreateLecturers < ActiveRecord::Migration
       t.string :surname
       t.string :academic_degree
       t.string :academic_rank
-      t.string :photo
-      t.text :bio
       t.references :organization
 
       t.timestamps
