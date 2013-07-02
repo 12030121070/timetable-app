@@ -21,6 +21,7 @@
           <%= link_to 'sign in', new_user_session_path %>
         <% end %>
       </div>
+      <%= render_navigation :context => 'wizard' if user_signed_in? %>
       <%= yield %>
     </div>
   </body>
