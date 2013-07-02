@@ -1,0 +1,14 @@
+<h1>Buildings list</h1>
+
+<ul>
+  <% collection.each do |item| %>
+    <li>
+      <%= render :partial => 'building', :locals => { :item => item } %>
+      <%= link_to t('edit_building'), edit_workplace_organization_building_path(@organization, item) %>
+      <%= link_to t('delete_building'), workplace_organization_building_path(@organization, item), :method => :delete, :confirm => 'Are you sure?' %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to t('new_building'), new_workplace_organization_building_path(@organization) %>
+

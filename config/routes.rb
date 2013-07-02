@@ -4,6 +4,11 @@ TimetableApp::Application.routes.draw do
   namespace :workplace do
     resources :organizations do
       resources :lecturers, except: :show
+
+      resources :buildings, except: :show do
+        resources :classrooms, except: :show
+      end
+
     end
     root :to => 'workplace#index'
   end
