@@ -1,5 +1,5 @@
 class Lecturer < ActiveRecord::Base
-  attr_accessible :academic_degree, :academic_rank, :name, :patronymic, :surname
+  attr_accessible :name, :patronymic, :surname
 
   belongs_to :organization
 
@@ -7,8 +7,4 @@ class Lecturer < ActiveRecord::Base
     "#{surname} #{name} #{patronymic}"
   end
   alias_method :to_s, :full_name
-
-  def academic_titles
-    [academic_degree, academic_rank].delete_if(&:blank?).join(', ')
-  end
 end

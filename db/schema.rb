@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(:version => 20130702050037) do
     t.string   "name"
     t.string   "patronymic"
     t.string   "surname"
-    t.string   "academic_degree"
-    t.string   "academic_rank"
     t.integer  "organization_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
