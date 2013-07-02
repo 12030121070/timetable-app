@@ -1,1 +1,18 @@
-<%= render resource %>
+<h1><%= resource.title %></h1>
+
+<h3>Your lecturers (<%= link_to "add lecturer", new_workplace_organization_lecturer_path(resource) %>)</h3>
+<ul>
+  <%= render resource.lecturers if resource.lecturers.any? %>
+</ul>
+
+<h3>Your buildings (<%= link_to 'add building', new_workplace_organization_building_path(resource) %>)</h3>
+<ul>
+  <%= render resource.buildings if resource.buildings.any? %>
+</ul>
+
+
+<h3>Your members (<%= link_to 'add membership', new_workplace_organization_membership_path(resource) %>)</h3>
+<ul>
+  <%= render resource.members if resource.members.any? %>
+</ul>
+

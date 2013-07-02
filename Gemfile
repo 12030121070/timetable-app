@@ -10,6 +10,7 @@ group :assets do
 end
 
 group :default do
+  gem 'attribute_normalizer'
   gem 'devise', '~> 2.2'
   gem 'enumerize'
   gem 'has_scope'

@@ -1,0 +1,87 @@
+@import 'compass/reset'
+@import 'compass/utilities'
+@import 'compass/css3'
+
+@import url(http://fonts.googleapis.com/css?family=PT+Sans&subset=cyrillic)
+
+html, body
+  font-size: 1em
+  line-height: 1.62em
+  height: 100%
+
+html, body, input, textarea, select, button, a, p
+  font-family: 'PT Sans', sans-serif
+  font-weight: normal
+
+h1, h2, h3, h4, h5, h6
+  font-weight: normal
+  margin: 0 0 0.62em 0
+
+h1
+  font-size: 2em
+
+h2
+  font-size: 1.7em
+
+h3
+  font-size: 1.5em
+
+h4
+  font-size: 1.4em
+
+h5
+  font-size: 1.2em
+
+h6
+  font-size: 1em
+
+p
+  margin: 0 0 0.1em 0
+
+body
+  background: #fff
+
+.message_wrapper
+  font-size: 0.8em
+  padding: 5px 0
+  position: fixed
+  text-align: center
+  width: 100%
+
+  &.alert
+    background: #df6d76
+
+  &.notice
+    background: #c4dc78
+
+.log_info
+  margin: 0 0 1em 0
+  text-align: right
+  width: 100%
+
+.main_wrapper
+  h1
+    text-align: center
+
+h1, h2, h3, h4, h5
+  a
+    font-size: 0.8em
+
+.sign_up_form_wrapper, .sign_in_form_wrapper
+  margin: 0 auto
+  width: 270px
+
+form
+  .error
+    color: #df6d76
+    font-size: 0.8em
+
+    &:before
+      content: '\2191'
+      margin: 0 5px 0 0
+
+  textarea
+    height: 15px
+    width: 400px
+
+

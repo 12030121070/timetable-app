@@ -2,8 +2,8 @@ TimetableApp::Application.routes.draw do
   devise_for :users
 
   namespace :workplace do
-    resources :organizations do
-      resources :lecturers,   :except => :show
+    resources :organizations, :except => [:index] do
+      resources :lecturers, :except => [:show, :index]
       resources :memberships, :except => :show
 
       resources :buildings, except: :show do
