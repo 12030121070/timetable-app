@@ -1,8 +1,10 @@
 class Workplace::OrganizationsController < Workplace::WorkplaceController
   inherit_resources
 
-#private
-  #def begin_of_association_chain
-    #@current_user = current_user
-  #end
+  def create
+    create! {
+      @organization.set_owner(current_user)
+      redirect_to workplace_root_path and return
+    }
+  end
 end
