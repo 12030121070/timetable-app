@@ -1,2 +1,3 @@
 <%= lecturer.full_name %>
-<%= link_to 'Delete', workplace_organization_lecturer_path(@organization, lecturer), :method => :delete, :confirm => 'Are you sure?' %>
+<%= link_to 'Edit', edit_workplace_organization_lecturer_path(lecturer.organization, lecturer) %>
+<%= link_to 'Delete', workplace_organization_lecturer_path(lecturer.organization, lecturer), :method => :delete, :confirm => 'Are you sure?' %>

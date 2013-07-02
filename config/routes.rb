@@ -4,10 +4,10 @@ TimetableApp::Application.routes.draw do
   namespace :workplace do
     resources :organizations, :except => [:index] do
       resources :lecturers, :except => [:show, :index]
-      resources :memberships, :except => :show
+      resources :memberships, :except => [:show, :index]
 
-      resources :buildings, except: :show do
-        resources :classrooms, except: :show
+      resources :buildings, except: [:show, :index] do
+        resources :classrooms, except: [:show, :index]
       end
     end
 

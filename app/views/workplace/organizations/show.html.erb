@@ -13,6 +13,6 @@
 
 <h3>Your members (<%= link_to 'add membership', new_workplace_organization_membership_path(resource) %>)</h3>
 <ul>
-  <%= render resource.members if resource.members.any? %>
+  <%= render resource.memberships if resource.memberships.any? %>
 </ul>
 
