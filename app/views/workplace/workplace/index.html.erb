@@ -1,3 +1,5 @@
 <%= link_to "Create organization", new_workplace_organization_path %>
 
-<%= render @organization %>
+<% if @organizations.any? %>
+  <%= render @organizations %>
+<% end %>

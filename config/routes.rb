@@ -5,7 +5,6 @@ TimetableApp::Application.routes.draw do
     resources :organizations do
       resources :lecturers, except: :show
     end
-
     root :to => 'workplace#index'
   end
 
