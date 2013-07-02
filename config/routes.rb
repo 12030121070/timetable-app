@@ -2,7 +2,7 @@ TimetableApp::Application.routes.draw do
   devise_for :users
 
   namespace :workplace do
-    resource :organization do
+    resources :organizations do
       resources :lecturers, except: :show
     end
 

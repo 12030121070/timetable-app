@@ -1,9 +1,13 @@
 <h1>Lecturers list</h1>
 
-<% collection.each do |item| %>
-  <%= render :partial => 'lecturer', :locals => { :item => item } %>
-  <%= link_to t('edit_lecturer'), edit_workplace_organization_lecturer_path(:workplace, @organization, item) %>
-  <%= link_to t('delete_lecturer'), workplace_organization_lecturer_path(:workplace, @organization, item), :method => :delete, :confirm => 'Are you sure?' %>
-<% end %>
+<ul>
+  <% collection.each do |item| %>
+    <li>
+      <%= render :partial => 'lecturer', :locals => { :item => item } %>
+      <%= link_to t('edit_lecturer'), edit_workplace_organization_lecturer_path(@organization, item) %>
+      <%= link_to t('delete_lecturer'), workplace_organization_lecturer_path(@organization, item), :method => :delete, :confirm => 'Are you sure?' %>
+    </li>
+  <% end %>
+</ul>
 
-<%= link_to t('new_lecturer'), new_workplace_organization_lecturer_path %>
+<%= link_to t('new_lecturer'), new_workplace_organization_lecturer_path(@organization) %>
