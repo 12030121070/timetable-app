@@ -10,12 +10,13 @@ group :assets do
 end
 
 group :default do
+  gem 'devise', '~> 2.2'
   gem 'enumerize'
   gem 'has_scope'
   gem 'inherited_resources'
   gem 'nested_form'
   gem 'pg'
-  gem 'rails'
+  gem 'rails', '~> 3.2'
   gem 'russian'
   gem 'simple-navigation'
   gem 'simple_form'
