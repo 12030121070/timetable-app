@@ -13,12 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130702050037) do
 
-  create_table "memberships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "organization_id"
-    t.string   "role"
-  end
-
   create_table "lecturers", :force => true do |t|
     t.string   "name"
     t.string   "patronymic"
@@ -32,9 +26,18 @@ ActiveRecord::Schema.define(:version => 20130702050037) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "lecturers", ["organization_id"], :name => "index_lecturers_on_organization_id"
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.string   "role"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   add_index "memberships", ["organization_id"], :name => "index_memberships_on_organization_id"
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
-  add_index "lecturers", ["organization_id"], :name => "index_lecturers_on_organization_id"
 
   create_table "organizations", :force => true do |t|
     t.text     "title"
