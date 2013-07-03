@@ -4,7 +4,8 @@
   <% end %>
   <%= f.input :role %>
 
-  <%= f.submit %>
+  <div class="buttons">
+    <%= f.submit "Save" %>
+    <%= link_to "Cancel", :back %>
+  </div>
 <% end %>
-
-<%= link_to 'Cancel', workplace_organization_memberships_path(@organization) %>
