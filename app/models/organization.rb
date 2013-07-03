@@ -12,6 +12,6 @@ class Organization < ActiveRecord::Base
   has_many :buildings, :dependent => :destroy
 
   def set_owner(user)
-    memberships.create! :user_id => user.id, :role => :admin
+    memberships.create! :user_id => user.id, :role => :owner
   end
 end

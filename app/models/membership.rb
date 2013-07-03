@@ -7,11 +7,13 @@ class Membership < ActiveRecord::Base
   belongs_to :organization
 
   validates_presence_of :role
-  #validates_uniqueness_of :role, :scope => [:user_id, :email, :organization_id]
+  validates_uniqueness_of :role, :scope => [:user_id, :email, :organization_id]
 
-  enumerize :role, :in => [:admin, :member]
+  enumerize :role, :in => [:owner, :member], :predicates => true
 
-  after_create :send_email
+  scope :inactive, -> { where :user_id => nil }
+
+  after_create :send_invitation, :if => :member?
 
   def activated?
     user_id?
@@ -19,7 +21,7 @@ class Membership < ActiveRecord::Base
 
   private
 
-  def send_email
+  def send_invitation
     MembershipMailer.invitation_email(self).deliver
   end
 end
