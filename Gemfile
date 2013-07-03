@@ -27,6 +27,7 @@ end
 group :development do
   gem 'brakeman'
   gem 'hirb'
+  gem 'letter_opener'
   gem 'rails-erd'
 end
 

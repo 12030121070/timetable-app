@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :organizations, :through => :memberships
 
-  devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable,
+    :rememberable, :trackable, :validatable, :confirmable
 end
