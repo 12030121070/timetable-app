@@ -18,7 +18,8 @@ class Workplace::LecturersController < Workplace::WorkplaceController
       begin
         CsvImport.new(file.tempfile.path, collection.new).import
         flash[:notice] = 'Импорт прошел успешно'
-      rescue
+      rescue => e
+        logger.error "ERROR: #{e}"
         flash[:alert] = 'Во время импорта произошла ошибка'
       end
 

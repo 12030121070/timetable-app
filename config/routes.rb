@@ -9,6 +9,7 @@ TimetableApp::Application.routes.draw do
       resources :memberships, :except => [:show, :index]
 
       resources :buildings, except: [:show, :index] do
+        post :import, :on => :collection
         resources :classrooms, except: [:show, :index]
       end
     end

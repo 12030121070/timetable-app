@@ -15,6 +15,15 @@
 </ul>
 
 <h3>Your buildings (<%= link_to 'add building', new_workplace_organization_building_path(resource) %>)</h3>
+<div class="import_help">
+  Description of csv file
+  * first line is headers ('address, title, number')
+  * next lines is lecturer info('"Vershinina st, 76", FET, 438)
+</div>
+<%= simple_form_for :import, :url => import_workplace_organization_buildings_path(resource) do |f| %>
+  <%= f.input :file, :as => :file %>
+  <%= f.submit 'Import' %>
+<% end %>
 <ul>
   <%= render resource.buildings if resource.buildings.any? %>
 </ul>
