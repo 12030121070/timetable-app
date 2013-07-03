@@ -1,0 +1,8 @@
+<li>
+  <%= timetable.title %>
+  <%= timetable.starts_on %> &mdash;
+  <%= timetable.ends_on %>
+  <%= timetable.status %>
+  <%= link_to 'Edit', edit_workplace_organization_timetable_path(@organization, timetable) %>
+  <%= link_to 'Delete', workplace_organization_timetable_path(@organization, timetable), method: :delete, confirm: 'Are you sure?' %>
+</li>

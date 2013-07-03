@@ -12,6 +12,8 @@ TimetableApp::Application.routes.draw do
         post :import, :on => :collection
         resources :classrooms, except: [:show, :index]
       end
+
+      resources :timetables, except: :show
     end
 
     root :to => 'workplace#index'

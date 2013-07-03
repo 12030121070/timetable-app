@@ -1,0 +1,9 @@
+<h1>All timetables for <%= @organization.title %></h1>
+
+<ul>
+  <% @timetables.each do |timetable| %>
+    <%= render timetable %>
+  <% end %>
+</ul>
+
+<%= link_to 'Add timetable', new_workplace_organization_timetable_path(@organization) %>

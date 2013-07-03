@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702092956) do
+ActiveRecord::Schema.define(:version => 20130703094412) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -64,6 +64,19 @@ ActiveRecord::Schema.define(:version => 20130702092956) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "timetables", :force => true do |t|
+    t.integer  "organization_id"
+    t.string   "title"
+    t.datetime "starts_on"
+    t.datetime "ends_on"
+    t.string   "status"
+    t.boolean  "parity"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "timetables", ["organization_id"], :name => "index_timetables_on_organization_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

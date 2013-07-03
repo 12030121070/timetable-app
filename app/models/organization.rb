@@ -10,6 +10,7 @@ class Organization < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :lecturers, :dependent => :destroy
   has_many :buildings, :dependent => :destroy
+  has_many :timetables, :dependent => :destroy
 
   def set_owner(user)
     memberships.create! :user_id => user.id, :role => :owner
