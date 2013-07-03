@@ -11,7 +11,15 @@ class Membership < ActiveRecord::Base
 
   enumerize :role, :in => [:admin, :member]
 
+  after_create :send_email
+
   def activated?
     user_id?
+  end
+
+  private
+
+  def send_email
+    MembershipMailer.invitation_email(self).deliver
   end
 end
