@@ -3,7 +3,9 @@ TimetableApp::Application.routes.draw do
 
   namespace :workplace do
     resources :organizations, :except => [:index] do
-      resources :lecturers, :except => [:show, :index]
+      resources :lecturers, :except => [:show, :index] do
+        post :import, :on => :collection
+      end
       resources :memberships, :except => [:show, :index]
 
       resources :buildings, except: [:show, :index] do

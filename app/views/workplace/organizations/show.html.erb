@@ -1,6 +1,15 @@
 <h1><%= resource.title %></h1>
 
 <h3>Your lecturers (<%= link_to "add lecturer", new_workplace_organization_lecturer_path(resource) %>)</h3>
+<div class="import_help">
+  Description of csv file
+  * first line is headers ('surname, name, patronymic')
+  * next lines is lecturer info('Ivanov, Ivan, Ivanovich')
+</div>
+<%= simple_form_for :import, :url => import_workplace_organization_lecturers_path(resource) do |f| %>
+  <%= f.input :file, :as => :file %>
+  <%= f.submit 'Import' %>
+<% end %>
 <ul>
   <%= render resource.lecturers if resource.lecturers.any? %>
 </ul>
