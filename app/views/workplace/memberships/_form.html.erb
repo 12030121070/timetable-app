@@ -1,6 +1,6 @@
 <%= simple_form_for [:workplace, @organization, @membership] do |f| %>
   <% if @membership.new_record? %>
-    <%= f.input :user_id, :as => :select, :collection => User.all.map { |user| [user.email, user.id] } %>
+    <%= f.input :email %>
   <% end %>
   <%= f.input :role %>
 
