@@ -1,2 +1,9 @@
 <h1><%= @timetable.title %></h1>
-<%= render @timetable %>
+
+<ul>
+<% @timetable.weeks.each do |week| %>
+  <li>
+    <%= link_to week, workplace_organization_timetable_week_path(@organization, @timetable, week) %>
+  </li>
+<% end %>
+</ul>
