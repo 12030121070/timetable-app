@@ -1,0 +1,5 @@
+<% (1..7).each do |day| %>
+  <% @lesson_times.for_day(day) do |lesson_time| %>
+    <%= render lesson_time %>
+  <% end %>
+<% end %>
