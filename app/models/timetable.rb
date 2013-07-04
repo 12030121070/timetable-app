@@ -35,6 +35,16 @@ class Timetable < ActiveRecord::Base
       week_parity += 1 if self.first_week_parity?
       days.each do |day|
         week.days.create(date: day)
+        week = weeks.create(:number => number, :starts_on => days.first > starts_on ? days.first : starts_on)
+        days.each { |day| week.days.create }
+      end
+    end
+  end
+
+  def create_lesson_times
+    (1..6).each do |day|
+      (1..6).each do |number|
+        lesson_times.create :day => day, :number => number, :starts_at => '0:00', :ends_at => '0:00'
       end
     end
   end
