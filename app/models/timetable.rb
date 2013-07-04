@@ -3,11 +3,10 @@ class Timetable < ActiveRecord::Base
 
   attr_accessible :ends_on, :parity, :starts_on, :status, :title, :first_week_parity
 
-
   belongs_to :organization
 
   has_many :lesson_times, :as => :context, :dependent => :destroy, :order => 'day ASC, number ASC'
-  has_many :weeks, dependent: :destroy
+  has_many :weeks, dependent: :destroy, :order => 'number ASC'
 
   validates_presence_of :title, :starts_on, :ends_on
 
@@ -35,8 +34,6 @@ class Timetable < ActiveRecord::Base
       week_parity += 1 if self.first_week_parity?
       days.each do |day|
         week.days.create(date: day)
-        week = weeks.create(:number => number, :starts_on => days.first > starts_on ? days.first : starts_on)
-        days.each { |day| week.days.create }
       end
     end
   end
