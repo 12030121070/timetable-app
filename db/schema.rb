@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130704022056) do
+ActiveRecord::Schema.define(:version => 20130704034732) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(:version => 20130704022056) do
   end
 
   add_index "classrooms", ["building_id"], :name => "index_classrooms_on_building_id"
+
+  create_table "days", :force => true do |t|
+    t.integer  "week_id"
+    t.date     "date"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "days", ["week_id"], :name => "index_days_on_week_id"
 
   create_table "lecturers", :force => true do |t|
     t.string   "name"
@@ -86,8 +96,9 @@ ActiveRecord::Schema.define(:version => 20130704022056) do
     t.date     "ends_on"
     t.string   "status"
     t.boolean  "parity"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "first_week_parity"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "timetables", ["organization_id"], :name => "index_timetables_on_organization_id"

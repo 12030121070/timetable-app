@@ -7,6 +7,7 @@ class CreateTimetables < ActiveRecord::Migration
       t.date :ends_on
       t.string :status
       t.boolean :parity
+      t.integer :first_week_parity
 
       t.timestamps
     end
