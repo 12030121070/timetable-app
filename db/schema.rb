@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703094412) do
+ActiveRecord::Schema.define(:version => 20130704021928) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(:version => 20130703094412) do
   create_table "timetables", :force => true do |t|
     t.integer  "organization_id"
     t.string   "title"
-    t.datetime "starts_on"
-    t.datetime "ends_on"
+    t.date     "starts_on"
+    t.date     "ends_on"
     t.string   "status"
     t.boolean  "parity"
     t.datetime "created_at",      :null => false
@@ -100,5 +100,16 @@ ActiveRecord::Schema.define(:version => 20130703094412) do
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "weeks", :force => true do |t|
+    t.integer  "timetable_id"
+    t.integer  "number"
+    t.date     "starts_on"
+    t.string   "parity"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "weeks", ["timetable_id"], :name => "index_weeks_on_timetable_id"
 
 end
