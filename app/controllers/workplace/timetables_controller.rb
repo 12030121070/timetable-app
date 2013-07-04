@@ -1,7 +1,7 @@
 class Workplace::TimetablesController < Workplace::WorkplaceController
   inherit_resources
 
-  actions :all, except: :show
+  actions :all
 
   belongs_to :organization
 end

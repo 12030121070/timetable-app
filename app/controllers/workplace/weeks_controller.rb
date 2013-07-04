@@ -3,7 +3,7 @@
 class Workplace::WeeksController < Workplace::WorkplaceController
   inherit_resources
 
-  actions :all, except: [:new, :show]
+  actions :all, except: [:new, :edit]
 
   belongs_to :organization, :timetable
 end
