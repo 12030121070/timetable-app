@@ -34,5 +34,8 @@
   <%= render resource.memberships if resource.memberships.any? %>
 </ul>
 
+<h3>Your diciplines</h3>
+<%= link_to 'your disciplines', workplace_organization_disciplines_path(resource) %>
+
 <h3>Your timetables</h3>
 <%= link_to 'your timetables', workplace_organization_timetables_path(resource) %>
