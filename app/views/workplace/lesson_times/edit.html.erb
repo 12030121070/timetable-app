@@ -1,0 +1,7 @@
+<%= simple_form_for resource, :url => workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, resource), :remote => true do |f| %>
+  <%= f.input :number, :input_html => { :autofocus => true } %>
+  <%= f.input :starts_at %>
+  <%= f.input :ends_at %>
+  <%= f.submit 'save' %>
+  <%= link_to 'cancel', workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, resource), :remote => true, :class => 'cancel_link' %>
+<% end %>

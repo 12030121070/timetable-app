@@ -6,7 +6,6 @@ TimetableApp::Application.routes.draw do
       resources :lecturers, :except => [:show, :index] do
         post :import, :on => :collection
       end
-      resources :lesson_times
       resources :memberships, :except => [:show, :index]
 
       resources :buildings, except: [:show, :index] do
@@ -17,6 +16,7 @@ TimetableApp::Application.routes.draw do
       resources :timetables do
         resources :groups, except: [:index, :show]
         resources :weeks, except: [:index, :new, :edit]
+        resources :lesson_times
       end
     end
 

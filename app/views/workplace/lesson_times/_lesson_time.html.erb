@@ -1,6 +1,5 @@
-<div>
-  <%= lesson_time.day %>
-  <%= lesson_time.number %>
-  <%= lesson_time.starts_at %>
-  <%= lesson_time.ends_at %>
-</div>
+<%= lesson_time.number %>
+<%= lesson_time.starts_at %>
+<%= lesson_time.ends_at %>
+<%= link_to 'edit', edit_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, lesson_time), :remote => true %>
+<%= link_to 'remove', workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, lesson_time), :method => :delete, :confirm => 'Are you sure?', :remote => true %>

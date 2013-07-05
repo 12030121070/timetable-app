@@ -1,5 +1,1 @@
-<% (1..7).each do |day| %>
-  <% @lesson_times.for_day(day) do |lesson_time| %>
-    <%= render lesson_time %>
-  <% end %>
-<% end %>
+<%= link_to "new", new_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, 'lesson_time[day]' => params['lesson_time']['day']), :remote => true %>

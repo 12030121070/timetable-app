@@ -8,3 +8,33 @@
 <% else %>
   <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks } %>
 <% end %>
+
+<%= render @timetable %>
+
+<div class="lesson_time_wrapper">
+  <ul class='tabbed_links'>
+    <% (1..7).each do |day| %>
+      <li><%= link_to day, '#', :class => 'tabbed_link', :id => "day_#{day}" %></li>
+    <% end %>
+  </ul>
+  <div class='tabbed ajaxed lesson_times'>
+    <% (1..7).each do |day| %>
+      <ul class='day_<%= day %> target'>
+        <% lesson_times_for_day = @timetable.lesson_times.for_day(day) %>
+        <% (1..lesson_times_for_day.maximum(:number).to_i).each do |number| %>
+          <li class='ajax_item'>
+            <% lesson_time = lesson_times_for_day.for_number(number) %>
+            <% if lesson_time.any? %>
+              <%= render lesson_time %>
+            <% else %>
+              <%= number %> нет занятия в это время
+            <% end %>
+          </li>
+        <% end %>
+        <li class='ajax_item'>
+          <%= link_to "new", new_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, 'lesson_time[day]' => day), :remote => true, :class => 'new_link' %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>
