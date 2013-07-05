@@ -7,7 +7,8 @@
 
 <table>
   <% @week.days.each do |day| %>
-    <% next if @timetable.lesson_times.where(:day => day.wday).empty? %>
+    <% next if day.lesson_times.empty? %>
+
     <tr>
       <th colspan="2"></th>
       <% @timetable.groups.each do |group| %>
@@ -17,27 +18,25 @@
       <% end %>
     </tr>
     <tr>
-      <th rowspan="<%= @timetable.lesson_times.where(:day => day.wday).count %>" class="abbr_day_name">
+      <th rowspan="<%= day.lesson_times.count %>" class="abbr_day_name">
         <b><%= day.day_name %><br /><br /><%= l(@week.days.first.date + day.date.day - 1.days, :format => '%e %b') %></b>
       </th>
       <th class="lesson_interval">
-        <p><%= @timetable.lesson_times.where(:day => day.wday).first.starts_at %></p>
-        <p><%= @timetable.lesson_times.where(:day => day.wday).first.ends_at %></p>
+        <p><%= day.lesson_times.first.starts_at %></p>
+        <p><%= day.lesson_times.first.ends_at %></p>
       </th>
       <% @timetable.groups.each_with_index do |group, index| %>
-        <td>
-        </td>
+        <%= render :partial => 'cell', :locals => { :cell => DailyTimetable.new(:timetable => @timetable, :day => day ,:week => @week).cells[day.lesson_times.first.number][index + 1], :group => group, week: @week } %>
       <% end %>
     </tr>
-    <% @timetable.lesson_times.where(:day => day.wday)[1..-1].each do |lesson_time| %>
+    <% day.lesson_times[1..-1].each do |lesson_time| %>
       <tr>
         <th class="lesson_interval">
         <p><%= lesson_time.starts_at %></p>
         <p><%= lesson_time.ends_at %></p>
         </th>
         <% @timetable.groups.each_with_index do |group, index| %>
-          <td>
-          </td>
+          <%= render :partial => 'cell', :locals => { :cell => DailyTimetable.new(:timetable => @timetable, :day => day ,:week => @week).cells[lesson_time.number][index + 1], :group => group, week: @week } %>
         <% end %>
       </tr>
     <% end %>

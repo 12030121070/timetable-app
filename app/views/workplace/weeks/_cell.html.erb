@@ -1,0 +1,14 @@
+<% if cell.rendering? %>
+  <td rowspan="<%= cell.span_rows %>" colspan="<%= cell.span_columns %>">
+    <div class="lesson_cell width_<%= cell.span_columns %> training_type_<%= cell.kind %>">
+      <% if cell.lesson_nil? %>
+        <%= link_to "добавить",
+          polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id),
+          :class => "add", :title => "добавить" %>
+      <% else %>
+        <%= cell.lesson.discipline.title %>
+        <%#= link_to "удалить", manage_timetables_faculty_course_group_lesson_path(@faculty, @course, group, cell.lesson, week_id: week), :class => "destroy", :title => "удалить" %>
+      <% end %>
+    </div>
+  </td>
+<% end %>
