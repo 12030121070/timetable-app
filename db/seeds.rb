@@ -1,7 +1,41 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# encoding: utf-8
+
+user = User.find_or_initialize_by_email('demo@demo.de') do |u|
+  u.password = 'demodemo'
+  u.skip_confirmation!
+  u.save!
+end
+
+organization = user.organizations.find_or_initialize_by_title('Томский Государственный Университет Систем Управления и Радиоэлектроники') do |o|
+  o.email = 'mail@tusur.ru'
+  o.phone = '(3822) 51-05-30'
+  o.site = 'http://tusur.ru'
+  o.subdomain = 'tusur'
+  o.save!
+  o.set_owner(user)
+end
+
+gk = organization.buildings.find_or_initialize_by_title('Главный корпус') do |b|
+  b.address = '634050, г. Томск, пр. Ленина, 40'
+  b.save!
+end
+
+fet = organization.buildings.find_or_initialize_by_title('Корпус ФЭТ') do |b|
+  b.address = '634034, Томск, Вершинина, 74'
+  b.save!
+end
+
+%w[111 222 333 444 555].each do |number|
+  gk.classrooms.find_or_initialize_by_number(number).save!
+  fet.classrooms.find_or_initialize_by_number(number).save!
+end
+
+['Нухимович Глеб Егорович',
+ 'Чуканов Александр Викторович',
+ 'Богатков Всеслав Андреевич',
+ 'Окуловa Вероника Яковлевна',
+ 'Тюфякинa Варвара Юрьевна',
+ 'Акимихинa Прасковья Львовна'].each do |fullname|
+  surname, name, patronymic = fullname.split(' ')
+  organization.lecturers.find_or_initialize_by_surname_and_name_and_patronymic(surname, name, patronymic).save!
+end

@@ -5,7 +5,7 @@ class Building < ActiveRecord::Base
 
   belongs_to :organization
 
-  has_many :classrooms, :dependent => :destroy
+  has_many :classrooms, :dependent => :destroy, :order => 'classrooms.number ASC'
 
   accepts_nested_attributes_for :classrooms, allow_destroy: true
 
