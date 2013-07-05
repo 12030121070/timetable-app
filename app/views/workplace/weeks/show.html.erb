@@ -1,5 +1,10 @@
 <h1><%= "#{@timetable.title} #{@week}" %></h1>
 
+<%= simple_form_for Group.new, url: workplace_organization_timetable_groups_path(@organization, @timetable) do |f| %>
+  <%= f.input :title %>
+  <%= f.submit %>
+<% end %>
+
 <table class='timetable'>
   <tr>
     <td>
@@ -7,7 +12,6 @@
         <tr>
           <th>Week</th>
         </tr>
-
         <% @week.days.each do |day| %>
           <tr>
             <td>
@@ -28,5 +32,29 @@
         <% end %>
       </table>
     </td>
+
+    <% @timetable.groups.each do |group| %>
+      <td>
+        <table>
+          <tr>
+            <th><%= group.title %></th>
+          </tr>
+          <% @week.days.each do |day| %>
+            <tr>
+              <td>
+                <table>
+                  <% @timetable.lesson_times.where(:day => day.wday).each do |time| %>
+                    <tr>
+                      <td></td>
+                    </tr>
+                  <% end %>
+                </table>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </td>
+    <% end %>
   </tr>
 </table>
+

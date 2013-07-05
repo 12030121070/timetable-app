@@ -15,6 +15,7 @@ TimetableApp::Application.routes.draw do
       end
 
       resources :timetables do
+        resources :groups, except: [:index, :show]
         resources :weeks, except: [:index, :new, :edit]
       end
     end
