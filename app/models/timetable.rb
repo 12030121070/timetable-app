@@ -14,7 +14,10 @@ class Timetable < ActiveRecord::Base
   after_create :create_weeks
   after_create :create_lesson_times
 
-  enumerize :status, in: [:draft, :published], predicates: true
+  enumerize :status,
+    in: [:draft, :published],
+    predicates: true,
+    default: :draft
 
   normalize_attributes :ends_on, :parity, :starts_on, :title, :first_week_parity
 

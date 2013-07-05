@@ -39,3 +39,11 @@ end
   surname, name, patronymic = fullname.split(' ')
   organization.lecturers.find_or_initialize_by_surname_and_name_and_patronymic(surname, name, patronymic).save!
 end
+
+timetable = organization.timetables.find_or_initialize_by_title('Расписание на осенний семестр') do |t|
+  t.starts_on = Date.new(Date.today.year, 9, 1)
+  t.ends_on = Date.new(Date.today.year, 12, 31)
+  t.parity = true
+  t.first_week_parity = 1
+  t.save!
+end

@@ -4,7 +4,7 @@
   <%= f.input :ends_on %>
   <%= f.input :status %>
   <%= f.input :parity %>
-  <%= f.input :first_week_parity %>
+  <%= f.input :first_week_parity, :as => :select, :collection => [['odd', 1], ['even', 0]] %>
 
   <div class="buttons">
     <%= f.submit "Save" %>
