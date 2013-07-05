@@ -21,20 +21,16 @@ class Timetable < ActiveRecord::Base
     number = 1
     week_parity = self.first_week_parity
     (self.starts_on.beginning_of_week..self.ends_on).each_slice(7) do |days|
+      week_starts_on = days.first > starts_on ? days.first : starts_on
       if self.parity?
-        if week_parity % 2 == 0
-          week = weeks.create(:number => number, :starts_on => days.first > starts_on ? days.first : starts_on, :parity => :even)
-        else
-          week = weeks.create(:number => number, :starts_on => days.first > starts_on ? days.first : starts_on, :parity => :odd)
-        end
+        parity = week_parity % 2 == 0 ? :even : :odd
+        week = weeks.create(number: number, starts_on: week_starts_on, parity: parity)
+        week_parity += 1
       else
-        week = weeks.create(:number => number, :starts_on => days.first > starts_on ? days.first : starts_on)
+        week = weeks.create(number: number, starts_on: week_starts_on)
       end
       number += 1
-      week_parity += 1 if self.first_week_parity?
-      days.each do |day|
-        week.days.create(date: day)
-      end
+      days.each { |day| week.days.create date: day }
     end
   end
 
