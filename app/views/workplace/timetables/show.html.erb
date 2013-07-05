@@ -1,10 +1,10 @@
 <h1><%= @timetable.title %></h1>
 
 <% if @timetable.parity? %>
-  <h3>Even weeks:</h3>
-  <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks.even } %>
   <h3>Odd weeks:</h3>
   <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks.odd } %>
+  <h3>Even weeks:</h3>
+  <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks.even } %>
 <% else %>
   <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks } %>
 <% end %>
