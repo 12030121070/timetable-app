@@ -5,58 +5,42 @@
   <%= f.submit %>
 <% end %>
 
-<table class='timetable'>
-  <tr>
-    <td>
-      <table>
-        <tr>
-          <th>Week</th>
-        </tr>
-        <% @week.days.each do |day| %>
-          <tr>
-            <td>
-              <table>
-                <tr>
-                  <td rowspan="<%= @week.days.count %>">
-                    <%= day.day_name %>
-                  </td>
-                </tr>
-                <% @timetable.lesson_times.where(:day => day.wday).each do |time| %>
-                  <tr>
-                    <td><%= "#{time.starts_at} - #{time.ends_at}" %></td>
-                  </tr>
-                <% end %>
-              </table>
-            </td>
-          </tr>
+<table>
+  <% @week.days.each do |day| %>
+    <% next if @timetable.lesson_times.where(:day => day.wday).empty? %>
+    <tr>
+      <th colspan="2"></th>
+      <% @timetable.groups.each do |group| %>
+        <th class="group_number group_<%= group.title.gsub('-', '_') %>">
+          <%= group.title  %>
+        </th>
+      <% end %>
+    </tr>
+    <tr>
+      <th rowspan="<%= @timetable.lesson_times.where(:day => day.wday).count %>" class="abbr_day_name">
+        <b><%= day.day_name %><br /><br /><%= l(@week.days.first.date + day.date.day - 1.days, :format => '%e %b') %></b>
+      </th>
+      <th class="lesson_interval">
+        <p><%= @timetable.lesson_times.where(:day => day.wday).first.starts_at %></p>
+        <p><%= @timetable.lesson_times.where(:day => day.wday).first.ends_at %></p>
+      </th>
+      <% @timetable.groups.each_with_index do |group, index| %>
+        <td>
+        </td>
+      <% end %>
+    </tr>
+    <% @timetable.lesson_times.where(:day => day.wday)[1..-1].each do |lesson_time| %>
+      <tr>
+        <th class="lesson_interval">
+        <p><%= lesson_time.starts_at %></p>
+        <p><%= lesson_time.ends_at %></p>
+        </th>
+        <% @timetable.groups.each_with_index do |group, index| %>
+          <td>
+          </td>
         <% end %>
-      </table>
-    </td>
-
-    <% @timetable.groups.each do |group| %>
-      <td>
-        <table>
-          <tr>
-            <th><%= group.title %></th>
-          </tr>
-          <% @week.days.each do |day| %>
-            <tr>
-              <td>
-                <table>
-                  <% @timetable.lesson_times.where(:day => day.wday).each do |time| %>
-                    <tr>
-                      <td>
-                        <%= link_to "+ lesson", polymorphic_path([:new, :workplace, @organization, @timetable, @week, day, :lesson], 'lesson[lesson_time_id]' => time.id) %>
-                      </td>
-                    </tr>
-                  <% end %>
-                </table>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-      </td>
+      </tr>
     <% end %>
-  </tr>
+  <% end %>
 </table>
 
