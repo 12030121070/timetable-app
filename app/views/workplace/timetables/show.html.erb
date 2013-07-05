@@ -1,9 +1,10 @@
 <h1><%= @timetable.title %></h1>
 
-<ul>
-<% @timetable.weeks.each do |week| %>
-  <li>
-    <%= link_to week, workplace_organization_timetable_week_path(@organization, @timetable, week) %>
-  </li>
+<% if @timetable.parity? %>
+  <h3>Even weeks:</h3>
+  <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks.even } %>
+  <h3>Odd weeks:</h3>
+  <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks.odd } %>
+<% else %>
+  <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks } %>
 <% end %>
-</ul>
