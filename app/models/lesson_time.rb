@@ -3,6 +3,8 @@ class LessonTime < ActiveRecord::Base
 
   belongs_to :context, :polymorphic => true
 
+  has_many :lessons, :dependent => :destroy
+
   validates_presence_of :day, :number, :starts_at, :ends_at
   validates_uniqueness_of :number, :scope => [:day, :context_type, :context_id]
   validate :format_of_time

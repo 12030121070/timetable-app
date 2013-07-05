@@ -13,4 +13,6 @@ class Building < ActiveRecord::Base
   validates_uniqueness_of :address, :title, :scope => :organization_id
 
   normalize_attributes :address, :title
+
+  alias_attribute :to_s, :title
 end

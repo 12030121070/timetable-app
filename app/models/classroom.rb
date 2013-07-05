@@ -9,4 +9,8 @@ class Classroom < ActiveRecord::Base
   validates_uniqueness_of :number, :scope => :building_id
 
   normalize_attributes :number
+
+  def to_s
+    "#{number} (#{building})"
+  end
 end

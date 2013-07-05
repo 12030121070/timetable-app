@@ -45,7 +45,9 @@
                 <table>
                   <% @timetable.lesson_times.where(:day => day.wday).each do |time| %>
                     <tr>
-                      <td></td>
+                      <td>
+                        <%= link_to "+ lesson", polymorphic_path([:new, :workplace, @organization, @timetable, @week, day, :lesson], 'lesson[lesson_time_id]' => time.id) %>
+                      </td>
                     </tr>
                   <% end %>
                 </table>

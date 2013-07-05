@@ -1,0 +1,23 @@
+<%= simple_nested_form_for [:workplace, @organization, @timetable, @week, @day, @lesson] do |f| %>
+  <%= f.input :lesson_time_id, :as => :hidden %>
+  <%= f.association :discipline %>
+  <%= f.input :kind %>
+
+  <%= f.fields_for :group_lessons do |gl_f| %>
+    <%= gl_f.input :group_id, :as => :select, :collection => @organization.groups %>
+  <% end %>
+  <%= f.link_to_add 'add group', :group_lessons %>
+
+  <%= f.fields_for :classroom_lessons do |crl_f| %>
+    <%= crl_f.input :classroom_id, :as => :select, :collection => @organization.classrooms %>
+  <% end %>
+  <%= f.link_to_add 'add classroom', :classroom_lessons %>
+
+  <%= f.fields_for :lecturer_lessons do |ll_f| %>
+    <%= ll_f.input :lecturer_id, :as => :select, :collection => @organization.lecturers %>
+  <% end %>
+  <%= f.link_to_add 'add lecturer', :lecturer_lessons %>
+
+
+  <%= f.submit %>
+<% end %>
