@@ -15,6 +15,8 @@ class Timetable < ActiveRecord::Base
 
   enumerize :status, in: [:draft, :published], predicates: true
 
+  normalize_attributes :ends_on, :parity, :starts_on, :title, :first_week_parity
+
   private
 
   def create_weeks
