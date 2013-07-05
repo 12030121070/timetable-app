@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130704084554) do
+ActiveRecord::Schema.define(:version => 20130705042249) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(:version => 20130704084554) do
   end
 
   add_index "days", ["week_id"], :name => "index_days_on_week_id"
+
+  create_table "disciplines", :force => true do |t|
+    t.text     "title"
+    t.integer  "organization_id"
+    t.string   "abbr"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "disciplines", ["organization_id"], :name => "index_disciplines_on_organization_id"
 
   create_table "groups", :force => true do |t|
     t.string   "title"

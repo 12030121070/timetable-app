@@ -7,6 +7,7 @@ class Organization < ActiveRecord::Base
   validates_uniqueness_of :subdomain
 
   has_many :buildings, :dependent => :destroy, :order => 'buildings.title ASC'
+  has_many :disciplines, :dependent => :destroy
   has_many :lecturers, :dependent => :destroy, :order => 'lecturers.surname ASC, lecturers.name ASC, lecturers.patronymic ASC'
   has_many :memberships, :dependent => :destroy
   has_many :timetables, :dependent => :destroy
