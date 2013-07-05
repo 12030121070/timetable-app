@@ -5,6 +5,7 @@ class Timetable < ActiveRecord::Base
 
   belongs_to :organization
 
+  has_many :groups, :dependent => :destroy
   has_many :lesson_times, :as => :context, :dependent => :destroy, :order => 'day ASC, number ASC'
   has_many :weeks, dependent: :destroy, :order => 'number ASC'
 

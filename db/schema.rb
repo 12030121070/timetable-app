@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130704034732) do
+ActiveRecord::Schema.define(:version => 20130704084554) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(:version => 20130704034732) do
   end
 
   add_index "days", ["week_id"], :name => "index_days_on_week_id"
+
+  create_table "groups", :force => true do |t|
+    t.string   "title"
+    t.integer  "timetable_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "groups", ["timetable_id"], :name => "index_groups_on_timetable_id"
 
   create_table "lecturers", :force => true do |t|
     t.string   "name"

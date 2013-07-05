@@ -1,1 +1,32 @@
 <h1><%= "#{@timetable.title} #{@week}" %></h1>
+
+<table class='timetable'>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <th>Week</th>
+        </tr>
+
+        <% @week.days.each do |day| %>
+          <tr>
+            <td>
+              <table>
+                <tr>
+                  <td rowspan="<%= @week.days.count %>">
+                    <%= day.day_name %>
+                  </td>
+                </tr>
+                <% @timetable.lesson_times.where(:day => day.wday).each do |time| %>
+                  <tr>
+                    <td><%= "#{time.starts_at} - #{time.ends_at}" %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+</table>

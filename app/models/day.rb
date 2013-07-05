@@ -3,6 +3,12 @@ class Day < ActiveRecord::Base
 
   belongs_to :week
 
+  delegate :wday, to: :date
+
   extend Enumerize
   enumerize :status, in: [:workday, :weekend, :holiday], predicates: true
+
+  def day_name
+    I18n.l(date, :format => '%a')
+  end
 end
