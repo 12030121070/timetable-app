@@ -3,7 +3,7 @@
     <div class="lesson_cell width_<%= cell.span_columns %> training_type_<%= cell.kind %>">
       <% if cell.lesson_nil? %>
         <%= link_to "добавить",
-          polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id),
+          polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => group),
           :class => "add", :title => "добавить" %>
       <% else %>
         <%= cell.lesson.discipline.title %>
