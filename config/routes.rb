@@ -15,6 +15,8 @@ TimetableApp::Application.routes.draw do
       end
 
       resources :timetables do
+        put 'to_published'  => 'timetables#to_published', :on => :member
+        put 'to_draft'  => 'timetables#to_draft', :on => :member
         resources :groups, except: [:index, :show]
         resources :lesson_times
         resources :weeks, except: [:index, :new, :edit] do

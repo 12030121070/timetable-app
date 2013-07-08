@@ -9,6 +9,12 @@
   <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks } %>
 <% end %>
 
+<% if @timetable.draft? %>
+  <%= link_to "Publish", to_published_workplace_organization_timetable_path(@timetable), method: :put %>
+<% else %>
+  <%= link_to "Return to draft", to_draft_workplace_organization_timetable_path(@timetable), method: :put %>
+<% end %>
+
 <%= render @timetable %>
 
 <div class="lesson_time_wrapper">

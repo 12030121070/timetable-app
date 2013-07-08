@@ -1,7 +1,7 @@
 class Timetable < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :ends_on, :parity, :starts_on, :status, :title, :first_week_parity
+  attr_accessible :ends_on, :parity, :starts_on, :title, :first_week_parity
 
   belongs_to :organization
 
@@ -20,6 +20,10 @@ class Timetable < ActiveRecord::Base
     default: :draft
 
   normalize_attributes :ends_on, :parity, :starts_on, :title, :first_week_parity
+
+  %w[draft published].each do |status|
+    define_method("to_#{status}") { update_attribute :status, status }
+  end
 
   private
 
