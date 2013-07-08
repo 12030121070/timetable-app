@@ -18,14 +18,10 @@ class DailyTimetable
       @cells << row_cells
     end
 
-    p day
     day.lessons.each do |lesson|
       lesson.groups.each do |group|
-        p groups
         next unless groups.include?(group)
         @cells[lesson.lesson_time.number][groups.index(group) + 1].lesson = lesson
-        p @cells[lesson.lesson_time.number][groups.index(group) + 1]
-        p @cells[lesson.lesson_time.number][groups.index(group) + 1].lesson
       end
     end
 

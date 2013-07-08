@@ -6,7 +6,9 @@
           polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => group),
           :class => "add", :title => "добавить" %>
       <% else %>
-        <%= cell.lesson.discipline.title %>
+        <p><%= cell.lesson.discipline.title %></p>
+        <p><%= cell.lesson.classrooms.map(&:to_s).join(', ') %></p>
+        <p><%= cell.lesson.lecturers.map(&:full_name).join(', ') %></p>
         <%#= link_to "удалить", manage_timetables_faculty_course_group_lesson_path(@faculty, @course, group, cell.lesson, week_id: week), :class => "destroy", :title => "удалить" %>
       <% end %>
     </div>
