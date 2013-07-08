@@ -27,4 +27,10 @@ class Week < ActiveRecord::Base
       end
     end
   end
+
+  def cells
+    @cells ||= {}.tap do |hash|
+      days.each { |day| hash[day] = day.lesson_times }
+    end
+  end
 end

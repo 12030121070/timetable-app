@@ -22,7 +22,6 @@ group :default do
   gem 'russian'
   gem 'simple-navigation'
   gem 'simple_form'
-  gem 'sqlite3'
 end
 
 group :development do
@@ -34,4 +33,10 @@ end
 
 group :production do
   gem 'unicorn'
+end
+
+group :development, :test do
+  gem 'fabrication'
+  gem 'rspec-rails'
+  gem 'sqlite3'
 end
