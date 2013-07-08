@@ -15,4 +15,8 @@ class Workplace::LessonsController < Workplace::WorkplaceController
   def update
     update! { redirect_to [:workplace, @organization, @timetable, @week] and return }
   end
+
+  def destroy
+    destroy! { redirect_to [:workplace, @organization, @timetable, @week] and return }
+  end
 end

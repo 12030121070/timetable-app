@@ -9,7 +9,7 @@
         <p><%= cell.lesson.discipline.title %></p>
         <p><%= cell.lesson.classrooms.map(&:to_s).join(', ') %></p>
         <p><%= cell.lesson.lecturers.map(&:full_name).join(', ') %></p>
-        <%#= link_to "удалить", manage_timetables_faculty_course_group_lesson_path(@faculty, @course, group, cell.lesson, week_id: week), :class => "destroy", :title => "удалить" %>
+        <%= link_to "удалить", polymorphic_path([:workplace, @organization, @timetable, @week, cell.day, cell.lesson]),  :method => :delete %>
       <% end %>
     </div>
   </td>
