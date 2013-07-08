@@ -48,14 +48,6 @@ class Lesson < ActiveRecord::Base
       joins(:lecturer_lessons).where('lecturer_lessons.lecturer_id' => lecturers.pluck(:id)).one?
   end
 
-  def move_to(day, lesson_time)
-    self.day = day
-    self.lesson_time = lesson_time
-    self.save!
-
-  def copy_to(recipient_day)
-  end
-
   def available_cells_for_copy_and_move
     cells = week.cells
     (lecturers + groups + classrooms).flat_map(&:lessons).each do |lesson|
@@ -63,5 +55,25 @@ class Lesson < ActiveRecord::Base
     end
 
     cells
+  end
+
+  def copy_to(day, lesson_time = lesson_time)
+    new_lesson = self.class.new do |new_lesson|
+      new_lesson.day = day
+      new_lesson.lesson_time = lesson_time
+      new_lesson.disipline = discipline
+      new_lesson.kind = kind
+      new_lesson.save!
+    end
+
+    new_lesson.groups << groups
+    new_lesson.lecturers << lecturers
+    new_lesson.classrooms << classrooms
+  end
+
+  def move_to(day, lesson_time)
+    self.day = day
+    self.lesson_time = lesson_time
+    self.save!
   end
 end
