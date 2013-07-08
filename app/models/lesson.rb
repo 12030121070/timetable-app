@@ -45,4 +45,10 @@ class Lesson < ActiveRecord::Base
       joins(:classroom_lessons).where('classroom_lessons.classroom_id' => classrooms.pluck(:id)).
       joins(:lecturer_lessons).where('lecturer_lessons.lecturer_id' => lecturers.pluck(:id)).one?
   end
+
+  def move_to(day, lesson_time)
+    self.day = day
+    self.lesson_time = lesson_time
+    self.save!
+  end
 end
