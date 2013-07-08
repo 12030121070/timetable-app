@@ -23,7 +23,10 @@ TimetableApp::Application.routes.draw do
           get 'copy/new', :to => 'copy_week#new', :as => :new_copy
           post 'copy', :to => 'copy_week#create', :as => :copy
           resources :days, only: [] do
-            resources :lessons, except: [:index, :show]
+            resources :lessons, except: [:index, :show] do
+              get 'to_copy', :on => :member
+              put 'copy', :on => :member
+            end
           end
         end
       end

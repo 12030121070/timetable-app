@@ -5,6 +5,8 @@ class Workplace::LessonsController < Workplace::WorkplaceController
 
   belongs_to :organization, :timetable, :week, :day
 
+  custom_actions :resource => [:to_copy, :copy]
+
   def create
     create! do
       flash[:alert] = @lesson.validation_message

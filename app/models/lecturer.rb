@@ -1,6 +1,4 @@
 class Lecturer < ActiveRecord::Base
-  include FreeCells
-
   attr_accessible :name, :patronymic, :surname
 
   belongs_to :organization

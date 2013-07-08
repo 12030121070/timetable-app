@@ -1,0 +1,29 @@
+<table>
+  <% @week.cells.each do |day, lesson_times| %>
+    <% next if lesson_times.empty? %>
+    <tr>
+      <th rowspan="<%= lesson_times.count %>" class="abbr_day_name">
+        <b><%= day.day_name %><br /><br /><%= l(@week.days.first.date + day.date.day - 1.days, :format => '%e %b') %></b>
+      </th>
+      <th class="lesson_interval">
+        <p><%= lesson_times.first.starts_at %></p>
+        <p><%= lesson_times.first.ends_at %></p>
+      </th>
+      <td>
+        <%= check_box_tag "cells[]", "day_#{day.id}_lesson_time_#{lesson_times.first.id}" if @lesson.available_cells_for_copy_and_move[day].include?(lesson_times.first) %>
+      </td>
+    </tr>
+
+    <% lesson_times[1..-1].each do |lesson_time| %>
+      <tr>
+        <th class="lesson_interval">
+          <p><%= lesson_time.starts_at %></p>
+          <p><%= lesson_time.ends_at %></p>
+        </th>
+        <td>
+          <%= check_box_tag "cells[]", "day_#{day.id}_lesson_time_#{lesson_time.id}" if @lesson.available_cells_for_copy_and_move[day].include?(lesson_time) %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

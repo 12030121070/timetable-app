@@ -22,6 +22,8 @@ class Lesson < ActiveRecord::Base
 
   enumerize :kind, in: [:lecture, :practice, :laboratory, :research, :design, :exam, :test], predicates: true
 
+  delegate :week, :to => :day
+
   def valid_classrooms?
     !self.class.joins(:lesson_time).where('lesson_times.id' => lesson_time.id).
       joins(:classrooms).where('classrooms.id' => classrooms.pluck(:id)).many?
@@ -52,5 +54,14 @@ class Lesson < ActiveRecord::Base
     self.save!
 
   def copy_to(recipient_day)
+  end
+
+  def available_cells_for_copy_and_move
+    cells = week.cells
+    (lecturers + groups + classrooms).flat_map(&:lessons).each do |lesson|
+      cells[lesson.day] -= [lesson.lesson_time]
+    end
+
+    cells
   end
 end

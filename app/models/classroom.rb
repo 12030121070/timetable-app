@@ -1,8 +1,6 @@
 # encoding: utf-8
 
 class Classroom < ActiveRecord::Base
-  include FreeCells
-
   attr_accessible :number
 
   belongs_to :building
