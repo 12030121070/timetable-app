@@ -1,12 +1,14 @@
 class Lecturer < ActiveRecord::Base
-  attr_accessible :name, :patronymic, :surname
+  include FreeCells
 
-  validates_presence_of :name, :patronymic, :surname
+  attr_accessible :name, :patronymic, :surname
 
   belongs_to :organization
 
-  has_many :lecturer_lessons
+  has_many :lecturer_lessons, :dependent => :destroy
   has_many :lessons, :through => :lecturer_lessons
+
+  validates_presence_of :name, :patronymic, :surname
 
   normalize_attributes :name, :patronymic, :surname
 
@@ -14,13 +16,4 @@ class Lecturer < ActiveRecord::Base
     "#{surname} #{name} #{patronymic}"
   end
   alias_method :to_s, :full_name
-
-  def free_cells_at(week)
-    cells = week.cells
-    lessons.where(:day_id => week.days).each do |lesson|
-      cells[lesson.day] -= [lesson.lesson_time]
-    end
-
-    cells
-  end
 end
