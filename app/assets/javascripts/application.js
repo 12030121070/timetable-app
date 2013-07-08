@@ -4,4 +4,5 @@
 //= require ajaxed
 //= require message
 //= require tabbed
+//= require copy_week
 //= require_tree .
