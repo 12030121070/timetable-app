@@ -8,7 +8,7 @@ class Discipline < ActiveRecord::Base
   before_create :update_abbr
 
   validates_presence_of :title
-  validates_uniqueness_of :title, scope: :organization
+  validates_uniqueness_of :title, scope: :organization_id
 
 private
   def update_abbr

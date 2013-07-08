@@ -48,8 +48,7 @@ timetable = organization.timetables.find_or_initialize_by_title('Расписа�
   t.save!
 end
 
-abbrs = ['Матан', 'Сопромат', 'Начерталка', 'Микрохирургия']
 titles = ['Математический анализ', 'Сопротивление материалов', 'Начертательная геометрия', 'Занимательная микрохирургия глаза в домашних условиях (пока папа спит)']
 titles.each do |title|
-  organization.disciplines.create! :title => title, :abbr => abbrs[titles.index(title)]
+  organization.disciplines.create! :title => title
 end
