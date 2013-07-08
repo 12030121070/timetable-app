@@ -61,7 +61,7 @@ class Lesson < ActiveRecord::Base
     new_lesson = self.class.new do |new_lesson|
       new_lesson.day = day
       new_lesson.lesson_time = lesson_time
-      new_lesson.disipline = discipline
+      new_lesson.discipline = discipline
       new_lesson.kind = kind
       new_lesson.save!
     end
