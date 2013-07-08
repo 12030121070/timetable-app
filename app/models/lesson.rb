@@ -50,5 +50,7 @@ class Lesson < ActiveRecord::Base
     self.day = day
     self.lesson_time = lesson_time
     self.save!
+
+  def copy_to(recipient_day)
   end
 end

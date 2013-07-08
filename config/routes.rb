@@ -20,6 +20,8 @@ TimetableApp::Application.routes.draw do
         resources :groups, except: [:index, :show]
         resources :lesson_times
         resources :weeks, except: [:index, :new, :edit] do
+          get 'copy/new', :to => 'copy_week#new', :as => :new_copy
+          post 'copy', :to => 'copy_week#create', :as => :copy
           resources :days, only: [] do
             resources :lessons, except: [:index, :show]
           end

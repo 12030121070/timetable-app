@@ -1,0 +1,14 @@
+<p><%= @week %> will be copied to:</p>
+<%= form_tag workplace_organization_timetable_week_copy_path(@organization, @timetable, @week), :method => :post do %>
+  <% @recipients.group_by(&:parity).each do |parity, weeks| %>
+    <h4><%= parity %></h4>
+    <% weeks.each do |week| %>
+      <div class="check_box">
+        <%= label_tag "recipient_#{week.id}", week %>
+        <%= check_box_tag 'recipients[]', week.id, false, :id => "recipient_#{week.id}" %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= submit_tag 'Copy' %>
+  <%= link_to 'Cancel', :back %>
+<% end %>
