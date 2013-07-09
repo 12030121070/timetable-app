@@ -29,8 +29,10 @@ TimetableApp::Application.routes.draw do
 
           resources :days, only: [] do
             resources :lessons, except: [:index, :show] do
-              get  'copies/new' => 'lesson_copies#new',    :as => :new_copy
-              post 'copies'     => 'lesson_copies#create', :as => :copies
+              get  'copies/new'    => 'lesson_copies#new',       :as => :new_copy
+              get  'movements/new' => 'lesson_movements#new',    :as => :new_movement
+              post 'copies'        => 'lesson_copies#create',    :as => :copies
+              post 'movements'     => 'lesson_movements#create', :as => :movements
             end
           end
         end

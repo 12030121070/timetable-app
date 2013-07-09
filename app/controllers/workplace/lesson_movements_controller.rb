@@ -1,4 +1,4 @@
-class Workplace::LessonCopiesController < Workplace::WorkplaceController
+class Workplace::LessonMovementsController < Workplace::WorkplaceController
   inherit_resources
 
   actions :new, :create
@@ -9,11 +9,8 @@ class Workplace::LessonCopiesController < Workplace::WorkplaceController
 
   def create
     create! do
-      params[:cells].each do |cell|
-        day, lesson_time = Day.find(cell.split('_').first), LessonTime.find(cell.split('_').last)
-        @lesson.copy_to day, lesson_time
-      end
-
+      day, lesson_time = Day.find(params[:cell].split('_').first), LessonTime.find(params[:cell].split('_').last)
+      @lesson.move_to day, lesson_time
       redirect_to [:workplace, @organization, @timetable, @week] and return
     end
   end
