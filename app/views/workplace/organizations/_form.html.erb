@@ -1,4 +1,4 @@
-<%= simple_form_for resource, :url => workplace_organizations_path(resource) do |f| %>
+<%= simple_form_for resource, :url => [:workplace, resource.persisted? ? resource : :organizations] do |f| %>
   <%= f.input :title %>
   <%= f.input :email %>
   <%= f.input :phone %>

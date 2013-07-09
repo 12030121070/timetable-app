@@ -6,10 +6,12 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
   actions :all, :except => [:index]
 
   def create
-    create! {
-      @organization.set_owner(current_user)
-      redirect_to workplace_root_path and return
-    }
+    create! do |success, failure|
+      success.html {
+        @organization.set_owner(current_user) if @organization.persisted?
+        redirect_to workplace_root_path and return
+      }
+    end
   end
 
 private

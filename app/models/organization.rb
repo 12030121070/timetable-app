@@ -14,9 +14,12 @@ class Organization < ActiveRecord::Base
   has_many :timetables, :dependent => :destroy
   has_many :groups, :through => :timetables, :order => 'groups.title ASC'
 
-  normalize_attributes :phone, :site, :subdomain, :title
+  normalize_attributes :phone, :site, :title
+  normalize_attribute :subdomain, :with => [:strip] do |value|
+    value.present? && value.is_a?(String) ? value.downcase : value
+  end
 
-  #TODO: validaate subdomain format
+  validate :format_of_domain
 
   def set_owner(user)
     memberships.create! :user_id => user.id, :role => :owner
@@ -24,5 +27,10 @@ class Organization < ActiveRecord::Base
 
   def to_param
     subdomain
+  end
+
+private
+  def format_of_domain
+    errors.add(:subdomain, 'Wrong subdomain') unless self.subdomain.match(/\A[a-z0-9]+[a-z0-9-]+[a-z0-9]+\Z/)
   end
 end
