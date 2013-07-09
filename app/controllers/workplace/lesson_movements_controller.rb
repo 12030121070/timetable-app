@@ -3,7 +3,8 @@ class Workplace::LessonMovementsController < Workplace::WorkplaceController
 
   actions :new, :create
 
-  belongs_to :organization, :timetable, :week, :day, :lesson
+  belongs_to :organization, :finder => :find_by_subdomain!
+  belongs_to :timetable, :week, :day, :lesson
 
   defaults :resource_class => false
 
