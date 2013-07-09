@@ -9,7 +9,7 @@
         <p><%= cell.lesson.discipline.title %></p>
         <p><%= cell.lesson.classrooms.map(&:to_s).join(', ') %></p>
         <p><%= cell.lesson.lecturers.map(&:full_name).join(', ') %></p>
-        <p><%= link_to 'copy', polymorphic_path([:to_copy, :workplace, @organization, @timetable, @week, cell.day, cell.lesson]) %></p>
+        <p><%= link_to 'copy', polymorphic_path([:workplace, @organization, @timetable, @week, cell.day, cell.lesson, :new_copy]) %></p>
         <%= link_to "delete", polymorphic_path([:workplace, @organization, @timetable, @week, cell.day, cell.lesson]),  :method => :delete %>
       <% end %>
     </div>
