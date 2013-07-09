@@ -3,7 +3,8 @@ class Workplace::LessonsController < Workplace::WorkplaceController
 
   actions :all, except: [:show, :index]
 
-  belongs_to :organization, :timetable, :week, :day
+  belongs_to :organization, :finder => :find_by_subdomain!
+  belongs_to :timetable, :week, :day
 
   custom_actions :resource => [:to_copy, :copy]
 

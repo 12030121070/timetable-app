@@ -9,7 +9,7 @@ class Workplace::LecturersController < Workplace::WorkplaceController
 
   custom_actions :collection => :import
 
-  belongs_to :organization
+  belongs_to :organization, :finder => :find_by_subdomain!
 
   def import
     import! {

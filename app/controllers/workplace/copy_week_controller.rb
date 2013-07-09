@@ -20,8 +20,8 @@ class Workplace::CopyWeekController < Workplace::WorkplaceController
 
 private
   def find_parents
-    @organization = Organization.find(params[:organization_id])
-    @timetable    = Timetable.find(params[:timetable_id])
-    @week         = Week.find(params[:week_id])
+    @organization = Organization.find_by_subdomain!(params[:organization_id])
+    @timetable    = @organization.timetables.find(params[:timetable_id])
+    @week         = @timetable.weeks.find(params[:week_id])
   end
 end

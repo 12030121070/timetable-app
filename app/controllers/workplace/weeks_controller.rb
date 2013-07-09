@@ -5,5 +5,6 @@ class Workplace::WeeksController < Workplace::WorkplaceController
 
   actions :all, except: [:index, :new, :edit]
 
-  belongs_to :organization, :timetable
+  belongs_to :organization, :finder => :find_by_subdomain!
+  belongs_to :timetable
 end

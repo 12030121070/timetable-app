@@ -3,7 +3,7 @@ class Workplace::MembershipsController < Workplace::WorkplaceController
 
   actions :all, :except => [:show, :index]
 
-  belongs_to :organization
+  belongs_to :organization, :finder => :find_by_subdomain!
 
   private
 

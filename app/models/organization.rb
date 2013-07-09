@@ -16,7 +16,13 @@ class Organization < ActiveRecord::Base
 
   normalize_attributes :phone, :site, :subdomain, :title
 
+  #TODO: validaate subdomain format
+
   def set_owner(user)
     memberships.create! :user_id => user.id, :role => :owner
+  end
+
+  def to_param
+    subdomain
   end
 end

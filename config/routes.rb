@@ -35,5 +35,9 @@ TimetableApp::Application.routes.draw do
     root :to => 'workplace#index'
   end
 
+  scope :module => :public do
+    match '/' => 'organizations#show', :constraints => -> (r) { r.subdomain.present? && Organization.pluck(:subdomain).include?(r.subdomain) }
+  end
+
   root :to => 'application#main_page'
 end

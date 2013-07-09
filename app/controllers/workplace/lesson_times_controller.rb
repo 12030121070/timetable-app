@@ -3,7 +3,7 @@ class Workplace::LessonTimesController < Workplace::WorkplaceController
 
   actions :all
 
-  belongs_to :organization
+  belongs_to :organization, :finder => :find_by_subdomain!
   belongs_to :timetable, :polymorphic => true
 
   layout false

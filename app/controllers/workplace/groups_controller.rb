@@ -3,7 +3,8 @@ class Workplace::GroupsController < Workplace::WorkplaceController
 
   actions :all, except: [:show, :index]
 
-  belongs_to :organization, :timetable
+  belongs_to :organization, :finder => :find_by_subdomain!
+  belongs_to :timetable
 
   def create
     create!( :notice => "Dude! Nice job creating that group." ) { request.referer }
