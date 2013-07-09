@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
 
 private
   def after_sign_in_path_for(resource)
-    workplace_root_path
+    workplace_root_url(:subdomain => false)
   end
 end
