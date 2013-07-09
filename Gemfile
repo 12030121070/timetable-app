@@ -17,6 +17,7 @@ group :default do
   gem 'has_scope'
   gem 'inherited_resources'
   gem 'nested_form'
+  gem 'openteam-commons'
   gem 'pg'
   gem 'rails', '~> 3.2'
   gem 'russian'
@@ -26,8 +27,11 @@ end
 
 group :development do
   gem 'brakeman'
+  gem 'capistrano-db-tasks', :git => 'git://github.com/openteam/capistrano-db-tasks'
+  gem 'capistrano-unicorn',  :git => 'git://github.com/sosedoff/capistrano-unicorn'
   gem 'hirb'
   gem 'letter_opener'
+  gem 'openteam-capistrano'
   gem 'rails-erd'
 end
 

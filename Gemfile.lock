@@ -1,3 +1,16 @@
+GIT
+  remote: git://github.com/openteam/capistrano-db-tasks
+  revision: b6b81df2d6965c456e8ca4cf3aa325c95a542b36
+  specs:
+    capistrano-db-tasks (0.2)
+
+GIT
+  remote: git://github.com/sosedoff/capistrano-unicorn
+  revision: 52376ad3d1fb20c21b7d79806bcf79fb91c78471
+  specs:
+    capistrano-unicorn (0.1.9)
+      capistrano
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,6 +45,10 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     addressable (2.3.5)
+    airbrake (3.1.12)
+      activesupport
+      builder
+      json
     arel (3.0.2)
     attribute_normalizer (1.1.0)
     bcrypt-ruby (3.0.1)
@@ -47,7 +64,16 @@ GEM
       slim (~> 1.3.6)
       terminal-table (~> 1.4)
     builder (3.0.4)
+    capistrano (2.15.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
     choice (0.1.6)
+    chronic (0.9.1)
     chunky_png (1.2.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -62,6 +88,9 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
+    configliere (0.4.18)
+      highline (>= 1.5.2)
+      multi_json (>= 1.1)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -102,6 +131,24 @@ GEM
     mime-types (1.23)
     multi_json (1.7.7)
     nested_form (0.3.2)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.8)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
+    openteam-capistrano (0.0.12)
+      capistrano-db-tasks
+      capistrano-ext
+      capistrano-unicorn
+      rvm-capistrano
+    openteam-commons (0.2.3)
+      airbrake
+      configliere
+      rails
+      unicorn
+      whenever
     orm_adapter (0.4.0)
     pg (0.15.1)
     polyglot (0.3.3)
@@ -159,6 +206,8 @@ GEM
       sexp_processor (~> 4.1)
     russian (0.6.0)
       i18n (>= 0.5.0)
+    rvm-capistrano (1.4.0)
+      capistrano (>= 2.0.0)
     sass (3.2.9)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -196,6 +245,9 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.1)
       rack (>= 1.0)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -204,6 +256,8 @@ DEPENDENCIES
   active_attr
   attribute_normalizer
   brakeman
+  capistrano-db-tasks!
+  capistrano-unicorn!
   coffee-rails
   compass-rails
   devise (~> 2.2)
@@ -216,6 +270,8 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   nested_form
+  openteam-capistrano
+  openteam-commons
   pg
   rails (~> 3.2)
   rails-erd
