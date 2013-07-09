@@ -1,0 +1,7 @@
+app:
+  secret: SECRET
+
+errors:
+  key:    KEY
+  url:    http://errors.openteam.ru
+
