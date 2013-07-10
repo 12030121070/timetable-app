@@ -20,6 +20,7 @@ class TimetableCell
   def eql?(cell)
     return false unless cell
     return false if cell.lessons.empty? || lessons.empty?
+
     lessons == cell.lessons
   end
 

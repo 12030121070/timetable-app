@@ -34,28 +34,20 @@ class Lesson < ActiveRecord::Base
 
   delegate :week, :to => :day
 
-  def valid_classrooms?
-    !self.class.joins(:lesson_time).where('lesson_times.id' => lesson_time.id).
-      joins(:classrooms).where('classrooms.id' => classrooms.pluck(:id)).many?
-  end
+  # TODO: need optimization
+  def available_subgroup_options
+    group_ids = group_lessons.map(&:group_id)
+    existing_subgroups = self.class.where(:day_id => day.id, :lesson_time_id => lesson_time.id).joins(:groups).where('groups.id' => group_ids).pluck(:subgroup)
 
-  def valid_lecturers?
-    !self.class.joins(:lesson_time).where('lesson_times.id' => lesson_time.id).
-      joins(:lecturers).where('lecturers.id' => lecturers.pluck(:id)).many?
-  end
+    return self.class.subgroup.options if existing_subgroups.empty? || existing_subgroups == ['whole']
 
-  def validation_message
-    message = ''
-    message << lecturers.map(&:full_name).join(', ') unless valid_lecturers?
-    message << classrooms.map(&:to_s).join(', ') unless valid_classrooms?
+    if new_record?
+      subgroups = self.class.subgroup.values - ['whole'] - existing_subgroups
+    else
+      subgroups = existing_subgroups.many? ? [subgroup] : self.class.subgroup.values - ['whole']
+    end
 
-    message.blank? ? nil : message
-  end
-
-  def valid_loading?
-    self.class.joins(:lesson_time).where('lesson_times.id' => lesson_time.id).
-      joins(:classroom_lessons).where('classroom_lessons.classroom_id' => classrooms.pluck(:id)).
-      joins(:lecturer_lessons).where('lecturer_lessons.lecturer_id' => lecturers.pluck(:id)).one?
+    return self.class.subgroup.options.select { |title, value| subgroups.include?(value) }
   end
 
   def available_cells_for_copy_and_move
@@ -78,8 +70,8 @@ class Lesson < ActiveRecord::Base
       new_lesson.save!
     end
 
-    new_lesson.groups << groups
-    new_lesson.lecturers << lecturers
+    new_lesson.groups     << groups
+    new_lesson.lecturers  << lecturers
     new_lesson.classrooms << classrooms
   end
 
