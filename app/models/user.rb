@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     Organization.where(:id => memberships.pluck(:organization_id)).limit(1).first
   end
 
+  def owner_of?(organization)
+    memberships.joins(:organization).where('organizations.id' => organization.id).any?
+  end
+
   private
 
   def activate_memberships

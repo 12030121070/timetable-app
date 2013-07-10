@@ -5,7 +5,11 @@
   </head>
   <body>
     <h1>Welcome to example.com, <%= @membership.email %></h1>
-    <%= link_to 'register', new_user_registration_url %>
-    <p>Thanks for joining and have a great day!</p>
+    <p>You have beed invited to <%= @membership.organization.title %></p>
+    <% if User.find_by_email(@membership.email) %>
+      <%= link_to 'sign_in', new_user_registration_url %>
+    <% else %>
+      <%= link_to 'sign up', new_user_registration_url %>
+    <% end %>
   </body>
 </html>

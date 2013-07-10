@@ -1,17 +1,2 @@
-<h3>Your organizations (<%= link_to "create organization", new_workplace_organization_path %>)</h3>
-
-<% if @organizations.any? %>
-  <ul>
-    <%= render @organizations %>
-  </ul>
-<% else %>
-  <p>
-    Hello, <%= current_user.email %>!
-  </p>
-  <ul>
-    <li class="not_done"><%= link_to 'Add organization', new_workplace_organization_path %></li>
-    <li class="not_done">Add classrooms</li>
-    <li class="not_done">Add lecturers</li>
-    <li class="not_done">Add memberships</li>
-  </ul>
-<% end %>
+<div>Hello, <%= current_user.email %>!</div>
+<div><%= link_to 'Add organization', new_workplace_organization_path %></div>

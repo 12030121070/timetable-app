@@ -1,1 +1,8 @@
-<%= render 'form' %>
+<%= simple_form_for [:workplace, @organization, @membership] do |f| %>
+  <%= f.input :email %>
+
+  <div class="buttons">
+    <%= f.submit "Save" %>
+    <%= link_to "Cancel", :back %>
+  </div>
+<% end %>

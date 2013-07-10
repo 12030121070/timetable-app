@@ -1,7 +1,7 @@
 class Workplace::MembershipsController < Workplace::WorkplaceController
   inherit_resources
 
-  actions :all, :except => [:show, :index]
+  actions :all, :except => [:index, :show, :edit, :update]
 
   belongs_to :organization, :finder => :find_by_subdomain!
 
