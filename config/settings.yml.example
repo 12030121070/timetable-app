@@ -1,6 +1,10 @@
 app:
   secret:       SECRET
 
+  default_url_options:
+    host:       HOST
+    port:       PORT
+
 errors:
   key:          KEY
   url:          http://errors.openteam.ru
