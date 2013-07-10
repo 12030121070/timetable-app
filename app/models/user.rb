@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
 
   after_create :activate_memberships
 
+  def has_organization?
+    memberships.joins(:organization).any?
+  end
+
+  def organization
+    Organization.where(:id => memberships.pluck(:organization_id)).limit(1).first
+  end
+
   private
 
   def activate_memberships
