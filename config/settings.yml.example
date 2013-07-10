@@ -1,7 +1,15 @@
 app:
-  secret: SECRET
+  secret:       SECRET
 
 errors:
-  key:    KEY
-  url:    http://errors.openteam.ru
+  key:          KEY
+  url:          http://errors.openteam.ru
+
+mail:
+  address:      SMTP
+  port:         PORT
+  domain:       DOMAIN
+  login:        LOGIN
+  password:     SECRET
+  from:         USER
 
