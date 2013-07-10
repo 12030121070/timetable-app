@@ -10,7 +10,7 @@ class HolidayImport
 
   def import
     prepare_hash.each do |k,v|
-      Holiday.create(date: k) if v == 'holiday'
+      Holiday.create(date: k) if v == 'holiday' && Time.zone.parse(k).year >= Time.zone.now.year
     end
   end
   
