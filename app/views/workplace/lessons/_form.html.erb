@@ -15,10 +15,9 @@
   <%= f.link_to_add 'add classroom', :classroom_lessons %>
 
   <%= f.fields_for :lecturer_lessons do |ll_f| %>
-    <%= ll_f.input :lecturer_id, :as => :select, :collection => @organization.lecturers %>
+    <%= ll_f.input :lecturer_id, :collection => @organization.lecturers, :label_method => :full_name %>
   <% end %>
   <%= f.link_to_add 'add lecturer', :lecturer_lessons %>
-
 
   <%= f.submit %>
 <% end %>
