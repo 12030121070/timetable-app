@@ -1,7 +1,8 @@
 class TimetableCell
-  attr_accessor :lesson, :span_columns, :span_rows, :rendering, :day, :number, :lesson_time
+  attr_accessor :lessons, :span_columns, :span_rows, :rendering, :day, :number, :lesson_time
 
-  delegate :name, :abbr, :nil?, :to => :lesson, :prefix => true
+  delegate :empty?, :to => :lessons, :prefix => true
+
 
   def initialize(day, lesson_time)
     @span_columns = 1
@@ -17,13 +18,26 @@ class TimetableCell
   end
 
   def kind
+    return 'kind'
     lesson ? lesson.kind : ""
   end
 
   def eql?(cell)
+    return false
     return false unless cell
     return false if cell.lesson.nil? || lesson.nil?
 
     cell.lesson.eql?(lesson)
+  end
+
+  def lessons
+    @lessons ||= []
+  end
+
+  def can_have_more_lesson?
+    return false if lessons.many?
+    lessons.each { |lesson| return false if lesson.subgroup_whole? }
+
+    true
   end
 end

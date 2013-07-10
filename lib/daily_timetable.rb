@@ -29,7 +29,7 @@ class DailyTimetable
     day.lessons.each do |lesson|
       lesson.groups.each do |group|
         next unless groups.include?(group)
-        cells[lesson.lesson_time.number][groups.index(group) + 1].lesson = lesson
+        cells[lesson.lesson_time.number][groups.index(group) + 1].lessons << lesson
       end
     end
   end

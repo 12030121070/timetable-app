@@ -1,2 +1,8 @@
 ru:
+  enumerize:
+    lesson:
+      subgroup:
+        whole: whole group
+        a: subgroup a
+        b: subgroup b
 

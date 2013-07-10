@@ -2,7 +2,7 @@
   <%= f.input :lesson_time_id, :as => :hidden %>
   <%= f.association :discipline %>
   <%= f.input :kind %>
-  <%= f.input :subgroup %>
+  <%= f.input :subgroup, :include_blank => false %>
 
   <%= f.fields_for :group_lessons do |gl_f| %>
     <%= gl_f.input :group_id, :as => :select, :collection => @organization.groups %>
