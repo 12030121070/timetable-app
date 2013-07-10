@@ -42,7 +42,7 @@ class Timetable < ActiveRecord::Base
         week = weeks.create(number: number, starts_on: week_starts_on)
       end
       number += 1
-      days.each do |day| 
+      days.each do |day|
         status = organization_holidays.pluck(:date).include?(day) ? :holiday : nil
         week.days.create(date: day, status: status)
       end
@@ -51,9 +51,13 @@ class Timetable < ActiveRecord::Base
 
   def create_lesson_times
     (1..6).each do |day|
-      (1..6).each do |number|
-        lesson_times.create :day => day, :number => number, :starts_at => '0:00', :ends_at => '0:00'
-      end
+      lesson_times.create :day => day, :number => 1, :starts_at => '8:50', :ends_at => '10:25'
+      lesson_times.create :day => day, :number => 2, :starts_at => '10:40', :ends_at => '12:15'
+      lesson_times.create :day => day, :number => 3, :starts_at => '13:15', :ends_at => '14:50'
+      lesson_times.create :day => day, :number => 4, :starts_at => '15:00', :ends_at => '16:35'
+      lesson_times.create :day => day, :number => 5, :starts_at => '16:45', :ends_at => '18:20'
+      lesson_times.create :day => day, :number => 6, :starts_at => '18:30', :ends_at => '20:05'
+      lesson_times.create :day => day, :number => 7, :starts_at => '20:15', :ends_at => '21:50'
     end
   end
 end
