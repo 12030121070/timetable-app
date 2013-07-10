@@ -67,11 +67,13 @@ class Lesson < ActiveRecord::Base
     cells
   end
 
-  def copy_to(day, lesson_time = lesson_time)
+  def copy_to(day, lesson_time = self.lesson_time)
     new_lesson = self.class.new do |new_lesson|
-      %w[day discipline kind lesson_time subgroup].each do |attribute|
-        new_lesson.send "#{attribute}=", send(attribute)
-      end
+      new_lesson.day         = day
+      new_lesson.discipline  = discipline
+      new_lesson.kind        = kind
+      new_lesson.lesson_time = lesson_time
+      new_lesson.subgroup    = subgroup
 
       new_lesson.save!
     end
