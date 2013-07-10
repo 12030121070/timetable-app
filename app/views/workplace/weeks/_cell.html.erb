@@ -6,9 +6,8 @@
           polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => group),
           :class => "add", :title => "добавить" %>
       <% end %>
-
       <% cell.lessons.each do |lesson| %>
-        <p><%= lesson.discipline.title %></p>
+        <p title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></p>
         <p><%= lesson.kind_text %></p>
         <p><%= lesson.classrooms.map(&:to_s).join(', ') %></p>
         <p><%= lesson.lecturers.map(&:full_name).join(', ') %></p>

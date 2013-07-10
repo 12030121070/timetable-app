@@ -19,11 +19,8 @@ class TimetableCell
 
   def eql?(cell)
     return false unless cell
-    return false if cell.lessons.empty? || lessons.nil?
-
-    lessons.each_with_index { |l, i| return false unless cell.lessons[i].eql?(l) }
-
-    true
+    return false if cell.lessons.empty? || lessons.empty?
+    lessons == cell.lessons
   end
 
   def lessons

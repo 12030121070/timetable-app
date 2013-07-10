@@ -43,9 +43,9 @@ class DailyTimetable
 
         @start_column = column unless @column_merging
 
-        if cells[lesson_time.number][@start_column].eql?(@cells[lesson_time.number][column + 1])
+        if cells[lesson_time.number][@start_column].eql?(cells[lesson_time.number][column + 1])
           @column_merging = true
-          @cells[lesson_time.number][@start_column].span_columns += 1
+          cells[lesson_time.number][@start_column].span_columns += 1
           cells[lesson_time.number][column + 1].rendering = false
         else
           @column_merging = false
