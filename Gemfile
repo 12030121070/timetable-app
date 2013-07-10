@@ -18,6 +18,7 @@ group :default do
   gem 'inherited_resources'
   gem 'nested_form'
   gem 'openteam-commons'
+  gem 'progress_bar'
   gem 'pg'
   gem 'rails', '~> 3.2'
   gem 'russian'

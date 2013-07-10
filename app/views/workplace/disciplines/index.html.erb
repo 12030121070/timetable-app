@@ -3,7 +3,7 @@
 <ul>
   <% @disciplines.each do |discipline| %>
     <li>
-      <%= discipline.title %>
+      <%= discipline.abbr %> &mdash; <%= discipline.title %>
       <%= link_to 'Edit', edit_workplace_organization_discipline_path(@organization, discipline) %>
     </li>
   <% end %>

@@ -10,7 +10,7 @@ class Building < ActiveRecord::Base
   accepts_nested_attributes_for :classrooms, allow_destroy: true
 
   validates_presence_of :address, :title
-  validates_uniqueness_of :address, :title, :scope => :organization_id
+  validates_uniqueness_of :title, :scope => [:organization_id, :address]
 
   normalize_attributes :address, :title
 

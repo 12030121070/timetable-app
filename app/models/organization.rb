@@ -9,7 +9,7 @@ class Organization < ActiveRecord::Base
   has_many :buildings, :dependent => :destroy, :order => 'buildings.title ASC'
   has_many :classrooms, :through => :buildings, :order => 'classrooms.number ASC'
   has_many :disciplines, :dependent => :destroy
-  has_many :lecturers, :dependent => :destroy, :order => 'lecturers.surname ASC, lecturers.name ASC, lecturers.patronymic ASC'
+  has_many :lecturers, :dependent => :destroy, :order => 'ascii(lecturers.surname) ASC, lecturers.name ASC, lecturers.patronymic ASC'
   has_many :memberships, :dependent => :destroy, :order => 'memberships.id ASC'
   has_many :timetables, :dependent => :destroy
   has_many :groups, :through => :timetables, :order => 'groups.title ASC'

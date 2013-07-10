@@ -1,7 +1,7 @@
 class Lesson < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :kind, :lesson_time_id, :discipline_id, :classroom_lessons_attributes, :lecturer_lessons_attributes, :group_lessons_attributes
+  attr_accessible :kind, :lesson_time_id, :discipline_id, :classroom_lessons_attributes, :lecturer_lessons_attributes, :group_lessons_attributes, :day_id, :discipline_id, :lesson_time_id
 
   belongs_to :day
   belongs_to :discipline
