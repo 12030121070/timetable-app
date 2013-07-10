@@ -31,6 +31,10 @@ class Organization < ActiveRecord::Base
   def to_param
     subdomain
   end
+  
+  def holidays
+    organization_holidays.map(&:date) | Holiday.all.map(&:date)
+  end
 
 private
   def format_of_domain

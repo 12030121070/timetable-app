@@ -43,7 +43,7 @@ class Timetable < ActiveRecord::Base
       end
       number += 1
       days.each do |day|
-        status = organization_holidays.pluck(:date).include?(day) ? :holiday : nil
+        status = organization.holidays.include?(day) ? :holiday : nil
         week.days.create(date: day, status: status)
       end
     end
