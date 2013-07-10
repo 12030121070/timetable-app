@@ -44,7 +44,7 @@ class Lesson < ActiveRecord::Base
     if new_record?
       subgroups = self.class.subgroup.values - ['whole'] - existing_subgroups
     else
-      subgroups = existing_subgroups.many? ? [subgroup] : self.class.subgroup.values - ['whole']
+      subgroups = existing_subgroups.many? ? [subgroup] : self.class.subgroup.values
     end
 
     return self.class.subgroup.options.select { |title, value| subgroups.include?(value) }

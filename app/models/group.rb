@@ -6,5 +6,5 @@ class Group < ActiveRecord::Base
   has_many :group_lessons, :dependent => :destroy
   has_many :lessons, :through => :group_lessons
 
-  validates_uniqueness_of :title
+  validates :title, :presence => true, :uniqueness => true
 end
