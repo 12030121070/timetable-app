@@ -6,16 +6,19 @@
 
   <%= f.fields_for :group_lessons do |gl_f| %>
     <%= gl_f.input :group_id, :as => :select, :collection => @organization.groups %>
+    <%= gl_f.link_to_remove 'remove' %>
   <% end %>
   <%= f.link_to_add 'add group', :group_lessons %>
 
   <%= f.fields_for :classroom_lessons do |crl_f| %>
     <%= crl_f.input :classroom_id, :as => :select, :collection => @organization.classrooms %>
+    <%= crl_f.link_to_remove 'remove' %>
   <% end %>
   <%= f.link_to_add 'add classroom', :classroom_lessons %>
 
   <%= f.fields_for :lecturer_lessons do |ll_f| %>
     <%= ll_f.input :lecturer_id, :collection => @organization.lecturers, :label_method => :full_name %>
+    <%= ll_f.link_to_remove 'remove' %>
   <% end %>
   <%= f.link_to_add 'add lecturer', :lecturer_lessons %>
 
