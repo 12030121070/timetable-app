@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Organization < ActiveRecord::Base
-  attr_accessible :email, :phone, :site, :subdomain, :title
+  attr_accessible :email, :phone, :site, :subdomain, :title, :organization_holidays_attributes
 
   validates_presence_of :email, :title, :subdomain
   validates_uniqueness_of :subdomain
@@ -13,6 +13,9 @@ class Organization < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :timetables, :dependent => :destroy
   has_many :groups, :through => :timetables, :order => 'groups.title ASC'
+  has_many :organization_holidays, :dependent => :destroy
+
+  accepts_nested_attributes_for :organization_holidays, :allow_destroy => true
 
   normalize_attributes :phone, :site, :title
   normalize_attribute :subdomain, :with => [:strip] do |value|

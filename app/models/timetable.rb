@@ -14,6 +14,8 @@ class Timetable < ActiveRecord::Base
   after_create :create_weeks
   after_create :create_lesson_times
 
+  delegate :organization_holidays, :to => :organization
+
   enumerize :status,
     in: [:draft, :published],
     predicates: true,
@@ -40,7 +42,10 @@ class Timetable < ActiveRecord::Base
         week = weeks.create(number: number, starts_on: week_starts_on)
       end
       number += 1
-      days.each { |day| week.days.create date: day }
+      days.each do |day| 
+        status = organization_holidays.pluck(:date).include?(day) ? :holiday : nil
+        week.days.create(date: day, status: status)
+      end
     end
   end
 
