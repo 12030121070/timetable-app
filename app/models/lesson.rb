@@ -21,7 +21,7 @@ class Lesson < ActiveRecord::Base
   accepts_nested_attributes_for :group_lessons, :allow_destroy => true
   accepts_nested_attributes_for :lecturer_lessons, :allow_destroy => true
 
-  validates_presence_of :discipline, :subgroup
+  validates_presence_of :discipline, :kind, :subgroup
 
   enumerize :kind,
     in: [:lecture, :practice, :laboratory, :research, :design, :exam, :test],

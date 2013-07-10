@@ -1,6 +1,6 @@
 <% if cell.rendering? %>
   <td rowspan="<%= cell.span_rows %>" colspan="<%= cell.span_columns %>">
-    <div class="lesson_cell width_<%= cell.span_columns %> training_type_<%= cell.kind %>">
+    <div class="lesson_cell width_<%= cell.span_columns %>">
       <% if cell.can_have_more_lesson? %>
         <%= link_to "добавить",
           polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => group),
@@ -9,6 +9,7 @@
 
       <% cell.lessons.each do |lesson| %>
         <p><%= lesson.discipline.title %></p>
+        <p><%= lesson.kind_text %></p>
         <p><%= lesson.classrooms.map(&:to_s).join(', ') %></p>
         <p><%= lesson.lecturers.map(&:full_name).join(', ') %></p>
         <% unless lesson.subgroup_whole? %>

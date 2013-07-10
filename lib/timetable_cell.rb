@@ -17,17 +17,13 @@ class TimetableCell
     @rendering
   end
 
-  def kind
-    return 'kind'
-    lesson ? lesson.kind : ""
-  end
-
   def eql?(cell)
-    return false
     return false unless cell
-    return false if cell.lesson.nil? || lesson.nil?
+    return false if cell.lessons.empty? || lessons.nil?
 
-    cell.lesson.eql?(lesson)
+    lessons.each_with_index { |l, i| return false unless cell.lessons[i].eql?(l) }
+
+    true
   end
 
   def lessons
