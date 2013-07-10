@@ -33,17 +33,18 @@ def create_timetables
               next if day.date.cwday > 6
 
               lesson_time = timetable.lesson_times.for_day(day.date.cwday).for_number(remote_lesson['order_number']).first
-              local_lesson = day.lessons.create :kind => remote_lesson['kind'], :discipline_id => discipline.id, :lesson_time_id => lesson_time.id
+              local_lesson = day.lessons.find_or_create_by_discipline_id_and_kind_and_lesson_time_id :kind => remote_lesson['kind'], :discipline_id => discipline.id, :lesson_time_id => lesson_time.id
               local_lesson.groups << group
 
               remote_lesson['lecturers'].each do |remote_lecturer|
-                local_lesson.lecturers << organization.lecturers.find_or_create_by_name_and_patronymic_and_surname(:surname => remote_lecturer['lastname'].squish, :name => remote_lecturer['firstname'].squish, :patronymic => remote_lecturer['middlename'].squish)
+                lecturer = organization.lecturers.find_or_create_by_name_and_patronymic_and_surname(:surname => remote_lecturer['lastname'].squish, :name => remote_lecturer['firstname'].squish, :patronymic => remote_lecturer['middlename'].squish)
+                local_lesson.lecturers << lecturer unless local_lesson.lecturers.include?(lecturer)
               end
 
               remote_building, remote_classroom = remote_lesson['classroom'].split(' ')
               building = organization.buildings.find_or_create_by_address_and_title(:address => 'г.Томск', :title => remote_building)
               classroom = building.classrooms.find_or_create_by_number(remote_classroom)
-              local_lesson.classrooms << classroom
+              local_lesson.classrooms << classroom unless local_lesson.classrooms.include?(classroom)
             end
           end
         end
