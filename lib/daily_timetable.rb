@@ -8,33 +8,45 @@ class DailyTimetable
   def initialize(args)
     super(args)
 
-    @cells = [[]]
+    initialize_cells
+    fill_cells
+    merge_cells
+  end
 
-    day.lesson_times.each do |lesson_time|
-      row_cells = []
-      (0..groups.size).each do |column|
-        row_cells << TimetableCell.new(day, lesson_time)
+  private
+
+  def initialize_cells
+    @cells ||= [[]].tap do |cells|
+      day.lesson_times.each do |lesson_time|
+        row_cells = []
+        (0..groups.size).each { |column| row_cells << TimetableCell.new(day, lesson_time) }
+        cells << row_cells
       end
-      @cells << row_cells
     end
+  end
 
+  def fill_cells
     day.lessons.each do |lesson|
       lesson.groups.each do |group|
         next unless groups.include?(group)
-        @cells[lesson.lesson_time.number][groups.index(group) + 1].lesson = lesson
+        cells[lesson.lesson_time.number][groups.index(group) + 1].lesson = lesson
       end
     end
+  end
 
+  def merge_cells
     day.lesson_times.each do |lesson_time|
       @column_merging = false
-      (1..groups.size).each do |column|
-        @start_column = column unless @column_merging
-        next if @cells[lesson_time.number][column].nil?
 
-        if @cells[lesson_time.number][@start_column].eql?(@cells[lesson_time.number][column + 1])
+      (1..groups.size).each do |column|
+        next if cells[lesson_time.number][column].nil?
+
+        @start_column = column unless @column_merging
+
+        if cells[lesson_time.number][@start_column].eql?(@cells[lesson_time.number][column + 1])
           @column_merging = true
           @cells[lesson_time.number][@start_column].span_columns += 1
-          @cells[lesson_time.number][column + 1].rendering = false
+          cells[lesson_time.number][column + 1].rendering = false
         else
           @column_merging = false
         end
