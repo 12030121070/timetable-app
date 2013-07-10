@@ -1,7 +1,8 @@
 class Lesson < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :kind, :lesson_time_id, :discipline_id, :classroom_lessons_attributes, :lecturer_lessons_attributes, :group_lessons_attributes, :day_id, :discipline_id, :lesson_time_id
+  attr_accessible :kind, :lesson_time_id, :discipline_id, :subgroup, :day_id,
+    :classroom_lessons_attributes, :lecturer_lessons_attributes, :group_lessons_attributes
 
   belongs_to :day
   belongs_to :discipline
@@ -20,7 +21,14 @@ class Lesson < ActiveRecord::Base
   accepts_nested_attributes_for :group_lessons, :allow_destroy => true
   accepts_nested_attributes_for :lecturer_lessons, :allow_destroy => true
 
-  enumerize :kind, in: [:lecture, :practice, :laboratory, :research, :design, :exam, :test], predicates: true
+  enumerize :kind,
+    in: [:lecture, :practice, :laboratory, :research, :design, :exam, :test],
+    predicates: true
+
+  enumerize :subgroup,
+    :in => [:whole, :a, :b],
+    :default => :whole,
+    :predicates => { :prefix => true }
 
   delegate :week, :to => :day
 
@@ -59,10 +67,10 @@ class Lesson < ActiveRecord::Base
 
   def copy_to(day, lesson_time = lesson_time)
     new_lesson = self.class.new do |new_lesson|
-      new_lesson.day = day
-      new_lesson.lesson_time = lesson_time
-      new_lesson.discipline = discipline
-      new_lesson.kind = kind
+      %w[day discipline kind lesson_time subgroup].each do |attribute|
+        new_lesson.send "#{attribute}=", send(attribute)
+      end
+
       new_lesson.save!
     end
 
