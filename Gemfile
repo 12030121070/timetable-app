@@ -12,6 +12,7 @@ end
 group :default do
   gem 'active_attr'
   gem 'attribute_normalizer'
+  gem 'daemons'
   gem 'delayed_job_active_record'
   gem 'devise', '~> 2.2'
   gem 'devise-async'

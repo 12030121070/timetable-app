@@ -93,6 +93,7 @@ GEM
     configliere (0.4.18)
       highline (>= 1.5.2)
       multi_json (>= 1.1)
+    daemons (1.1.9)
     delayed_job (3.0.5)
       activesupport (~> 3.0)
     delayed_job_active_record (0.4.4)
@@ -289,6 +290,7 @@ DEPENDENCIES
   capistrano-unicorn!
   coffee-rails
   compass-rails
+  daemons
   delayed_job_active_record
   devise (~> 2.2)
   devise-async
