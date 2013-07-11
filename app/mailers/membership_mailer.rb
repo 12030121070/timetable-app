@@ -1,5 +1,5 @@
 class MembershipMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default :from => Settings['mail']['from']
 
   def invitation_email(membership)
     @membership = membership
