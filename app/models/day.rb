@@ -12,6 +12,7 @@ class Day < ActiveRecord::Base
   delegate :timetable, :to => :week
   delegate :wday,      :to => :date
 
+  # TODO: rename to name
   def day_name
     I18n.l date, :format => '%a'
   end

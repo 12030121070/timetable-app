@@ -5,6 +5,8 @@
   <%= f.submit %>
 <% end %>
 
+<%= link_to 'pdf', [:pdf, :workplace, @organization, @timetable, @week] %>
+
 <table>
   <% @week.cells.each do |day, lesson_times| %>
     <% next if lesson_times.empty? %>
@@ -20,7 +22,7 @@
 
     <tr>
       <th rowspan="<%= lesson_times.count %>" class="abbr_day_name">
-        <b><%= day.day_name %><br /><br /><%= l(@week.days.first.date + day.date.day - 1.days, :format => '%e %b') %></b>
+        <b><%= day.day_name %><br /><br /><%= l(day.date, :format => '%e %b') %></b>
       </th>
 
       <th class="lesson_interval">
