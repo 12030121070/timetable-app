@@ -1,6 +1,10 @@
 TimetableApp::Application.routes.draw do
   devise_for :users
 
+  namespace :manage do
+    root :to => 'manage#index'
+  end
+
   namespace :workplace do
     resources :organizations, :except => [:index] do
       resources :disciplines, :except => :show

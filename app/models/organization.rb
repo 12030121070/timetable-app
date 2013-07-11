@@ -14,6 +14,7 @@ class Organization < ActiveRecord::Base
   has_many :timetables, :dependent => :destroy
   has_many :groups, :through => :timetables, :order => 'groups.title ASC'
   has_many :organization_holidays, :dependent => :destroy
+  has_many :subscriptions, :dependent => :destroy
 
   accepts_nested_attributes_for :organization_holidays, :allow_destroy => true
 
@@ -31,7 +32,7 @@ class Organization < ActiveRecord::Base
   def to_param
     subdomain
   end
-  
+
   def holidays
     organization_holidays.map(&:date) | Holiday.all.map(&:date)
   end
