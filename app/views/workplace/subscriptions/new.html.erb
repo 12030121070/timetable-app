@@ -1,20 +1,35 @@
 <h1>New subscription</h1>
 
-<table>
-  <tr>
-    <td></td>
-    <% @subscription.prices.first.last.each do |k,v| %>
-      <td><%= k %></td>
-    <% end %>
-  </tr>
-  <% @subscription.prices.each do |period, prices| %>
+<h1>Costs for 1 group per 1 month</h1>
+<table class='tariff' data-tariff='<%= @tariff.to_json %>'>
+  <thead>
     <tr>
-      <td><%= period %></td>
-      <% prices.each do |price| %>
-        <td><%= price.second %></td>
-      <% end %>
+      <th></th>
+      <th><%= @tariff.min_month %> month</th>
+      <th>><%= @tariff.half_months %> month</th>
+      <th><%= @tariff.max_month %> month</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <tr>
+      <td>>=<%= @tariff.min_group %> groups</td>
+      <td class='first_plan'><%= number_to_currency @tariff.first_plan %></td>
+      <td class='second_plan'><%= number_to_currency @tariff.second_plan %></td>
+      <td class='third_plan'><%= number_to_currency @tariff.third_plan %></td>
+    </tr>
+    <tr>
+      <td>>=<%= @tariff.half_groups %> groups</td>
+      <td class='fourth_plan'><%= number_to_currency @tariff.fourth_plan %></td>
+      <td class='fith_plan'><%= number_to_currency @tariff.fith_plan %></td>
+      <td class='sixth_plan'><%= number_to_currency @tariff.sixth_plan %></td>
+    </tr>
+    <tr>
+      <td><%= @tariff.max_group %> groups</td>
+      <td class='seventh_plan'><%= number_to_currency @tariff.seventh_plan %></td>
+      <td class='eighth_plan'><%= number_to_currency @tariff.eighth_plan %></td>
+      <td class='nineth_plan'><%= number_to_currency @tariff.nineth_plan %></td>
+    </tr>
+  </tbody>
 </table>
 
 <%= render 'form' %>

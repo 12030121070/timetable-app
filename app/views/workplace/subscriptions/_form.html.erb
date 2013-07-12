@@ -1,6 +1,7 @@
 <%= simple_form_for [:workplace, @organization, @subscription] do |f| %>
-  <%= f.input :month_count, as: :range, input_html: { min: 1, max: 12, step: 1, 'data-init' => 1 }  %>
-  <%= f.input :groups_count, as: :range, input_html: { min: 10, max: 200, step: 10, 'data-init' => 20 } %>
+  <%= f.input :month_count, as: :range, input_html: { min: 1, max: 12, step: 1, 'data-init' => 1, :class => 'month_count' }  %>
+  <%= f.input :groups_count, as: :range, input_html: { min: 10, max: 200, step: 10, 'data-init' => 20, :class => 'group_count' } %>
+  <span class="sum"><span class='total'>0</span>.00 руб.</span>
 
   <div class="buttons">
     <%= f.submit "Save" %>

@@ -5,11 +5,6 @@ class Subscription < ActiveRecord::Base
   belongs_to :organization
   before_create :set_dates
 
-  def prices
-    @prices ||= YAML::load(File.open("#{Rails.root}/config/prices.yml"))
-    @prices['prices']
-  end
-
 private
   def set_dates
     self.starts_on = Time.zone.today
