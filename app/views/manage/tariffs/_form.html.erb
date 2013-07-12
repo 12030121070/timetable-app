@@ -1,0 +1,14 @@
+<%= simple_form_for @tariff, :url => manage_tariff_path, :method => :put do |f| %>
+  <%= f.input :cost %>
+  <%= f.input :min_group %>
+  <%= f.input :max_group %>
+  <%= f.input :min_month %>
+  <%= f.input :max_month %>
+  <%= f.input :discount_half_year %>
+  <%= f.input :discount_year %>
+  <%= f.input :discount_small %>
+  <%= f.input :discount_medium %>
+  <%= f.input :discount_large %>
+  <%= f.submit 'save' %>
+  <%= link_to "cancel", :back %>
+<% end %>

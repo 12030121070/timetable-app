@@ -3,6 +3,10 @@ TimetableApp::Application.routes.draw do
 
   namespace :manage do
     root :to => 'manage#index'
+    resource :tariff, :only => [:edit, :update, :show]
+    resources :organizations do
+      resources :subscriptions, :except => [:show]
+    end
   end
 
   namespace :workplace do
@@ -14,6 +18,7 @@ TimetableApp::Application.routes.draw do
       end
 
       resources :memberships, :except => [:index, :show, :edit, :update]
+      resources :subscriptions, :only => [:index, :new, :create]
 
       resources :buildings, except: [:show, :index] do
         post :import, :on => :collection

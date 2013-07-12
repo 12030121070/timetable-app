@@ -1,0 +1,7 @@
+<h1>All subscriptions <%= @organization.title %></h1>
+
+<ul>
+  <% @organization.subscriptions.each do |subscription| %>
+    <li><%= render subscription %></li>
+  <% end %>
+</ul>

@@ -5,4 +5,5 @@
 //= require message
 //= require tabbed
 //= require copy_week
+//= require range_handler
 //= require_tree .

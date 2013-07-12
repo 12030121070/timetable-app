@@ -125,3 +125,38 @@ table
   th, tr, td
     border: 1px solid black
     padding: 3px
+
+input.range
+  width: 600px
+
+.counter
+  font-size: 16px
+  font-weight: bold
+  font-style: italic
+  margin: 0 5px
+
+.date_wrapper
+  .years
+    +clearfix
+
+    .year
+      +clearfix
+      float: left
+
+  .months
+    +clearfix
+
+    li
+      float: left
+      text-align: center
+      width: 80px
+
+      &.not_active
+        background: #eee
+
+      &.active
+        background: #035c9a
+        color: yellow
+
+      &:hover
+        cursor: pointer

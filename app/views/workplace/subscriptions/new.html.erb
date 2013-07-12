@@ -1,0 +1,20 @@
+<h1>New subscription</h1>
+
+<table>
+  <tr>
+    <td></td>
+    <% @subscription.prices.first.last.each do |k,v| %>
+      <td><%= k %></td>
+    <% end %>
+  </tr>
+  <% @subscription.prices.each do |period, prices| %>
+    <tr>
+      <td><%= period %></td>
+      <% prices.each do |price| %>
+        <td><%= price.second %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<%= render 'form' %>

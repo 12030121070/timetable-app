@@ -1,0 +1,9 @@
+<h1>All subscriptions for <%= @organization.title %></h1>
+
+<ul>
+  <% @organization.subscriptions.each do |subscription| %>
+    <li><%= subscription.groups_count %> <%= subscription.starts_on %> &mdash; <%= subscription.ends_on %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add subscription', new_workplace_organization_subscription_path(@organization) %>

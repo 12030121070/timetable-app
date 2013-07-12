@@ -2,7 +2,7 @@ class CreateSubscriptions < ActiveRecord::Migration
   def change
     create_table :subscriptions do |t|
       t.references :organization
-      t.date :start_on
+      t.date :starts_on
       t.date :ends_on
       t.integer :groups_count
 
