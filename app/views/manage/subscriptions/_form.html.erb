@@ -1,0 +1,10 @@
+<%= simple_form_for [:manage, @organization, @subscription] do |f| %>
+  <%= f.input :starts_on %>
+  <%= f.input :ends_on %>
+  <%= f.input :groups_count %>
+
+  <div class="buttons">
+    <%= f.submit "Save" %>
+    <%= link_to "Cancel", :back %>
+  </div>
+<% end %>
