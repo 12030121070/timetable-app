@@ -14,7 +14,7 @@ class Organization < ActiveRecord::Base
   has_many :timetables, :dependent => :destroy
   has_many :groups, :through => :timetables, :order => 'groups.title ASC'
   has_many :organization_holidays, :dependent => :destroy
-  has_many :subscriptions, :dependent => :destroy
+  has_many :subscriptions, :dependent => :destroy, :order => 'subscriptions.created_at ASC'
 
   accepts_nested_attributes_for :organization_holidays, :allow_destroy => true
 

@@ -5,7 +5,9 @@ TimetableApp::Application.routes.draw do
     root :to => 'manage#index'
     resource :tariff, :only => [:edit, :update, :show]
     resources :organizations do
-      resources :subscriptions, :except => [:show]
+      resources :subscriptions, :except => [:show] do
+        get '/change_active_state' => 'subscriptions#change_active_state', :as => :change_active_state, :on => :member
+      end
     end
   end
 
