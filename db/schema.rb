@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712034734) do
+ActiveRecord::Schema.define(:version => 20130712090612) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -188,8 +188,9 @@ ActiveRecord::Schema.define(:version => 20130712034734) do
     t.date     "starts_on"
     t.date     "ends_on"
     t.integer  "groups_count"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "active",          :default => false
   end
 
   add_index "subscriptions", ["organization_id"], :name => "index_subscriptions_on_organization_id"

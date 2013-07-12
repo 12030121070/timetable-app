@@ -1,5 +1,5 @@
 class Subscription < ActiveRecord::Base
-  attr_accessible :ends_on, :groups_count, :starts_on, :month_count
+  attr_accessible :ends_on, :groups_count, :starts_on, :month_count, :active
   attr_accessor :month_count
 
   belongs_to :organization
