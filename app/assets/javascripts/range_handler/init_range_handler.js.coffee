@@ -22,21 +22,28 @@ set_sum = (tariff) ->
   else if month_count >= tariff.max_month && group_count >= tariff.max_group
     sum *= tariff.nineth_plan
 
-  $('.sum .total').html(sum)
+  $('.sum span').html(accounting.formatMoney(sum, { symbol: 'руб.', format: '%v %s', thousand: ' ', precision: 0 }))
 
 @init_range_handler = () ->
-  range = $('input.range')
-  tariff = eval($('table.tariff').data('tariff'))
+  range = $('div.range')
   return unless range.length
 
-  range.each (index, item) ->
-    $(item).after('<span class="counter"/>')
+  tariff = eval($('table.tariff').data('tariff'))
+  inputs = $('input.range')
 
-  range.on 'change', ->
-    $this = $(this)
-    $this.next('.counter').html($this.val())
+  inputs.on 'change', ->
+    target_class = if $(this).hasClass('month_count') then 'month_count' else 'group_count'
+    $('.counter.'+target_class+' span').html($(this).val())
     set_sum(tariff)
 
   range.each (index, item) ->
-    $this = $(item)
-    $this.val($this.data('init')).trigger('change')
+    slider = $(item)
+    slider.slider
+      min: slider.data('min')
+      max: slider.data('max')
+      value: slider.data('init')
+      step: slider.data('step')
+      change: (event, ui) ->
+        $('.'+$(event.target).attr('id')).val(ui.value).trigger('change')
+      create: (event, ui) ->
+        $('.'+$(event.target).attr('id')).val($(event.target).slider('value')).trigger('change')

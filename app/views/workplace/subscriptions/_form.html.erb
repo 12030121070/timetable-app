@@ -1,7 +1,20 @@
 <%= simple_form_for [:workplace, @organization, @subscription] do |f| %>
-  <%= f.input :month_count, as: :range, input_html: { min: 1, max: 12, step: 1, 'data-init' => 1, :class => 'month_count' }  %>
-  <%= f.input :groups_count, as: :range, input_html: { min: 10, max: 200, step: 10, 'data-init' => 20, :class => 'group_count' } %>
-  <span class="sum"><span class='total'>0</span>.00 руб.</span>
+  <div class='range_wrapper'>
+    <label for="month_count">Период времени:</label>
+    <span class='counter month_count'><span></span> мес.</span>
+    <div id='month_count' class="range" data-min='<%= @tariff.min_month %>' data-max='<%= @tariff.max_month %>' data-step='1' data-init='<%= @tariff.half_months %>'></div>
+  </div>
+
+  <div class='range_wrapper'>
+    <label for="group_count">Кол-во групп:</label>
+    <span class='counter group_count'><span></span> гр.</span>
+    <div id='group_count' class="range" data-min='<%= @tariff.min_group %>' data-max='<%= @tariff.max_group*2 %>' data-step='5' data-init='<%= @tariff.half_groups %>'></div>
+  </div>
+
+  <%= f.input :month_count,  :as => :hidden, :input_html => { :class => 'month_count range' } %>
+  <%= f.input :groups_count, :as => :hidden, :input_html => { :class => 'group_count range' } %>
+
+  <span class="sum">Сумма: <span></span></span>
 
   <div class="buttons">
     <%= f.submit "Save" %>

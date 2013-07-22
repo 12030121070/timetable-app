@@ -5,6 +5,7 @@ group :assets do
   gem 'compass-rails'
   gem 'execjs'
   gem 'jquery-rails'
+  gem 'jquery-ui-rails'
   gem 'sass-rails'
   gem 'uglifier'
 end
