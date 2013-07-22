@@ -5,6 +5,8 @@ class Subscription < ActiveRecord::Base
   belongs_to :organization
   before_create :set_dates
 
+  scope :actual, -> { where('starts_on <= :today AND ends_on >= :today', :today => Time.zone.today) }
+
   def change_active_state
     self.active = (active? ? false : true)
     self.save

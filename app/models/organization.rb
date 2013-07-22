@@ -37,6 +37,18 @@ class Organization < ActiveRecord::Base
     organization_holidays.map(&:date) | Holiday.all.map(&:date)
   end
 
+  def available_group_count
+    groups_count_by_subscriptions - groups_count_by_published_timetables
+  end
+
+  def groups_count_by_published_timetables
+    timetables.with_status(:published).map{|t| t.groups.count}.sum
+  end
+
+  def groups_count_by_subscriptions
+    subscriptions.actual.sum(:groups_count)
+  end
+
 private
   def format_of_domain
     errors.add(:subdomain, 'Wrong subdomain') unless self.subdomain.match(/\A[a-z0-9]+[a-z0-9-]+[a-z0-9]+\Z/)

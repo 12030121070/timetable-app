@@ -16,15 +16,20 @@ class Timetable < ActiveRecord::Base
 
   delegate :organization_holidays, :to => :organization
 
-  enumerize :status,
-    in: [:draft, :published],
-    predicates: true,
-    default: :draft
-
   normalize_attributes :ends_on, :parity, :starts_on, :title, :first_week_parity
 
-  %w[draft published].each do |status|
-    define_method("to_#{status}") { update_attribute :status, status }
+  state_machine :status, :initial => :draft do
+    event :publish do
+      transition :draft => :published, :if => :can_publish?
+    end
+
+    event :unpublish do
+      transition :published => :draft
+    end
+  end
+
+  def can_publish?
+    (organization.available_group_count - groups.count) > 0
   end
 
   private
@@ -51,7 +56,7 @@ class Timetable < ActiveRecord::Base
 
   def create_lesson_times
     (1..6).each do |day|
-      lesson_times.create :day => day, :number => 1, :starts_at => '8:50', :ends_at => '10:25'
+      lesson_times.create :day => day, :number => 1, :starts_at =>  '8:50', :ends_at => '10:25'
       lesson_times.create :day => day, :number => 2, :starts_at => '10:40', :ends_at => '12:15'
       lesson_times.create :day => day, :number => 3, :starts_at => '13:15', :ends_at => '14:50'
       lesson_times.create :day => day, :number => 4, :starts_at => '15:00', :ends_at => '16:35'

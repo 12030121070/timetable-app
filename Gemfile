@@ -29,6 +29,7 @@ group :default do
   gem 'russian'
   gem 'simple-navigation'
   gem 'simple_form'
+  gem 'state_machine'
 end
 
 group :development do
