@@ -3,8 +3,10 @@
 <h3>Your lecturers (<%= link_to "add lecturer", new_workplace_organization_lecturer_path(resource) %>)</h3>
 <div class="import_help">
   Description of csv file
-  * first line is headers ('surname, name, patronymic')
-  * next lines is lecturer info('Ivanov, Ivan, Ivanovich')
+  <ul>
+    <li>* first line is headers ('surname, name, patronymic')</li>
+    <li>* next lines is a lecturer info ('Ivanov, Ivan, Ivanovich')</li>
+  </ul>
 </div>
 <%= simple_form_for :import, :url => import_workplace_organization_lecturers_path(resource) do |f| %>
   <%= f.input :file, :as => :file %>
@@ -17,8 +19,10 @@
 <h3>Your buildings (<%= link_to 'add building', new_workplace_organization_building_path(resource) %>)</h3>
 <div class="import_help">
   Description of csv file
-  * first line is headers ('address, title, number')
-  * next lines is lecturer info('"Vershinina st, 76", FET, 438)
+  <ul>
+    <li>* first line is headers ('address, title, number')</li>
+    <li>* next lines is a building info ('"Vershinina st, 76", FET, 438)</li>
+  </ul>
 </div>
 <%= simple_form_for :import, :url => import_workplace_organization_buildings_path(resource) do |f| %>
   <%= f.input :file, :as => :file %>
