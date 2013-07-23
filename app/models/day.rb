@@ -11,6 +11,7 @@ class Day < ActiveRecord::Base
 
   delegate :timetable, :to => :week
   delegate :wday,      :to => :date
+  delegate :cwday,      :to => :date
 
   # TODO: rename to name
   def day_name
