@@ -11,7 +11,7 @@ class Organization < ActiveRecord::Base
   has_many :disciplines, :dependent => :destroy
   has_many :lecturers, :dependent => :destroy, :order => 'ascii(lecturers.surname) ASC, lecturers.name ASC, lecturers.patronymic ASC'
   has_many :memberships, :dependent => :destroy, :order => 'memberships.id ASC'
-  has_many :timetables, :dependent => :destroy
+  has_many :timetables, :dependent => :destroy, :order => 'timetables.starts_on ASC, timetables.created_at ASC'
   has_many :groups, :through => :timetables, :order => 'groups.title ASC'
   has_many :organization_holidays, :dependent => :destroy
   has_many :subscriptions, :dependent => :destroy, :order => 'subscriptions.created_at ASC'
