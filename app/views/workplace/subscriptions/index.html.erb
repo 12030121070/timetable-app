@@ -2,7 +2,11 @@
 
 <ul>
   <% @organization.subscriptions.each do |subscription| %>
-    <li><%= subscription.groups_count %> <%= subscription.starts_on %> &mdash; <%= subscription.ends_on %></li>
+    <li>
+      Кол-во групп: <%= subscription.groups_count %><br/>
+      <%= l subscription.starts_on, :format => :long %> &mdash; <%= l subscription.ends_on, :format => :long %><br/>
+      Сумма: <%= number_to_currency subscription.sum %>
+    </li>
   <% end %>
 </ul>
 

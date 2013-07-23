@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712090612) do
+ActiveRecord::Schema.define(:version => 20130723020944) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(:version => 20130712090612) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.boolean  "active",          :default => false
+    t.integer  "sum"
   end
 
   add_index "subscriptions", ["organization_id"], :name => "index_subscriptions_on_organization_id"
