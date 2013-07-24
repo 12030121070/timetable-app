@@ -43,7 +43,7 @@ set_sum = (tariff) ->
       max: slider.data('max')
       value: slider.data('init')
       step: slider.data('step')
-      change: (event, ui) ->
-        $('.'+$(event.target).attr('id')).val(ui.value).trigger('change')
       create: (event, ui) ->
         $('.'+$(event.target).attr('id')).val($(event.target).slider('value')).trigger('change')
+      slide: (event, ui) ->
+        $('.'+$(event.target).attr('id')).val(ui.value).trigger('change')
