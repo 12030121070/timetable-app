@@ -1,6 +1,14 @@
 ru:
   enumerize:
     lesson:
+      kind:
+        lecture:    Лекция
+        practice:   Практ.
+        laboratory: Лаб.раб.
+        research:   Курс.иссл.
+        design:     Курс.раб.
+        exam:       Экзамен
+        test:       Зачет
       subgroup:
         whole: whole group
         a: subgroup a

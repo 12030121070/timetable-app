@@ -20,4 +20,8 @@ class LessonTime < ActiveRecord::Base
     errors.add(:starts_at, 'Wrong format') unless self.starts_at.match(/\A\d{,2}:\d{2}\Z/)
     errors.add(:ends_at, 'Wrong format') unless self.ends_at.match(/\A\d{,2}:\d{2}\Z/)
   end
+
+  def to_s
+    "#{starts_at}–#{ends_at}"
+  end
 end

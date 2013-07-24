@@ -25,7 +25,7 @@ class PdfWeek
   private
 
   def pdf
-    @pdf ||= Prawn::Document.new(:page_size => 'A3', :page_layout => :landscape, :margin => [0.25.in, 0.5.in])
+    @pdf ||= Prawn::Document.new(:page_size => 'A3', :page_layout => :landscape, :margin => [0.25.in, 0.25.in])
   end
 
   def set_font_style
@@ -33,97 +33,55 @@ class PdfWeek
     pdf.font 'Verdana', :size => 8
   end
 
-  def max_groups_on_page
-    9
-  end
-
-  def colspan(cell, index)
-    return cell.span_columns if cell.span_columns == 1
-
-    cell.span_columns > max_groups_on_page - index ? max_groups_on_page - index : cell.span_columns
-  end
-
-  def rendering(cell, index)
-    return true if index.zero?
-
-    return cell.rendering?
-  end
-
   def generate
     set_font_style
 
-    external_index = 0
-    timetable.groups.each_slice(9) do |groups|
-      pdf.text 'Расписание', :size => 16
-      pdf.move_down 10
-
-      raw_table = []
-      row = [{ :content => '', :colspan => 2}]
-      groups.each { |group| row << group.title }
-      raw_table << row
-
-      cells.each do |day, lesson_times|
-        next if lesson_times.empty?
-
-        row = [{:content => day.day_name, :rowspan => day.lesson_times.count}]
-        row << "#{lesson_times.first.starts_at} - #{lesson_times.first.ends_at}"
-        groups.each_with_index do |group, index|
-          cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_times.first.number][external_index + index + 1]
-
-          content = ''.tap do |content|
-            cell.lessons.each do |lesson|
-              content << "#{lesson.discipline.title}\n"
-              content << "#{lesson.kind_text}\n"
-              content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-              content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-            end
-          end
-
-          row << {
-            :content => content,
-            :rowspan => cell.span_rows,
-            :colspan => colspan(cell, index)
-          } if rendering(cell, index)
-        end
-        raw_table << row
-
-        lesson_times[1..-1].each do |lesson_time|
-          row = []
-          row << "#{lesson_time.starts_at} - #{lesson_time.ends_at}"
-          groups.each_with_index do |group, index|
-            cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_time.number][external_index + index + 1]
-
-            content = ''.tap do |content|
-              cell.lessons.each do |lesson|
-                content << "#{lesson.discipline.title}\n"
-                content << "#{lesson.kind_text}\n"
-                content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-                content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-              end
-            end
-
-            row << {
-              :content => content,
-              :rowspan => cell.span_rows,
-              :colspan => colspan(cell, index)
-            } if rendering(cell, index)
-          end
-          raw_table << row
+    pages = WeekTable.new(week).pages
+    pages.each do |page|
+      table = [page.shift.map(&:title).unshift({ :content => '', :colspan => 2 })]
+      page.each do |day|
+        day_name = day.shift
+        day.each_with_index do |time, index|
+          row = time.each_with_index.map { |lt, i| decorate_cell(lt, day[index], i) }.delete_if{|i| !i.nil? && i.blank? }
+          row.unshift({ :content => day_name.first.day_name, :rowspan => day.count }) if index == 0
+          table << row
         end
       end
 
-      pdf.table(raw_table) do
-        cells.style :align => :center, :valign => :center, :height => 0.75.in
-
-        row(0).height = 0.25.in
-        columns(0).width = 0.25.in
-        columns(1).width = 1.in
+      pdf.table(table) do
+        cells.style :align => :center, :valign => :center
       end
-
-      external_index += 9
-      pdf.start_new_page
+      pdf.start_new_page unless pages.last == page
     end
+  end
 
-    pdf
+  def decorate_cell(cell_item, row, i)
+    if cell_item.one?
+      return cell_item.first.to_s if cell_item.first.is_a?(LessonTime)
+
+      if i-1 >= 0 && get_col_span(row[i-1], row, i-1) <= 1
+        { :content => cell_item.first.to_s, :colspan => get_col_span(cell_item, row, i)}
+      else
+        ''
+      end
+
+    elsif cell_item.any?
+      'Подrруппы'
+    end
+  end
+
+  def get_col_span(cell_item, row, i)
+    col_span = 0
+    matched = false
+    row.each_with_index do |item, index|
+      if index >= i
+        return col_span if matched && cell_item.first != item.first
+        if cell_item.first == item.first
+          matched = true
+          col_span += 1
+        end
+      end
+    end
+    col_span
   end
 end

@@ -80,4 +80,8 @@ class Lesson < ActiveRecord::Base
     self.lesson_time = lesson_time
     self.save!
   end
+
+  def to_s
+    "#{discipline.abbr} #{kind_text}"
+  end
 end

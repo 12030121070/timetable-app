@@ -12,22 +12,21 @@ class WeekTable
   end
 
   def table_for_days(groups)
-    @week.days.includes(:lessons).map { |d| table_for_day(d, groups) }
+    @week.days.includes(:lessons).map { |d| table_for_day(d, groups) }.unshift(groups)
   end
 
   def table_for_day(day, groups)
     [].tap do |arr|
       timetable.lesson_times.for_day(day.cwday).each_with_index do |lt, index|
-        groups.each do |group|
-          arr[index] ||= []
-          arr[index] << group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lt.id}).where(:days => { :id => day.id })
-        end
+        arr << groups.map do |group|
+          group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lt.id}).where(:days => { :id => day.id })
+        end.unshift([lt])
       end
-    end
+    end.unshift([day])
   end
 
   def groups_per_page
-    3
+    9
   end
 
   def lessons_time_per_page
