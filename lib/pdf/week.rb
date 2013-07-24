@@ -75,66 +75,7 @@ class Pdf::Week
     end
   end
 
-  #def table_data
-    ## TODO: lazy initialization
-    #return @table_data if @table_data
-
-    #rows = []
-
-    #row = [Pdf::Cell.new('', 2, 1)]
-    #timetable.groups.each { |group| row << Pdf::Cell.new(group.title) }
-    #rows << row
-
-    #week_cells.each do |day, lesson_times|
-      #next if lesson_times.empty?
-
-      ## TODO: extract into method
-      #lesson_time = lesson_times.first
-      #row = [Pdf::Cell.new(day.day_name, 1, lesson_times.length)]
-      #row << Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")
-
-      #timetable.groups.each_with_index do |group, index|
-        #cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_time.number][index + 1]
-
-        #content = ''.tap do |content|
-          #cell.lessons.each do |lesson|
-            #content << "#{lesson.discipline.title}\n"
-            #content << "#{lesson.kind_text}\n"
-            #content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-            #content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-          #end
-        #end
-
-        #row << Pdf::Cell.new(content)
-      #end
-      #rows << row
-
-      ## TODO: extract into method
-      #lesson_times[1..-1].each do |lesson_time|
-        #row = [Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")]
-
-        #timetable.groups.each_with_index do |group, index|
-          #cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_time.number][index + 1]
-
-          #content = ''.tap do |content|
-            #cell.lessons.each do |lesson|
-              #content << "#{lesson.discipline.title}\n"
-              #content << "#{lesson.kind_text}\n"
-              #content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-              #content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-            #end
-          #end
-
-          #row << Pdf::Cell.new(content)
-        #end
-        #rows << row
-      #end
-    #end
-
-    #@table_data = rows
-  #end
-
-  def set_span(array, method)
+  def set_spans(array, method)
     array.each_with_index do |e, i|
       next if array[i].content.blank?
 
@@ -153,23 +94,28 @@ class Pdf::Week
   end
 
   def set_colspans
-    table_data.each do |row|
-      row[2...2 + timetable.groups.count] = set_span(row[2...2 + timetable.groups.count], :colspan)
+    table_data[:days].each do |_, rows|
+      rows.each do |row|
+        row = set_spans(row, :colspan)
+      end
     end
   end
 
   def set_rowspans
-    rows = []
-    table_data[1..-1].each_with_index do |row, index|
-      rows << row[row.size - timetable.groups.size..row.size]
-    end
+    table_data[:days].each do |_, rows|
+      new_rows = []
 
-    rows = rows.transpose
-    rows.each { |row| row = set_span(row, :rowspan) }
-    rows = rows.transpose
+      rows.each do |row|
+        new_rows << row[row.size - timetable.groups.size..row.size]
+      end
 
-    table_data.each_with_index do |row, index|
-      row[2...2 + timetable.groups.count] = rows[index]
+      new_rows = new_rows.transpose
+      new_rows.each { |row| row = set_spans(row, :rowspan) }
+      new_rows = new_rows.transpose
+
+      rows.each_with_index do |row, index|
+        row[row.size - timetable.groups.size..row.size] = new_rows[index]
+      end
     end
   end
 
@@ -182,8 +128,12 @@ class Pdf::Week
     pdf.font 'Verdana', :size => 8
 
     rows = []
-    table_data.each do |row|
-      rows << row.select(&:visibiliity?).map(&:to_h)
+    rows << table_data[:header].select(&:visibiliity?).map(&:to_h)
+
+    table_data[:days].each do |day, array|
+      array.each do |elem|
+        rows << elem.select(&:visibiliity?).map(&:to_h)
+      end
     end
 
     pdf.table(rows) do
