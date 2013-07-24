@@ -87,7 +87,11 @@ class Pdf::Week
       end
 
       if matches > 0
-        array[i].send "#{method.to_s}=", matches + 1
+        if method == :rowspan && array[i].colspan > 1
+          return
+        end
+
+        array[i].send "#{method}=", matches + 1
         (i + 1..i + matches).each { |k| array[k].visibiliity = false }
       end
     end
