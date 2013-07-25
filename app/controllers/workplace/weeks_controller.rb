@@ -12,7 +12,7 @@ class Workplace::WeeksController < Workplace::WorkplaceController
 
   def pdf
     pdf! {
-      send_data Pdf::Week.new(@week).render, :type => 'application/pdf', :filename => 'week.pdf' and return
+      send_data Pdf::Week.new(@week).render, :type => 'application/pdf', :filename => 'week.pdf', :disposition => :inline and return
     }
   end
 end

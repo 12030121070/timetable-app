@@ -16,8 +16,6 @@ class Pdf::Week
   def initialize(week)
     @week = week
 
-    set_colspans
-    set_rowspans
     generate
   end
 
@@ -25,7 +23,7 @@ class Pdf::Week
     @timetable ||= @week.timetable
   end
 
-  def groups
+  def timetable_groups
     @groups ||= timetable.groups
   end
 
@@ -34,7 +32,7 @@ class Pdf::Week
   end
 
   def groups_per_page
-    9
+    4
   end
 
   def lessons_time_per_page
@@ -42,13 +40,13 @@ class Pdf::Week
   end
 
   def pages
-    pages ||= [].tap do |pages|
-      pages << groups.each_slice(groups_per_page).map { |groups| table_data(groups) }
+    @pages ||= [].tap do |array|
+      timetable_groups.each_slice(groups_per_page) { |groups| array << table_data(groups) }
     end
   end
 
   def table_data(groups)
-    @table_data ||= {}.tap do |table_data|
+    {}.tap do |table_data|
       table_data[:header] = [Pdf::Cell.new('', 2, 1)]
       groups.each { |group| table_data[:header] << Pdf::Cell.new(group.title) }
 
@@ -65,10 +63,10 @@ class Pdf::Week
         row << Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")
 
         groups.each_with_index do |group, index|
-          cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_time.number][index + 1]
+          lessons = group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lesson_time.id}).where(:days => { :id => day.id })
 
           content = ''.tap do |content|
-            cell.lessons.each do |lesson|
+            lessons.each do |lesson|
               content << "#{lesson.discipline.title}\n"
               content << "#{lesson.kind_text}\n"
               content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
@@ -84,68 +82,11 @@ class Pdf::Week
         lesson_times[1..-1].each do |lesson_time|
           row = [Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")]
 
-          timetable.groups.each_with_index do |group, index|
-            cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_time.number][index + 1]
+          groups.each_with_index do |group, index|
+            lessons = group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lesson_time.id}).where(:days => { :id => day.id })
 
             content = ''.tap do |content|
-              cell.lessons.each do |lesson|
-                content << "#{lesson.discipline.title}\n"
-                content << "#{lesson.kind_text}\n"
-                content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-                content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-              end
-            end
-
-            row << Pdf::Cell.new(content)
-          end
-          table_data[:days][day] << row
-        end
-      end
-    end
-  end
-
-  def table_data
-    @table_data ||= {}.tap do |table_data|
-      table_data[:header] = [Pdf::Cell.new('', 2, 1)]
-      timetable.groups.each { |group| table_data[:header] << Pdf::Cell.new(group.title) }
-
-      table_data[:days] = {}
-
-      cells.each do |day, lesson_times|
-        next if lesson_times.empty?
-
-        table_data[:days][day] = []
-
-        # TODO: extract into method
-        lesson_time = lesson_times.first
-        row = [Pdf::Cell.new(day.day_name, 1, lesson_times.length)]
-        row << Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")
-
-        timetable.groups.each_with_index do |group, index|
-          cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_time.number][index + 1]
-
-          content = ''.tap do |content|
-            cell.lessons.each do |lesson|
-              content << "#{lesson.discipline.title}\n"
-              content << "#{lesson.kind_text}\n"
-              content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-              content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-            end
-          end
-
-          row << Pdf::Cell.new(content)
-        end
-        table_data[:days][day] << row
-
-        # TODO: extract into method
-        lesson_times[1..-1].each do |lesson_time|
-          row = [Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")]
-
-          timetable.groups.each_with_index do |group, index|
-            cell = DailyTimetable.new(:timetable => timetable, :day => day ,:week => week).cells[lesson_time.number][index + 1]
-
-            content = ''.tap do |content|
-              cell.lessons.each do |lesson|
+              lessons.each do |lesson|
                 content << "#{lesson.discipline.title}\n"
                 content << "#{lesson.kind_text}\n"
                 content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
@@ -191,39 +132,47 @@ class Pdf::Week
     end
   end
 
-  def set_colspans
+  def set_colspans(table_data)
     table_data[:days].each do |_, rows|
       rows.each { |row| row = set_spans(row, :colspan) }
     end
   end
 
-  def set_rowspans
+  def set_rowspans(table_data)
+    group_size = table_data[:days].values.first.first.count - 2
+
     table_data[:days].each do |_, rows|
       new_rows = []
-      rows.each { |row| new_rows << row[row.size - timetable.groups.size..row.size] }
+      rows.each { |row| new_rows << row[row.size - group_size..row.size] }
 
       new_rows = new_rows.transpose
       new_rows.each { |row| row = set_spans(row, :rowspan) }
       new_rows = new_rows.transpose
 
-      rows.each_with_index { |row, index| row[row.size - timetable.groups.size..row.size] = new_rows[index] }
+      rows.each_with_index { |row, index| row[row.size - group_size..row.size] = new_rows[index] }
     end
   end
 
   def generate
     set_font_style
 
-    rows = []
-    rows << table_data[:header].select(&:visibiliity?).map(&:to_h)
+    pages.each do |page|
+      table = []
+      table << page[:header].select(&:visibiliity?).map(&:to_h)
 
-    table_data[:days].each do |day, array|
-      array.each { |elem| rows << elem.select(&:visibiliity?).map(&:to_h) }
-    end
+      set_colspans(page)
+      set_rowspans(page)
 
-    pdf.table(rows) do
-      cells.style :align => :center, :valign => :center, :height => 0.75.in
+      page[:days].each do |day, array|
+        array.each { |elem| table << elem.select(&:visibiliity?).map(&:to_h) }
+      end
 
-      row(0).height = 0.25.in
+      pdf.table(table) do
+        cells.style :align => :center, :valign => :center, :height => 0.75.in
+        row(0).height = 0.25.in
+      end
+
+      pdf.start_new_page unless pages.last == page
     end
   end
 end
