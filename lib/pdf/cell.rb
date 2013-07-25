@@ -70,11 +70,15 @@ class Pdf::Cell
 
   def lessons_content
     ''.tap do |content|
-      lessons.each do |lesson|
+      if lessons.many?
+        content << lessons.map { |lesson| "#{lesson.subgroup_text}: #{lesson.discipline.abbr}\n#{lesson.classrooms.join(', ')}" }.join("\n\n")
+      else
+        lesson = lessons.first
         content << "#{lesson_title_or_abbr(lesson)}\n"
         content << "#{lesson.kind_text}\n"
-        content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-        content << lesson_lecturers(lesson) if lesson.lecturers.any?
+        content << "#{lesson.classrooms.join(', ')}\n" if lesson.classrooms.any?
+        content << "#{lesson_lecturers(lesson)}\n" if lesson.lecturers.any?
+        content << lesson.subgroup_text unless lesson.subgroup_whole?
       end
     end
   end

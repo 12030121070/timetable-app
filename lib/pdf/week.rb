@@ -35,10 +35,6 @@ class Pdf::Week
     10
   end
 
-  def lessons_time_per_page
-    14
-  end
-
   def pages
     @pages ||= [].tap do |array|
       timetable_groups.each_slice(groups_per_page) { |groups| array << table_data(groups) }
@@ -137,6 +133,9 @@ class Pdf::Week
     set_font_style
 
     pages.each do |page|
+      pdf.text timetable.title, :size => 16
+      pdf.move_down 10
+
       table = []
       table << page[:header].select(&:visibiliity?).map(&:to_h)
 
