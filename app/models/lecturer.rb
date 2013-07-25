@@ -15,7 +15,7 @@ class Lecturer < ActiveRecord::Base
   end
 
   def short_name
-    "#{surname.mb_chars.capitalize} #{name.first.mb_chars.capitalize}. #{patronymic.first.mb_chars.capitalize}."
+    "#{surname.mb_chars.capitalize} #{name.first.mb_chars.capitalize}.#{patronymic.first.mb_chars.capitalize}."
   end
   alias_method :to_s, :short_name
 end

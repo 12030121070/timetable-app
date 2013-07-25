@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class Pdf::Cell
   include ActiveAttr::MassAssignment
 
@@ -60,7 +62,7 @@ class Pdf::Cell
       return string if string.size > max_string_width
 
       lesson.lecturers[1..-1].each do |lecturer|
-        string << ', ...' and break if (string + lecturer.to_s).size > max_string_width
+        string << ' и др.' and break if (string + lecturer.to_s).size > max_string_width
         string << ", #{lecturer.to_s}"
       end
     end
@@ -69,12 +71,9 @@ class Pdf::Cell
   def lessons_content
     ''.tap do |content|
       lessons.each do |lesson|
-        content << lesson_title_or_abbr(lesson)
-        content << "\n"
-        content << lesson.kind_text
-        content << "\n"
-        content << lesson.classrooms.map(&:to_s).join(', ') if lesson.classrooms.any?
-        content << "\n"
+        content << "#{lesson_title_or_abbr(lesson)}\n"
+        content << "#{lesson.kind_text}\n"
+        content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
         content << lesson_lecturers(lesson) if lesson.lecturers.any?
       end
     end
