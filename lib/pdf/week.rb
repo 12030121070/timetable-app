@@ -3,7 +3,7 @@ require "prawn/measurement_extensions"
 module ::Prawn
   class Table
     def column_widths
-      [36, 72] + (2..cells.length).map { 108 }
+      [36, 36] + (2..cells.length).map { 108 }
     end
   end
 end
@@ -32,7 +32,7 @@ class Pdf::Week
   end
 
   def groups_per_page
-    4
+    10
   end
 
   def lessons_time_per_page
@@ -47,8 +47,8 @@ class Pdf::Week
 
   def table_data(groups)
     {}.tap do |table_data|
-      table_data[:header] = [Pdf::Cell.new('', 2, 1)]
-      groups.each { |group| table_data[:header] << Pdf::Cell.new(group.title) }
+      table_data[:header] = [Pdf::Cell.new(:colspan => 2)]
+      groups.each { |group| table_data[:header] << Pdf::Cell.new(:content => group.title) }
 
       table_data[:days] = {}
 
@@ -59,42 +59,22 @@ class Pdf::Week
 
         # TODO: extract into method
         lesson_time = lesson_times.first
-        row = [Pdf::Cell.new(day.day_name, 1, lesson_times.length)]
-        row << Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")
+        row = [Pdf::Cell.new(:content => day.day_name, :rowspan => lesson_times.length)]
+        row << Pdf::Cell.new(:content => "#{lesson_time.starts_at}\n\n #{lesson_time.ends_at}")
 
         groups.each_with_index do |group, index|
           lessons = group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lesson_time.id}).where(:days => { :id => day.id })
-
-          content = ''.tap do |content|
-            lessons.each do |lesson|
-              content << "#{lesson.discipline.title}\n"
-              content << "#{lesson.kind_text}\n"
-              content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-              content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-            end
-          end
-
-          row << Pdf::Cell.new(content)
+          row << Pdf::Cell.new(:lessons => lessons)
         end
         table_data[:days][day] << row
 
         # TODO: extract into method
         lesson_times[1..-1].each do |lesson_time|
-          row = [Pdf::Cell.new("#{lesson_time.starts_at} - #{lesson_time.ends_at}")]
+          row = [Pdf::Cell.new(:content => "#{lesson_time.starts_at}\n\n #{lesson_time.ends_at}")]
 
           groups.each_with_index do |group, index|
             lessons = group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lesson_time.id}).where(:days => { :id => day.id })
-
-            content = ''.tap do |content|
-              lessons.each do |lesson|
-                content << "#{lesson.discipline.title}\n"
-                content << "#{lesson.kind_text}\n"
-                content << "#{lesson.classrooms.map(&:to_s).join(', ')}\n" if lesson.classrooms.any?
-                content << "#{lesson.lecturers.map(&:to_s).join(', ')}\n" if lesson.lecturers.any?
-              end
-            end
-
-            row << Pdf::Cell.new(content)
+            row << Pdf::Cell.new(:lessons => lessons)
           end
           table_data[:days][day] << row
         end
@@ -119,7 +99,7 @@ class Pdf::Week
 
       matches = 0
       (i + 1...array.length).each do |j|
-        break if array[i].content != array[j].content
+        break unless array[i] == array[j]
         matches += 1
       end
 
