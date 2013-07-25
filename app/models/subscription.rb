@@ -22,23 +22,23 @@ private
     month_count = self.month_count.to_i
     total = month_count * groups_count
 
-    if month_count >= tariff.min_month && month_count < tariff.half_months && groups_count >= tariff.min_group && groups_count < tariff.half_groups
+    if month_count >= tariff.min_month && month_count < tariff.half_months && group_count >= tariff.min_group && group_count < tariff.half_groups
       total *= tariff.first_plan
-    elsif month_count >= tariff.min_month && month_count < tariff.half_months && groups_count >= tariff.half_groups && groups_count < tariff.max_group
+    elsif month_count >= tariff.half_months && month_count < tariff.max_months && group_count >= tariff.min_group && group_count < tariff.half_groups
       total *= tariff.second_plan
-    elsif month_count >= tariff.min_month && month_count < tariff.half_months && groups_count >= tariff.max_group
+    elsif month_count >= tariff.max_month && group_count >= tariff.min_group && group_count < tariff.half_groups
       total *= tariff.third_plan
-    elsif month_count >= tariff.half_months && month_count < tariff.max_month && groups_count >= tariff.min_group && groups_count < tariff.half_groups
+    elsif month_count >= tariff.min_month && month_count < tariff.half_months && group_count >= tariff.half_groups && group_count < tariff.max_group
       total *= tariff.fourth_plan
-    elsif month_count >= tariff.half_months && month_count < tariff.max_month && groups_count >= tariff.half_groups && groups_count < tariff.max_group
+    elsif month_count >= tariff.half_months && month_count < tariff.max_months && group_count >= tariff.half_groups && group_count < tariff.max_group
       total *= tariff.fith_plan
-    elsif month_count >= tariff.half_months && month_count < tariff.max_month && groups_count >= tariff.max_group
+    elsif month_count >= tariff.max_months && group_count >= tariff.half_groups && group_count < tariff.max_group
       total *= tariff.sixth_plan
-    elsif month_count >= tariff.max_month && groups_count >= tariff.min_group && groups_count < tariff.half_groups
+    elsif month_count >= tariff.min_month && group_count < tariff.half_months && group_count >= tariff.half_groups && group_count < tariff.max_group
       total *= tariff.seventh_plan
-    elsif month_count >= tariff.max_month && groups_count >= tariff.half_groups && groups_count < tariff.max_group
+    elsif month_count >= tariff.half_months && group_count < tariff.max_months && group_count >= tariff.half_groups && group_count < tariff.max_group
       total *= tariff.eighth_plan
-    elsif month_count >= tariff.max_month && groups_count >= tariff.max_group
+    elsif month_count >= tariff.max_month && group_count >= tariff.half_groups && group_count < tariff.max_group
       total *= tariff.nineth_plan
     end
 
