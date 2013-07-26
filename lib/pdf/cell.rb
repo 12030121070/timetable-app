@@ -3,7 +3,8 @@
 class Pdf::Cell
   include ActiveAttr::MassAssignment
 
-  attr_accessor :content, :colspan, :rowspan, :visibiliity, :lessons
+  attr_accessor :content, :colspan, :rowspan, :visibiliity,
+    :day, :lesson_time, :group, :lessons
 
   def initialize(args = {})
     super(args)
@@ -45,6 +46,13 @@ class Pdf::Cell
     true
   end
 
+  def can_have_more_lesson?
+    return false if lessons.many?
+    lessons.each { |lesson| return false if lesson.subgroup_whole? }
+
+    true
+  end
+
   private
 
   def max_string_width
@@ -69,7 +77,7 @@ class Pdf::Cell
   end
 
   def lessons_content
-    ''.tap do |content|
+    @lessons_conent ||= ''.tap do |content|
       if lessons.many?
         content << lessons.map { |lesson| "#{lesson.subgroup_text}: #{lesson.discipline.abbr}\n#{lesson.classrooms.join(', ')}" }.join("\n\n")
       else

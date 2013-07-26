@@ -10,6 +10,14 @@ class Workplace::WeeksController < Workplace::WorkplaceController
   belongs_to :organization, :finder => :find_by_subdomain!
   belongs_to :timetable
 
+  def show
+    show! {
+      pdf_week = Pdf::Week.new(@week)
+      @table = pdf_week.table_data
+      pdf_week.set_colspans(@table)
+    }
+  end
+
   def pdf
     pdf! {
       send_data Pdf::Week.new(@week).render, :type => 'application/pdf', :filename => 'week.pdf', :disposition => :inline and return
