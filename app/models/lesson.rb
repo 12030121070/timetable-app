@@ -53,7 +53,8 @@ class Lesson < ActiveRecord::Base
   def available_cells_for_copy_and_move
     cells = week.cells
     (lecturers + groups + classrooms).flat_map(&:lessons).each do |lesson|
-      cells[lesson.day] -= [lesson.lesson_time]
+      # TODO: little poo
+      cells[lesson.day] -= [lesson.lesson_time] if cells[lesson.day]
     end
 
     cells
