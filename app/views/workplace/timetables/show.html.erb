@@ -1,21 +1,23 @@
 <h1><%= @timetable.title %></h1>
 
 <% if @timetable.parity? %>
-  <h3>Odd weeks:</h3>
+  <h3>Нечетные недели:</h3>
   <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks.odd } %>
-  <h3>Even weeks:</h3>
+  <h3>Четные недели:</h3>
   <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks.even } %>
 <% else %>
   <%= render partial: 'workplace/weeks/weeks_list', locals: { weeks: @timetable.weeks } %>
 <% end %>
 
 <% if @timetable.draft? %>
-  <%= link_to "Publish", to_published_workplace_organization_timetable_path(@organization.subdomain, @timetable), method: :put %>
+  <%= link_to "Опубликовать", to_published_workplace_organization_timetable_path(@organization.subdomain, @timetable), method: :put %>
 <% else %>
-  <%= link_to "Return to draft", to_draft_workplace_organization_timetable_path(@organization.subdomain, @timetable), method: :put %>
+  <%= link_to "Вернуть в черновики", to_draft_workplace_organization_timetable_path(@organization.subdomain, @timetable), method: :put %>
 <% end %>
 
-<%= render @timetable %>
+<div>
+  <%= render @timetable %>
+</div>
 
 <div class="lesson_time_wrapper">
   <ul class='tabbed_links'>
@@ -38,7 +40,7 @@
           </li>
         <% end %>
         <li class='ajax_item'>
-          <%= link_to "new", new_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, 'lesson_time[day]' => day), :remote => true, :class => 'new_link' %>
+          <%= link_to "добавить", new_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, 'lesson_time[day]' => day), :remote => true, :class => 'new_link' %>
         </li>
       </ul>
     <% end %>

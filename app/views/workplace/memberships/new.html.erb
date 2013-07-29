@@ -1,8 +1,10 @@
+<h1>Приглашение менеджера</h1>
+
 <%= simple_form_for [:workplace, @organization, @membership] do |f| %>
   <%= f.input :email %>
 
   <div class="buttons">
-    <%= f.submit "Save" %>
-    <%= link_to "Cancel", :back %>
+    <%= f.submit "Сохранить" %>
+    <%= link_to "Отмена", :back %>
   </div>
 <% end %>

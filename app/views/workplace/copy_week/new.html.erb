@@ -1,14 +1,16 @@
-<p><%= @week %> will be copied to:</p>
-<%= link_to "Copy to all week",  '#', :id => 'copy_all', :class => 'copy_link' %>
+<h1>Копирование недели</h1>
+
+<p><%= @week %> скопировать на:</p>
+<%= link_to "на все недели",  '#', :id => 'copy_all', :class => 'copy_link' %>
 <% if @timetable.parity? %>
-  <%= link_to 'Copy to even week', '#', :id => 'copy_even', :class => 'copy_link' %>
-  <%= link_to 'Copy to odd week',  '#', :id => 'copy_odd', :class => 'copy_link' %>
+  <%= link_to 'на четные недели', '#', :id => 'copy_even', :class => 'copy_link' %>
+  <%= link_to 'на нечетные недели',  '#', :id => 'copy_odd', :class => 'copy_link' %>
 <% end %>
-<%= link_to "Uncheck all",  '#', :id => 'uncheck', :class => 'copy_link' %>
+<%= link_to "сброс",  '#', :id => 'uncheck', :class => 'copy_link' %>
 
 <%= form_tag workplace_organization_timetable_week_copy_path(@organization, @timetable, @week), :method => :post, :class => 'copy_week' do %>
   <% @recipients.group_by(&:parity).each do |parity, weeks| %>
-    <h4><%= parity %></h4>
+    <h4><%= Hash[Week.parity.options.map(&:reverse)][parity] %> недели</h4>
     <% weeks.each do |week| %>
       <div class="check_box">
         <%= label_tag "recipient_#{week.id}", week %>
@@ -16,6 +18,8 @@
       </div>
     <% end %>
   <% end %>
-  <%= submit_tag 'Copy' %>
-  <%= link_to 'Cancel', :back %>
+  <div class="buttons">
+    <%= submit_tag 'Копировать' %>
+    <%= link_to 'Отмена', :back %>
+  </div>
 <% end %>

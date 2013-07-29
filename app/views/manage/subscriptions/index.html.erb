@@ -1,4 +1,5 @@
-<h1>All subscriptions <%= @organization.title %></h1>
+<h1><%= @organization.title %></h1>
+<h2>Все подписки </h2>
 
 <ul>
   <% @organization.subscriptions.each do |subscription| %>
@@ -6,4 +7,4 @@
   <% end %>
 </ul>
 
-<%= link_to 'add subscription', new_manage_organization_subscription_path(@organization) %>
+<%= link_to 'Добавить новую подписку', new_manage_organization_subscription_path(@organization) %>

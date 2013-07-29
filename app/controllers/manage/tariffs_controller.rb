@@ -9,16 +9,12 @@ class Manage::TariffsController < Manage::ManageController
       @tariff.attributes = params['tariff']
       @tariff.save!
       flash[:notice] = 'Тариф успешно сохранен'
-      redirect_to manage_tariff_path
+      redirect_to manage_root_path
     rescue => e
       logger.error "ERROR: #{e}"
       flash[:alert] = 'Во время сохранения произошла ошибка'
       render :edit
     end
-  end
-
-  def show
-    @tariff = resource
   end
 
 private

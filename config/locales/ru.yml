@@ -1,4 +1,88 @@
 ru:
+  activerecord:
+    state_machines:
+      timetable:
+        status:
+          states:
+            draft: Черновик
+            published: Опубликовано
+
+    models:
+      building: Корпус
+      classroom: Аудитория
+      discipline: Дисциплина
+      lecturer: Лектор
+      membership: Менеджер
+      subscription: Подписка
+      tariff: Тариф
+      timetable: Расписание
+      user: Пользователь
+
+    attributes:
+      building:
+        title: Название
+        address: Адрес
+
+      classroom:
+        number: Номер аудитории
+
+      discipline:
+        title: Название
+
+      group:
+        title: Название группы
+
+      lecturer:
+        surname: Фамилия
+        name: Имя
+        patronymic: Отчество
+
+      lesson:
+        discipline: Дисциплина
+        kind: Тип
+        subgroup: Подгруппы
+
+      lesson_time:
+        number: Номер занятия
+        starts_at: Начало занятия
+        ends_at: Окончание занятия
+
+      membership:
+        email: Электронная почта
+
+      subscription:
+        starts_on: Начало подписки
+        ends_on: Окончание подписки
+        groups_count: Кол-во групп
+        active: Активность
+
+      tariff:
+        cost: 'Цена подписки за одну группу'
+        min_group: 'Минимальное кол-во групп'
+        max_group: 'Максимально кол-во групп'
+        min_month: 'Минимальный срок в месяцах'
+        max_month: 'Максимальный срок в месяцах'
+        discount_half_year: 'Скидка для сроков больше, чем полгода'
+        discount_year: 'Скидка для года'
+        discount_small: 'Скидка для маленьких групп'
+        discount_medium: 'Скидка для средних групп'
+        discount_large: 'Скидка для больших групп'
+
+      timetable:
+        title: Название
+        starts_on: Начало расписания
+        ends_on: Конец расписания
+        parity: Наличие четных недель
+        first_week_parity: Первая неделя
+
+      user:
+        email: Электронная почта
+        password: Пароль
+        remember_me: Запомнить меня
+
+  app:
+    title: 'Расписание'
+
   enumerize:
     lesson:
       kind:
@@ -10,7 +94,21 @@ ru:
         exam:       Экзамен
         test:       Зачет
       subgroup:
-        whole: whole group
+        whole: полная группа
         a: подгр. а
         b: подгр. б
 
+    membership:
+      role:
+        owner: Владелец
+        member: Менеджер
+
+    timetable:
+      first_week_parity:
+        even: четная
+        odd: нечетная
+
+    week:
+      parity:
+        even: Четные
+        odd: Нечетные

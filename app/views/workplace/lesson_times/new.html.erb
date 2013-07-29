@@ -3,7 +3,10 @@
   <%= f.input :number, :input_html => { :autofocus => true } %>
   <%= f.input :starts_at %>
   <%= f.input :ends_at %>
-  <%= f.submit 'save' %>
-  <%= link_to 'cancel', workplace_organization_timetable_lesson_times_path(@timetable.organization, @timetable, 'lesson_time[day]' => f.object.day), :remote => true, :class => 'cancel_link' %>
+
+  <div class="buttons">
+    <%= f.submit 'Сохранить' %>
+    <%= link_to 'Отмена', workplace_organization_timetable_lesson_times_path(@timetable.organization, @timetable, 'lesson_time[day]' => f.object.day), :remote => true, :class => 'cancel_link' %>
+  </div>
 <% end %>
 

@@ -5,7 +5,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :organization
   before_create :set_dates, :set_sum
 
-  scope :actual, -> { where('starts_on <= :today AND ends_on >= :today', :today => Time.zone.today) }
+  scope :actual, -> { where('active = :active AND starts_on <= :today AND ends_on >= :today', :active => true,  :today => Time.zone.today) }
 
   def change_active_state
     self.active = (active? ? false : true)
@@ -22,7 +22,7 @@ private
     month_count = self.month_count.to_i
     total = month_count * groups_count
 
-    if group_count >= tariff.min_group && group_count < tariff.half_groups
+    if groups_count >= tariff.min_group && groups_count < tariff.half_groups
       if month_count >= tariff.min_month && month_count < tariff.half_months
         total *= tariff.first_plan
       elsif month_count >= tariff.half_months && month_count < tariff.max_month
@@ -30,7 +30,7 @@ private
       elsif month_count >= tariff.max_month
         total *= tariff.third_plan
       end
-    elsif group_count >= tariff.half_groups && group_count < tariff.max_group
+    elsif groups_count >= tariff.half_groups && groups_count < tariff.max_group
       if month_count >= tariff.min_month && month_count < tariff.half_months
         total *= tariff.fourth_plan
       elsif month_count >= tariff.half_months && month_count < tariff.max_month
@@ -38,7 +38,7 @@ private
       elsif month_count >= tariff.max_month
         total *= tariff.sixth_plan
       end
-    elsif group_count >= tariff.max_group
+    elsif groups_count >= tariff.max_group
       if month_count >= tariff.min_month && month_count < tariff.half_months
         total *= tariff.seventh_plan
       elsif month_count >= tariff.half_months && month_count < tariff.max_month

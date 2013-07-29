@@ -16,6 +16,8 @@ class Timetable < ActiveRecord::Base
 
   delegate :organization_holidays, :to => :organization
 
+  enumerize :first_week_parity, :in => { :odd => 1, :even => 0 }
+
   normalize_attributes :ends_on, :parity, :starts_on, :title, :first_week_parity
 
   state_machine :status, :initial => :draft do
@@ -36,7 +38,7 @@ class Timetable < ActiveRecord::Base
 
   def create_weeks
     number = 1
-    week_parity = self.first_week_parity
+    week_parity = self.first_week_parity.value
     (self.starts_on.beginning_of_week.to_date..self.ends_on.to_date).each_slice(7) do |days|
       week_starts_on = days.first > starts_on ? days.first : starts_on
       if self.parity?

@@ -28,6 +28,6 @@ sort = (list) ->
       target.closest('.ajax_item').before('<li class="ajax_item">'+xhr.responseText+'</li>')
     else
       ul = target.closest('ul')
-      ul.find('.new_link').show() unless xhr.responseText.match(/error/)
+      ul.find('.new_link').show() unless xhr.responseText.match(/error/) || xhr.responseText.match(/new_link/)
       target.closest('.ajax_item').html(xhr.responseText)
       sort(ul)

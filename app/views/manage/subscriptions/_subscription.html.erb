@@ -1,6 +1,7 @@
-<%= subscription.active? ? 'active' : 'non active' %>
-<%= subscription.groups_count %>
-<%= subscription.starts_on %> &mdash; <%= subscription.ends_on %>
-<%= link_to 'edit', edit_manage_organization_subscription_path(@organization, subscription) %>
-<%= link_to 'delete', manage_organization_subscription_path(@organization, subscription), :method => :delete, :confirm => 'Are you sure?' %>
-<%= link_to 'change state', change_active_state_manage_organization_subscription_path(@organization, subscription) %>
+<div><%= subscription.active? ? 'Подписка активна' : 'Не активна' %></div>
+<div>Кол-во групп: <%= subscription.groups_count %></div>
+<div>Срок подписки: <%= subscription.starts_on %> &mdash; <%= subscription.ends_on %></div>
+<div>Сумма: <%= number_to_currency subscription.sum %></div>
+<%= link_to 'редактировать', edit_manage_organization_subscription_path(@organization, subscription) %>
+<%= link_to 'удалить', manage_organization_subscription_path(@organization, subscription), :method => :delete, :confirm => 'Вы уверены?:' %>
+<%= link_to 'изменить статус', change_active_state_manage_organization_subscription_path(@organization, subscription) %>

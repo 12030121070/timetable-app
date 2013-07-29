@@ -1,0 +1,12 @@
+<h2>Выслать инструкции для подтверждения регистрации</h2>
+
+<%= simple_form_for resource, :url => confirmation_path(resource_name), :as => resource_name do |f| %>
+  <%= f.input :email, :input_html => { :autofocus => true } %>
+
+  <div class="buttons">
+    <%= f.submit "Выслать инструкции для подтверждения регистрации" %>
+    <%= link_to "Отмена", root_path %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

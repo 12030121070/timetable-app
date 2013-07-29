@@ -1,30 +1,31 @@
-<h1>New subscription</h1>
+<h1>Новая подписка</h1>
 
-<h1>Costs for 1 group per 1 month</h1>
+<h2>Цены за одну группу в один месяц:</h2>
+
 <table class='tariff' data-tariff='<%= @tariff.to_json %>'>
   <thead>
     <tr>
       <th></th>
-      <th><%= @tariff.min_month %> month</th>
-      <th>>=<%= @tariff.half_months %> month</th>
-      <th><%= @tariff.max_month %> month</th>
+      <th><%= @tariff.min_month %> мес.</th>
+      <th>>= <%= @tariff.half_months %> мес.</th>
+      <th><%= @tariff.max_month %> мес.</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>>=<%= @tariff.min_group %> groups</td>
+      <td>>= <%= @tariff.min_group %> гр.</td>
       <td class='first_plan'><%= number_to_currency @tariff.first_plan %></td>
       <td class='second_plan'><%= number_to_currency @tariff.second_plan %></td>
       <td class='third_plan'><%= number_to_currency @tariff.third_plan %></td>
     </tr>
     <tr>
-      <td>>=<%= @tariff.half_groups %> groups</td>
+      <td>>= <%= @tariff.half_groups %> гр.</td>
       <td class='fourth_plan'><%= number_to_currency @tariff.fourth_plan %></td>
       <td class='fith_plan'><%= number_to_currency @tariff.fith_plan %></td>
       <td class='sixth_plan'><%= number_to_currency @tariff.sixth_plan %></td>
     </tr>
     <tr>
-      <td><%= @tariff.max_group %> groups</td>
+      <td><%= @tariff.max_group %> гр.</td>
       <td class='seventh_plan'><%= number_to_currency @tariff.seventh_plan %></td>
       <td class='eighth_plan'><%= number_to_currency @tariff.eighth_plan %></td>
       <td class='nineth_plan'><%= number_to_currency @tariff.nineth_plan %></td>

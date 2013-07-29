@@ -1,4 +1,5 @@
-<h1>All subscriptions for <%= @organization.title %></h1>
+<h1><%= @organization.title %></h1>
+<h2>Список подписок (<%= link_to 'новая подписка', new_workplace_organization_subscription_path(@organization) %>)</h2>
 
 <ul>
   <% @organization.subscriptions.each do |subscription| %>
@@ -9,5 +10,3 @@
     </li>
   <% end %>
 </ul>
-
-<%= link_to 'Add subscription', new_workplace_organization_subscription_path(@organization) %>

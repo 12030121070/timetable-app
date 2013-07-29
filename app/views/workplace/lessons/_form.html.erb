@@ -5,22 +5,25 @@
   <%= f.input :subgroup, :collection => @lesson.available_subgroup_options, :include_blank => false %>
 
   <%= f.fields_for :group_lessons do |gl_f| %>
-    <%= gl_f.input :group_id, :as => :select, :collection => @organization.groups %>
-    <%= gl_f.link_to_remove 'remove' %>
+    <%= gl_f.input :group_id, :as => :select, :collection => @organization.groups, :label => 'Группа' %>
+    <%= gl_f.link_to_remove 'убрать' %>
   <% end %>
-  <%= f.link_to_add 'add group', :group_lessons %>
+  <%= f.link_to_add 'добавить группу', :group_lessons %>
 
   <%= f.fields_for :classroom_lessons do |crl_f| %>
-    <%= crl_f.input :classroom_id, :as => :select, :collection => @organization.classrooms %>
-    <%= crl_f.link_to_remove 'remove' %>
+    <%= crl_f.input :classroom_id, :as => :select, :collection => @organization.classrooms, :label => 'Аудитория' %>
+    <%= crl_f.link_to_remove 'убрать' %>
   <% end %>
-  <%= f.link_to_add 'add classroom', :classroom_lessons %>
+  <%= f.link_to_add 'добавить аудиторию', :classroom_lessons %>
 
   <%= f.fields_for :lecturer_lessons do |ll_f| %>
-    <%= ll_f.input :lecturer_id, :collection => @organization.lecturers, :label_method => :full_name %>
-    <%= ll_f.link_to_remove 'remove' %>
+    <%= ll_f.input :lecturer_id, :collection => @organization.lecturers, :label_method => :full_name, :label => 'Лектор' %>
+    <%= ll_f.link_to_remove 'убрать' %>
   <% end %>
-  <%= f.link_to_add 'add lecturer', :lecturer_lessons %>
+  <%= f.link_to_add 'добавить лектора', :lecturer_lessons %>
 
-  <%= f.submit %>
+  <div class="buttons">
+    <%= f.submit 'Сохранить' %>
+    <%= link_to "Отмена", workplace_organization_timetable_week_path(@organization, @timetable, @week) %>
+  </div>
 <% end %>

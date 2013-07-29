@@ -3,10 +3,10 @@
   <%= f.input :starts_on %>
   <%= f.input :ends_on %>
   <%= f.input :parity %>
-  <%= f.input :first_week_parity, :as => :select, :collection => [['odd', 1], ['even', 0]] %>
+  <%= f.input :first_week_parity, :as => :select %>
 
   <div class="buttons">
-    <%= f.submit "Save" %>
-    <%= link_to "Cancel", :back %>
+    <%= f.submit "Сохранить" %>
+    <%= link_to "Отмена", :back %>
   </div>
 <% end %>

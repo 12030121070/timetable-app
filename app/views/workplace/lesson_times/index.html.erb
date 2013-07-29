@@ -1,1 +1,1 @@
-<%= link_to "new", new_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, 'lesson_time[day]' => params['lesson_time']['day']), :remote => true %>
+<%= link_to "добавить", new_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, 'lesson_time[day]' => params['lesson_time']['day']), :remote => true, :class => 'new_link' %>

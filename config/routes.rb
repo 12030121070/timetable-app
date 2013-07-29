@@ -3,7 +3,7 @@ TimetableApp::Application.routes.draw do
 
   namespace :manage do
     root :to => 'manage#index'
-    resource :tariff, :only => [:edit, :update, :show]
+    resource :tariff, :only => [:edit, :update]
     resources :organizations do
       resources :subscriptions, :except => [:show] do
         get '/change_active_state' => 'subscriptions#change_active_state', :as => :change_active_state, :on => :member
@@ -15,14 +15,14 @@ TimetableApp::Application.routes.draw do
     resources :organizations, :except => [:index] do
       resources :disciplines, :except => :show
 
-      resources :lecturers, :except => [:show, :index] do
+      resources :lecturers, :except => [:show] do
         post :import, :on => :collection
       end
 
       resources :memberships, :except => [:index, :show, :edit, :update]
       resources :subscriptions, :only => [:index, :new, :create]
 
-      resources :buildings, except: [:show, :index] do
+      resources :buildings, except: [:show] do
         post :import, :on => :collection
         resources :classrooms, except: [:show, :index]
       end

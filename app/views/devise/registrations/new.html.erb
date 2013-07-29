@@ -1,4 +1,4 @@
-<h1>Sign up</h1>
+<h1>Регистрация</h1>
 
 <div class="sign_up_form_wrapper">
   <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
@@ -6,8 +6,8 @@
     <%= f.input :password, :required => true %>
 
     <div class="buttons">
-      <%= f.button :submit, "Sign up" %>
-      <%= link_to "Cancel", root_path %>
+      <%= f.button :submit, "Зарегистрироваться" %>
+      <%= link_to "Отмена", root_path %>
     </div>
   <% end %>
 
