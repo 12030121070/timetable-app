@@ -122,6 +122,9 @@ table
         background: red
 
 table
+  border-collapse: collapse
+  width: 100%
+
   th, tr, td
     border: 1px solid black
     padding: 3px
@@ -195,3 +198,123 @@ form.new_subscription
         color: #000
         cursor: pointer
 
+.group_timetable
+  width: auto
+
+  thead
+    tr
+      th
+        border-color: #aaa
+        text-align: center
+        padding: 0
+        width: 200px
+
+        .day_name
+          display: block
+          color: #555
+
+        .date
+          display: block
+          color: #777
+          font-size: 12px
+
+  tbody
+    tr
+      td
+        border-color: #aaa
+        font-size: 12px
+        padding: 0
+        vertical-align: top
+        width: 200px
+
+        &.empty_cell
+          background: #fdfdfd
+
+          span
+            display: none
+
+        .time
+          border-bottom: 1px solid #aaa
+          color: #777
+          display: block
+          font-size: 11px
+          line-height: 14px
+          margin: 5px 55px 8px
+          text-align: center
+
+        .lesson
+          +clearfix
+          background: yellow
+          padding: 3px
+
+          span
+            height: 14px
+            line-height: 14px
+
+          .discipline
+            +clearfix
+            display: block
+            float: left
+            font-weight: bold
+            margin: 0 0 5px 0
+            width: 50%
+
+            &:hover
+              cursor: pointer
+
+          .kind
+            +clearfix
+            display: block
+            float: left
+            text-align: right
+            margin: 0 0 5px 0
+            width: 50%
+
+          .classrooms
+            +clearfix
+            display: block
+            float: left
+            margin: 0 0 5px 0
+            width: 50%
+
+            &:hover
+              cursor: pointer
+
+          .subgroup
+            +clearfix
+            display: block
+            float: left
+            margin: 0 0 5px 0
+            text-align: right
+            width: 50%
+
+          .lecturers
+            +clearfix
+            display: block
+            width: 100%
+
+            &:hover
+              cursor: pointer
+
+          &.lecture
+            background: #DDECCF
+          &.practice
+            background: #D8F0F0
+          &.laboratory
+            background: #EBE1F4
+
+          &.n1
+            background: #F8EAEA
+          &.n2
+            background: #FBF3F3
+
+.week_list
+  font-size: 12px
+  float: right
+
+  li
+    &.selected
+      background: #3c6ab4
+
+      a
+        color: #fafafa

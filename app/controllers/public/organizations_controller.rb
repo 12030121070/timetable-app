@@ -7,6 +7,23 @@ class Public::OrganizationsController < ApplicationController
 
   action :show
 
+  def show
+    show!{
+      @groups = params.try(:[], :search).try(:[], :q).try(:present?) ? Group.search do
+        fulltext params[:search][:q]
+        with :timetable_status, :published
+        with :organization_id, resource.id
+        order_by :title, :asc
+      end.results : []
+
+      @lecturers = params.try(:[], :search).try(:[], :q).try(:present?) ? Lecturer.search do
+        fulltext params[:search][:q]
+        with :organization_id, resource.id
+        order_by :full_name, :asc
+      end.results : []
+    }
+  end
+
   def set_params
     params.merge! :id => request.subdomain
   end

@@ -10,6 +10,12 @@ class Lecturer < ActiveRecord::Base
 
   normalize_attributes :name, :patronymic, :surname
 
+  searchable do
+    text :full_name
+    string :full_name
+    integer :organization_id
+  end
+
   def full_name
     "#{surname} #{name} #{patronymic}"
   end

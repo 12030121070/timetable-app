@@ -56,7 +56,9 @@ TimetableApp::Application.routes.draw do
   end
 
   scope :module => :public do
-    match '/' => 'organizations#show', :constraints => -> (r) { r.subdomain.present? && Organization.pluck(:subdomain).include?(r.subdomain) }
+    get '/' => 'organizations#show', :constraints => -> (r) { r.subdomain.present? }, :as => :organization
+    get '/groups/:id' => 'groups#show', :constraints => -> (r) { r.subdomain.present? }, :as => :organization_group
+    get '/lecturers/:id' => 'lecturers#show', :constraints => -> (r) { r.subdomain.present? }, :as => :organization_lecturer
   end
 
   root :to => 'application#main_page'

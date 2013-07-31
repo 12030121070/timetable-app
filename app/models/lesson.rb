@@ -17,6 +17,9 @@ class Lesson < ActiveRecord::Base
   has_many :lecturer_lessons, :dependent => :destroy
   has_many :lecturers, :through => :lecturer_lessons
 
+  has_one :week, :through => :day
+  has_one :timetable, :through => :week
+
   accepts_nested_attributes_for :classroom_lessons, :allow_destroy => true
   accepts_nested_attributes_for :group_lessons, :allow_destroy => true
   accepts_nested_attributes_for :lecturer_lessons, :allow_destroy => true

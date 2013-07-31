@@ -1,5 +1,5 @@
 <td <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %>>
-  <% if cell.can_have_more_lesson? && cell.lesson_time.present? && cell.content.blank? %>
+  <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
     <%= link_to "добавить",
       polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
       :class => "add", :title => "добавить" %>

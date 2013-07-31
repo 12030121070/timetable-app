@@ -66,7 +66,7 @@ def courses
 end
 
 def period
-    [Time.zone.parse('2013-02-11').to_date, Time.zone.parse('2013-02-22').to_date]
+  [Time.zone.parse('2013-02-11').beginning_of_week.to_date, Time.zone.parse('2013-02-22').end_of_week.to_date]
 end
 
 def organization

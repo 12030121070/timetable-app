@@ -1,0 +1,49 @@
+<h1><%= @organization.title %></h1>
+
+<h2><%= @group.timetable.title %></h2>
+<h3>Расписание для <%= @group.title %> группы</h3>
+
+<ul class='week_list'>
+  <% @group.weeks.each do |week| %>
+    <li class='<%= week == @week ? 'selected' : 'not_selected' %>'>
+      <%= link_to "#{l(week.days.first.date, :format => "%d %b %Y")} &mdash; #{l(week.days.last.date, :format => "%d %b %Y")}".html_safe, organization_group_path(@group.title, :week => week.starts_on)  %>
+    </li>
+  <% end %>
+</ul>
+
+<table class='group_timetable'>
+  <thead>
+    <tr>
+      <% @table[:days].each do |day| %>
+        <th>
+          <span class='day_name'><%= day.day_name %></span>
+          <span class='date'><%= l day.date, :format => :long %></span>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @table[:rows].each do |row| %>
+      <tr>
+        <% row.each do |lesson_time, lessons| %>
+          <td class='<%= lessons.empty? ? 'empty_cell' : 'filled' %>'>
+            <span class='time'><%= lesson_time %></span>
+
+            <% lessons.sort_by{|l| l.subgroup}.each do |lesson| %>
+              <div class="lesson <%= lesson.kind %>">
+                <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
+                <span class='kind'><%= lesson.kind_text %></span>
+
+                <span class='classrooms' title='<%= lesson.classrooms.map(&:to_s).join(', ') %>'><%= lesson.classrooms.many? ? "#{lesson.classrooms.first}, ..." : lesson.classrooms.first %></span>
+                <% unless lesson.subgroup_whole? %>
+                  <span class='subgroup'><%= lesson.subgroup_text %></span>
+                <% end %>
+                <span class='lecturers' title='<%= lesson.lecturers.join(', ') %>'><%= lesson.lecturers.many? ? "#{lesson.lecturers.first}, ..." : lesson.lecturers.first %></span>
+              </div>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -6,12 +6,17 @@ class Week < ActiveRecord::Base
   belongs_to :timetable
 
   has_many :days, :order => 'days.date ASC'
+  has_many :lessons, :through => :days
+  has_many :study_days, :through => :lessons, :source => :day, :uniq => true, :order => 'days.date ASC'
 
   extend Enumerize
   enumerize :parity, in: [:odd, :even], predicates: true
 
   scope :even, -> { where(parity: :even) }
   scope :odd, -> { where(parity: :odd) }
+  scope :current, -> { where('weeks.starts_on BETWEEN ? AND ?', Time.zone.today.beginning_of_week, Time.zone.today.end_of_week) }
+  scope :future, -> { where('weeks.starts_on > ?', Time.zone.today.beginning_of_week).order('weeks.starts_on ASC') }
+  scope :past, -> { where('weeks.starts_on < ?', Time.zone.today.beginning_of_week).order('weeks.starts_on ASC') }
 
   def to_s
     "неделя #{number}, #{starts_on}"

@@ -30,6 +30,7 @@ group :default do
   gem 'simple-navigation'
   gem 'simple_form'
   gem 'state_machine'
+  gem 'sunspot_rails'
 end
 
 group :development do
@@ -40,6 +41,7 @@ group :development do
   gem 'letter_opener'
   gem 'openteam-capistrano'
   gem 'rails-erd'
+  gem 'sunspot_solr'
 end
 
 group :production do

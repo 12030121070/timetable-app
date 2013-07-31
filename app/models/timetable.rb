@@ -28,6 +28,10 @@ class Timetable < ActiveRecord::Base
     event :unpublish do
       transition :published => :draft
     end
+
+    after_transition do |timetable, transition|
+      timetable.groups.reindex
+    end
   end
 
   def can_publish?
@@ -39,7 +43,7 @@ class Timetable < ActiveRecord::Base
   def create_weeks
     number = 1
     week_parity = self.first_week_parity.value
-    (self.starts_on.beginning_of_week.to_date..self.ends_on.to_date).each_slice(7) do |days|
+    (self.starts_on.beginning_of_week.to_date..self.ends_on.end_of_week.to_date).each_slice(7) do |days|
       week_starts_on = days.first > starts_on ? days.first : starts_on
       if self.parity?
         parity = week_parity % 2 == 0 ? :even : :odd
