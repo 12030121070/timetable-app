@@ -1,4 +1,4 @@
-class Public::OrganizationsController < ApplicationController
+class Public::OrganizationsController < Public::PublicController
   inherit_resources
 
   defaults :finder => :find_by_subdomain!

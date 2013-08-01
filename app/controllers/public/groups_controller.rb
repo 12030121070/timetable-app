@@ -1,4 +1,4 @@
-class Public::GroupsController < ApplicationController
+class Public::GroupsController < Public::PublicController
   inherit_resources
 
   belongs_to :organization, :finder => :find_by_subdomain!

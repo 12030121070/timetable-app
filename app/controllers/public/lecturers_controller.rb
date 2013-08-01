@@ -1,4 +1,4 @@
-class Public::LecturersController < ApplicationController
+class Public::LecturersController < Public::PublicController
   inherit_resources
 
   belongs_to :organization, :finder => :find_by_subdomain!

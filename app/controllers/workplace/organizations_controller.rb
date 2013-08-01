@@ -3,7 +3,7 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
 
   defaults :finder => :find_by_subdomain!
 
-  actions :all, :except => :index
+  actions :all, :except => [:index, :show]
 
   def new
     new! {

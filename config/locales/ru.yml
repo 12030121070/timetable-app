@@ -50,6 +50,16 @@ ru:
       membership:
         email: Электронная почта
 
+      organization:
+        title: Название организации
+        email: Электронная почта
+        phone: Телефон
+        subdomain: Доменное имя
+        site: Сайт
+
+      organization_holiday:
+        date: Дата праздника
+
       subscription:
         starts_on: Начало подписки
         ends_on: Окончание подписки

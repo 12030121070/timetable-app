@@ -7,12 +7,12 @@
   Праздники организации:
   <%= f.fields_for :organization_holidays do |ohf| %>
     <%= ohf.input :date %>
-    <%= ohf.link_to_remove 'delete' %>
+    <%= ohf.link_to_remove 'убрать' %>
   <% end %>
-  <%= f.link_to_add 'add', :organization_holidays %>
+  <%= f.link_to_add 'добавить', :organization_holidays %>
 
   <div class="buttons">
-    <%= f.submit "Save" %>
-    <%= link_to "Cancel", :back %>
+    <%= f.submit "Сохранить" %>
+    <%= link_to "Отмена", :back %>
   </div>
 <% end %>

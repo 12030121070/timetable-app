@@ -5,7 +5,7 @@ require 'importers/csv_import'
 class Workplace::LecturersController < Workplace::WorkplaceController
   inherit_resources
 
-  actions :all, except: [:show, :index]
+  actions :all, except: [:show]
 
   custom_actions :collection => :import
 

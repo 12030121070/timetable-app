@@ -38,8 +38,15 @@ h6
 p
   margin: 0 0 0.1em 0
 
+a
+  color: #314890
+
+  &:hover
+    color: #5470C4
+    text-decoration: none
+
 body
-  background: #fff
+  background: #f1e1d3
 
 .message_wrapper
   font-size: 0.8em
@@ -318,3 +325,64 @@ form.new_subscription
 
       a
         color: #fafafa
+
+@-webkit-keyframes glow
+  from
+    background-color: #007d9a
+    +box-shadow(#333 0 0 9px)
+
+  50%
+    background-color: #2daebf
+    +box-shadow(#2daebf 0 0 18px)
+
+  to
+    background-color: #007d9a
+    +box-shadow(#333 0 0 9px)
+
+.side_navigation
+  background: #b9d1e5
+  border-right: 1px solid #90bbda
+  height: 100%
+  position: fixed
+  top: 0
+  width: 60px
+  z-index: 2
+
+  ul
+    li
+      font-size: 10px
+      text-align: center
+      margin: 10px 0
+
+      a
+        display: block
+        line-height: 16px
+        margin: 0 auto
+        width: 60px
+
+        span
+          +border-radius(24px)
+          background: image_url('http://placekitten.com/g/48/48') no-repeat center top
+          display: block
+          height: 48px
+          margin: 0 auto
+          width: 48px
+
+      &.selected
+        span
+          -webkit-animation-name: glow
+          -webkit-animation-duration: 2s
+          -webkit-animation-iteration-count: infinite
+
+    &#timetables
+    &#subscribes
+    &#members
+    &#lectures
+    &#buildings
+    &#disciplines
+
+.workplace_wrapper
+  left: 61px
+  margin-right: 61px
+  position: relative
+  padding: 0 15px
