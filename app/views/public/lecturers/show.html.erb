@@ -1,3 +1,17 @@
 <h1><%= @organization.title %></h1>
+<h2><%= @lecturer.full_name %></h2>
+<h3>Расписание преподавателя</h3>
 
-<h3>Расписание <%= @lecturer.full_name %></h3>
+<% @lecturer.lessons.published.group_by(&:day).sort_by{|k,v| k}.each do |day, lessons| %>
+  <h5><%= l day.date, :format => :long %></h5>
+  <ul>
+    <% lessons.sort_by{|l| l.lesson_time.number }.each do |lesson| %>
+      <li>
+        <%= lesson.lesson_time %>
+        <%= lesson.discipline.abbr %>
+        <%= lesson.classrooms.join(', ') %>
+        <%= lesson.groups.map(&:title).join(', ') %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

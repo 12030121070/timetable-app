@@ -5,6 +5,8 @@ class Public::LecturersController < ApplicationController
 
   action :show
 
+  has_scope :published, :default => 1
+
   before_filter :set_subdomain
 
 private

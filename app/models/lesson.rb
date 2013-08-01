@@ -26,6 +26,8 @@ class Lesson < ActiveRecord::Base
 
   validates_presence_of :discipline, :kind, :subgroup
 
+  scope :published, -> { joins(:timetable).where("timetables.status = 'published'") }
+
   enumerize :kind,
     in: [:lecture, :practice, :laboratory, :research, :design, :exam, :test],
     predicates: true

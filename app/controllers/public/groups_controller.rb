@@ -5,12 +5,13 @@ class Public::GroupsController < ApplicationController
   defaults :finder => :find_by_title!
 
   action :show
+  has_scope :published, :default => 1
 
   before_filter :set_subdomain
 
   def show
     show!{
-      @week = params[:week] ? resource.weeks.find_by_starts_on(params[:week]) : resource.closest_week
+      @week = params[:week] ? resource.published_weeks.find_by_starts_on(params[:week]) : resource.closest_week
       @table = resource.table_on(@week)
     }
   end

@@ -19,6 +19,7 @@ class Public::OrganizationsController < ApplicationController
       @lecturers = params.try(:[], :search).try(:[], :q).try(:present?) ? Lecturer.search do
         fulltext params[:search][:q]
         with :organization_id, resource.id
+        with(:published_lessons_count).greater_than(0)
         order_by :full_name, :asc
       end.results : []
     }

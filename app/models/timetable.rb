@@ -8,6 +8,8 @@ class Timetable < ActiveRecord::Base
   has_many :groups, :dependent => :destroy, :order => 'groups.title ASC'
   has_many :lesson_times, :as => :context, :dependent => :destroy, :order => 'day ASC, number ASC'
   has_many :weeks, dependent: :destroy, :order => 'number ASC'
+  has_many :lessons, :through => :lesson_times
+  has_many :lecturers, :through => :lessons, :uniq => true
 
   validates_presence_of :title, :starts_on, :ends_on
 
@@ -31,6 +33,7 @@ class Timetable < ActiveRecord::Base
 
     after_transition do |timetable, transition|
       timetable.groups.reindex
+      timetable.lecturers.reindex
     end
   end
 
