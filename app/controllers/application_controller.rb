@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  layout 'public'
+
   def main_page
     redirect_to workplace_root_path if user_signed_in?
   end
