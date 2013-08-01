@@ -82,7 +82,7 @@ frame = {
 
   slide_left: () ->
     this.show_overlay()
-    this.container().animate(
+    this.container().show().animate(
       right: 0
     )
 
@@ -90,7 +90,9 @@ frame = {
     this.hide_overlay()
     right = this.container_style.right()
     this.container().animate(
-      right: right
+      right: right,
+      () ->
+        $(this).hide()
     )
     this.content('')
 }
