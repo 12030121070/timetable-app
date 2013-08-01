@@ -1,5 +1,5 @@
 class Workplace::WorkplaceController < ApplicationController
-  layout 'workplace'
+  layout ->(controller) { request.xhr? ? false : 'workplace' }
 
   before_filter :authenticate_user!
 

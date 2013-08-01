@@ -1,4 +1,4 @@
-<%= simple_nested_form_for resource, :url => [:workplace, resource.persisted? ? resource : :organizations] do |f| %>
+<%= simple_nested_form_for resource, :url => [:workplace, resource.persisted? ? resource : :organizations], :remote => true do |f| %>
   <%= f.input :title %>
   <%= f.input :email %>
   <%= f.input :phone %>
@@ -13,6 +13,6 @@
 
   <div class="buttons">
     <%= f.submit "Сохранить" %>
-    <%= link_to "Отмена", :back %>
+    <%= link_to "Отмена", :back, :class => 'cancel' %>
   </div>
 <% end %>

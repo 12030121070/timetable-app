@@ -3,10 +3,7 @@
     <%= render_navigation %>
   </div>
   <div class="workplace_wrapper">
-    <div class="organization_info">
-      <h1><%= @organization.title %></h1>
-      <%= link_to "редактировать инфу об организации", edit_workplace_organization_path(@organization) %>
-    </div>
+    <%= render @organization %>
     <%= yield %>
   </div>
 <% end %>

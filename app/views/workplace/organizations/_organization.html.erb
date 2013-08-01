@@ -1,12 +1,5 @@
-<li class="done">
-  <%= link_to organization.title, workplace_organization_path(organization) %>
-</li>
-<li class="<%= organization.buildings.any? ? 'done' : 'not_done' %>">
-  <%= link_to 'Add classrooms', new_workplace_organization_building_path(organization) %>
-</li>
-<li class="<%= organization.lecturers.any? ? 'done' : 'not_done' %>">
-  <%= link_to 'Add lecturers', new_workplace_organization_lecturer_path(organization) %>
-</li>
-<li class="<%= organization.memberships.many? ? 'done' : 'not_done' %>">
-  <%= link_to 'Add memberships', new_workplace_organization_membership_path(organization) %>
-</li>
+<div class="organization_info data_presentation">
+  <h1><%= @organization.title %></h1>
+  <%= link_to "редактировать инфу об организации", edit_workplace_organization_path(@organization), :remote => :true, :class => 'in_frame' %>
+</div>
+

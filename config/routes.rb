@@ -12,7 +12,7 @@ TimetableApp::Application.routes.draw do
   end
 
   namespace :workplace do
-    resources :organizations, :except => [:index, :show] do
+    resources :organizations, :except => [:index] do
       resources :disciplines, :except => :show
 
       resources :lecturers, :except => [:show] do

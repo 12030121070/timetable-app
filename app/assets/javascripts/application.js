@@ -4,6 +4,7 @@
 //= require jquery_nested_form
 //= require accounting
 //= require ajaxed
+//= require frame_handler
 //= require message
 //= require tabbed
 //= require copy_week

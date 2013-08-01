@@ -3,16 +3,16 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
 
   defaults :finder => :find_by_subdomain!
 
-  actions :all, :except => [:index, :show]
+  actions :all, :except => [:index]
 
   def new
     new! {
-      redirect_to workplace_organization_path(current_user.organization) and return if current_user.has_organization?
+      redirect_to workplace_root_path and return if current_user.has_organization?
     }
   end
 
   def create
-    redirect_to workplace_organization_path(current_user.organization) and return if current_user.has_organization?
+    redirect_to workplace_root_path and return if current_user.has_organization?
 
     create! do |success, failure|
       success.html {
