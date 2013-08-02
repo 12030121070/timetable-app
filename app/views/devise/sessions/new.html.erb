@@ -1,6 +1,6 @@
-<h1>Вход</h1>
+<div class="auth_form_wrapper">
+  <h3>Вход</h3>
 
-<div class="sign_in_form_wrapper">
   <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
     <%= f.input :email, :required => false, :autofocus => true %>
     <%= f.input :password, :required => false %>

@@ -97,7 +97,7 @@ frame = {
     this.content('')
 }
 
-@init_frame_handler = () ->
+$ ->
   $('body').on 'ajax:success', (evt, response) ->
     if $(evt.target).hasClass('in_frame')
       frame.parent = $(evt.target).closest('.data_presentation')

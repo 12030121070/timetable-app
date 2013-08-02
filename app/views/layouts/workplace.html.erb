@@ -1,3 +1,12 @@
+<%= content_for :head do %>
+  <head>
+    <title>Управление расписаниями <%= @organization.try(:title) %></title>
+    <%= stylesheet_link_tag    'workplace', :media => 'all' %>
+    <%= javascript_include_tag 'workplace' %>
+    <%= csrf_meta_tags %>
+  </head>
+<% end %>
+
 <%= content_for :content do %>
   <div class="side_navigation">
     <%= render_navigation %>
@@ -7,4 +16,5 @@
     <%= yield %>
   </div>
 <% end %>
+
 <%= render :file => 'layouts/base' %>

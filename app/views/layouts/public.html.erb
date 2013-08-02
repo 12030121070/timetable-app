@@ -1,4 +1,14 @@
+<%= content_for :head do %>
+  <head>
+    <title><%= @organization.title %> | Расписание занятий</title>
+    <%= stylesheet_link_tag    'public', :media => 'all' %>
+    <%= javascript_include_tag 'public' %>
+    <%= csrf_meta_tags %>
+  </head>
+<% end %>
+
 <%= content_for :content do %>
   <%= yield %>
 <% end %>
+
 <%= render :file => 'layouts/base' %>

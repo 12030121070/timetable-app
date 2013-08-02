@@ -1,6 +1,5 @@
-<h1>Редактирование вашего профиля</h1>
-
-<div class="edit_account_form_wrapper">
+<div class="auth_form_wrapper">
+  <h3>Редактирование вашего профиля</h3>
   <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <%= f.input :email, :required => true, :autofocus => true %>
 

@@ -1,4 +1,14 @@
+<%= content_for :head do %>
+  <head>
+    <title>Управление системой расписаний</title>
+    <%= stylesheet_link_tag    'manage', :media => 'all' %>
+    <%= javascript_include_tag 'manage' %>
+    <%= csrf_meta_tags %>
+  </head>
+<% end %>
+
 <%= content_for :content do %>
   <%= yield %>
 <% end %>
+
 <%= render :file => 'layouts/base' %>
