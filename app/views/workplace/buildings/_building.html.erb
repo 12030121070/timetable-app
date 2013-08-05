@@ -1,6 +1,8 @@
-<li>
-  <%= building.title %>
-  <%= building.address %>
-  <%= link_to 'редактировать', edit_workplace_building_path(building) %>
-  <%= link_to 'удалить', workplace_building_path(building), :method => :delete, :confirm => 'Вы уверены?' %>
+<li class='item'>
+  <div class="actions">
+    <%= link_to 'редактировать', edit_workplace_building_path(building), :class => 'yellow_button' %>
+    <%= link_to 'удалить', workplace_building_path(building), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button' %>
+  </div>
+  <%= link_to "#{building.title.mb_chars.upcase}. #{building.classrooms.count} ауд.", '#', :class => 'title' %>
+  <div class="additional"><%= building.address %></div>
 </li>

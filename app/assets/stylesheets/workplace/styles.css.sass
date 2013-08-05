@@ -119,7 +119,7 @@
   padding: 10px 20px
 
   .header
-    margin: 0 0 30px 0
+    margin: 0 0 25px 0
 
     .logo
       background: image_url('logo.png') no-repeat
@@ -128,12 +128,14 @@
       text-indent: -999px
       width: 164px
 
-  .yellow_button
-    +border-radius(3px)
-    +background-image(linear-gradient(#febb09, #fdab09))
-    +single-box-shadow(#fed560, 0, -4px, 0, false, true)
+  .yellow_button, .grey_button, .delete_button
+    +border-radius(4px)
+    +inline-block
+    border: none
     color: #141414
-    font-size: 12px
+    font-size: 10px
+    font-weight: 700
+    letter-spacing: 1px
     line-height: 14px
     padding: 7px 20px
     text-decoration: none
@@ -141,3 +143,84 @@
 
     &:active
       +single-box-shadow(#000, 0, 0, 4px, false, true)
+
+    &:hover
+      cursor: pointer
+
+    &.to_right
+      float: right
+
+  .yellow_button
+    +background-image(linear-gradient(#febb09, #fdab09))
+    +single-box-shadow(#fed560, 0, -4px, 0, false, true)
+
+  .grey_button
+    +background-image(linear-gradient(#d5d5d5, #cbcbcb))
+    +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
+
+  .delete_button
+    +clearfix
+    @include background(image_url('trash.png') no-repeat center center, linear-gradient(#fb3408, #fb2508))
+    +single-box-shadow(#fd8560, 0, -4px, 0, false, true)
+    text-indent: -999px
+    padding: 7px 14px
+
+  .important_wrapper
+    background: #fee495
+    border-bottom: 2px solid #535353
+    color: #141414
+    font-size: 14px
+    padding: 20px 20px 5px 20px
+    margin: 0 0 5px 0
+
+    h5
+      color: #094c95
+
+    p
+      line-height: 0.8em
+
+    ul
+      margin: 7px 0 0 0
+
+      li
+        &:before
+          content: '•'
+          margin: 0 5px 0 0
+
+    .separator
+      border-bottom: 1px solid #fec532
+      margin: 15px 0
+
+    form
+      .hint
+        display: block
+        color: #6d6d6d
+        font-size: 12px
+        font-style: italic
+
+      .file_input_wrapper
+        .upload_file
+        input
+          +inline-block
+          cursor: pointer
+          opacity: 0
+          position: relative
+          left: -167px
+          width: 163px
+          height: 28px
+
+
+  .list
+    .item
+      padding: 12px 10px
+
+      .additional
+        font-size: 12px
+        color: #808080
+
+      .actions
+        float: right
+        margin: 12px 0 0 0
+
+      &:nth-child(even)
+        background: #fff
