@@ -7,7 +7,7 @@ set_state = (state) ->
 $ ->
   side_wrapper = $('.side_wrapper')
   handle = $('.handle', side_wrapper)
-  b_s = $('b', side_wrapper)
+  b_s = $('b', side_wrapper).add('.footer')
 
   if get_state() == 'opened'
     handle.html('&lang;')

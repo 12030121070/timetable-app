@@ -95,7 +95,49 @@
       font-weight: normal
       line-height: 21px
 
+  .footer
+    bottom: 0
+    font-size: 12px
+    line-height: 16px
+    padding: 10px
+    position: absolute
+    width: 245px
+
+    a
+      display: inline
+      width: auto
+
+    .desc
+      color: #999999
+
+    b
+      display: block
+
 .workplace_wrapper
   +clearfix
   background: #f2f2f2
-  padding: 20px
+  padding: 10px 20px
+
+  .header
+    margin: 0 0 30px 0
+
+    .logo
+      background: image_url('logo.png') no-repeat
+      display: block
+      height: 40px
+      text-indent: -999px
+      width: 164px
+
+  .yellow_button
+    +border-radius(3px)
+    +background-image(linear-gradient(#febb09, #fdab09))
+    +single-box-shadow(#fed560, 0, -4px, 0, false, true)
+    color: #141414
+    font-size: 12px
+    line-height: 14px
+    padding: 7px 20px
+    text-decoration: none
+    text-transform: uppercase
+
+    &:active
+      +single-box-shadow(#000, 0, 0, 4px, false, true)

@@ -1,6 +1,6 @@
 <%= content_for :head do %>
   <head>
-    <title>Управление расписаниями <%= @organization.try(:title) %></title>
+    <title><%= @organization.try(:title) %> | Управление расписаниями</title>
     <%= stylesheet_link_tag    'workplace', :media => 'all' %>
     <%= javascript_include_tag 'workplace' %>
     <%= csrf_meta_tags %>
@@ -15,10 +15,21 @@
       <%= render_navigation %>
     </div>
     <div class="separator"></div>
+    <div class="footer">
+      <div class='copyright'>
+        &copy; <%= Time.zone.today.year %> <%= link_to "fliptable.ru", 'http://fliptable.ru/' %>
+      </div>
+      <div class="desc">
+        Электронное расписание для учебных заведений
+      </div>
+    </div>
     <div class="handle"></div>
   </div>
 
   <div class="workplace_wrapper">
+    <div class="header">
+      <a class='logo' href="/" title='http://fliptable.ru'>fliptable.ru</a>
+    </div>
     <%= yield %>
   </div>
 <% end %>
