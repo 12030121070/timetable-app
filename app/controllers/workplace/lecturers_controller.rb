@@ -9,8 +9,6 @@ class Workplace::LecturersController < Workplace::WorkplaceController
 
   custom_actions :collection => :import
 
-  belongs_to :organization, :finder => :find_by_subdomain!
-
   def import
     import! {
       file = params[:import][:file] if params[:import]
@@ -25,5 +23,11 @@ class Workplace::LecturersController < Workplace::WorkplaceController
 
       redirect_to parent_path and return
     }
+  end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
   end
 end

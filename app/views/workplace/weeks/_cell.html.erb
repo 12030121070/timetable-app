@@ -1,7 +1,7 @@
 <td <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %>>
   <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
     <%= link_to "добавить",
-      polymorphic_path([:new, :workplace, @organization, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
+      polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
       :class => "add", :title => "добавить" %>
   <% end %>
 
@@ -16,10 +16,10 @@
         <p><%= lesson.subgroup %></p>
       <% end %>
 
-      <p><%= link_to 'редактировать', polymorphic_path([:edit, :workplace, @organization, @timetable, @week, cell.day, lesson]) %></p>
-      <p><%= link_to 'скопировать', polymorphic_path([:workplace, @organization, @timetable, @week, cell.day, lesson, :new_copy]) %></p>
-      <p><%= link_to 'переместить', polymorphic_path([:workplace, @organization, @timetable, @week, cell.day, lesson, :new_movement]) %></p>
-      <p><%= link_to 'удалить', polymorphic_path([:workplace, @organization, @timetable, @week, cell.day, lesson]),  :method => :delete, :confirm => 'Вы уверены?' %></p>
+      <p><%= link_to 'редактировать', polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson]) %></p>
+      <p><%= link_to 'скопировать', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_copy]) %></p>
+      <p><%= link_to 'переместить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_movement]) %></p>
+      <p><%= link_to 'удалить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson]),  :method => :delete, :confirm => 'Вы уверены?' %></p>
     <% end %>
   <% else %>
     <%= cell.content %>

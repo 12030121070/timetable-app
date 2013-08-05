@@ -1,5 +1,5 @@
 <%= lesson_time.number %>
 <%= lesson_time.starts_at %>
 <%= lesson_time.ends_at %>
-<%= link_to 'редактировать', edit_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, lesson_time), :remote => true %>
-<%= link_to 'удалить', workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, lesson_time), :method => :delete, :confirm => 'Вы уверены?', :remote => true %>
+<%= link_to 'редактировать', edit_workplace_timetable_lesson_time_path(@timetable, lesson_time), :remote => true %>
+<%= link_to 'удалить', workplace_timetable_lesson_time_path(@timetable, lesson_time), :method => :delete, :confirm => 'Вы уверены?', :remote => true %>

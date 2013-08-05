@@ -6,5 +6,5 @@
   <% end %>
 
   <!-- TODO: only owner can manage memberships -->
-  <%= link_to 'Удалить', workplace_organization_membership_path(membership.organization, membership), :method => :delete, :confirm => 'Вы уверены?' %>
+  <%= link_to 'Удалить', workplace_membership_path(membership), :method => :delete, :confirm => 'Вы уверены?' %>
 </li>

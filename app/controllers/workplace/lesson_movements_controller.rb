@@ -12,11 +12,15 @@ class Workplace::LessonMovementsController < Workplace::WorkplaceController
     create! do
       day, lesson_time = Day.find(params[:cell].split('_').first), LessonTime.find(params[:cell].split('_').last)
       @lesson.move_to day, lesson_time
-      redirect_to [:workplace, @organization, @timetable, @week] and return
+      redirect_to [:workplace, @timetable, @week] and return
     end
   end
 
   protected
+
+  def begin_of_association_chain
+    @organization
+  end
 
   def build_resource
   end

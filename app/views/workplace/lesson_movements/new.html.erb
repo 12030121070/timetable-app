@@ -1,4 +1,4 @@
-<%= form_tag polymorphic_path([:workplace, @organization, @timetable, @week, @day, @lesson, :movements]) do %>
+<%= form_tag polymorphic_path([:workplace, @timetable, @week, @day, @lesson, :movements]) do %>
   <table>
     <% @week.cells.each do |day, lesson_times| %>
       <% next if lesson_times.empty? %>

@@ -1,4 +1,4 @@
-<h3>Корпуса (<%= link_to 'добавить', new_workplace_organization_building_path(@organization) %>)</h3>
+<h3>Корпуса (<%= link_to 'добавить', new_workplace_building_path %>)</h3>
 
 <div class="import_help">
   Описание формата csv:
@@ -7,7 +7,7 @@
     <li>* следующе строки - информация о корпусах ("ул. Вершинина, 76", ФЭТ, 438)</li>
   </ul>
 </div>
-<%= simple_form_for :import, :url => import_workplace_organization_buildings_path(@organization) do |f| %>
+<%= simple_form_for :import, :url => import_workplace_buildings_path do |f| %>
   <%= f.input :file, :as => :file, :label => 'CSV файл' %>
   <%= f.submit 'Импортировать' %>
 <% end %>

@@ -3,10 +3,16 @@ class Workplace::SubscriptionsController < Workplace::WorkplaceController
 
   actions :index, :new, :create
 
-  belongs_to :organization, :finder => :find_by_subdomain!
   before_filter :find_tariff, :only => :new
 
-private
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
+
+  private
+
   def find_tariff
     @tariff = Tariff.instance
   end

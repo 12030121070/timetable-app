@@ -11,8 +11,9 @@
   <div class="side_navigation">
     <%= render_navigation %>
   </div>
+
   <div class="workplace_wrapper">
-    <%= render @organization %>
+    <%= render @organization if @organization %>
     <%= yield %>
   </div>
 <% end %>

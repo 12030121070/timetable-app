@@ -1,6 +1,6 @@
 <li>
   <%= building.title %>
   <%= building.address %>
-  <%= link_to 'редактировать', edit_workplace_organization_building_path(building.organization, building) %>
-  <%= link_to 'удалить', workplace_organization_building_path(building.organization, building), :method => :delete, :confirm => 'Вы уверены?' %>
+  <%= link_to 'редактировать', edit_workplace_building_path(building) %>
+  <%= link_to 'удалить', workplace_building_path(building), :method => :delete, :confirm => 'Вы уверены?' %>
 </li>

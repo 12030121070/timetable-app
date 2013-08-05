@@ -3,7 +3,6 @@ class Workplace::LessonTimesController < Workplace::WorkplaceController
 
   actions :all
 
-  belongs_to :organization, :finder => :find_by_subdomain!
   belongs_to :timetable, :polymorphic => true
 
   layout false
@@ -18,5 +17,11 @@ class Workplace::LessonTimesController < Workplace::WorkplaceController
       destroy_resource object
       render :text => "#{object.number} нет занятия в это время"
     end
+  end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
   end
 end

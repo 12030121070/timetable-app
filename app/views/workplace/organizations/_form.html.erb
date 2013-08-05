@@ -1,4 +1,4 @@
-<%= simple_nested_form_for resource, :url => [:workplace, resource.persisted? ? resource : :organizations], :remote => true do |f| %>
+<%= simple_nested_form_for resource, :url => [:workplace, @organization], :remote => true do |f| %>
   <%= f.input :title %>
   <%= f.input :email %>
   <%= f.input :phone %>

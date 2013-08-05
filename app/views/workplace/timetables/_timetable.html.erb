@@ -1,6 +1,6 @@
-<%= link_to timetable.title, workplace_organization_timetable_path(@organization, timetable) %>
+<%= link_to timetable.title, workplace_timetable_path(timetable) %>
 <%= timetable.starts_on %> &mdash;
 <%= timetable.ends_on %>
 <%= timetable.human_status_name %>
-<%= link_to 'редактировать', edit_workplace_organization_timetable_path(@organization, timetable) %>
-<%= link_to 'удалить', workplace_organization_timetable_path(@organization, timetable), method: :delete, confirm: 'Вы уверены?' %>
+<%= link_to 'редактировать', edit_workplace_timetable_path(timetable) %>
+<%= link_to 'удалить', workplace_timetable_path(timetable), method: :delete, confirm: 'Вы уверены?' %>

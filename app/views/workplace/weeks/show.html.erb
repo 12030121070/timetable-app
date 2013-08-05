@@ -1,13 +1,13 @@
 <h1><%= "#{@timetable.title} #{@week}" %></h1>
 
 <hr />
-<%= simple_form_for Group.new, url: workplace_organization_timetable_groups_path(@organization, @timetable) do |f| %>
+<%= simple_form_for Group.new, url: workplace_timetable_groups_path(@timetable) do |f| %>
   <%= f.input :title %>
   <%= f.submit 'Создать' %>
 <% end %>
 <hr />
 
-<%= link_to 'Расписание в формате pdf', [:pdf, :workplace, @organization, @timetable, @week] %>
+<%= link_to 'Расписание в формате pdf', [:pdf, :workplace, @timetable, @week] %>
 
 <table>
   <thead>

@@ -1,10 +1,10 @@
-<h3>Список дисциплин (<%= link_to 'добавить', new_workplace_organization_discipline_path(@organization) %>)</h3>
+<h3>Список дисциплин (<%= link_to 'добавить', new_workplace_discipline_path %>)</h3>
 
 <ul>
   <% @disciplines.each do |discipline| %>
     <li>
       <%= discipline.abbr %> &mdash; <%= discipline.title %>
-      <%= link_to 'редактировать', edit_workplace_organization_discipline_path(@organization, discipline) %>
+      <%= link_to 'редактировать', edit_workplace_discipline_path(discipline) %>
     </li>
   <% end %>
 </ul>

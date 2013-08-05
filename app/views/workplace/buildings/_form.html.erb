@@ -1,4 +1,4 @@
-<%= simple_nested_form_for [:workplace, @organization, @building].flatten do |f| %>
+<%= simple_nested_form_for [:workplace, @building].flatten do |f| %>
   <%= f.input :title %>
   <%= f.input :address %>
   <%= f.simple_fields_for :classrooms do |cf|  %>
@@ -9,7 +9,7 @@
 
   <div class="buttons">
     <%= f.submit "Сохранить" %>
-    <%= link_to 'Удалить', workplace_organization_building_path(:workplace, @organization, resource), :method => :delete, :confirm => 'Вы уверены?' unless resource.new_record? %>
+    <%= link_to 'Удалить', workplace_building_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?' unless resource.new_record? %>
     <%= link_to "Отмена", :back %>
   </div>
 <% end %>

@@ -3,5 +3,9 @@ class Workplace::DisciplinesController < Workplace::WorkplaceController
 
   actions :all, except: :show
 
-  belongs_to :organization, :finder => :find_by_subdomain!
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end

@@ -1,11 +1,14 @@
-<h2>Список подписок (<%= link_to 'новая подписка', new_workplace_organization_subscription_path(@organization) %>)</h2>
+<h2>Список подписок (<%= link_to 'новая подписка', new_workplace_subscription_path %>)</h2>
 
-<ul>
-  <% @organization.subscriptions.each do |subscription| %>
-    <li>
-      Кол-во групп: <%= subscription.groups_count %><br/>
-      <%= l subscription.starts_on, :format => :long %> &mdash; <%= l subscription.ends_on, :format => :long %><br/>
-      Сумма: <%= number_to_currency subscription.sum %>
+<% if @organization %>
+  <ul>
+    <% @organization.subscriptions.each do |subscription| %>
+      <li>
+        Кол-во групп: <%= subscription.groups_count %><br/>
+        <%= l subscription.starts_on, :format => :long %> &mdash; <%= l subscription.ends_on, :format => :long %><br/>
+        Сумма: <%= number_to_currency subscription.sum %>
     </li>
   <% end %>
 </ul>
+<% end %>
+

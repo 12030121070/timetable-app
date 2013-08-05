@@ -10,7 +10,7 @@
 <% end %>
 
 <% if @timetable.draft? %>
-  <%= link_to "Опубликовать", to_published_workplace_organization_timetable_path(@organization.subdomain, @timetable), method: :put %>
+  <%= link_to "Опубликовать", to_published_workplace_timetable_path(@timetable), method: :put %>
 <% else %>
   <%= link_to "Вернуть в черновики", to_draft_workplace_organization_timetable_path(@organization.subdomain, @timetable), method: :put %>
 <% end %>
@@ -40,7 +40,7 @@
           </li>
         <% end %>
         <li class='ajax_item'>
-          <%= link_to "добавить", new_workplace_organization_timetable_lesson_time_path(@timetable.organization, @timetable, 'lesson_time[day]' => day), :remote => true, :class => 'new_link' %>
+          <%= link_to "добавить", new_workplace_timetable_lesson_time_path(@timetable, 'lesson_time[day]' => day), :remote => true, :class => 'new_link' %>
         </li>
       </ul>
     <% end %>

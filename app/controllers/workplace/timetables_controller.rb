@@ -5,8 +5,6 @@ class Workplace::TimetablesController < Workplace::WorkplaceController
 
   actions :all
 
-  belongs_to :organization, :finder => :find_by_subdomain!
-
   custom_actions :resource => [:to_draft, :to_published]
 
   def to_published
@@ -39,5 +37,11 @@ class Workplace::TimetablesController < Workplace::WorkplaceController
 
       redirect_to workplace_organization_timetable_path(@organization.subdomain, @timetable) and return
     }
+  end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
   end
 end

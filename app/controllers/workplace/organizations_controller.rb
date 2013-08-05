@@ -8,6 +8,8 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
   def new
     new! {
       redirect_to workplace_root_path and return if current_user.has_organization?
+
+      @organization = Organization.new
     }
   end
 
@@ -16,7 +18,8 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
 
     create! do |success, failure|
       success.html {
-        @organization.set_owner(current_user) if @organization.persisted?
+        @organization.set_owner(current_user)
+
         redirect_to workplace_root_path and return
       }
     end
@@ -24,6 +27,6 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
 
 private
   def begin_of_association_chain
-    @current_user = current_user
+    current_user
   end
 end

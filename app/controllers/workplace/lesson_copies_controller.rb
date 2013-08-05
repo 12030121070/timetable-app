@@ -3,7 +3,6 @@ class Workplace::LessonCopiesController < Workplace::WorkplaceController
 
   actions :new, :create
 
-  belongs_to :organization, :finder => :find_by_subdomain!
   belongs_to :timetable, :week, :day, :lesson
 
   defaults :resource_class => false
@@ -15,11 +14,15 @@ class Workplace::LessonCopiesController < Workplace::WorkplaceController
         @lesson.copy_to day, lesson_time
       end
 
-      redirect_to [:workplace, @organization, @timetable, @week] and return
+      redirect_to [:workplace, @timetable, @week] and return
     end
   end
 
   protected
+
+  def begin_of_association_chain
+    @organization
+  end
 
   def build_resource
   end
