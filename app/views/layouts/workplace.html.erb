@@ -8,12 +8,17 @@
 <% end %>
 
 <%= content_for :content do %>
-  <div class="side_navigation">
-    <%= render_navigation %>
+  <div class="side_wrapper">
+    <%= render :partial => 'workplace/organizations/organization', :locals => { :link => false, :organization => @organization } %>
+    <div class="separator"></div>
+    <div class="navigation">
+      <%= render_navigation %>
+    </div>
+    <div class="separator"></div>
+    <div class="handle"></div>
   </div>
 
   <div class="workplace_wrapper">
-    <%= render @organization if @organization %>
     <%= yield %>
   </div>
 <% end %>

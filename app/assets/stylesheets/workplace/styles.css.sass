@@ -5,3 +5,97 @@
 @import 'commons/fonts'
 @import 'commons/forms'
 @import 'commons/tables'
+
+.main_wrapper
+  +clearfix
+  background: #f2f2f2
+  height: 100%
+
+.side_wrapper
+  background: #4d4d4d
+  color: #f2f2f2
+  float: left
+  height: 100%
+  overflow: visible !important
+  position: relative
+  width: 245px
+  z-index: 2
+
+  &.closed
+    width: 52px
+
+  &.opened
+    width: 245px
+
+  .handle
+    +border-bottom-right-radius(3px)
+    +border-top-right-radius(3px)
+    background: #4d4d4d
+    height: 32px
+    line-height: 32px
+    margin-top: -16px
+    position: absolute
+    right: -13px
+    text-align: center
+    top: 50%
+    width: 14px
+    z-index: 3
+
+    &:hover
+      cursor: pointer
+      font-weight: bold
+
+  ul
+    +clearfix
+    padding: 10px 0
+
+    li
+      padding: 8px 10px
+
+      &.selected
+        background: #1a1a1a
+
+        b
+          color: #999999
+
+  a
+    +clearfix
+    display: block
+    color: #f2f2f2
+    font-weight: bold
+    text-decoration: none
+    width: 225px
+
+    span
+      +border-radius(4px)
+      background: #f2f2f2
+      display: block
+      float: left
+      height: 32px
+      width: 32px
+
+    b
+      +clearfix
+      display: block
+      line-height: 32px
+      padding: 0 0 0 10px
+
+  .separator
+    border-bottom: 1px solid #666
+    margin: 0 10px
+
+  .organization_info
+    +clearfix
+    padding: 10px 10px 0 10px
+
+    a
+      padding: 0 0 10px 0
+
+    b
+      font-weight: normal
+      line-height: 21px
+
+.workplace_wrapper
+  +clearfix
+  background: #f2f2f2
+  padding: 20px

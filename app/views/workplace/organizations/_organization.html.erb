@@ -1,6 +1,10 @@
 <% if @organization.persisted? %>
   <div class="organization_info data_presentation">
-    <h1><%= @organization.title %></h1>
-    <%= link_to "редактировать инфу об организации", edit_workplace_organization_path(@organization), :remote => :true, :class => 'in_frame' %>
+    <%= link_to workplace_root_path do %>
+      <span></span>
+      <b><%= @organization.title %></b>
+    <% end %>
+
+    <%= link_to "редактировать", edit_workplace_organization_path(@organization), :remote => :true, :class => 'in_frame' if link %>
   </div>
 <% end %>
