@@ -58,6 +58,45 @@
         b
           color: #999999
 
+      &:hover
+        background: #0061A6
+
+      &#timetables
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 0
+
+      &#lecturers
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 -32px
+
+      &#disciplines
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 -64px
+
+      &#buildings
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 -96px
+
+      &#members
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 -128px
+
+      &#lecturers_loading
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 -160px
+
+      &#buildings_loading
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 -192px
+
+      &#subscribes
+        span
+          background: transparent image_url('side_icons.png') no-repeat 0 -224px
+
+        b
+          font-size: 16px
+          font-weight: bold
+
   a
     +clearfix
     display: block
@@ -83,6 +122,13 @@
   .separator
     border-bottom: 1px solid #666
     margin: 0 10px
+    padding: 0
+
+  #separator
+    background: #666
+    height: 1px
+    margin: 10px
+    padding: 0
 
   .organization_info
     +clearfix
@@ -99,7 +145,7 @@
     bottom: 0
     font-size: 12px
     line-height: 16px
-    padding: 10px
+    padding: 10px 0
     position: absolute
     width: 245px
 
@@ -109,9 +155,14 @@
 
     .desc
       color: #999999
+      padding: 0 20px
 
     b
       display: block
+
+    .copyright
+      margin: 20px 0 0 0
+      padding: 0 20px
 
 .workplace_wrapper
   +clearfix
@@ -154,6 +205,20 @@
     +background-image(linear-gradient(#febb09, #fdab09))
     +single-box-shadow(#fed560, 0, -4px, 0, false, true)
 
+    &.faded
+      +single-box-shadow(none)
+      background: none
+      border: 1px solid #e6e6e6
+      color: #ccc
+
+      &:hover
+        +background-image(linear-gradient(#febb09, #fdab09))
+        +single-box-shadow(#fed560, 0, -4px, 0, false, true)
+        color: #141414
+
+      &:active
+        +single-box-shadow(#000, 0, 0, 4px, false, true)
+
   .grey_button
     +background-image(linear-gradient(#d5d5d5, #cbcbcb))
     +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
@@ -165,6 +230,18 @@
     text-indent: -999px
     padding: 7px 14px
 
+    &.faded
+      @include background(image_url('faded_trash.png') no-repeat center center)
+      +single-box-shadow(none)
+      border: 1px solid #e6e6e6
+
+      &:hover
+        @include background(image_url('trash.png') no-repeat center center, linear-gradient(#fb3408, #fb2508))
+        +single-box-shadow(#fd8560, 0, -4px, 0, false, true)
+
+      &:active
+        +single-box-shadow(#000, 0, 0, 4px, false, true)
+
   .important_wrapper
     background: #fee495
     border-bottom: 2px solid #535353
@@ -172,6 +249,28 @@
     font-size: 14px
     padding: 20px 20px 5px 20px
     margin: 0 0 5px 0
+
+    .close
+      border-bottom: 1px dashed #0061a6
+      color: #0061a6
+      font-size: 12px
+      float: right
+      line-height: 12px
+      margin: 0 10px 0 0
+      position: relative
+      top: -20px
+      text-decoration: none
+      text-transform: uppercase
+
+      &:before
+        background: image_url('close.png') no-repeat center center
+        content: ''
+        display: block
+        height: 14px
+        position: relative
+        left: 55px
+        top: 13px
+        width: 14px
 
     h5
       color: #094c95

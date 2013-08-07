@@ -14,8 +14,13 @@
     <div class="navigation">
       <%= render_navigation %>
     </div>
-    <div class="separator"></div>
     <div class="footer">
+      <ul>
+        <li id='subscribes'>
+          <%= link_to "<span></span><b>Подписки</b>".html_safe, workplace_subscriptions_path %>
+        </li>
+      </ul>
+      <div class="separator"></div>
       <div class='copyright'>
         &copy; <%= Time.zone.today.year %> <%= link_to "fliptable.ru", 'http://fliptable.ru/' %>
       </div>
