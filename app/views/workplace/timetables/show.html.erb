@@ -12,7 +12,7 @@
 <% if @timetable.draft? %>
   <%= link_to "Опубликовать", to_published_workplace_timetable_path(@timetable), method: :put %>
 <% else %>
-  <%= link_to "Вернуть в черновики", to_draft_workplace_organization_timetable_path(@organization.subdomain, @timetable), method: :put %>
+  <%= link_to "Вернуть в черновики", to_draft_workplace_timetable_path(@timetable), method: :put %>
 <% end %>
 
 <div>
