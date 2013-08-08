@@ -1,4 +1,22 @@
 form
+  +clearfix
+
+  div
+    +clearfix
+
+  div.string
+    input
+      +border-radius(3px)
+      border: 1px solid #808080
+      font-size: 14px
+      height: 30px
+      line-height: 30px
+      padding: 0 5px
+
+    &.normal
+    &.tight
+    &.wide
+
   .error
     color: #df6d76
     font-size: 0.8em
@@ -6,6 +24,11 @@ form
     &:before
       content: '\2191'
       margin: 0 5px 0 0
+
+  label
+    display: block
+    font-size: 14px
+    font-weight: bold
 
   .buttons
     text-align: center

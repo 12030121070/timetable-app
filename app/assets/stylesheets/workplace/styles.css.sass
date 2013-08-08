@@ -6,10 +6,35 @@
 @import 'commons/forms'
 @import 'commons/tables'
 
+body
+  +clearfix
+
 .main_wrapper
   +clearfix
   background: #f2f2f2
   height: 100%
+
+.close_link
+  border-bottom: 1px dashed #0061a6
+  color: #0061a6
+  font-size: 12px
+  float: right
+  line-height: 12px
+  margin: 0 10px 0 0
+  position: relative
+  top: -20px
+  text-decoration: none
+  text-transform: uppercase
+
+  &:before
+    background: image_url('close.png') no-repeat center center
+    content: ''
+    display: block
+    height: 14px
+    position: relative
+    left: 55px
+    top: 13px
+    width: 14px
 
 .side_wrapper
   background: #4d4d4d
@@ -274,28 +299,6 @@
       .close_link
         display: none
 
-    .close_link
-      border-bottom: 1px dashed #0061a6
-      color: #0061a6
-      font-size: 12px
-      float: right
-      line-height: 12px
-      margin: 0 10px 0 0
-      position: relative
-      top: -20px
-      text-decoration: none
-      text-transform: uppercase
-
-      &:before
-        background: image_url('close.png') no-repeat center center
-        content: ''
-        display: block
-        height: 14px
-        position: relative
-        left: 55px
-        top: 13px
-        width: 14px
-
     p
       line-height: 0.8em
 
@@ -329,7 +332,6 @@
           width: 163px
           height: 28px
 
-
   .list
     .item
       padding: 12px 10px
@@ -344,3 +346,25 @@
 
       &:nth-child(even)
         background: #fff
+
+.frame_container
+  padding: 10px 20px
+  //overflow-y: scroll
+
+  .close_link
+    margin: 0 30px 0 0
+    position: fixed
+    top: 0
+    right: 15px
+
+  form
+    width: 350px
+
+    .buttons
+      background: rgba(#fbfbfb, 0.8)
+      bottom: 0
+      left: 0
+      padding: 0 18px
+      position: absolute
+      text-align: left
+      width: 100%

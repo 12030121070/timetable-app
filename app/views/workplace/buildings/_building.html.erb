@@ -1,8 +1,8 @@
 <li class='item'>
   <div class="actions">
-    <%= link_to 'редактировать', edit_workplace_building_path(building), :class => 'yellow_button faded' %>
+    <%= link_to 'редактировать', edit_workplace_building_path(building), :class => 'yellow_button faded in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
     <%= link_to 'удалить', workplace_building_path(building), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
   </div>
-  <%= link_to "#{building.title.mb_chars.upcase}. #{building.classrooms.count} ауд.", '#', :class => 'title' %>
+  <%= link_to "#{building.title.mb_chars.upcase}. #{building.classrooms.count} ауд.", edit_workplace_building_path(building), :class => 'title in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
   <div class="additional"><%= building.address %></div>
 </li>

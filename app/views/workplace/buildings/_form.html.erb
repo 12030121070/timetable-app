@@ -1,16 +1,16 @@
-<%= simple_nested_form_for [:workplace, @building].flatten do |f| %>
+<%= simple_nested_form_for [:workplace, @building].flatten, :remote => true do |f| %>
   <%= f.input :title %>
   <%= f.input :address %>
   <%= f.simple_fields_for :classrooms do |cf|  %>
+    <%= cf.link_to_remove 'убрать', :class => 'delete_button faded to_right' %>
     <%= cf.input :number  %>
-    <%= cf.link_to_remove 'убрать' %>
   <% end %>
   <%= f.link_to_add "добавить аудиторию", :classrooms %>
 
   <div class="buttons">
-    <%= f.submit "Сохранить" %>
-    <%= link_to 'Удалить', workplace_building_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?' unless resource.new_record? %>
-    <%= link_to "Отмена", :back %>
+    <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to 'Удалить', workplace_building_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button' unless resource.new_record? %>
+    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
 <% end %>
 

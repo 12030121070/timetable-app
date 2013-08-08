@@ -1,31 +1,30 @@
-frame = {
-  container_style: {
+frame_handler = (parent, response) ->
+  _ = {}
+  parent_width = parent.width()
+  container_width = Math.round(parent_width*0.90)
+  container_styles = {
     'background': () ->
       $('body').css('background')
-
+    'bottom': () ->
+      '0'
     'border-left': () ->
       '1px solid #888'
-
     'display': () ->
       'block'
-
-    'height': () ->
-      '100%'
-
     'position': () ->
       'absolute'
-
     'right': () ->
-      '-600px'
-
+      '-'+container_width+'px'
     'top': () ->
       '0'
-
     'width': () ->
-      '600px'
-
+      container_width+'px'
     'z-index': () ->
-      '4'
+      parent_zindex = parseInt(parent.css('z-index'))
+      if isNaN(parent_zindex)
+        1
+      else
+        parent_zindex + 1
 
     to_s: () ->
       str = ""
@@ -33,73 +32,67 @@ frame = {
         str += propertyName+': '+this[propertyName]()+'; ' unless propertyName == 'to_s'
       str
   }
+  create_container = () ->
+    $('<div class="frame_container" style="'+container_styles.to_s()+'"><a href="#" class="close_link">Закрыть</a><div class="inner_wrapper"></div></div>').appendTo(parent)
 
-  container: () ->
-    frame_container = $('#frame_container')
-    unless frame_container.length
-      frame_container = $('<div id="frame_container" style="'+this.container_style.to_s()+'" />').appendTo('body .main_wrapper')
-
-    frame_container
-
-  content: (html) ->
-    this.container().html(html)
-
-  data_presentation: (html) ->
-    this.parent.replaceWith($(html).hide().fadeIn(500))
-
-  overlay: () ->
-    overlay_block = $('#overlay')
-
+  overlay = () ->
+    overlay_block = $('.overlay')
     unless overlay_block.length
-      overlay_block = $('<div id="overlay" style="background: #222; opacity: 0.6; top: 0; bottom: 0; left: 0; right: 0; position: absolute;"/>').appendTo('body .main_wrapper')
-      this.set_callbacks()
-
+      overlay_block = $('<div class="overlay" style="background: #222; opacity: 0.6; top: 0; bottom: 0; left: 0; right: 0; position: absolute;"/>').appendTo(parent)
     overlay_block
 
-  set_callbacks: () ->
-    obj_this = this
-    obj_this.container().on 'click', (evt) ->
+  set_callbacks = () ->
+    $(document).off('keyup')
+    $(document).keyup (e) ->
+      if e.keyCode == 27
+        _.container_hide()
+
+    _.container.children('.close_link').on 'click', ->
+      _.container_hide()
+      false
+
+    _.container.on 'click', (evt) ->
       if $(evt.target).hasClass('cancel')
-        obj_this.slide_right()
+        _.container_hide()
         false
 
-    obj_this.container().on 'ajax:success', (evt, response) ->
+    _.container.on 'ajax:success', (evt, response) ->
       if $(response).find('.error').length
-        obj_this.content(response)
+        _.content(response)
       else
-        obj_this.slide_right()
-        obj_this.data_presentation(response)
+        _.container_hide()
+        # update_parent
 
-  show_overlay: () ->
-    $('.workplace_wrapper').css('-webkit-filter',  'blur(3px)')
-    this.overlay().fadeIn()
-
-  hide_overlay: () ->
-    this.overlay().fadeOut()
-    $('.workplace_wrapper').css('-webkit-filter',  'none')
-
-  parent: {}
-
-  slide_left: () ->
-    this.show_overlay()
-    this.container().show().animate(
+  _.container = create_container()
+  _.content = (html) ->
+    _.container.children('.inner_wrapper').html(html)
+  _.container_show = () ->
+    _.overlay_show()
+    set_callbacks()
+    _.container.animate
       right: 0
-    )
+  _.container_hide = () ->
+    _.container.animate
+      right: container_styles['right']()
+    _.overlay_hide()
+  _.overlay_show = () ->
+    overlay().fadeIn()
+  _.overlay_hide = () ->
+    overlay().fadeOut ->
+      _.destroy()
+      overlay().remove()
+  _.destroy = () ->
+    _.container.remove()
 
-  slide_right: () ->
-    this.hide_overlay()
-    right = this.container_style.right()
-    this.container().animate(
-      right: right,
-      () ->
-        $(this).hide()
-    )
-    this.content('')
-}
+  # run
+  _.content(response)
+  _.container_show()
+
+  return _
 
 $ ->
   $('body').on 'ajax:success', (evt, response) ->
-    if $(evt.target).hasClass('in_frame')
-      frame.parent = $(evt.target).closest('.data_presentation')
-      frame.content(response)
-      frame.slide_left()
+    link = $(evt.target)
+    if link.hasClass('in_frame')
+      parent = $(link.data('parent'))
+      frame_handler(parent, response)
