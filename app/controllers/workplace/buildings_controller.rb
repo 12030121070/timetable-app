@@ -15,13 +15,13 @@ class Workplace::BuildingsController < Workplace::WorkplaceController
 
       begin
         CsvImport.new(file.tempfile.path, collection.new).import
-        flash[:notice] = 'Импорт прошел успешно'
+        flash[:notice] = 'Импорт прошел успешно.'
       rescue => e
         logger.error "ERROR: #{e}"
-        flash[:alert] = 'Во время импорта произошла ошибка'
+        flash[:alert] = 'Во время импорта произошла ошибка.'
       end
 
-      redirect_to parent_path and return
+      redirect_to collection_path and return
     }
   end
 
