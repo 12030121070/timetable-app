@@ -250,7 +250,30 @@
     padding: 20px 20px 5px 20px
     margin: 0 0 5px 0
 
-    .close
+    .open_link
+      +inline-block
+      color: #094c95
+      line-height: 14px
+
+    &.opened
+      .close
+        display: block
+
+    &.closed
+      border: none
+
+      .open_link
+        border-bottom: 1px dashed #094c95
+
+        &:hover
+          border: none
+          cursor: pointer
+          padding: 0 0 1px 0
+
+      .close_link
+        display: none
+
+    .close_link
       border-bottom: 1px dashed #0061a6
       color: #0061a6
       font-size: 12px
@@ -271,9 +294,6 @@
         left: 55px
         top: 13px
         width: 14px
-
-    h5
-      color: #094c95
 
     p
       line-height: 0.8em

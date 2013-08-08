@@ -13,10 +13,6 @@ $ ->
     handle.html('&lang;')
     b_s.show()
     side_wrapper.removeClass('closed').addClass('opened')
-  else if get_state() == 'closed'
-    handle.html('&rang;')
-    b_s.hide()
-    side_wrapper.removeClass('opened').addClass('closed')
   else
     handle.html('&rang;')
     b_s.hide()

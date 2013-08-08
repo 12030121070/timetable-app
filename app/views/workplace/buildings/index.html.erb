@@ -2,26 +2,28 @@
 <h2 class='thin'>Корпуса</h2>
 
 <div class="important_wrapper import_help">
-  <a href="#" class='close'>закрыть</a>
-  <h5>Быстрый импорт</h5>
-  <p>Для импорта списка корпусов и аудиторий вам понадобится <i>.csv</i> файл со списком корпусов со следующими параметрами:</p>
-  <ul>
-    <li>первая строка &mdash; заголовки (<i>address, title, number</i>)</li>
-    <li>следующе строки &mdash; информация о корпусах (<i>"ул. Вершинина, 76", ФЭТ, 438</i>)</li>
-  </ul>
+  <a href="#" class='close_link'>закрыть</a>
+  <h5 class='open_link'>Быстрый импорт</h5>
+  <div class="inner_wrapper">
+    <p>Для импорта списка корпусов и аудиторий вам понадобится <i>.csv</i> файл со списком корпусов со следующими параметрами:</p>
+    <ul>
+      <li>первая строка &mdash; заголовки (<i>address, title, number</i>)</li>
+      <li>следующе строки &mdash; информация о корпусах (<i>"ул. Вершинина, 76", ФЭТ, 438</i>)</li>
+    </ul>
 
-  <%= link_to "скачать пример", '#' %>
+    <%= link_to "скачать пример", '#' %>
 
-  <div class="separator"></div>
+    <div class="separator"></div>
 
-  <%= simple_form_for :import, :url => import_workplace_buildings_path do |f| %>
-    <%= f.submit 'Импортировать', :class => 'yellow_button to_right' %>
-    <div class="file_input_wrapper">
-      <div class="upload_file grey_button">Загрузить .csv файл</div>
-      <%= f.input_field :file, :as => :file, :label => false %>
-    </div>
-    <span class="hint">Выберите файл на своем компьютере, затем нажмите кнопку &laquo;импортировать&raquo;</span>
-  <% end %>
+    <%= simple_form_for :import, :url => import_workplace_buildings_path do |f| %>
+      <%= f.submit 'Импортировать', :class => 'yellow_button to_right' %>
+      <div class="file_input_wrapper">
+        <div class="upload_file grey_button">Загрузить .csv файл</div>
+        <%= f.input_field :file, :as => :file, :label => false %>
+      </div>
+      <span class="hint">Выберите файл на своем компьютере, затем нажмите кнопку &laquo;импортировать&raquo;</span>
+    <% end %>
+  </div>
 </div>
 
 <ul class='list'>
