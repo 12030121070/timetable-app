@@ -1,0 +1,3 @@
+/*
+ * = require 'workplace/index'
+ */

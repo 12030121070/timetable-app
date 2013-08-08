@@ -1,0 +1,3 @@
+/*
+ * = require 'landing/index'
+ */

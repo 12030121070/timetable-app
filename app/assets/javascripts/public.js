@@ -1,0 +1,3 @@
+/*
+ * = requier 'public/index'
+ */
