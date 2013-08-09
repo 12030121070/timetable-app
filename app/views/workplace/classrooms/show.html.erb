@@ -1,0 +1,47 @@
+<ul>
+  <% @classroom.beginning_of_weeks.each do |starts_on| %>
+    <li>
+      <%= link_to starts_on, workplace_classroom_path(@classroom, :week => starts_on) %>
+    </li>
+  <% end %>
+</ul>
+
+<table>
+  <% @table.each do |date, hash| %>
+    <% next if hash.empty? %>
+
+    <tr>
+      <td rowspan='<%= hash.values.count %>'>
+        <span class='day_name'><%= l date, :format => '%a' %></span>
+        <span class='date'><%= l date, :format => :long %></span>
+      </td>
+
+      <td>
+        <%= hash.to_a.first.last[:starts_at] %>
+        <%= hash.to_a.first.last[:ends_at] %>
+      </td>
+
+      <td>
+        <% hash.to_a.first.last[:lessons].each do |lesson| %>
+          <%= lesson %>
+        <% end %>
+      </td>
+    </tr>
+
+    <% hash.to_a[1..-1].each do |_, data| %>
+      <tr>
+        <td>
+          <%= data[:starts_at] %>
+          <%= data[:ends_at] %>
+        </td>
+
+        <td>
+          <% data[:lessons].each do |lessons| %>
+            <%= lessons %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+

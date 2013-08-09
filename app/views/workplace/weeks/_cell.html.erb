@@ -9,16 +9,22 @@
     <% cell.lessons.each do |lesson| %>
       <p title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></p>
       <p><%= lesson.kind_text %></p>
-      <p><%= lesson.classrooms.map(&:to_s).join(', ') %></p>
-      <p>
-        <ul>
+
+      <ul>
+        <% lesson.classrooms.each do |classroom| %>
+          <li>
+            <%= link_to classroom, workplace_classroom_path(classroom) %>
+          </li>
+        <% end %>
+      </ul>
+
+      <ul>
         <% lesson.lecturers.each do |lecturer| %>
           <li>
             <%= link_to lecturer.full_name, workplace_lecturer_path(lecturer) %>
           </li>
         <% end %>
-        </ul>
-      </p>
+      </ul>
 
       <% unless lesson.subgroup_whole? %>
         <p><%= lesson.subgroup %></p>

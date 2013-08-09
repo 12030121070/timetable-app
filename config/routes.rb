@@ -25,8 +25,8 @@ TimetableApp::Application.routes.draw do
 
     resources :buildings, except: [:show] do
       post :import, :on => :collection
-      resources :classrooms, except: [:show, :index]
     end
+    resources :classrooms, :only => :show
 
     resources :timetables do
       put 'to_draft'     => 'timetables#to_draft',     :on => :member
