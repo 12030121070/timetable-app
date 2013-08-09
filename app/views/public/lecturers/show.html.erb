@@ -2,16 +2,34 @@
 <h2><%= @lecturer.full_name %></h2>
 <h3>Расписание преподавателя</h3>
 
-<% @lecturer.lessons.published.group_by(&:day).sort_by{|k,v| k}.each do |day, lessons| %>
-  <h5><%= l day.date, :format => :long %></h5>
-  <ul>
-    <% lessons.sort_by{|l| l.lesson_time.number }.each do |lesson| %>
-      <li>
-        <%= lesson.lesson_time %>
-        <%= lesson.discipline.abbr %>
-        <%= lesson.classrooms.join(', ') %>
-        <%= lesson.groups.map(&:title).join(', ') %>
-      </li>
+<table>
+  <thead>
+    <tr></tr>
+    <tr>
+      <% @table.each do |date, hash| %>
+        <% next if hash.values.empty? %>
+        <th>
+          <span class='day_name'><%= l date, :format => '%a' %></span>
+          <span class='date'><%= l date, :format => :long %></span>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% (1..@table.first.last.keys.size).each do |row_index| %>
+      <tr>
+        <% @table.to_a.each_with_index do |element, index| %>
+          <% next if @table.to_a[index].last.empty? %>
+          <td>
+            <%= @table.to_a[index].last[row_index][:starts_at] %>
+            <%= @table.to_a[index].last[row_index][:ends_at] %>
+            <% @table.to_a[index].last[row_index][:lessons].each do |lesson| %>
+              <%= lesson.discipline.title %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
     <% end %>
-  </ul>
-<% end %>
+  </tbody>
+</table>

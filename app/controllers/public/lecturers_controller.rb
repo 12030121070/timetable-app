@@ -9,6 +9,12 @@ class Public::LecturersController < Public::PublicController
 
   before_filter :set_subdomain
 
+  def show
+    show! {
+      @table = @lecturer.table('2013-02-11')
+    }
+  end
+
 private
   def set_subdomain
     params.merge! :organization_id => request.subdomain
