@@ -13,6 +13,8 @@ class Classroom < ActiveRecord::Base
 
   normalize_attributes :number
 
+  delegate :organization, :to => :building
+
   def to_s
     "#{number} (#{building})"
   end
