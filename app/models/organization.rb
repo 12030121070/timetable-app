@@ -14,6 +14,7 @@ class Organization < ActiveRecord::Base
   has_many :timetables, :dependent => :destroy, :order => 'timetables.starts_on ASC, timetables.created_at ASC'
   has_many :lesson_times, :through => :timetables, :order => 'lesson_times.day ASC, lesson_times.number ASC, lesson_times.starts_at ASC'
   has_many :weeks, :through => :timetables, :order => 'weeks.number ASC, weeks.starts_on ASC'
+  has_many :published_weeks, :through => :timetables, :order => 'weeks.number ASC, weeks.starts_on ASC', :conditions => "timetables.status = 'published'", :source => :weeks
   has_many :groups, :through => :timetables, :order => 'groups.title ASC'
   has_many :organization_holidays, :dependent => :destroy
   has_many :subscriptions, :dependent => :destroy, :order => 'subscriptions.created_at ASC'

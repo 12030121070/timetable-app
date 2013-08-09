@@ -2,34 +2,44 @@
 <h2><%= @lecturer.full_name %></h2>
 <h3>Расписание преподавателя</h3>
 
-<table>
-  <thead>
-    <tr></tr>
-    <tr>
-      <% @table.each do |date, hash| %>
-        <% next if hash.values.empty? %>
-        <th>
-          <span class='day_name'><%= l date, :format => '%a' %></span>
-          <span class='date'><%= l date, :format => :long %></span>
-        </th>
-      <% end %>
-    </tr>
-  </thead>
+<ul>
+  <% @lecturer.beginning_of_weeks.each do |starts_on| %>
+    <li>
+      <%= link_to starts_on, organization_lecturer_path(@lecturer, :week => starts_on) %>
+    </li>
+  <% end %>
+</ul>
 
-  <tbody>
-    <% (1..@table.first.last.keys.size).each do |row_index| %>
+<% unless @table.empty? %>
+  <table>
+    <thead>
+      <tr></tr>
       <tr>
-        <% @table.to_a.each_with_index do |element, index| %>
-          <% next if @table.to_a[index].last.empty? %>
-          <td>
-            <%= @table.to_a[index].last[row_index][:starts_at] %>
-            <%= @table.to_a[index].last[row_index][:ends_at] %>
-            <% @table.to_a[index].last[row_index][:lessons].each do |lesson| %>
-              <%= lesson.discipline.title %>
-            <% end %>
-          </td>
+        <% @table.each do |date, hash| %>
+          <% next if hash.values.empty? %>
+          <th>
+            <span class='day_name'><%= l date, :format => '%a' %></span>
+            <span class='date'><%= l date, :format => :long %></span>
+          </th>
         <% end %>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% (1..@table.first.last.keys.size).each do |row_index| %>
+        <tr>
+          <% @table.to_a.each_with_index do |element, index| %>
+            <% next if @table.to_a[index].last.empty? %>
+            <td>
+              <%= @table.to_a[index].last[row_index][:starts_at] %>
+              <%= @table.to_a[index].last[row_index][:ends_at] %>
+              <% @table.to_a[index].last[row_index][:lessons].each do |lesson| %>
+                <%= lesson.discipline.title %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
