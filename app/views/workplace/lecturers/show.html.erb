@@ -36,9 +36,16 @@
         </td>
 
         <td>
-          <% data[:lessons].each do |lessons| %>
-            <%= lessons %>
-          <% end %>
+          <ul>
+            <% data[:lessons].each do |lesson| %>
+              <li>
+                <%= lesson.discipline.title %>
+                <%= lesson.kind_text %>
+                <%= lesson.groups.map(&:title).join(', ') %>
+                <%= lesson.classrooms.join(', ') %>
+              </li>
+            <% end %>
+          </ul>
         </td>
       </tr>
     <% end %>
