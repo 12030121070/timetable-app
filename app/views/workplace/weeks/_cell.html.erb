@@ -10,7 +10,15 @@
       <p title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></p>
       <p><%= lesson.kind_text %></p>
       <p><%= lesson.classrooms.map(&:to_s).join(', ') %></p>
-      <p><%= lesson.lecturers.map(&:full_name).join(', ') %></p>
+      <p>
+        <ul>
+        <% lesson.lecturers.each do |lecturer| %>
+          <li>
+            <%= link_to lecturer.full_name, workplace_lecturer_path(lecturer) %>
+          </li>
+        <% end %>
+        </ul>
+      </p>
 
       <% unless lesson.subgroup_whole? %>
         <p><%= lesson.subgroup %></p>
