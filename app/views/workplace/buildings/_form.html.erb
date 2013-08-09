@@ -1,16 +1,20 @@
-<%= simple_nested_form_for [:workplace, @building].flatten, :remote => true do |f| %>
-  <%= f.input :title %>
-  <%= f.input :address %>
-  <%= f.simple_fields_for :classrooms do |cf|  %>
-    <%= cf.link_to_remove 'убрать', :class => 'delete_button faded to_right' %>
-    <%= cf.input :number  %>
-  <% end %>
-  <%= f.link_to_add "добавить аудиторию", :classrooms %>
+<%= simple_nested_form_for [:workplace, @building].flatten, :remote => true, :html => { :class => 'scrollable' } do |f| %>
+  <%= f.input :title, :input_html => { :class => 'inline_edit large' } %>
+  <%= f.input :address, :input_html => { :class => 'inline_edit' } %>
+  <label>Список аудиторий</label>
+  <div class="fields_list">
+    <%= f.simple_fields_for :classrooms do |cf|  %>
+      <%= cf.input :number, :label => false, :input_html => { :class => 'inline_edit tight' }  %>
+      <%= cf.link_to_remove 'убрать', :class => 'delete_button faded', :confirm => 'Вы уверены?' %>
+    <% end %>
+    <%= f.link_to_add "добавить аудиторию", :classrooms %>
+  </div>
 
-  <div class="buttons">
+  <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
     <%= link_to 'Удалить', workplace_building_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button' unless resource.new_record? %>
     <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
+  <div class='bottom_empty'></div>
 <% end %>
 

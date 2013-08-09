@@ -6,5 +6,6 @@
  * = require 'commons/frame_handler'
  * = require 'commons/important_wrapper'
  * = require 'commons/side_wrapper'
+ * = require 'commons/scrollable'
  * = require_tree .
  */

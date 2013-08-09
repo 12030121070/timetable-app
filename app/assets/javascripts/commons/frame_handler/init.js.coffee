@@ -42,7 +42,7 @@ frame_handler = (parent, response) ->
     overlay_block
 
   set_callbacks = () ->
-    $(document).off('keyup')
+    init_scrollable()
     $(document).keyup (e) ->
       if e.keyCode == 27
         _.container_hide()
@@ -63,6 +63,9 @@ frame_handler = (parent, response) ->
         _.container_hide()
         # update_parent
 
+  off_callbacks = () ->
+    $(document).off('keyup')
+
   _.container = create_container()
   _.content = (html) ->
     _.container.children('.inner_wrapper').html(html)
@@ -82,6 +85,7 @@ frame_handler = (parent, response) ->
       _.destroy()
       overlay().remove()
   _.destroy = () ->
+    off_callbacks()
     _.container.remove()
 
   # run
