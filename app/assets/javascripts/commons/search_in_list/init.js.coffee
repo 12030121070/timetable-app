@@ -5,7 +5,7 @@
   if inputs.length
     inputs.each (index, item) ->
       $item = $(item)
-      add_link = $item.prev('a')
+      add_link = $item.next('a')
       $item.addClass('charged')
       list = new List($('.scrollable')[0], {
         valueNames: ['hidden_value']
