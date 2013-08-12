@@ -1,10 +1,11 @@
 frame_handler = (parent, response) ->
   _ = {}
+  parent.addClass('not_active')
   parent_width = parent.width()
   container_width = Math.round(parent_width*0.90)
   container_styles = {
     'background': () ->
-      $('body').css('background')
+      $('.main_wrapper').css('background')
     'bottom': () ->
       '0'
     'border-left': () ->
@@ -36,7 +37,7 @@ frame_handler = (parent, response) ->
     $('<div class="frame_container" style="'+container_styles.to_s()+'"><a href="#" class="close_link">Закрыть</a><div class="inner_wrapper"></div></div>').appendTo(parent)
 
   overlay = () ->
-    overlay_block = $('.overlay')
+    overlay_block = $('.overlay', parent)
     unless overlay_block.length
       overlay_block = $('<div class="overlay" style="background: #222; opacity: 0.6; top: 0; bottom: 0; left: 0; right: 0; position: absolute;"/>').appendTo(parent)
     overlay_block
@@ -46,7 +47,8 @@ frame_handler = (parent, response) ->
     init_search()
     $(document).keyup (e) ->
       if e.keyCode == 27
-        _.container_hide()
+        console.log parent
+        _.container_hide() unless _.container.hasClass('not_active')
 
     _.container.children('.close_link').on 'click', ->
       _.container_hide()
@@ -58,14 +60,15 @@ frame_handler = (parent, response) ->
         false
 
     _.container.on 'ajax:success', (evt, response) ->
-      if $(response).find('.error').length
-        _.content(response)
-      else
-        _.container_hide()
-        # update_parent
+      unless $(evt.target).hasClass('in_frame') || _.container.hasClass('not_active')
+        if $(response).find('.error').length || $(evt.target).hasClass('in_same_frame')
+          _.content(response)
+        else
+          _.container_hide()
+          #update_parent
 
   off_callbacks = () ->
-    $(document).off('keyup')
+    $(document).off('keyup') unless $('.not_active').length
 
   _.container = create_container()
   _.content = (html) ->
@@ -83,6 +86,7 @@ frame_handler = (parent, response) ->
     overlay().fadeIn()
   _.overlay_hide = () ->
     overlay().fadeOut ->
+      parent.removeClass('not_active')
       _.destroy()
       overlay().remove()
   _.destroy = () ->
@@ -95,7 +99,7 @@ frame_handler = (parent, response) ->
 
   return _
 
-$ ->
+$(window).load ->
   $('body').on 'ajax:success', (evt, response) ->
     link = $(evt.target)
     if link.hasClass('in_frame')

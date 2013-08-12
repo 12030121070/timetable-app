@@ -1,54 +1,64 @@
-<ul>
-  <% @classroom.beginning_of_weeks.each do |starts_on| %>
-    <li>
-      <%= link_to starts_on, workplace_classroom_path(@classroom, :week => starts_on) %>
-    </li>
-  <% end %>
-</ul>
+<h2 class='thin'>Загруженность аудитории <%= @classroom %></h1>
 
-<table>
-  <% @table.each do |date, hash| %>
-    <% next if hash.empty? %>
+<div class="scrollable">
+  <ul>
+    <% @classroom.beginning_of_weeks.each do |starts_on| %>
+      <li>
+        <%= link_to starts_on, workplace_classroom_path(@classroom, :week => starts_on), :class => 'in_same_frame', :remote => true %>
+      </li>
+    <% end %>
+  </ul>
 
-    <tr>
-      <td rowspan='<%= hash.values.count %>'>
-        <span class='day_name'><%= l date, :format => '%a' %></span>
-        <span class='date'><%= l date, :format => :long %></span>
-      </td>
+  <table class='slave_table'>
+    <% @table.each do |date, hash| %>
+      <% next if hash.empty? %>
 
-      <td>
-        <%= hash.to_a.first.last[:starts_at] %>
-        <%= hash.to_a.first.last[:ends_at] %>
-      </td>
-
-      <td>
-        <% hash.to_a.first.last[:lessons].each do |lesson| %>
-          <%= lesson %>
-        <% end %>
-      </td>
-    </tr>
-
-    <% hash.to_a[1..-1].each do |_, data| %>
       <tr>
-        <td>
-          <%= data[:starts_at] %>
-          <%= data[:ends_at] %>
+        <td rowspan='<%= hash.values.count %>' class='no_bg'>
+          <span class='day_name center'><%= l date, :format => '%a' %></span>
+          <span class='date center'><%= l date, :format => '%d %b %Y' %></span>
+        </td>
+
+        <td class='center tight'>
+          <%= hash.to_a.first.last[:starts_at] %>
+          &mdash;
+          <%= hash.to_a.first.last[:ends_at] %>
         </td>
 
         <td>
-          <ul>
-            <% data[:lessons].each do |lesson| %>
-              <li>
-                <%= lesson.discipline.title %>
-                <%= lesson.kind_text %>
-                <%= lesson.groups.map(&:title).join(', ') %>
-                <%= lesson.lecturers.map(&:full_name).join(', ') %>
-              </li>
-            <% end %>
-          </ul>
+          <% hash.to_a.first.last[:lessons].each do |lesson| %>
+            <%= lesson %>
+          <% end %>
         </td>
       </tr>
-    <% end %>
-  <% end %>
-</table>
 
+      <% hash.to_a[1..-1].each do |_, data| %>
+        <tr>
+          <td class='center tight'>
+            <%= data[:starts_at] %>
+            &mdash;
+            <%= data[:ends_at] %>
+          </td>
+
+          <td>
+            <ul>
+              <% data[:lessons].each do |lesson| %>
+                <li>
+                  <%= lesson.discipline.title %>
+                  <%= lesson.kind_text %>
+                  <%= lesson.groups.map(&:title).join(', ') %>
+                  <%= lesson.lecturers.map(&:full_name).join(', ') %>
+                </li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+
+  <div class="sticky bottom buttons">
+    <%= link_to "Готово", :back, :class => 'cancel yellow_button' %>
+  </div>
+  <div class='bottom_empty'></div>
+</div>

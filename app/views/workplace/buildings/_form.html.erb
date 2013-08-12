@@ -10,6 +10,7 @@
       <%= f.simple_fields_for :classrooms, :wrapper => false do |cf|  %>
         <li class='fields'>
           <%= cf.input :number, :label => false, :input_html => { :class => 'inline_edit tight' }, :wrapper_html => { :class => 'item_value' }  %>
+          <%= link_to "посмотреть загрузку", workplace_classroom_path(cf.object), :class => 'show_loadings in_frame', :remote => true, :data => { :parent => '.frame_container' } if cf.object.persisted? %>
           <%= cf.link_to_remove 'убрать', :class => 'delete_button faded', :confirm => 'Вы уверены?' %>
           <div class="hidden_value"><%= cf.object.number %></div>
         </li>
