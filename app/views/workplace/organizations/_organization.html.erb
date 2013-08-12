@@ -1,7 +1,9 @@
 <% if @organization.persisted? %>
   <div class="organization_info data_presentation">
     <%= link_to workplace_root_path do %>
-      <span></span>
+      <span>
+        <%= image_tag @organization.logotype.thumb('32x32').url if @organization.logotype_uid? %>
+      </span>
       <b><%= @organization.title %></b>
     <% end %>
 

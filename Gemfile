@@ -17,6 +17,7 @@ group :default do
   gem 'delayed_job_active_record'
   gem 'devise', '~> 2.2'
   gem 'devise-async'
+  gem 'dragonfly'
   gem 'enumerize'
   gem 'has_scope'
   gem 'inherited_resources'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723020944) do
+ActiveRecord::Schema.define(:version => 20130812040352) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -179,8 +179,10 @@ ActiveRecord::Schema.define(:version => 20130723020944) do
     t.string   "phone"
     t.string   "site"
     t.string   "subdomain"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "logotype_uid"
+    t.string   "logotype_name"
   end
 
   create_table "subscriptions", :force => true do |t|

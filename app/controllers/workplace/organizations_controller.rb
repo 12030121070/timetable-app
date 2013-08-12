@@ -25,6 +25,12 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
     end
   end
 
+  def update
+    update! { |success, failure|
+      success.html { redirect_to workplace_root_path and return }
+    }
+  end
+
 private
   def begin_of_association_chain
     current_user
