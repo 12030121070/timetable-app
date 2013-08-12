@@ -2,12 +2,20 @@
   <%= f.input :title, :input_html => { :class => 'inline_edit large' } %>
   <%= f.input :address, :input_html => { :class => 'inline_edit' } %>
   <label>Список аудиторий</label>
+  <input type="text" class='search_in_list tight' />
+  <%= link_to "+ Добавить", '#', :class => 'yellow_button search_in_list_add faded' %>
+  <span class="search_in_list_hint">Найдите аудиторию по номеру или<br/> добавьте новую, нажав на кнопку 'Добавить'</span>
   <div class="fields_list">
-    <%= f.simple_fields_for :classrooms do |cf|  %>
-      <%= cf.input :number, :label => false, :input_html => { :class => 'inline_edit tight' }  %>
-      <%= cf.link_to_remove 'убрать', :class => 'delete_button faded', :confirm => 'Вы уверены?' %>
-    <% end %>
-    <%= f.link_to_add "добавить аудиторию", :classrooms %>
+    <ul class='classrooms list'>
+      <%= f.simple_fields_for :classrooms, :wrapper => false do |cf|  %>
+        <li class='fields'>
+          <%= cf.input :number, :label => false, :input_html => { :class => 'inline_edit tight' }, :wrapper_html => { :class => 'item_value' }  %>
+          <%= cf.link_to_remove 'убрать', :class => 'delete_button faded', :confirm => 'Вы уверены?' %>
+          <div class="hidden_value"><%= cf.object.number %></div>
+        </li>
+      <% end %>
+    </ul>
+    <%= f.link_to_add "добавить аудиторию", :classrooms, :data => { :target => '.classrooms' }, :class => 'hidden' %>
   </div>
 
   <div class="buttons sticky bottom">

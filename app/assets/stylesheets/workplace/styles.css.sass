@@ -9,6 +9,9 @@
 body
   +clearfix
 
+.hidden
+  display: none
+
 .main_wrapper
   +clearfix
   background: #f2f2f2
@@ -231,12 +234,17 @@ body
     +background-image(linear-gradient(#febb09, #fdab09))
     +single-box-shadow(#fed560, 0, -4px, 0, false, true)
 
-    &.faded
+    &.faded, &.inactive
       +single-box-shadow(none)
       background: none
       border: 1px solid #e6e6e6
       color: #ccc
 
+    &.inactive
+      &:hover
+        cursor: default
+
+    &.faded
       &:hover
         +background-image(linear-gradient(#febb09, #fdab09))
         +single-box-shadow(#fed560, 0, -4px, 0, false, true)
@@ -371,3 +379,26 @@ body
     bottom: 0
     left: 0
     position: absolute
+
+.search_in_list
+  +border-radius(3px)
+  border: 1px solid #808080
+  color: #555
+  font-size: 14px
+  height: 30px
+  line-height: 30px
+  margin: 0
+  outline: 0
+  padding: 0 5px
+  width: 64px
+
+.search_in_list_hint
+  display: block
+  color: #6d6d6d
+  font-size: 12px
+  font-style: italic
+  line-height: 16px
+  margin: 5px 0 15px 0
+
+.search_in_list_add
+  margin: 0 0 0 15px

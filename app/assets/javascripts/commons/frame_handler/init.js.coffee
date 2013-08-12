@@ -43,6 +43,7 @@ frame_handler = (parent, response) ->
 
   set_callbacks = () ->
     init_scrollable()
+    init_search()
     $(document).keyup (e) ->
       if e.keyCode == 27
         _.container_hide()
