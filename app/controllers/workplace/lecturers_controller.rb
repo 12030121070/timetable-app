@@ -28,7 +28,7 @@ class Workplace::LecturersController < Workplace::WorkplaceController
         flash[:alert] = 'Во время импорта произошла ошибка'
       end
 
-      redirect_to parent_path and return
+      redirect_to workplace_lecturers_path and return
     }
   end
 
