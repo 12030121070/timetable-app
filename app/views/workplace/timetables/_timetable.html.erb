@@ -1,6 +1,10 @@
-<%= link_to timetable.title, workplace_timetable_path(timetable) %>
-<%= timetable.starts_on %> &mdash;
-<%= timetable.ends_on %>
-<%= timetable.human_status_name %>
-<%= link_to 'редактировать', edit_workplace_timetable_path(timetable) %>
-<%= link_to 'удалить', workplace_timetable_path(timetable), method: :delete, confirm: 'Вы уверены?' %>
+<li class="item">
+  <div class="actions">
+    <%= link_to 'редактировать', edit_workplace_timetable_path(timetable), :class => 'yellow_button faded in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+    <%= link_to 'удалить', workplace_timetable_path(timetable), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
+  </div>
+  <%= link_to timetable.title, workplace_timetable_path(timetable), :class => 'title' %>
+  <div class="additional">
+    <%= timetable.human_status_name %> (<%= l timetable.starts_on %> &mdash; <%= l timetable.ends_on %>)
+  </div>
+</li>

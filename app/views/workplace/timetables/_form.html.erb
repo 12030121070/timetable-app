@@ -1,12 +1,13 @@
-<%= simple_form_for [:workplace, @timetable].flatten do |f| %>
-  <%= f.input :title %>
-  <%= f.input :starts_on %>
-  <%= f.input :ends_on %>
-  <%= f.input :parity %>
-  <%= f.input :first_week_parity, :as => :select %>
+<%= simple_form_for [:workplace, @timetable].flatten, :remote => true do |f| %>
+  <%= f.input :title, :input_html => { :class => 'inline_edit large' } %>
+  <%= f.input :starts_on, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :ends_on, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :parity, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :first_week_parity, :as => :select, :input_html => { :class => 'inline_edit' } %>
 
-  <div class="buttons">
-    <%= f.submit "Сохранить" %>
-    <%= link_to "Отмена", :back %>
+  <div class="buttons sticky bottom">
+    <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to 'Удалить', workplace_timetable_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button' if resource.persisted? %>
+    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
 <% end %>

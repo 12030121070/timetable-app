@@ -1,10 +1,22 @@
-<h3>Список дисциплин (<%= link_to 'добавить', new_workplace_discipline_path %>)</h3>
+<%= link_to '+ добавить дисциплину', new_workplace_discipline_path, :class => 'yellow_button thin to_right in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+<h2 class='thin'>Список дисциплин</h2>
 
-<ul>
-  <% @disciplines.each do |discipline| %>
-    <li>
-      <%= discipline.abbr %> &mdash; <%= discipline.title %>
-      <%= link_to 'редактировать', edit_workplace_discipline_path(discipline) %>
-    </li>
-  <% end %>
-</ul>
+<div class="scrollable searchable">
+  <div class='search_in_list_wrapper'>
+    <input type="text" class='search_in_list wide' />
+    <span class="search_in_list_hint">Найдите дисциплину по названию</span>
+  </div>
+  <ul class='list'>
+    <% @disciplines.each do |discipline| %>
+      <li class='item'>
+        <div class="actions">
+          <%= link_to 'редактировать', edit_workplace_discipline_path(discipline), :class => 'yellow_button faded in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+          <%= link_to 'удалить', workplace_discipline_path(discipline), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
+        </div>
+        <%= link_to discipline.title, edit_workplace_discipline_path(discipline), :class => 'title in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+        <div class="additional"><%= discipline.abbr %></div>
+        <div class="hidden_value"><%= discipline.title %></div>
+      </li>
+    <% end %>
+  </ul>
+</div>

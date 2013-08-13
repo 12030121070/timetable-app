@@ -27,6 +27,7 @@ ru:
         number: Номер аудитории
 
       discipline:
+        abbr: Аббревиатура
         title: Название
 
       group:

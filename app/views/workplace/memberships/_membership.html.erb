@@ -1,10 +1,12 @@
-<li>
+<li class='item'>
+  <div class="actions">
+    <!-- TODO: only owner can manage memberships -->
+    <%= link_to 'удалить', workplace_membership_path(membership), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
+  </div>
+
   <% if membership.activated? %>
     <%= "#{membership.user.email} (#{membership.role_text})" %>
   <% else %>
     <%= "#{membership.email} (#{membership.role_text}) не подтверждено" %>
   <% end %>
-
-  <!-- TODO: only owner can manage memberships -->
-  <%= link_to 'Удалить', workplace_membership_path(membership), :method => :delete, :confirm => 'Вы уверены?' %>
 </li>

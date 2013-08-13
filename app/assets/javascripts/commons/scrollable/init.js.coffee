@@ -12,7 +12,7 @@
 
       item_height = parent.height() - siblings_height
       $item.css('height', item_height)
-      $item.css('overflow-y', 'scroll')
+      $item.css('overflow-y', 'auto')
 
       stickies = $('.sticky', $item)
 

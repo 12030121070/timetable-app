@@ -1,8 +1,10 @@
-<%= simple_form_for [:workplace, @discipline] do |f| %>
-  <%= f.input :title %>
+<%= simple_form_for [:workplace, @discipline], :remote => true do |f| %>
+  <%= f.input :abbr, :input_html => { :class => 'inline_edit tight' } %>
+  <%= f.input :title, :input_html => { :class => 'inline_edit wide' } %>
 
-  <div class="buttons">
-    <%= f.submit "Сохранить" %>
-    <%= link_to "Отмена", :back %>
+  <div class="buttons sticky bottom">
+    <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to 'Удалить', workplace_discipline_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button' if resource.persisted? %>
+    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
 <% end %>

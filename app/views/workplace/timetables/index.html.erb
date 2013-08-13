@@ -1,9 +1,8 @@
-<h2>Ваши расписания (<%= link_to 'добавить', new_workplace_timetable_path %>)</h2>
+<%= link_to '+ добавить расписание', new_workplace_timetable_path, :class => 'yellow_button thin to_right in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+<h2 class='thin'>Ваши расписания</h2>
 
-<ul>
-  <% @timetables.each do |timetable| %>
-    <li>
-      <%= render timetable %>
-    </li>
-  <% end %>
-</ul>
+<div class="scrollable">
+  <ul class='list'>
+    <%= render @timetables %>
+  </ul>
+</div>
