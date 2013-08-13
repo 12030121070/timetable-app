@@ -45,9 +45,12 @@ frame_handler = (parent, response) ->
   set_callbacks = () ->
     init_scrollable()
     init_search()
+
+    $(window).on 'beforeunload', ->
+      return 'Не сохраненные данные будет потеряны!' if parent.hasClass('not_active')
+
     $(document).keyup (e) ->
       if e.keyCode == 27
-        console.log parent
         _.container_hide() unless _.container.hasClass('not_active')
 
     _.container.children('.close_link').on 'click', ->
@@ -60,9 +63,11 @@ frame_handler = (parent, response) ->
         false
 
     _.container.on 'ajax:success', (evt, response) ->
-      unless $(evt.target).hasClass('in_frame') || _.container.hasClass('not_active')
-        if $(response).find('.error').length || $(evt.target).hasClass('in_same_frame')
+      target = $(evt.target)
+      unless target.hasClass('in_frame') || _.container.hasClass('not_active')
+        if $(response).find('.error').length || target.hasClass('in_same_frame')
           _.content(response)
+          init_scrollable()
         else
           _.container_hide()
           #update_parent
@@ -100,8 +105,15 @@ frame_handler = (parent, response) ->
   return _
 
 $(window).load ->
-  $('body').on 'ajax:success', (evt, response) ->
+  $('body').on('ajax:before', (evt) ->
+    link = $(evt.target)
+    console.log link.attr('class')
+    return false if link.hasClass('busy')
+    link.addClass('busy')
+  ).on('ajax:success', (evt, response) ->
     link = $(evt.target)
     if link.hasClass('in_frame')
       parent = $(link.data('parent'))
       frame_handler(parent, response)
+    link.removeClass('busy')
+  )

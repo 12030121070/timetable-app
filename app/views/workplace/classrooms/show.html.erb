@@ -25,10 +25,17 @@
           <%= hash.to_a.first.last[:ends_at] %>
         </td>
 
-        <td>
-          <% hash.to_a.first.last[:lessons].each do |lesson| %>
-            <%= lesson %>
-          <% end %>
+        <td class='lesson'>
+          <ul>
+            <% hash.to_a.first.last[:lessons].each do |lesson| %>
+              <li>
+                <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
+                <span class='kind'><%= lesson.kind_text %></span>
+                <span class='lecturers'><%= lesson.lecturers.join(', ') %></span>
+                <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
+              </li>
+            <% end %>
+          </ul>
         </td>
       </tr>
 
@@ -40,14 +47,14 @@
             <%= data[:ends_at] %>
           </td>
 
-          <td>
+          <td class='lesson'>
             <ul>
               <% data[:lessons].each do |lesson| %>
                 <li>
-                  <%= lesson.discipline.title %>
-                  <%= lesson.kind_text %>
-                  <%= lesson.groups.map(&:title).join(', ') %>
-                  <%= lesson.lecturers.map(&:full_name).join(', ') %>
+                  <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
+                  <span class='kind'><%= lesson.kind_text %></span>
+                  <span class='lecturers'><%= lesson.lecturers.join(', ') %></span>
+                  <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
                 </li>
               <% end %>
             </ul>

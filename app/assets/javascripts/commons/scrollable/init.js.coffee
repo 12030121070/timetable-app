@@ -1,8 +1,9 @@
 @init_scrollable = () ->
-  scrollable = $('.scrollable')
+  scrollable = $('.scrollable:not(.charged)')
   if scrollable.length
     scrollable.each (index, item) ->
       $item = $(item)
+      $item.addClass('charged')
       parent = $item.parent()
       siblings_height = 0
 

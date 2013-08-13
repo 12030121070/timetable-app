@@ -1,10 +1,15 @@
 @init_search = () ->
   inputs = $('.search_in_list:not(.charged)')
-  $('.hidden_value').hide()
 
   if inputs.length
     inputs.each (index, item) ->
       $item = $(item)
+      $item.on 'keydown', (e) ->
+        if e.keyCode == 13
+          e.preventDefault()
+          e.stopPropagation()
+          e.stopImmediatePropagation()
+
       add_link = $item.next('a')
       $item.addClass('charged')
       list = new List($('.scrollable')[0], {

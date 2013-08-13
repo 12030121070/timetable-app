@@ -382,6 +382,9 @@ body
     tr:nth-child(odd)
       background: #fff
 
+    td
+      +clearfix
+
     .no_bg
       background: #f2f2f2
 
@@ -398,12 +401,38 @@ body
     .tight
       width: 96px
 
+    .discipline, .kind, .groups, .lecturers
+      float: left
+      display: block
+
+    .discipline
+      font-weight: bold
+
+      &:hover
+        cursor: pointer
+
+    .kind
+      font-style: italic
+      margin: 0 0 0 15px
+
+    .groups
+      clear: left
+
+    .lecturers
+      margin: 0 0 0 15px
+
+    .lesson
+      +min-width(100px)
+
 .sticky
   &.bottom
     bottom: 0
     left: 0
     position: absolute
     right: 0
+
+.hidden_value
+  display: none
 
 .search_in_list
   +border-radius(3px)
