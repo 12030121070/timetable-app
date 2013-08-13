@@ -107,7 +107,6 @@ frame_handler = (parent, response) ->
 $(window).load ->
   $('body').on('ajax:before', (evt) ->
     link = $(evt.target)
-    console.log link.attr('class')
     return false if link.hasClass('busy')
     link.addClass('busy')
   ).on('ajax:success', (evt, response) ->

@@ -16,16 +16,17 @@ TimetableApp::Application.routes.draw do
 
     resources :disciplines, :except => :show
 
-    resources :lecturers do
+    resources :lecturers, :except => [:show] do
+      post :import, :on => :collection
+    end
+
+    resources :buildings, :except => [:show] do
       post :import, :on => :collection
     end
 
     resources :memberships, :except => [:show, :edit, :update]
     resources :subscriptions, :only => [:index, :new, :create]
 
-    resources :buildings, except: [:show] do
-      post :import, :on => :collection
-    end
     resources :classrooms, :only => :show
 
     resources :timetables do

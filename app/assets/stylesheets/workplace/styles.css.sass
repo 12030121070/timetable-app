@@ -14,6 +14,7 @@ body
 
 .main_wrapper
   +clearfix
+  +min-width(1024px)
   background: #f2f2f2
   height: 100%
 
@@ -197,6 +198,7 @@ body
   +clearfix
   background: #f2f2f2
   padding: 10px 20px
+  height: 100%
 
   .header
     margin: 0 0 25px 0
@@ -342,6 +344,7 @@ body
 
   .list
     .item
+      +min-height(30px)
       padding: 12px 10px
 
       .additional
@@ -350,7 +353,6 @@ body
 
       .actions
         float: right
-        margin: 12px 0 0 0
 
       &:nth-child(even)
         background: #fff
@@ -401,7 +403,7 @@ body
     .tight
       width: 96px
 
-    .discipline, .kind, .groups, .lecturers
+    .discipline, .kind, .groups, .lecturers, .classrooms
       float: left
       display: block
 
@@ -415,7 +417,7 @@ body
       font-style: italic
       margin: 0 0 0 15px
 
-    .groups
+    .groups, .classrooms
       clear: left
 
     .lecturers

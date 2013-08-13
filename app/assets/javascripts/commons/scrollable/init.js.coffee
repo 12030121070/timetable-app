@@ -30,3 +30,5 @@
               sticky.addClass('sticky')
               $('.bottom_empty', $item).css('height', sticky_height)
 
+$ ->
+  init_scrollable()

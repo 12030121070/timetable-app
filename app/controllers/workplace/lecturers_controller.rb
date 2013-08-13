@@ -5,12 +5,12 @@ require 'importers/csv_import'
 class Workplace::LecturersController < Workplace::WorkplaceController
   inherit_resources
 
-  actions :all
+  actions :all, :except => [:show]
 
   custom_actions :collection => :import
 
-  def show
-    show! {
+  def edit
+    edit!{
       beginning_of_week = params[:week] ? params[:week] : @lecturer.beginning_of_weeks.first
       @table = @lecturer.table(beginning_of_week)
     }
@@ -32,8 +32,7 @@ class Workplace::LecturersController < Workplace::WorkplaceController
     }
   end
 
-  protected
-
+protected
   def begin_of_association_chain
     @organization
   end

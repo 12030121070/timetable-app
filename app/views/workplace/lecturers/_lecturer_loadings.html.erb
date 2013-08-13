@@ -1,0 +1,63 @@
+<ul>
+  <% @lecturer.beginning_of_weeks.each do |starts_on| %>
+    <li>
+      <%= link_to starts_on, workplace_lecturer_path(@lecturer, :week => starts_on) %>
+    </li>
+  <% end %>
+</ul>
+
+<table class='slave_table'>
+  <% @table.each do |date, hash| %>
+    <% next if hash.empty? %>
+
+    <tr>
+      <td rowspan='<%= hash.values.count %>' class='no_bg'>
+        <span class='day_name center'><%= l date, :format => '%a' %></span>
+        <span class='date center'><%= l date, :format => '%d %b %Y' %></span>
+      </td>
+
+      <td class='center tight'>
+        <%= hash.to_a.first.last[:starts_at] %>
+        &mdash;
+        <%= hash.to_a.first.last[:ends_at] %>
+      </td>
+
+      <td class='lesson'>
+        <ul>
+          <% hash.to_a.first.last[:lessons].each do |lesson| %>
+            <li>
+              <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
+              <span class='kind'><%= lesson.kind_text %></span>
+              <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
+              <span class='classrooms'><%= lesson.classrooms.join(', ') %></span>
+            </li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+
+    <% hash.to_a[1..-1].each do |_, data| %>
+      <tr>
+        <td class='center tight'>
+          <%= data[:starts_at] %>
+          &mdash;
+          <%= data[:ends_at] %>
+        </td>
+
+        <td class='lesson'>
+          <ul>
+            <% data[:lessons].each do |lesson| %>
+              <li>
+                <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
+                <span class='kind'><%= lesson.kind_text %></span>
+                <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
+                <span class='classrooms'><%= lesson.classrooms.join(', ') %></span>
+              </li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
