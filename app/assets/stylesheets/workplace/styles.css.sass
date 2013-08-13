@@ -433,8 +433,15 @@ body
     position: absolute
     right: 0
 
+  &.top
+
 .hidden_value
   display: none
+
+.search_in_list_wrapper
+  +clearfix
+  background: #fff
+  padding: 12px 10px 0 10px
 
 .search_in_list
   +border-radius(3px)
@@ -447,6 +454,9 @@ body
   outline: 0
   padding: 0 5px
   width: 64px
+
+  &.wide
+    width: 500px
 
 .search_in_list_hint
   display: block

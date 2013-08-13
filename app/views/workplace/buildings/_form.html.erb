@@ -1,4 +1,4 @@
-<%= simple_nested_form_for [:workplace, @building].flatten, :remote => true, :html => { :class => 'scrollable' } do |f| %>
+<%= simple_nested_form_for [:workplace, @building].flatten, :remote => true, :html => { :class => 'scrollable searchable' } do |f| %>
   <%= f.input :title, :input_html => { :class => 'inline_edit large' } %>
   <%= f.input :address, :input_html => { :class => 'inline_edit' } %>
   <label>Список аудиторий</label>

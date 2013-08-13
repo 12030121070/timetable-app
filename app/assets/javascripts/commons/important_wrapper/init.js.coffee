@@ -10,6 +10,7 @@ $ ->
   close_link = $('.close_link', wrapper)
   open_link = $('h5', wrapper)
   inner_wrapper = $('.inner_wrapper', wrapper)
+  scrollable = wrapper.next('.scrollable')
 
   if get_state() == 'opened'
     wrapper.addClass('opened').removeClass('closed')
@@ -22,9 +23,13 @@ $ ->
     link = $(this)
     if link.hasClass('open_link') && wrapper.hasClass('closed')
       set_state('opened')
-      inner_wrapper.slideDown()
+      inner_wrapper.slideDown 300, ->
+        scrollable.off().removeClass('charged')
+        init_scrollable()
 
     if link.hasClass('close_link') && wrapper.hasClass('opened')
       set_state('closed')
-      inner_wrapper.slideUp()
+      inner_wrapper.slideUp 300, ->
+        scrollable.off().removeClass('charged')
+        init_scrollable()
     false

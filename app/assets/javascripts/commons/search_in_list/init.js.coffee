@@ -10,9 +10,9 @@
           e.stopPropagation()
           e.stopImmediatePropagation()
 
-      add_link = $item.next('a')
+      add_link = $item.next('a.search_in_list_add')
       $item.addClass('charged')
-      list = new List($('.scrollable')[0], {
+      list = new List($('.searchable')[0], {
         valueNames: ['hidden_value']
         searchClass: 'search_in_list'
       })
@@ -33,3 +33,6 @@
           list.addItems([added_li[0]],['hidden_value'])
           list.search('')
         false
+
+$ ->
+  init_search()
