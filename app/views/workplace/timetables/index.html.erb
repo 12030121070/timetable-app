@@ -1,8 +1,15 @@
-<%= link_to '+ добавить расписание', new_workplace_timetable_path, :class => 'yellow_button thin to_right in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+<%= link_to '+ добавить расписание',
+            new_workplace_timetable_path,
+            :class => 'yellow_button thin to_right in_frame',
+            'data-parent' => '.workplace_wrapper',
+            'data-target' => "#timetable_list",
+            'data-list' => '#timetable_list',
+            'data-kind' => 'new_record',
+            :remote => true %>
 <h2 class='thin'>Ваши расписания</h2>
 
 <div class="scrollable">
-  <ul class='list'>
+  <ul class='list' id='timetable_list'>
     <%= render @timetables %>
   </ul>
 </div>

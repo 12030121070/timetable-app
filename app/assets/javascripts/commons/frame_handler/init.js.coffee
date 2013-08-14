@@ -1,4 +1,4 @@
-frame_handler = (parent, response) ->
+frame_handler = (parent, response, options = {}) ->
   _ = {}
   parent.addClass('not_active')
   parent_width = parent.width()
@@ -36,6 +36,20 @@ frame_handler = (parent, response) ->
   create_container = () ->
     $('<div class="frame_container" style="'+container_styles.to_s()+'"><a href="#" class="close_link">Закрыть</a><div class="inner_wrapper"></div></div>').appendTo(parent)
 
+  sort = (ul) ->
+    arr = ul.children('li').get()
+    arr.sort (a,b) ->
+      a_value = $(a).text()
+      b_value = $(b).text()
+
+      return a_value.localeCompare(b_value)
+    new_list = []
+
+    arr.map (item, index) ->
+      new_list.push(item)
+
+    ul.html(new_list)
+
   overlay = () ->
     overlay_block = $('.overlay', parent)
     unless overlay_block.length
@@ -70,7 +84,11 @@ frame_handler = (parent, response) ->
           init_scrollable()
         else
           _.container_hide()
-          #update_parent
+          if options.kind == 'new_record'
+            options.target.append($(response).hide().fadeIn(700))
+          if options.kind == 'update_record'
+            options.target.replaceWith($(response).hide().fadeIn(700))
+          sort(options.list)
 
   off_callbacks = () ->
     $(document).off('keyup') unless $('.not_active').length
@@ -113,6 +131,10 @@ $(window).load ->
     link = $(evt.target)
     if link.hasClass('in_frame')
       parent = $(link.data('parent'))
-      frame_handler(parent, response)
+      frame_handler(parent, response, {
+                                        kind: link.data('kind'),
+                                        target: $(link.data('target')),
+                                        list: $(link.data('list'))
+                                      })
     link.removeClass('busy')
   )

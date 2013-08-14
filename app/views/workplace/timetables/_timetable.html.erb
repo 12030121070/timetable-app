@@ -1,6 +1,13 @@
-<li class="item">
+<li class="item" id='timetable_<%= timetable.id%>'>
   <div class="actions">
-    <%= link_to 'редактировать', edit_workplace_timetable_path(timetable), :class => 'yellow_button faded in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+    <%= link_to 'редактировать',
+                edit_workplace_timetable_path(timetable),
+                :class => 'yellow_button faded in_frame',
+                'data-parent' => '.workplace_wrapper',
+                'data-target' => "#timetable_#{ timetable.id }",
+                'data-list' => '#timetable_list',
+                'data-kind' => 'update_record',
+                :remote => true %>
     <%= link_to 'удалить', workplace_timetable_path(timetable), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
   </div>
   <%= link_to timetable.title, workplace_timetable_path(timetable), :class => 'title' %>

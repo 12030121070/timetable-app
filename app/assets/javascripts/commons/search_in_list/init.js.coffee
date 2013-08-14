@@ -29,6 +29,7 @@
           $('.add_nested_fields', list.listContainer).click()
           added_li = $('li:last', list.list)
           $('div input', added_li).val(val)
+          $('.hidden_value', added_li).text(val)
           $item.val('')
           list.addItems([added_li[0]],['hidden_value'])
           list.search('')

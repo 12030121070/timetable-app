@@ -7,7 +7,6 @@
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
-    <%= link_to 'Удалить', workplace_lecturer_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button' if resource.persisted? %>
     <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
   <div class="bottom_empty"></div>

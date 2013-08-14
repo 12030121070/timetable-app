@@ -1,4 +1,12 @@
-<%= link_to '+ добавить корпус', new_workplace_building_path, :class => 'yellow_button thin to_right in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+<%= link_to '+ добавить корпус',
+            new_workplace_building_path,
+            :class => 'yellow_button thin to_right in_frame',
+            'data-parent' => '.workplace_wrapper',
+            'data-target' => '#building_list',
+            'data-list' => '#building_list',
+            'data-kind' => 'new_record',
+            :remote => true %>
+
 <h2 class='thin'>Корпуса и аудитории</h2>
 
 <div class="important_wrapper import_help">
@@ -26,6 +34,6 @@
   </div>
 </div>
 
-<ul class='list scrollable'>
+<ul class='list scrollable' id='building_list'>
   <%= render collection %>
 </ul>

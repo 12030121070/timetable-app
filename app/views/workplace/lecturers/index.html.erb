@@ -1,4 +1,11 @@
-<%= link_to "+ добавить лектора", new_workplace_lecturer_path, :class => 'yellow_button thin to_right in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+<%= link_to "+ добавить лектора",
+            new_workplace_lecturer_path,
+            :class => 'yellow_button thin to_right in_frame',
+            'data-parent' => '.workplace_wrapper',
+            'data-target' => "#lecturer_list",
+            'data-list' => '#lecturer_list',
+            'data-kind' => 'new_record',
+            :remote => true %>
 <h2 class='thin'>Лекторы</h2>
 
 <div class="important_wrapper import_help">
@@ -31,7 +38,7 @@
     <input type="text" class='search_in_list wide' />
     <span class="search_in_list_hint">Найдите лектора по фамилии, имени или отчеству</span>
   </div>
-  <ul class='list'>
+  <ul class='list' id='lecturer_list'>
     <%= render collection %>
   </ul>
 </div>

@@ -25,6 +25,18 @@ class Workplace::BuildingsController < Workplace::WorkplaceController
     }
   end
 
+  def create
+    create! do |success, failure|
+      success.html { render :partial => 'building', :locals => { :building => resource } and return }
+    end
+  end
+
+  def update
+    update! do |success, failure|
+      success.html { render :partial => 'building', :locals => { :building => resource } and return }
+    end
+  end
+
   protected
 
   def begin_of_association_chain

@@ -1,9 +1,16 @@
-<%= link_to '+ добавить менеджера', new_workplace_membership_path, :class => 'yellow_button thin to_right in_frame', 'data-parent' => '.workplace_wrapper', :remote => true %>
+<%= link_to '+ добавить менеджера',
+            new_workplace_membership_path,
+            :class => 'yellow_button thin to_right in_frame',
+            'data-parent' => '.workplace_wrapper',
+            'data-target' => "#membership_list",
+            'data-list' => '#membership_list',
+            'data-kind' => 'new_record',
+            :remote => true %>
 <h2 class='thin'>Менеджеры</h2>
 
 <div class="scrollable">
   <% if @organization %>
-    <ul class='list'>
+    <ul class='list' id='membership_list'>
       <%= render @organization.memberships %>
     </ul>
   <% end %>
