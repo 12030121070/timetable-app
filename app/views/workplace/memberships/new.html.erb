@@ -1,10 +1,13 @@
-<h1>Приглашение менеджера</h1>
+<h2 class='thin'>Приглашение менеджера</h2>
 
-<%= simple_form_for [:workplace, @membership] do |f| %>
-  <%= f.input :email %>
+<%= simple_form_for [:workplace, @membership], :remote => true do |f| %>
 
-  <div class="buttons">
-    <%= f.submit "Сохранить" %>
-    <%= link_to "Отмена", :back %>
+  <%= f.input :email, :input_html => { :class => 'inline_edit' } %>
+
+  <div class="buttons sticky bottom">
+    <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to 'Удалить', workplace_membership_path(:workplace, resource), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button' unless resource.new_record? %>
+    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
+  <div class='bottom_empty'></div>
 <% end %>
