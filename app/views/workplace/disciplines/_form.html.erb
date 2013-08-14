@@ -1,6 +1,6 @@
 <%= simple_form_for [:workplace, @discipline], :remote => true do |f| %>
-  <%= f.input :abbr, :input_html => { :class => 'inline_edit tight' } %>
   <%= f.input :title, :input_html => { :class => 'inline_edit wide' } %>
+  <%= f.input :abbr, :input_html => { :class => 'inline_edit tight' } %>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
