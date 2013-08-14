@@ -88,6 +88,7 @@ frame_handler = (parent, response, options = {}) ->
             options.target.append($(response).hide().fadeIn(700))
           if options.kind == 'update_record'
             options.target.replaceWith($(response).hide().fadeIn(700))
+          options.list.trigger('changed')
           sort(options.list)
 
   off_callbacks = () ->

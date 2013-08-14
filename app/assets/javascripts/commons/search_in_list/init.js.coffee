@@ -22,6 +22,13 @@
         else
           $('.empty', list.list).remove()
 
+      $(list.list).on 'changed', ->
+        $this = $(this)
+        for_reindex = $('.item', $this).get()
+        list.clear()
+        list.addItems(for_reindex, ['hidden_value'])
+        list.search('')
+
       add_link.on 'click', ->
         val = $item.val()
         if val.length > 0
