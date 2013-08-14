@@ -17,6 +17,8 @@ class Group < ActiveRecord::Base
 
   scope :published, ->(i) { joins(:timetable).where("timetables.status = 'published'") }
 
+  before_create :check_can_be_created
+
   searchable do
     text :title
     string :title
@@ -56,5 +58,11 @@ class Group < ActiveRecord::Base
         end
       end
     }
+  end
+
+  private
+
+  def check_can_be_created
+    organization.available_group_count > 0
   end
 end
