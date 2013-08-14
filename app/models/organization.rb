@@ -54,6 +54,8 @@ class Organization < ActiveRecord::Base
   end
 
   def groups_count_by_subscriptions
+    return 5 if subscriptions.empty?
+
     subscriptions.actual.sum(:groups_count)
   end
 
