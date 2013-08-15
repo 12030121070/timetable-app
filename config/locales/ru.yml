@@ -81,10 +81,10 @@ ru:
 
       timetable:
         title: Название
-        starts_on: Начало расписания
+        starts_on: Срок действия
         ends_on: Конец расписания
-        parity: Наличие четных недель
-        first_week_parity: Первая неделя
+        parity: Четные и нечетные недели
+        first_week_parity: Начинать с
 
       user:
         email: Электронная почта

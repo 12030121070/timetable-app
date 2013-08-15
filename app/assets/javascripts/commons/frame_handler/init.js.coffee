@@ -57,8 +57,10 @@ frame_handler = (parent, response, options = {}) ->
     overlay_block
 
   set_callbacks = () ->
+    init_date_picker()
     init_scrollable()
     init_search()
+    init_checked()
 
     $(window).on 'beforeunload', ->
       return 'Не сохраненные данные будет потеряны!' if parent.hasClass('not_active')
@@ -83,6 +85,7 @@ frame_handler = (parent, response, options = {}) ->
           _.content(response)
           init_scrollable()
           init_search()
+          init_checked()
         else
           _.container_hide()
           if options.kind == 'new_record'

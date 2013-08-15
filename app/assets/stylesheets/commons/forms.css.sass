@@ -4,7 +4,7 @@ form
   div
     +clearfix
 
-  div.string, div.text, div.email
+  div.string, div.text, div.email, div.date_picker
     input, textarea
       +border-radius(3px)
       background: #f2f2f2
@@ -40,11 +40,42 @@ form
         font-size: 22px
 
       &.normal
+      &.date_picker
+        width: 72px
+
       &.tight
         width: 64px
 
       &.wide
         width: 98%
+
+    &.timetable_starts_on
+      float: left
+
+    &.timetable_ends_on
+      margin: 25px 0 0 0
+
+      &:before
+        content: '\2014'
+        margin: 0 15px 0 0
+
+  div.boolean
+    label
+      input
+        margin: 0 10px 0 0
+
+  div.radio_buttons
+    background: #fff
+    padding: 0 10px 5px 10px
+    overflow: visible
+    position: relative
+
+    &:before
+      color: #fff
+      content: '\25B2'
+      left: 18px
+      position: absolute
+      top: -9px
 
   li.fields
     +clearfix
@@ -58,7 +89,7 @@ form
     font-size: 0.8em
 
     &:before
-      content: '\2191'
+      content: '\2190'
       margin: 0 5px 0 0
 
   label

@@ -19,7 +19,7 @@ class Timetable < ActiveRecord::Base
 
   delegate :organization_holidays, :to => :organization
 
-  enumerize :first_week_parity, :in => { :odd => 1, :even => 0 }
+  enumerize :first_week_parity, :in => { :even => 0, :odd => 1 }
 
   normalize_attributes :ends_on, :parity, :starts_on, :title, :first_week_parity
 

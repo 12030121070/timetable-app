@@ -1,9 +1,9 @@
 <%= simple_form_for [:workplace, @timetable].flatten, :remote => true do |f| %>
   <%= f.input :title, :input_html => { :class => 'inline_edit large' } %>
-  <%= f.input :starts_on, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :ends_on, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :starts_on, :as => :date_picker, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :ends_on, :as => :date_picker, :input_html => { :class => 'inline_edit' }, :label => false %>
   <%= f.input :parity, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :first_week_parity, :as => :select, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :first_week_parity, :as => :radio, :input_html => { :class => 'inline_edit' } %>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
