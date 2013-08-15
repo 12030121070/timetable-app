@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130812040352) do
+ActiveRecord::Schema.define(:version => 20130815050702) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20130812040352) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "classrooms", ["building_id", "number"], :name => "index_classrooms_on_building_id_and_number", :unique => true
   add_index "classrooms", ["building_id"], :name => "index_classrooms_on_building_id"
 
   create_table "days", :force => true do |t|
