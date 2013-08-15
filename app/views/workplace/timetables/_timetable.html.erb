@@ -1,4 +1,5 @@
 <li class="item" id='timetable_<%= timetable.id%>' data-value='<%= timetable.title %>'>
+  <span class="status <%= timetable.status %>"><%= timetable.human_status_name %></span>
   <div class="actions">
     <%= link_to 'редактировать',
                 edit_workplace_timetable_path(timetable),
@@ -12,6 +13,6 @@
   </div>
   <%= link_to timetable.title, workplace_timetable_path(timetable), :class => 'title' %>
   <div class="additional">
-    <%= timetable.human_status_name %> (<%= l timetable.starts_on %> &mdash; <%= l timetable.ends_on %>)
+    c <%= l timetable.starts_on, :format => '%d %b %Y' %> по <%= l timetable.ends_on, :format => '%d %b %Y' %>
   </div>
 </li>
