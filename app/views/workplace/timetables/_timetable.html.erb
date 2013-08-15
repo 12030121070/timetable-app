@@ -13,6 +13,6 @@
   </div>
   <%= link_to timetable.title, workplace_timetable_path(timetable), :class => 'title' %>
   <div class="additional">
-    c <%= l timetable.starts_on, :format => '%d %b %Y' %> по <%= l timetable.ends_on, :format => '%d %b %Y' %>
+    c <%= l timetable.starts_on, :format => :long %> по <%= l timetable.ends_on, :format => :long %>
   </div>
 </li>
