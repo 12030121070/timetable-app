@@ -82,6 +82,7 @@ frame_handler = (parent, response, options = {}) ->
         if $(response).find('.error').length || target.hasClass('in_same_frame')
           _.content(response)
           init_scrollable()
+          init_search()
         else
           _.container_hide()
           if options.kind == 'new_record'
