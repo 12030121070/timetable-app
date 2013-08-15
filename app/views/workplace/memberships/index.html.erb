@@ -10,6 +10,10 @@
 
 <div class="scrollable">
   <% if @organization %>
+    <div class='search_in_list_wrapper'>
+      <input type="text" class='search_in_list wide' data-list='#membership_list' autofocus='autofocus' />
+      <span class="search_in_list_hint">Найдите менеджера по электронной почте</span>
+    </div>
     <ul class='list' id='membership_list'>
       <%= render @organization.memberships %>
     </ul>

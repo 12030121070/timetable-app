@@ -1,4 +1,4 @@
-<li class='item'>
+<li class='item' data-value='<%= membership.email || membership.user.email %>'>
   <div class="actions">
     <!-- TODO: only owner can manage memberships -->
     <%= link_to 'удалить', workplace_membership_path(membership), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>

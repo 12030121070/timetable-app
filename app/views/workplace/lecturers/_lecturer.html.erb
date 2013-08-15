@@ -1,4 +1,4 @@
-<li class='item' id='lecturer_<%= lecturer.id%>'>
+<li class='item' id='lecturer_<%= lecturer.id%>' data-value='<%= lecturer.full_name %>'>
   <div class="actions">
     <%= link_to 'редактировать',
                 edit_workplace_lecturer_path(lecturer),
@@ -19,5 +19,4 @@
               'data-list' => '#lecturer_list',
               'data-kind' => 'update_record',
               :remote => true %>
-  <div class="hidden_value"><%= lecturer.full_name %></div>
 </li>

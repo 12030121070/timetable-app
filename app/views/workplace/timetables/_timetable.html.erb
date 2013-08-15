@@ -1,4 +1,4 @@
-<li class="item" id='timetable_<%= timetable.id%>'>
+<li class="item" id='timetable_<%= timetable.id%>' data-value='<%= timetable.title %>'>
   <div class="actions">
     <%= link_to 'редактировать',
                 edit_workplace_timetable_path(timetable),

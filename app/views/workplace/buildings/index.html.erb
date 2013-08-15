@@ -34,6 +34,12 @@
   </div>
 </div>
 
-<ul class='list scrollable' id='building_list'>
-  <%= render collection %>
-</ul>
+<div class="scrollable">
+  <div class='search_in_list_wrapper'>
+    <input type="text" class='search_in_list wide' data-list='#building_list' autofocus='autofocus' />
+    <span class="search_in_list_hint">Найдите корпус по названию</span>
+  </div>
+  <ul class='list' id='building_list'>
+    <%= render collection %>
+  </ul>
+</div>

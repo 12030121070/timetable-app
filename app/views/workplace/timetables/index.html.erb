@@ -9,6 +9,10 @@
 <h2 class='thin'>Ваши расписания</h2>
 
 <div class="scrollable">
+  <div class='search_in_list_wrapper'>
+    <input type="text" class='search_in_list wide' data-list='#timetable_list' autofocus='autofocus' />
+    <span class="search_in_list_hint">Найдите расписание по названию</span>
+  </div>
   <ul class='list' id='timetable_list'>
     <%= render @timetables %>
   </ul>

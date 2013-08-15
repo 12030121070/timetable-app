@@ -1,45 +1,53 @@
+reindex = (list) ->
+  res = []
+  list.children('li').each (index, item) ->
+    $item = $(item)
+    res.push { element: $item, value: $item.data('value').toString().toLocaleLowerCase() }
+  res
+
 @init_search = () ->
   inputs = $('.search_in_list:not(.charged)')
 
   if inputs.length
     inputs.each (index, item) ->
-      $item = $(item)
-      $item.on 'keydown', (e) ->
+      input = $(item).addClass('charged')
+      add_link = input.next('a.search_in_list_add')
+      list = $(input.data('list'))
+      input.on 'keydown', (e) ->
         if e.keyCode == 13
           e.preventDefault()
           e.stopPropagation()
           e.stopImmediatePropagation()
 
-      add_link = $item.next('a.search_in_list_add')
-      $item.addClass('charged')
-      list = new List($('.searchable')[0], {
-        valueNames: ['hidden_value']
-        searchClass: 'search_in_list'
-      })
-      list.on 'updated', ->
-        if list.matchingItems.length == 0
-          $(list.list).append('<li class="empty">Ничего не найдено</li>')
+      index_values = reindex(list)
+      input.on 'keyup', (e) ->
+        searchStr = input.val().replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&").toLocaleLowerCase()
+        res = []
+        list.children('li').each (index, item) ->
+          $(item).hide()
+        for item in index_values
+          do ->
+            res.push item if item.value.search(searchStr) > -1
+        if res.length > 0
+          $('.empty', list).remove()
+          for item in res
+            do ->
+              item.element.show()
         else
-          $('.empty', list.list).remove()
+          list.append('<li class="empty">Ничего не найдено</li>')
 
-      $(list.list).on 'changed', ->
-        $this = $(this)
-        for_reindex = $('.item', $this).get()
-        list.clear()
-        list.addItems(for_reindex, ['hidden_value'])
-        list.search('')
+      list.on 'changed', ->
+        index_values = reindex(list)
 
       add_link.on 'click', ->
-        val = $item.val()
+        val = input.val()
         if val.length > 0
-          $('.empty', list.list).remove()
-          $('.add_nested_fields', list.listContainer).click()
-          added_li = $('li:last', list.list)
+          $('.empty', list).remove()
+          $('.add_nested_fields', list.parent()).click()
+          added_li = $('li:last', list)
           $('div input', added_li).val(val)
-          $('.hidden_value', added_li).text(val)
-          $item.val('')
-          list.addItems([added_li[0]],['hidden_value'])
-          list.search('')
+          added_li.data('value', val)
+          list.trigger('changed')
         false
 
 $ ->
