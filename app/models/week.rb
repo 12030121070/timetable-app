@@ -38,4 +38,22 @@ class Week < ActiveRecord::Base
       days.each { |day| hash[day] = day.lesson_times }
     end
   end
+
+  def next
+    return nil if self_index+1 == timetable_weeks.count
+    timetable_weeks[self_index+1]
+  end
+
+  def prev
+    return nil if self_index.zero?
+    timetable_weeks[self_index-1]
+  end
+
+  def timetable_weeks
+    @timetable_weeks ||= timetable.weeks
+  end
+
+  def self_index
+    @self_index ||= timetable_weeks.index(self)
+  end
 end

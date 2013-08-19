@@ -1,39 +1,43 @@
 <td <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %>>
   <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
-    <%= link_to "добавить",
+    <%= link_to "+ добавить",
       polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
-      :class => "add", :title => "добавить" %>
+      :class => "add yellow_button faded", :title => "добавить" %>
   <% end %>
 
   <% if cell.lessons.any? %>
     <% cell.lessons.each do |lesson| %>
-      <p title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></p>
-      <p><%= lesson.kind_text %></p>
+      <div class="lesson_wrapper <%= lesson.kind %>">
+        <p title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></p>
+        <p><%= lesson.kind_text %></p>
 
-      <ul>
-        <% lesson.classrooms.each do |classroom| %>
-          <li>
-            <%= link_to classroom, workplace_classroom_path(classroom) %>
-          </li>
+        <ul>
+          <% lesson.classrooms.each do |classroom| %>
+            <li>
+              <%= link_to classroom, workplace_classroom_path(classroom) %>
+            </li>
+          <% end %>
+        </ul>
+
+        <ul>
+          <% lesson.lecturers.each do |lecturer| %>
+            <li>
+              <%= link_to lecturer.full_name, workplace_lecturer_path(lecturer) %>
+            </li>
+          <% end %>
+        </ul>
+
+        <% unless lesson.subgroup_whole? %>
+          <p><%= lesson.subgroup %></p>
         <% end %>
-      </ul>
 
-      <ul>
-        <% lesson.lecturers.each do |lecturer| %>
-          <li>
-            <%= link_to lecturer.full_name, workplace_lecturer_path(lecturer) %>
-          </li>
-        <% end %>
-      </ul>
-
-      <% unless lesson.subgroup_whole? %>
-        <p><%= lesson.subgroup %></p>
-      <% end %>
-
-      <p><%= link_to 'редактировать', polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson]) %></p>
-      <p><%= link_to 'скопировать', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_copy]) %></p>
-      <p><%= link_to 'переместить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_movement]) %></p>
-      <p><%= link_to 'удалить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson]),  :method => :delete, :confirm => 'Вы уверены?' %></p>
+      </div>
+      <div class="lesson_actions">
+        <%= link_to 'редактировать', polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson]), :class => 'grey_button faded edit' %>
+        <%= link_to 'скопировать', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_copy]), :class => 'grey_button faded copy' %>
+        <%= link_to 'переместить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_movement]), :class => 'grey_button faded move' %>
+        <%= link_to 'удалить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson]),  :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
+      </div>
     <% end %>
   <% else %>
     <%= cell.content %>

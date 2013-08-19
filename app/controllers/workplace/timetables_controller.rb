@@ -3,7 +3,7 @@
 class Workplace::TimetablesController < Workplace::WorkplaceController
   inherit_resources
 
-  actions :all
+  actions :all, :except => [:show]
 
   custom_actions :resource => [:to_draft, :to_published]
 

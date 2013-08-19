@@ -11,7 +11,7 @@
                 :remote => true %>
     <%= link_to 'удалить', workplace_timetable_path(timetable), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
   </div>
-  <%= link_to timetable.title, workplace_timetable_path(timetable), :class => 'title' %>
+  <%= link_to timetable.title, workplace_timetable_week_path(timetable, timetable.closest_week), :class => 'title' %>
   <div class="additional">
     c <%= l timetable.starts_on, :format => :long %> по <%= l timetable.ends_on, :format => :long %>
   </div>

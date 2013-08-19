@@ -1,35 +1,61 @@
-<h1><%= "#{@timetable.title} #{@week}" %></h1>
-
-<hr />
-<%= simple_form_for Group.new, url: workplace_timetable_groups_path(@timetable) do |f| %>
-  <%= f.input :title %>
-  <%= f.submit 'Создать' %>
-<% end %>
-<hr />
-
-<%= link_to 'Расписание в формате pdf', [:pdf, :workplace, @timetable, @week] %>
-
-<table>
-  <thead>
-    <tr>
-      <% @table[:header].each do |cell| %>
-        <th <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 2 %>>
-          <%= cell.content %>
-        </th>
-      <% end %>
-    </tr>
-  </thead>
-
-
-  <tbody>
-    <% @table[:days].each do |day, rows| %>
-      <% rows.each do |row| %>
-        <tr>
-          <% row.select(&:visibiliity?).each do |cell| %>
-            <%= render :partial => 'cell', :locals => { :cell => cell } %>
-          <% end %>
-        </tr>
-      <% end %>
+<div style='overflow: hidden'>
+  <div class="actions to_right">
+    <% if @timetable.draft? %>
+      <%= link_to "Опубликовать", to_published_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button faded' %>
+    <% else %>
+      <%= link_to "Вернуть в черновики", to_draft_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button faded' %>
     <% end %>
-  </tbody>
-</table>
+    <%= link_to 'редактировать',
+      edit_workplace_timetable_path(@timetable),
+      :class => 'yellow_button faded in_frame',
+      'data-parent' => '.workplace_wrapper',
+      'data-target' => "#timetable_#{ @timetable.id }",
+      'data-list' => '#timetable_list',
+      'data-kind' => 'update_record',
+      :remote => true %>
+    <%= link_to 'удалить', workplace_timetable_path(@timetable), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
+  </div>
+
+  <div class="status <%= @timetable.status %>"><%= @timetable.human_status_name %></div>
+  <h2 class='thin border_bottom'><%= @timetable.title %></h2>
+</div>
+
+<div class="scrollable">
+  <%= link_to "Скопировать", workplace_timetable_week_new_copy_path(@timetable, @week), :class => 'yellow_button faded to_right' %>
+  <%= link_to 'Расписание в формате pdf', [:pdf, :workplace, @timetable, @week], :class => 'yellow_button faded to_right', :style => 'margin: 0 5px 0 0' %>
+  <div class="inner_navigation">
+    <div class="inner_wrapper">
+      <% if @week.prev %>
+        <%= link_to "⟨", workplace_timetable_week_path(@timetable, @week.prev), :class => 'prev grey_button' %>
+      <% end %>
+      <div class="current_week"><%= l @week.starts_on.beginning_of_week %> &mdash; <%= l @week.starts_on.end_of_week %></div>
+      <% if @week.next %>
+        <%= link_to "⟩", workplace_timetable_week_path(@timetable, @week.next), :class => 'next grey_button'%>
+      <% end %>
+    </div>
+  </div>
+
+  <table class='week_timetable'>
+    <thead>
+      <tr>
+        <% @table[:header].each do |cell| %>
+          <th <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 2 %> class='group_number'>
+            <%= cell.content %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @table[:days].each do |day, rows| %>
+        <% rows.each do |row| %>
+          <tr>
+            <% row.select(&:visibiliity?).each do |cell| %>
+              <%= render :partial => 'cell', :locals => { :cell => cell } %>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

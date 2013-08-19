@@ -3,6 +3,7 @@
 @import 'commons/color_scheme'
 @import 'commons/flash_messages'
 @import 'commons/fonts'
+@import 'jquery.ui.datepicker'
 @import 'commons/forms'
 @import 'commons/tables'
 
@@ -23,7 +24,7 @@ body
   color: #0061a6
   font-size: 12px
   float: right
-  line-height: 12px
+  line-height: 14px
   margin: 0 10px 0 0
   position: relative
   top: -20px
@@ -35,9 +36,10 @@ body
     content: ''
     display: block
     height: 14px
+    padding: 0 0 0 10px
     position: relative
     left: 55px
-    top: 13px
+    top: 14px
     width: 14px
 
 .side_wrapper
@@ -60,8 +62,10 @@ body
     +border-bottom-right-radius(3px)
     +border-top-right-radius(3px)
     background: #4d4d4d
+    font-size: 26px
+    font-weight: 100
     height: 32px
-    line-height: 32px
+    line-height: 27px
     margin-top: -16px
     position: absolute
     right: -13px
@@ -72,7 +76,6 @@ body
 
     &:hover
       cursor: pointer
-      font-weight: bold
 
   ul
     +clearfix
@@ -180,6 +183,7 @@ body
 
     a
       display: inline
+      font-weight: 100
       letter-spacing: 1px
       width: auto
 
@@ -197,11 +201,11 @@ body
 .workplace_wrapper
   +clearfix
   background: #f2f2f2
-  padding: 10px 20px
+  padding: 0 20px
   height: 100%
 
   .header
-    margin: 0 0 25px 0
+    margin: 10px 0 25px 0
 
     .logo
       background: image_url('logo.png') no-repeat
@@ -216,10 +220,10 @@ body
     border: none
     color: #141414
     font-size: 10px
-    font-weight: 700
+    font-weight: 400
     letter-spacing: 1px
     line-height: 14px
-    padding: 7px 20px
+    padding: 5px 20px
     text-decoration: none
     text-transform: uppercase
 
@@ -229,10 +233,8 @@ body
     &:hover
       cursor: pointer
 
-    &.to_right
-      float: right
-
   .yellow_button
+    +clearfix
     +background-image(linear-gradient(#febb09, #fdab09))
     +single-box-shadow(#fed560, 0, -4px, 0, false, true)
 
@@ -256,8 +258,40 @@ body
         +single-box-shadow(#000, 0, 0, 4px, false, true)
 
   .grey_button
+    +clearfix
     +background-image(linear-gradient(#d5d5d5, #cbcbcb))
     +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
+
+    &.faded
+      +single-box-shadow(none)
+      background: none
+      border: 1px solid #e6e6e6
+      color: #ccc
+
+      &:hover
+        +background-image(linear-gradient(#d5d5d5, #cbcbcb))
+        +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
+        color: #141414
+
+        &.edit
+          @include background(image_url('actions_buttons.png') no-repeat 0 -30px, linear-gradient(#d5d5d5, #cbcbcb))
+        &.move
+          @include background(image_url('actions_buttons.png') no-repeat -60px -30px, linear-gradient(#d5d5d5, #cbcbcb))
+        &.copy
+          @include background(image_url('actions_buttons.png') no-repeat -30px -30px, linear-gradient(#d5d5d5, #cbcbcb))
+
+      &:active
+        +single-box-shadow(#000, 0, 0, 4px, false, true)
+
+    &.edit, &.move, &.copy
+      text-indent: -999px
+      padding: 7px 14px
+    &.edit
+      @include background(image_url('actions_buttons.png') no-repeat 0 0)
+    &.move
+      @include background(image_url('actions_buttons.png') no-repeat -60px 0)
+    &.copy
+      @include background(image_url('actions_buttons.png') no-repeat -30px 0)
 
   .delete_button
     +clearfix
@@ -289,7 +323,7 @@ body
     .open_link
       +inline-block
       color: #094c95
-      line-height: 14px
+      line-height: 18px
 
     &.opened
       .close
@@ -347,19 +381,6 @@ body
       +min-height(30px)
       padding: 12px 10px
 
-      .status
-        font-size: 10px
-        line-height: 12px
-        margin: 0 5px 0 0
-        padding: 2px 4px
-
-        &.published
-          background: #8CD999
-
-        &.draft
-          background: #4d4d4d
-          color: #f2f2f2
-
       .additional
         font-size: 12px
         color: #808080
@@ -369,6 +390,31 @@ body
 
       &:nth-child(even)
         background: #fff
+
+.status
+  font-size: 10px
+  line-height: 12px
+  margin: 0 5px 0 0
+  padding: 2px 4px
+
+  &.published
+    background: #8CD999
+
+  &.draft
+    background: #4d4d4d
+    color: #f2f2f2
+
+div.status
+  float: left
+  margin: 5px 10px 0 0
+
+.to_right
+  float: right
+
+.border_bottom
+  border-bottom: 2px solid #666
+  padding: 0 0 24px 0
+  margin-bottom: 15px
 
 .frame_container
   padding: 10px 20px
@@ -380,7 +426,7 @@ body
     margin: 0 30px 0 0
     position: fixed
     top: 0
-    right: 15px
+    right: 18px
 
   .buttons
     background: rgba(#fbfbfb, 0.8)
@@ -485,3 +531,80 @@ body
 .show_loadings
   font-size: 14px
   margin: 0 15px
+
+.inner_navigation
+  margin: 0 0 15px 0
+
+  .inner_wrapper
+    +clearfix
+
+  .prev, .next, .current_week
+    +clearfix
+    float: left
+
+  .prev, .next
+    font-size: 16px
+    padding: 7px 10px
+
+  .prev
+    margin: 0 15px 0 0
+
+  .next
+    margin: 0 0 0 15px
+
+  .current_week
+    +border-radius(3px)
+    -webkit-text-decoration-style: dashed
+    border: none
+    color: #4498ff
+    font-size: 18px
+    height: 26px
+    padding: 1px
+    text-align: center
+    text-decoration: underline
+    width: 480px
+
+    &:hover
+      background: #fff
+      border: 1px solid #ccc
+      cursor: pointer
+      padding: 0
+      text-decoration: none
+
+    &:active, &:focus
+      background: #fff
+      border: 1px solid #808080
+      color: #555
+      padding: 0
+      text-decoration: none
+
+.week_timetable
+  width: auto
+
+  td
+    padding: 0
+
+  .group_number
+    font-size: 14px
+    font-weight: bold
+
+  .lesson_wrapper
+    +clearfix
+    height: 80px
+    width: 200px
+
+    &.lecture
+      background: #DDECCF
+    &.practice
+      background: #D8F0F0
+    &.laboratory
+      background: #EBE1F4
+    &.n1
+      background: #F8EAEA
+    &.n2
+      background: #FBF3F3
+
+  .actions
+    +clearfix
+    background: #fff
+    height: 45px

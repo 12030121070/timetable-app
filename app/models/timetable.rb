@@ -42,6 +42,10 @@ class Timetable < ActiveRecord::Base
     (organization.available_group_count - groups.count) > 0
   end
 
+  def closest_week
+    weeks.first
+  end
+
   private
 
   def create_weeks
