@@ -274,31 +274,31 @@ body
         color: #141414
 
         &.edit
-          @include background(image_url('actions_buttons.png') no-repeat 0 -30px, linear-gradient(#d5d5d5, #cbcbcb))
+          @include background(image_url('actions_buttons.png') no-repeat 0 -33px, linear-gradient(#d5d5d5, #cbcbcb))
         &.move
-          @include background(image_url('actions_buttons.png') no-repeat -60px -30px, linear-gradient(#d5d5d5, #cbcbcb))
+          @include background(image_url('actions_buttons.png') no-repeat -60px -33px, linear-gradient(#d5d5d5, #cbcbcb))
         &.copy
-          @include background(image_url('actions_buttons.png') no-repeat -30px -30px, linear-gradient(#d5d5d5, #cbcbcb))
+          @include background(image_url('actions_buttons.png') no-repeat -30px -33px, linear-gradient(#d5d5d5, #cbcbcb))
 
       &:active
         +single-box-shadow(#000, 0, 0, 4px, false, true)
 
     &.edit, &.move, &.copy
       text-indent: -999px
-      padding: 7px 14px
+      padding: 5px 14px
     &.edit
-      @include background(image_url('actions_buttons.png') no-repeat 0 0)
+      @include background(image_url('actions_buttons.png') no-repeat 0 -3px)
     &.move
-      @include background(image_url('actions_buttons.png') no-repeat -60px 0)
+      @include background(image_url('actions_buttons.png') no-repeat -60px -3px)
     &.copy
-      @include background(image_url('actions_buttons.png') no-repeat -30px 0)
+      @include background(image_url('actions_buttons.png') no-repeat -30px -3px)
 
   .delete_button
     +clearfix
     @include background(image_url('trash.png') no-repeat center center, linear-gradient(#fb3408, #fb2508))
     +single-box-shadow(#fd8560, 0, -4px, 0, false, true)
     text-indent: -999px
-    padding: 7px 14px
+    padding: 5px 14px
 
     &.faded
       @include background(image_url('faded_trash.png') no-repeat center center)
@@ -581,17 +581,67 @@ div.status
 .week_timetable
   width: auto
 
+  tr:nth-child(odd)
+    background: #fff
+
   td
     padding: 0
+    text-align: center
+
+  .group_label
+    text-align: left
+    text-transform: uppercase
+    padding: 0 10px
 
   .group_number
+    +min-width(180px)
     font-size: 14px
     font-weight: bold
 
+  .week_day
+    display: block
+    font-size: 14px
+    line-height: 16px
+    margin: 10px 0
+    text-transform: uppercase
+    width: 38px
+
+  .date
+    display: block
+    font-size: 10px
+    line-height: 12px
+
+  .today
+    display: block
+    font-size: 9px
+    line-height: 13px
+    text-transform: lowercase
+
+  .day
+    vertical-align: top
+
+  .lesson_time
+    .time
+      line-height: 14px
+      width: 80px
+
+    .hours, .minutes
+      +inline-block
+
+    .hours
+      font-size: 14px
+
+    .minutes
+      font-size: 8px
+      position: relative
+      left: 0px
+      top: -4px
+
   .lesson_wrapper
     +clearfix
-    height: 80px
-    width: 200px
+    height: 60px
+    padding: 10px
+    text-align: left
 
     &.lecture
       background: #DDECCF
@@ -604,7 +654,37 @@ div.status
     &.n2
       background: #FBF3F3
 
-  .actions
+    .discipline
+      display: block
+      font-size: 14px
+      line-height: 16px
+      margin: 0 0 5px 0
+
+    .kind
+      display: block
+      color: #808080
+      font-size: 12px
+      line-height: 18px
+
+      a
+        color: #808080
+
+    .lecturers
+      display: block
+      font-size: 12px
+      line-height: 18px
+
+    a
+      line-height: 18px !important
+
+  .lesson_actions
     +clearfix
-    background: #fff
-    height: 45px
+    height: 26px
+    padding: 10px 10px 10px 10px
+
+    .grey_button
+      float: left
+      margin: 0 5px 0 0
+
+    .delete_button
+      float: right

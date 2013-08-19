@@ -26,11 +26,11 @@
   <div class="inner_navigation">
     <div class="inner_wrapper">
       <% if @week.prev %>
-        <%= link_to "⟨", workplace_timetable_week_path(@timetable, @week.prev), :class => 'prev grey_button' %>
+        <%= link_to "&#x2039;".html_safe, workplace_timetable_week_path(@timetable, @week.prev), :class => 'prev grey_button' %>
       <% end %>
       <div class="current_week"><%= l @week.starts_on.beginning_of_week %> &mdash; <%= l @week.starts_on.end_of_week %></div>
       <% if @week.next %>
-        <%= link_to "⟩", workplace_timetable_week_path(@timetable, @week.next), :class => 'next grey_button'%>
+        <%= link_to "&#x203A;".html_safe, workplace_timetable_week_path(@timetable, @week.next), :class => 'next grey_button'%>
       <% end %>
     </div>
   </div>
@@ -39,18 +39,52 @@
     <thead>
       <tr>
         <% @table[:header].each do |cell| %>
-          <th <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 2 %> class='group_number'>
-            <%= cell.content %>
-          </th>
+          <% if cell.colspan > 1 %>
+            <th <%= "colspan=#{cell.colspan}" %> class="group_label">
+              Группа
+            </th>
+          <% else %>
+            <th class="group_number">
+              <%= cell.content %>
+            </th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
 
     <tbody>
       <% @table[:days].each do |day, rows| %>
-        <% rows.each do |row| %>
+        <% row = rows.first %>
+
+        <tr>
+          <td rowspan="<%= row[0].rowspan %>" class='day'>
+            <span class="week_day"><%= row[0].day.day_name %></span>
+            <span class="date"><%= l row[0].day.date, :format => '%d.%m' %></span>
+            <% if row[0].day.date == Date.today %>
+              <span class="today">Сегодня</span>
+            <% end %>
+          </td>
+
+          <td class="lesson_time">
+            <div class="time">
+              <span class="hours"><%= l row[1].lesson_starts_at, :format => '%k' %></span><span class="minutes"><%= l row[1].lesson_starts_at, :format => '%M' %></span>&mdash;<span class="hours"><%= l row[1].lesson_ends_at, :format => '%k' %></span><span class="minutes"><%= l row[1].lesson_ends_at, :format => '%M' %></span>
+            </div>
+          </td>
+
+          <% row[2..-1].select(&:visibiliity?).each do |cell| %>
+            <%= render :partial => 'cell', :locals => { :cell => cell } %>
+          <% end %>
+        </tr>
+
+        <% rows[1..-1].each do |row| %>
           <tr>
-            <% row.select(&:visibiliity?).each do |cell| %>
+            <td class="lesson_time">
+              <div class='time'>
+                <span class="hours"><%= l row[0].lesson_starts_at, :format => '%k' %></span><span class="minutes"><%= l row[0].lesson_starts_at, :format => '%M' %></span>&mdash;<span class="hours"><%= l row[0].lesson_ends_at, :format => '%k' %></span><span class="minutes"><%= l row[0].lesson_ends_at, :format => '%M' %></span>
+              </div>
+            </td>
+
+            <% row[1..-1].select(&:visibiliity?).each do |cell| %>
               <%= render :partial => 'cell', :locals => { :cell => cell } %>
             <% end %>
           </tr>

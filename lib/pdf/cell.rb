@@ -53,6 +53,14 @@ class Pdf::Cell
     true
   end
 
+  def lesson_starts_at
+    Time.zone.parse lesson_time.starts_at
+  end
+
+  def lesson_ends_at
+    Time.zone.parse lesson_time.ends_at
+  end
+
   private
 
   def max_string_width

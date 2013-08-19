@@ -77,8 +77,8 @@ class Pdf::Week
 
         # TODO: extract into method
         [lesson_times.first].each do |lesson_time|
-          row = [Pdf::Cell.new(:content => day.day_name, :rowspan => lesson_times.length)]
-          row << Pdf::Cell.new(:content => "#{lesson_time.starts_at}\n\n #{lesson_time.ends_at}")
+          row = [Pdf::Cell.new(:day => day, :content => day.day_name, :rowspan => lesson_times.length)]
+          row << Pdf::Cell.new(:lesson_time => lesson_time)
 
           groups.each_with_index do |group, index|
             lessons = group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lesson_time.id}).where(:days => { :id => day.id })
@@ -89,7 +89,7 @@ class Pdf::Week
 
         # TODO: extract into method
         lesson_times[1..-1].each do |lesson_time|
-          row = [Pdf::Cell.new(:content => "#{lesson_time.starts_at}\n\n #{lesson_time.ends_at}")]
+          row = [Pdf::Cell.new(:lesson_time => lesson_time)]
 
           groups.each_with_index do |group, index|
             lessons = group.lessons.joins(:day).where(:lessons => {:lesson_time_id => lesson_time.id}).where(:days => { :id => day.id })
