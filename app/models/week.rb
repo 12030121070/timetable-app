@@ -9,6 +9,8 @@ class Week < ActiveRecord::Base
   has_many :lessons, :through => :days
   has_many :study_days, :through => :lessons, :source => :day, :uniq => true, :order => 'days.date ASC'
 
+  has_one :organization, :through => :timetable
+
   extend Enumerize
   enumerize :parity, in: [:odd, :even], predicates: true
 

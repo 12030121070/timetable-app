@@ -9,9 +9,16 @@ class Day < ActiveRecord::Base
 
   enumerize :status, in: [:workday, :weekend, :holiday], predicates: true
 
-  delegate :timetable, :to => :week
-  delegate :wday,      :to => :date
-  delegate :cwday,      :to => :date
+  delegate :timetable, :organization, :to => :week
+  delegate :cwday, :wday,             :to => :date
+
+  def today?
+    date == Date.today
+  end
+
+  def holiday?
+    organization.holidays.include? date
+  end
 
   # TODO: rename to name
   def day_name
