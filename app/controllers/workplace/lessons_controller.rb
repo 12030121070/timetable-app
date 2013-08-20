@@ -9,15 +9,13 @@ class Workplace::LessonsController < Workplace::WorkplaceController
 
   def create
     create! do |success, failure|
-      success.html { redirect_to [:workplace, @timetable, @week] and return }
-      failure.html { render :new and return }
+      success.html { render :partial => 'lesson', :locals => { :lesson => resource } and return }
     end
   end
 
   def update
     update! do |success, failure|
-      success.html { redirect_to [:workplace, @timetable, @week] and return }
-      failure.html { render :new and return }
+      success.html { render :partial => 'lesson', :locals => { :lesson => resource } and return }
     end
   end
 

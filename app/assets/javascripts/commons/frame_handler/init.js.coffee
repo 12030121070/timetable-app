@@ -23,9 +23,9 @@ frame_handler = (parent, response, options = {}) ->
     'z-index': () ->
       parent_zindex = parseInt(parent.css('z-index'))
       if isNaN(parent_zindex)
-        1
+        3
       else
-        parent_zindex + 1
+        parent_zindex + 2
 
     to_s: () ->
       str = ""
@@ -53,7 +53,7 @@ frame_handler = (parent, response, options = {}) ->
   overlay = () ->
     overlay_block = $('.overlay', parent)
     unless overlay_block.length
-      overlay_block = $('<div class="overlay" style="background: #222; opacity: 0.6; top: 0; bottom: 0; left: 0; right: 0; position: absolute;"/>').appendTo(parent)
+      overlay_block = $('<div class="overlay" style="background: #222; opacity: 0.6; top: 0; bottom: 0; left: 0; right: 0; position: absolute; z-index: 2"/>').appendTo(parent)
     overlay_block
 
   set_callbacks = () ->

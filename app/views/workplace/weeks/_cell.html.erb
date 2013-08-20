@@ -1,9 +1,15 @@
-<td <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %>>
+<% dom_id = 'id_'+SecureRandom.hex %>
+<td id='<%= dom_id %>' <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %>>
   <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
     <div class="lesson <%= "subgroup_#{(Lesson.subgroup.values - ['whole', cell.lessons.last.subgroup]).first}_wrapper" if cell.lessons.any? && !cell.lessons.first.subgroup_whole? %>">
       <%= link_to "+ добавить",
         polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
-        :class => "add yellow_button faded", :title => "добавить" %>
+        :class => "add yellow_button faded in_frame",
+        'data-parent' => '.workplace_wrapper',
+        'data-target' => "##{dom_id}",
+        'data-kind'   => 'update_record',
+        :remote => true,
+        :title => "добавить" %>
     </div>
   <% end %>
 

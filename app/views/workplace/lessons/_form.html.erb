@@ -1,4 +1,4 @@
-<%= simple_nested_form_for [:workplace, @timetable, @week, @day, @lesson] do |f| %>
+<%= simple_nested_form_for [:workplace, @timetable, @week, @day, @lesson], :remote => true, :html => { :class => 'scrollable' }  do |f| %>
   <%= f.input :lesson_time_id, :as => :hidden %>
   <%= f.association :discipline, :include_blank => false %>
   <%= f.input :kind, :include_blank => false %>
@@ -22,8 +22,9 @@
   <% end %>
   <%= f.link_to_add 'добавить лектора', :lecturer_lessons %>
 
-  <div class="buttons">
-    <%= f.submit 'Сохранить' %>
-    <%= link_to "Отмена", workplace_timetable_week_path(@timetable, @week) %>
+  <div class="buttons sticky bottom">
+    <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
+  <div class="bottom_empty"></div>
 <% end %>
