@@ -27,10 +27,14 @@
     <div class="inner_wrapper">
       <% if @week.prev %>
         <%= link_to "&#x2039;".html_safe, workplace_timetable_week_path(@timetable, @week.prev), :class => 'prev grey_button' %>
+      <% else %>
+        <%= link_to "&#x2039;".html_safe, '#', :class => 'inactive faded prev grey_button' %>
       <% end %>
-      <div class="current_week"><%= l @week.starts_on.beginning_of_week %> &mdash; <%= l @week.starts_on.end_of_week %></div>
+      <div class="current_week"><%= l @week.starts_on.beginning_of_week, :format => '%d %B' %> &mdash; <%= l @week.starts_on.end_of_week, :format => '%d %B' %></div>
       <% if @week.next %>
         <%= link_to "&#x203A;".html_safe, workplace_timetable_week_path(@timetable, @week.next), :class => 'next grey_button'%>
+      <% else %>
+        <%= link_to "&#x203A;".html_safe, '#', :class => 'inactive faded next grey_button'%>
       <% end %>
     </div>
   </div>

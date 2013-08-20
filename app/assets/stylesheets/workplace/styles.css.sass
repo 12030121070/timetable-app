@@ -543,8 +543,17 @@ div.status
     float: left
 
   .prev, .next
-    font-size: 16px
-    padding: 7px 10px
+    font-size: 24px
+    padding: 4px 10px 10px 10px
+
+    &.inactive
+      pointer-events: none
+
+      &:hover
+        +single-box-shadow(none)
+        background: none
+        color: #ccc
+        cursor: pointer
 
   .prev
     margin: 0 15px 0 0
