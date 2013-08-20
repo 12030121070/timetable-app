@@ -1,22 +1,22 @@
 <td <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %>>
   <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
-    <%= link_to "+ добавить",
-      polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
-      :class => "add yellow_button faded", :title => "добавить" %>
+    <div class="lesson <%= "subgroup_#{(Lesson.subgroup.values - ['whole', cell.lessons.last.subgroup]).first}_wrapper" if cell.lessons.any? && !cell.lessons.first.subgroup_whole? %>">
+      <%= link_to "+ добавить",
+        polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
+        :class => "add yellow_button faded", :title => "добавить" %>
+    </div>
   <% end %>
 
   <% if cell.lessons.any? %>
     <% cell.lessons.each do |lesson| %>
-      <div class="lesson">
+      <div class="lesson <%= "subgroup_#{lesson.subgroup}_wrapper" unless lesson.subgroup_whole? %>">
         <div class="lesson_wrapper <%= lesson.kind %>">
+          <% unless lesson.subgroup_whole? %>
+            <span class='subgroup_<%= lesson.subgroup %>'>(<span><%= lesson.subgroup_text %></span>)</span>
+          <% end %>
           <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
           <span class='kind'><%= lesson.kind_text %> в <%= lesson.classrooms.map{|c| link_to(c, workplace_classroom_path(c), 'data-parent' => '.workplace_wrapper', :class => 'in_frame', :remote => true)}.join(', ').html_safe %></span>
           <span class="lecturers"><%= lesson.lecturers.map{ |l| link_to(l, workplace_lecturer_path(l), 'data-parent' => '.workplace_wrapper', :class => 'in_frame', :remote => true) }.join(', ').html_safe %></span>
-
-          <% unless lesson.subgroup_whole? %>
-            <p><%= lesson.subgroup %></p>
-          <% end %>
-
         </div>
         <div class="lesson_actions">
           <%= link_to 'редактировать', polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson]), :class => 'grey_button faded edit' %>

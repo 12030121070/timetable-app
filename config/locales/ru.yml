@@ -106,8 +106,8 @@ ru:
         test:       Зачет
       subgroup:
         whole: полная группа
-        a: подгр. а
-        b: подгр. б
+        a: А
+        b: Б
 
     membership:
       role:

@@ -584,8 +584,25 @@ div.status
   tr:nth-child(odd)
     background: #fff
 
+    .subgroup_a_wrapper, .subgroup_b_wrapper
+      background: #fff
+
+    .lesson_actions
+      background: #fff
+
+  tr:nth-child(even)
+    background: #f2f2f2
+
+    .subgroup_a_wrapper, .subgroup_b_wrapper
+      background: #f2f2f2
+
+    .lesson_actions
+      background: #f2f2f2
+
   td
+    +clearfix
     padding: 0
+    position: relative
     text-align: center
 
   .group_label
@@ -622,6 +639,7 @@ div.status
 
   .lesson_time
     .time
+      +min-height(126px)
       line-height: 14px
       width: 80px
 
@@ -636,6 +654,51 @@ div.status
       position: relative
       left: 0px
       top: -4px
+
+  .subgroup_a_wrapper, .subgroup_b_wrapper
+    +single-box-shadow(#333, 0, 0, 100px)
+    height: 126px
+    position: absolute
+    top: 0
+    width: 153px
+    z-index: 1
+
+    &:hover
+      z-index: 2
+
+    .add
+      margin-top: 51px
+
+  .subgroup_a_wrapper
+    left: 0
+
+  .subgroup_b_wrapper
+    right: 0
+
+  .subgroup_a, .subgroup_b
+    color: #4498ff
+    font-size: 14px
+    font-weight: bold
+    line-height: 16px
+
+    span
+      border-bottom: 1px dashed #4498ff
+
+    &.active
+      color: #555
+
+      span
+        border: none
+
+    &:hover
+      cursor: pointer
+
+  .subgroup_a
+    float: left
+    margin: 0 4px 0 0
+
+  .subgroup_b
+    float: right
 
   .lesson_wrapper
     +clearfix
@@ -658,7 +721,7 @@ div.status
       display: block
       font-size: 14px
       line-height: 16px
-      margin: 0 0 5px 0
+      margin: 0 0 3px 0
 
     .kind
       display: block
@@ -684,7 +747,7 @@ div.status
 
     .grey_button
       float: left
-      margin: 0 5px 0 0
+      margin: 0 4px 0 0
 
     .delete_button
       float: right
