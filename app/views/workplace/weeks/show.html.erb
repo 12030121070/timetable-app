@@ -66,4 +66,12 @@
       <% end %>
     </tbody>
   </table>
+
+  <% @table[:days].keys.select{ |d| d.holiday? }.each do |holiday| %>
+    <div class="holiday" id="holiday_<%= holiday.id %>">
+      <span class="date"><%= l holiday.date, :format => '%d %B' %> &mdash; выходной</span>
+      <span class="title thin">Название праздника</span>
+      <%= link_to 'Сделать учебным', '#', :class => 'yellow_button' %>
+    </div>
+  <% end %>
 </div>

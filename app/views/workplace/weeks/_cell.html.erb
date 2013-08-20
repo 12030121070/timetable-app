@@ -1,5 +1,5 @@
 <% dom_id = 'id_'+SecureRandom.hex %>
-<td id='<%= dom_id %>' <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %> <%= "class=#{td_class}" if local_assigns.has_key?(:td_class) %>>
+<td id='<%= dom_id %>' <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %> <%= "class=\"#{td_class}\"".html_safe if local_assigns.has_key?(:td_class) %>>
   <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
     <div class="lesson <%= "subgroup_#{(Lesson.subgroup.values - ['whole', cell.lessons.last.subgroup]).first}_wrapper" if cell.lessons.any? && !cell.lessons.first.subgroup_whole? %>">
       <%= link_to "+ добавить",
