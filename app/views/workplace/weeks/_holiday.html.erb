@@ -1,0 +1,54 @@
+<% row = rows.first %>
+<tr>
+  <td rowspan="<%= row[0].rowspan %>" class='day'>
+    <span class="week_day"><%= row[0].day.day_name %></span>
+    <span class="date"><%= l row[0].day.date, :format => '%d.%m' %></span>
+    <% if row[0].day.today? %>
+      <span class="today">Сегодня</span>
+    <% end %>
+  </td>
+
+  <td class="lesson_time blt">
+    <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[1] } %>
+  </td>
+
+  <% visible_cells = row[2..-1].select(&:visible?) %>
+
+  <% visible_cells[0..-2].each do |cell| %>
+    <%= render :partial => 'cell', :locals => { :cell => cell, :td_class => 'bt' } %>
+  <% end %>
+
+  <%= render :partial => 'cell', :locals => { :cell => visible_cells[-1], :td_class => 'brt' } %>
+</tr>
+
+<% rows[1..-2].each do |row| %>
+  <tr>
+    <td class="lesson_time bl">
+      <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[0] } %>
+    </td>
+
+    <% visible_cells = row[1..-1].select(&:visible?) %>
+
+    <% visible_cells[0..-2].each do |cell| %>
+      <%= render :partial => 'cell', :locals => { :cell => cell } %>
+    <% end %>
+
+    <%= render :partial => 'cell', :locals => { :cell => visible_cells[-1], :td_class => 'br' } %>
+  </tr>
+<% end %>
+
+<tr>
+  <% row = rows[-1] %>
+
+  <td class="lesson_time blb">
+    <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[0] } %>
+  </td>
+
+  <% visible_cells = row[1..-1].select(&:visible?) %>
+
+  <% visible_cells[0..-2].each do |cell| %>
+    <%= render :partial => 'cell', :locals => { :cell => cell, :td_class => 'bb' } %>
+  <% end %>
+
+  <%= render :partial => 'cell', :locals => { :cell => visible_cells[-1], :td_class => 'brb' } %>
+</tr>

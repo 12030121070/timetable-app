@@ -117,7 +117,7 @@ class Pdf::Week
         return if method == :rowspan && array[i].colspan > 1
 
         array[i].send "#{method}=", matches + 1
-        (i + 1..i + matches).each { |k| array[k].visibiliity = false }
+        (i + 1..i + matches).each { |k| array[k].visible = false }
       end
     end
   end
@@ -141,10 +141,10 @@ class Pdf::Week
       set_colspans(page)
       set_rowspans(page)
 
-      table = [ page[:header].select(&:visibiliity?).map(&:to_h) ]
+      table = [ page[:header].select(&:visible?).map(&:to_h) ]
 
       page[:days].each do |day, array|
-        array.each { |elem| table << elem.select(&:visibiliity?).map(&:to_h) }
+        array.each { |elem| table << elem.select(&:visible?).map(&:to_h) }
       end
 
       pdf.table(table) do

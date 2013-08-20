@@ -18,10 +18,6 @@ class Day < ActiveRecord::Base
     date == Date.today
   end
 
-  def holiday?
-    organization.holidays.include? date
-  end
-
   # TODO: rename to name
   def day_name
     I18n.l date, :format => '%a'

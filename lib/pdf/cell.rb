@@ -3,25 +3,25 @@
 class Pdf::Cell
   include ActiveAttr::MassAssignment
 
-  attr_accessor :content, :colspan, :rowspan, :visibiliity,
+  attr_accessor :content, :colspan, :rowspan, :visible,
     :day, :lesson_time, :group, :lessons
 
   def initialize(args = {})
     super(args)
 
-    @content     ||= ''
-    @lessons     ||= []
-    @colspan     ||= 1
-    @rowspan     ||= 1
-    @visibiliity ||= true
+    @content ||= ''
+    @lessons ||= []
+    @colspan ||= 1
+    @rowspan ||= 1
+    @visible ||= true
   end
 
   def to_h
     { :content => content, :colspan => colspan, :rowspan => rowspan }
   end
 
-  def visibiliity?
-    visibiliity
+  def visible?
+    visible
   end
 
   def content
