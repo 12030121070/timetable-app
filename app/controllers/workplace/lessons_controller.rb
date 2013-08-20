@@ -9,13 +9,19 @@ class Workplace::LessonsController < Workplace::WorkplaceController
 
   def create
     create! do |success, failure|
-      success.html { render :partial => 'lesson', :locals => { :lesson => resource } and return }
+      @sibling = @day.lessons.find_by_id(params[:lesson][:sibling_id])
+      success.html {
+        render :partial => 'workplace/weeks/cell', :locals => { :cell => Pdf::Cell.new(:day => resource.day, :lesson_time => resource.lesson_time, :lessons => [resource, @sibling].compact) } and return
+      }
     end
   end
 
   def update
     update! do |success, failure|
-      success.html { render :partial => 'lesson', :locals => { :lesson => resource } and return }
+      @sibling = @day.lessons.find_by_id(params[:lesson][:sibling_id])
+      success.html {
+        render :partial => 'workplace/weeks/cell', :locals => { :cell => Pdf::Cell.new(:day => resource.day, :lesson_time => resource.lesson_time, :lessons => [resource, @sibling].compact) } and return
+      }
     end
   end
 

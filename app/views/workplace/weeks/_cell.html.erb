@@ -3,7 +3,7 @@
   <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
     <div class="lesson <%= "subgroup_#{(Lesson.subgroup.values - ['whole', cell.lessons.last.subgroup]).first}_wrapper" if cell.lessons.any? && !cell.lessons.first.subgroup_whole? %>">
       <%= link_to "+ добавить",
-        polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
+        polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group, 'lesson[sibling_id]' => cell.lessons.first.try(:id)),
         :class => "add yellow_button faded in_frame",
         'data-parent' => '.workplace_wrapper',
         'data-target' => "##{dom_id}",
@@ -25,7 +25,15 @@
           <span class="lecturers"><%= lesson.lecturers.map{ |l| link_to(l, workplace_lecturer_path(l), 'data-parent' => '.workplace_wrapper', :class => 'in_frame', :remote => true) }.join(', ').html_safe %></span>
         </div>
         <div class="lesson_actions">
-          <%= link_to 'редактировать', polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson]), :class => 'grey_button faded edit' %>
+          <%= link_to 'редактировать',
+                      polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson], 'lesson[sibling_id]' => (cell.lessons - [lesson]).first.try(:id)),
+                      :class => 'grey_button faded edit in_frame',
+                      'data-parent' => '.workplace_wrapper',
+                      'data-target' => "##{dom_id}",
+                      'data-kind'   => 'update_record',
+                      :title => 'редактировать',
+                      :remote => true
+                    %>
           <%= link_to 'скопировать', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_copy]), :class => 'grey_button faded copy' %>
           <%= link_to 'переместить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_movement]), :class => 'grey_button faded move' %>
           <%= link_to 'удалить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson]),  :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
