@@ -12,6 +12,8 @@ class Day < ActiveRecord::Base
   delegate :timetable, :organization, :to => :week
   delegate :cwday, :wday,             :to => :date
 
+  normalize_attributes :status
+
   def today?
     date == Date.today
   end
