@@ -28,8 +28,8 @@
             <li>
               <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
               <span class='kind'><%= lesson.kind_text %></span>
-              <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
               <span class='classrooms'><%= lesson.classrooms.join(', ') %></span>
+              <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
             </li>
           <% end %>
         </ul>
@@ -50,8 +50,8 @@
               <li>
                 <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
                 <span class='kind'><%= lesson.kind_text %></span>
-                <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
                 <span class='classrooms'><%= lesson.classrooms.join(', ') %></span>
+                <span class='groups'>гр. <%= lesson.groups.map(&:title).join(', ') %></span>
               </li>
             <% end %>
           </ul>
