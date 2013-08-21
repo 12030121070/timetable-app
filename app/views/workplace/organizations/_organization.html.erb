@@ -1,12 +1,10 @@
 <% if @organization.persisted? %>
   <div class="organization_info data_presentation">
-    <%= link_to workplace_root_path do %>
+    <%= link_to edit_workplace_organization_path(@organization) do %>
       <span>
         <%= image_tag @organization.logotype.thumb('32x32').url if @organization.logotype_uid? %>
       </span>
       <b><%= @organization.title %></b>
     <% end %>
-
-    <%= link_to "редактировать", edit_workplace_organization_path(@organization), :remote => :true, :class => 'in_frame' if link %>
   </div>
 <% end %>

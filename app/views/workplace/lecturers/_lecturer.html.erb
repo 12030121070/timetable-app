@@ -19,4 +19,6 @@
               'data-list' => '#lecturer_list',
               'data-kind' => 'update_record',
               :remote => true %>
+
+  <%= link_to "посмотреть загрузку", workplace_lecturer_path(lecturer), :class => 'show_loadings in_frame', :remote => true, :data => { :parent => '.workplace_wrapper' } %>
 </li>

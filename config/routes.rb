@@ -16,7 +16,7 @@ TimetableApp::Application.routes.draw do
 
     resources :disciplines, :except => :show
 
-    resources :lecturers, :except => [:show] do
+    resources :lecturers do
       post :import, :on => :collection
     end
 

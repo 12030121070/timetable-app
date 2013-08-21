@@ -9,7 +9,7 @@
 
 <%= content_for :content do %>
   <div class="side_wrapper">
-    <%= render :partial => 'workplace/organizations/organization', :locals => { :link => false, :organization => @organization } %>
+    <%= render :partial => 'workplace/organizations/organization', :locals => { :organization => @organization } %>
     <div class="separator"></div>
     <div class="navigation">
       <%= render_navigation %>
