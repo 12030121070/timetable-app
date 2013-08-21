@@ -8,7 +8,7 @@
 <% end %>
 <%= link_to "сброс",  '#', :id => 'uncheck', :class => 'copy_link' %>
 
-<%= form_tag workplace_organization_timetable_week_copy_path(@organization, @timetable, @week), :method => :post, :class => 'copy_week' do %>
+<%= form_tag workplace_timetable_week_copy_path(@timetable, @week), :method => :post, :class => 'copy_week' do %>
   <% @recipients.group_by(&:parity).each do |parity, weeks| %>
     <h4><%= Hash[Week.parity.options.map(&:reverse)][parity] %> недели</h4>
     <% weeks.each do |week| %>

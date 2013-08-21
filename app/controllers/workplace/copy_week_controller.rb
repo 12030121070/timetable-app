@@ -1,4 +1,5 @@
 class Workplace::CopyWeekController < Workplace::WorkplaceController
+  inherit_resources
   before_filter :find_parents
 
   def new
@@ -20,8 +21,11 @@ class Workplace::CopyWeekController < Workplace::WorkplaceController
 
 private
   def find_parents
-    @organization = Organization.find_by_subdomain!(params[:organization_id])
     @timetable    = @organization.timetables.find(params[:timetable_id])
     @week         = @timetable.weeks.find(params[:week_id])
+  end
+
+  def begin_of_association_chain
+    @organization
   end
 end
