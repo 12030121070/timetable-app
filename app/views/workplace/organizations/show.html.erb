@@ -1,8 +1,9 @@
+<h1><%= @organization.title %></h1>
 <p>Электронная почта: <%= mail_to @organization.email %></p>
 <p>Телефон: <%= @organization.phone %></p>
 <p>Сайт организации: <%= link_to @organization.site %></p>
 <p>Ссылка на расписание: <%= link_to "http://#{@organization.subdomain}.fliptable.ru", "http://#{@organization.subdomain}.fliptable.ru" %></p>
 
-<p>
-  <%= link_to 'редактировать', edit_workplace_organization_path(@organization) %>
-</p>
+<p><%= link_to 'редактировать', edit_workplace_organization_path(@organization) %></p>
+<p><%= link_to 'управление праздниками', workplace_organization_edit_holidays_path(@organization) %></p>
+<p><%= link_to 'управление расписанием звонков' %></p>

@@ -1,0 +1,12 @@
+<h1>Праздники организации</h1>
+<%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization) do |f| %>
+  <%= f.fields_for :organization_holidays do |oh_f| %>
+    <%= oh_f.input :date %>
+    <%= oh_f.link_to_remove 'Удалить праздник' %>
+  <% end %>
+  <%= f.link_to_add 'Добавить праздник', :organization_holidays %>
+
+  <div>
+    <%= f.submit 'Сохранить' %>
+  </div>
+<% end %>
