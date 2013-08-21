@@ -12,7 +12,7 @@ TimetableApp::Application.routes.draw do
   end
 
   namespace :workplace do
-    resources :organizations, :only => [:new, :create, :edit, :update]
+    resources :organizations, :only => [:new, :create, :edit, :update, :show]
 
     resources :disciplines, :except => :show
 
