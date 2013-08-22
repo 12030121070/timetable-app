@@ -1,7 +1,8 @@
 class Timetable < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :ends_on, :parity, :starts_on, :title, :first_week_parity
+  attr_accessible :ends_on, :parity, :starts_on, :title, :first_week_parity,
+    :lesson_times_attributes
 
   belongs_to :organization
 
@@ -14,8 +15,10 @@ class Timetable < ActiveRecord::Base
   validates_presence_of :title, :starts_on, :ends_on
   validates_presence_of :first_week_parity, :if => :parity?
 
+  accepts_nested_attributes_for :lesson_times, :allow_destroy => true
+
+  after_initialize :initialize_lesson_times, :if => :new_record?
   after_create :create_weeks
-  after_create :copy_lesson_times_from_organization
 
   delegate :organization_holidays, :to => :organization
 
@@ -68,10 +71,10 @@ class Timetable < ActiveRecord::Base
     end
   end
 
-  def copy_lesson_times_from_organization
+  def initialize_lesson_times
     organization.lesson_times.each do |lesson_time|
       day, number, starts_at, ends_at = lesson_time.day, lesson_time.number, lesson_time.starts_at, lesson_time.ends_at
-      lesson_times.create! :day => day, :number => number, :starts_at => starts_at, :ends_at => ends_at
+      lesson_times.build :day => day, :number => number, :starts_at => starts_at, :ends_at => ends_at
     end
   end
 end
