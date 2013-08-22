@@ -1,8 +1,11 @@
 /*
  * = require jquery
  * = require jquery.ui.datepicker
+ * = require jquery.ui.autocomplete
  * = require jquery_ujs
  * = require jquery_nested_form
+ * = require 'commons/autocomplete'
+ * = require 'commons/radio_buttons'
  * = require 'commons/checked'
  * = require 'commons/flash_messages'
  * = require 'commons/frame_handler'

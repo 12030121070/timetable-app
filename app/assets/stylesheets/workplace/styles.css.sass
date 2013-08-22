@@ -4,6 +4,7 @@
 @import 'commons/flash_messages'
 @import 'commons/fonts'
 @import 'jquery.ui.datepicker'
+@import 'jquery.ui.autocomplete'
 @import 'commons/forms'
 @import 'commons/tables'
 
@@ -590,15 +591,6 @@ div.status
 .week_timetable
   width: auto
 
-  .holiday_blt
-  .holiday_bt
-  .holiday_brt
-  .holiday_br
-  .holiday_brb
-  .holiday_bb
-  .holiday_blb
-  .holiday_bl
-
   tr:nth-child(odd)
     background: #fff
 
@@ -675,7 +667,7 @@ div.status
 
   .subgroup_a_wrapper, .subgroup_b_wrapper
     +single-box-shadow(#333, 0, 0, 100px)
-    height: 126px
+    height: 137px
     position: absolute
     top: 0
     width: 153px
@@ -720,7 +712,7 @@ div.status
 
   .lesson_wrapper
     +clearfix
-    height: 60px
+    height: 70px
     padding: 10px
     text-align: left
 
@@ -784,3 +776,131 @@ div.status
 
   a
     margin: 20px 0 0 50px
+
+form
+  .multicomplete
+    margin: 10px 0
+
+    div.string
+      margin: 0 0 15px 0
+
+    div.fields
+      margin: 0 0 10px 10px
+
+  .radio_buttons
+    margin: 10px 0
+
+    label
+      display: block
+      float: left
+      margin: 0 10px 5px 0
+
+    ul
+      +clearfix
+      clear: both
+
+      li
+        +border-radius(4px)
+        +clearfix
+        font-size: 10px
+        float: left
+        height: 28px
+        padding: 45px 5px 0
+        text-align: center
+        text-transform: uppercase
+        width: 50px
+
+        &:hover
+          color: #f2f2f2
+          cursor: pointer
+
+        &.whole
+          background: image_url('icons-lessons.png') no-repeat 0px 0px
+
+          &.checked
+            background-position: 0px -147px
+
+          &:hover
+            background-position: 0px -73px
+
+        &.a
+          background: image_url('icons-lessons.png') no-repeat -60px 0px
+
+          &.checked
+            background-position: -60px -147px
+
+          &:hover
+            background-position: -60px -73px
+
+        &.b
+          background: image_url('icons-lessons.png') no-repeat -120px 0px
+
+          &.checked
+            background-position: -120px -147px
+
+          &:hover
+            background-position: -120px -73px
+
+
+        &.lecture
+          background: image_url('icons-lessons.png') no-repeat -180px 0px
+
+          &.checked
+            background-position: -180px -147px
+
+          &:hover
+            background-position: -180px -73px
+
+        &.practice
+          background: image_url('icons-lessons.png') no-repeat -240px 0px
+
+          &.checked
+            background-position: -240px -147px
+
+          &:hover
+            background-position: -240px -73px
+
+        &.laboratory
+          background: image_url('icons-lessons.png') no-repeat -300px 0px
+
+          &.checked
+            background-position: -300px -147px
+
+          &:hover
+            background-position: -300px -73px
+
+        &.research
+          background: image_url('icons-lessons.png') no-repeat -360px 0px
+
+          &.checked
+            background-position: -360px -147px
+
+          &:hover
+            background-position: -360px -73px
+
+        &.design
+          background: image_url('icons-lessons.png') no-repeat -420px 0px
+
+          &.checked
+            background-position: -420px -147px
+
+          &:hover
+            background-position: -420px -73px
+
+        &.exam
+          background: image_url('icons-lessons.png') no-repeat -480px 0px
+
+          &.checked
+            background-position: -480px -147px
+
+          &:hover
+            background-position: -480px -73px
+
+        &.test
+          background: image_url('icons-lessons.png') no-repeat -540px 0px
+
+          &.checked
+            background-position: -540px -147px
+
+          &:hover
+            background-position: -540px -73px

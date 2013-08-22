@@ -40,8 +40,9 @@ ru:
 
       lesson:
         discipline: Дисциплина
-        kind: Тип
-        subgroup: Подгруппы
+        kind: Тип занятия
+        subgroup: Подгруппа
+        discipline_title: Дисциплина
 
       lesson_time:
         number: Номер занятия

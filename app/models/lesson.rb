@@ -2,7 +2,7 @@ class Lesson < ActiveRecord::Base
   extend Enumerize
 
   attr_accessible :kind, :lesson_time_id, :discipline_id, :subgroup,
-    :classroom_lessons_attributes, :lecturer_lessons_attributes, :group_lessons_attributes, :sibling_id
+    :classroom_lessons_attributes, :lecturer_lessons_attributes, :group_lessons_attributes, :sibling_id, :discipline_title
 
   attr_accessor :sibling_id
 
@@ -40,6 +40,14 @@ class Lesson < ActiveRecord::Base
     :predicates => { :prefix => true }
 
   delegate :week, :to => :day
+
+  def discipline_title
+    discipline.try(:title)
+  end
+
+  def discipline_title=(title)
+    self.discipline = lesson_time.context.organization.disciplines.find_or_create_by_title(title.squish) if title.present?
+  end
 
   # TODO: need optimization
   def available_subgroup_options

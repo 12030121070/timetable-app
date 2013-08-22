@@ -1,27 +1,76 @@
 <%= simple_nested_form_for [:workplace, @timetable, @week, @day, @lesson], :remote => true, :html => { :class => 'scrollable' }  do |f| %>
   <%= f.input :lesson_time_id, :as => :hidden %>
   <%= f.input :sibling_id, :as => :hidden, :input_html => { :value => params.try(:[], :lesson).try(:[], :sibling_id)} %>
-  <%= f.association :discipline, :include_blank => false %>
-  <%= f.input :kind, :include_blank => false %>
-  <%= f.input :subgroup, :collection => @lesson.available_subgroup_options, :include_blank => false %>
+  <%= f.input :kind, :as => :hidden %>
+  <%= f.input :subgroup, :as => :hidden %>
 
-  <%= f.fields_for :group_lessons do |gl_f| %>
-    <%= gl_f.input :group_id, :as => :select, :collection => @organization.groups, :label => 'Группа' %>
-    <%= gl_f.link_to_remove 'убрать' %>
+  <% if f.object.errors.messages[:discipline] %>
+    <span class='error' style='position: absolute; left: 111px; top: 53px;'><%= f.object.errors.messages[:discipline].join(', ') %></span>
   <% end %>
-  <%= f.link_to_add 'добавить группу', :group_lessons %>
+  <%= f.input :discipline_title, :include_blank => false, :input_html => { :placeholder => 'Название дисциплины', :class => 'inline_edit wide need_autocomplete', :data => { :autocomplete_source => @organization.disciplines.map(&:title).sort } } %>
 
-  <%= f.fields_for :classroom_lessons do |crl_f| %>
-    <%= crl_f.input :classroom_id, :as => :select, :collection => @organization.classrooms, :label => 'Аудитория' %>
-    <%= crl_f.link_to_remove 'убрать' %>
-  <% end %>
-  <%= f.link_to_add 'добавить аудиторию', :classroom_lessons %>
+  <div class="radio_buttons" data-target='#lesson_kind'>
+    <label>Тип занятия</label>
+    <% if f.object.errors.messages[:kind].present? %>
+      <span class="error"><%= f.object.errors.messages[:kind].join(', ') %></span>
+    <% end %>
+    <ul>
+      <% Hash[Lesson.kind.values.map{|v| [v.to_s, v.text]}].each do |value, title| %>
+        <li class='<%= value %> <%= 'checked' if f.object.kind == value %>' data-value='<%= value %>'><%= title %></li>
+      <% end %>
+    </ul>
+  </div>
 
-  <%= f.fields_for :lecturer_lessons do |ll_f| %>
-    <%= ll_f.input :lecturer_id, :collection => @organization.lecturers, :label_method => :full_name, :label => 'Лектор' %>
-    <%= ll_f.link_to_remove 'убрать' %>
-  <% end %>
-  <%= f.link_to_add 'добавить лектора', :lecturer_lessons %>
+  <div class="radio_buttons" data-target='#lesson_subgroup'>
+    <label>Подгруппа</label>
+    <% if f.object.errors.messages[:subgroup].present? %>
+      <span class="error"><%= f.object.errors.messages[:subgroup].join(', ') %></span>
+    <% end %>
+    <ul>
+      <% Hash[Lesson.subgroup.values.map{|v| [v.to_s, v.text]}].each do |value, title| %>
+        <li class='<%= value %> <%= 'checked' if f.object.subgroup == value %>' data-value='<%= value %>'><%= title %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="multicomplete">
+    <div class="string">
+      <label>Группа</label>
+      <input type="text" placeholder='Номер группы' class='inline_edit need_autocomplete with_id', data-autocomplete-source='<%= @timetable.groups.sort.map{ |g| { 'value' => g.id, 'label' => g.title }}.to_json %>' />
+    </div>
+    <%= f.fields_for :group_lessons do |gl_f| %>
+      <span class="value"><%= gl_f.object.group.title if gl_f.object.group %></span>
+      <%= gl_f.input :group_id, :as => :hidden %>
+      <%= gl_f.link_to_remove 'убрать', :class => 'delete_button faded' %>
+    <% end %>
+    <%= f.link_to_add 'добавить группу', :group_lessons, :class => 'hidden' %>
+  </div>
+
+  <div class="multicomplete">
+    <div class="string">
+      <label>Аудитория</label>
+      <input type="text" placeholder='Номер аудитории' class='inline_edit need_autocomplete with_id', data-autocomplete-source='<%= @organization.classrooms.sort.map{ |c| { 'value' => c.id, 'label' => c.to_s, 'link' => link_to(c.to_s, workplace_classroom_path(c), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container' ) }}.to_json %>' />
+    </div>
+    <%= f.fields_for :classroom_lessons do |crl_f| %>
+      <span class="value"><%= link_to(crl_f.object.classroom.to_s, workplace_classroom_path(crl_f.object.classroom), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container') if crl_f.object.classroom %></span>
+      <%= crl_f.input :classroom_id, :as => :hidden %>
+      <%= crl_f.link_to_remove 'убрать', :class => 'delete_button faded' %>
+    <% end %>
+    <%= f.link_to_add 'добавить аудиторию', :classroom_lessons, :class => 'hidden' %>
+  </div>
+
+  <div class="multicomplete">
+    <div class="string">
+      <label>Лектор</label>
+      <input type="text" placeholder='ФИО лектора' class='inline_edit need_autocomplete normal with_id', data-autocomplete-source='<%= @organization.lecturers.sort.map{ |c| { 'value' => c.id, 'label' => c.full_name, 'link' => link_to(c.full_name, workplace_lecturer_path(c), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container' ) }}.to_json %>' />
+    </div>
+    <%= f.fields_for :lecturer_lessons do |ll_f| %>
+      <span class="value"><%= link_to(ll_f.object.lecturer.full_name, workplace_lecturer_path(ll_f.object.lecturer), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container') if ll_f.object.lecturer %></span>
+      <%= ll_f.input :lecturer_id, :as => :hidden %>
+      <%= ll_f.link_to_remove 'убрать', :class => 'delete_button faded' %>
+    <% end %>
+    <%= f.link_to_add 'добавить лектора', :lecturer_lessons, :class => 'hidden' %>
+  </div>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>

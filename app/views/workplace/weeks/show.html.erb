@@ -1,16 +1,15 @@
 <div style='overflow: hidden'>
   <div class="actions to_right">
     <% if @timetable.draft? %>
-      <%= link_to "Опубликовать", to_published_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button faded' %>
+      <%= link_to "Опубликовать", to_published_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button', :remote => true %>
     <% else %>
-      <%= link_to "Вернуть в черновики", to_draft_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button faded' %>
+      <%= link_to "Вернуть в черновики", to_draft_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button', :remote => true %>
     <% end %>
     <%= link_to 'редактировать',
       edit_workplace_timetable_path(@timetable),
       :class => 'yellow_button faded in_frame',
       'data-parent' => '.workplace_wrapper',
       'data-target' => "#timetable_#{ @timetable.id }",
-      'data-list' => '#timetable_list',
       'data-kind' => 'update_record',
       :remote => true %>
     <%= link_to 'удалить', workplace_timetable_path(@timetable), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
