@@ -1,16 +1,10 @@
 <%= simple_nested_form_for resource, :url => [:workplace, @organization], :html => { :multipart => true, :class => 'scrollable' } do |f| %>
-  <%= f.input :title, :input_html => { :class => 'inline_edit wide large' } %>
-  <%= f.input :email, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :phone, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :site, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :subdomain, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :title, :input_html => { :class => 'inline_edit wide large', :placeholder => 'Название организации' } %>
+  <%= f.input :email, :input_html => { :class => 'inline_edit', :placeholder => 'Электронная почта' } %>
+  <%= f.input :phone, :input_html => { :class => 'inline_edit', :placeholder => 'Телефон' } %>
+  <%= f.input :site, :input_html => { :class => 'inline_edit', :placeholder => 'Сайт' } %>
+  <%= f.input :subdomain, :input_html => { :class => 'inline_edit', :placeholder => 'Поддомен' } %>
   <%= f.input :logotype, :as => :file, :hint => 'Необходима картинка размером 128x128' %>
-  Праздники организации:
-  <%= f.fields_for :organization_holidays do |ohf| %>
-    <%= ohf.input :date %>
-    <%= ohf.link_to_remove 'убрать' %>
-  <% end %>
-  <%= f.link_to_add 'добавить', :organization_holidays %>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>

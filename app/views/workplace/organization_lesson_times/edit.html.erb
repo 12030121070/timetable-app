@@ -1,4 +1,4 @@
-<h1>Расписание звонков организации</h1>
+<h2 class='thin'>Расписание звонков организации</h2>
 <%= simple_nested_form_for @organization, :url => workplace_organization_update_lesson_times_path(@organization) do |f| %>
   <%= f.fields_for :lesson_times do |lt_f| %>
     <%= lt_f.input :starts_at %>
@@ -7,7 +7,9 @@
   <% end %>
   <%= f.link_to_add 'Добавить урок', :lesson_times %>
 
-  <div>
-    <%= f.submit 'Сохранить' %>
+  <div class="buttons sticky bottom">
+    <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
+  <div class="bottom_empty"></div>
 <% end %>
