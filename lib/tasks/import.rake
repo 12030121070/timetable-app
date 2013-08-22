@@ -35,7 +35,7 @@ def create_timetables
       timetable = organization.timetables.create(:title => "#{faculty} #{course} курс", :parity => true, :first_week_parity => 1, :starts_on => period.first, :ends_on => period.last)
       timetable.publish
 
-      remote_groups.select{|group| group['course'] == course && group['faculty_name'] == faculty}.each do |group|
+      remote_groups.select{|group| group['course'] == course && group['faculty_name'] == faculty}[0..4].each do |group|
         timetable.groups.create! :title => group['number']
       end
 

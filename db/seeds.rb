@@ -50,12 +50,12 @@ end
   organization.lecturers.find_or_initialize_by_surname_and_name_and_patronymic(surname, name, patronymic).save!
 end
 
-timetable = organization.timetables.find_or_initialize_by_title('Расписание на осенний семестр') do |t|
-  t.starts_on = Date.new(Date.today.year, 9, 1)
-  t.ends_on = Date.new(Date.today.year, 12, 31)
-  t.parity = true
-  t.first_week_parity = 1
-  t.save!
+unless timetable = organization.timetables.find_by_title('Расписание на осенний семестр')
+  timetable = organization.timetables.build(:title => 'Расписание на осенний семестр') do |t|
+    t.starts_on = Date.new(Date.today.year, 9, 1)
+    t.ends_on = Date.new(Date.today.year, 12, 31)
+    t.save!
+  end
 end
 
 titles = ['Математический анализ', 'Сопротивление материалов', 'Начертательная геометрия', 'Занимательная микрохирургия глаза в домашних условиях (пока папа спит)']

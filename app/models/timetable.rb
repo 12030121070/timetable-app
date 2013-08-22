@@ -17,7 +17,7 @@ class Timetable < ActiveRecord::Base
 
   accepts_nested_attributes_for :lesson_times, :allow_destroy => true
 
-  after_initialize :initialize_lesson_times, :if => :new_record?
+  after_initialize :initialize_lesson_times, :if => ->(timetable) { timetable.new_record? && timetable.lesson_times.empty? }
   after_create :create_weeks
 
   delegate :organization_holidays, :to => :organization
