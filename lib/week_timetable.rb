@@ -12,7 +12,7 @@ module WeekTimetable
         hash[date] = {}
 
         days.each do |day|
-          lesson_times = organization.all_lesson_times.where('lesson_times.day = ?', day.cwday)
+          lesson_times = organization.timetable_lesson_times.where('lesson_times.day = ?', day.cwday)
 
           next if lesson_times.empty?
 

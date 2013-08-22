@@ -16,11 +16,12 @@ class Organization < ActiveRecord::Base
   has_many :subscriptions,         :dependent => :destroy, :order => 'subscriptions.created_at ASC'
   has_many :timetables,            :dependent => :destroy, :order => 'timetables.starts_on ASC, timetables.created_at ASC'
 
-  has_many :classrooms,      :through => :buildings,  :order => 'classrooms.number ASC'
-  has_many :days,            :through => :weeks,      :order => 'days.date ASC'
-  has_many :groups,          :through => :timetables, :order => 'groups.title ASC'
-  has_many :published_weeks, :through => :timetables, :order => 'weeks.number ASC, weeks.starts_on ASC', :conditions => "timetables.status = 'published'", :source => :weeks
-  has_many :weeks,           :through => :timetables, :order => 'weeks.number ASC, weeks.starts_on ASC'
+  has_many :classrooms,             :through => :buildings,  :order => 'classrooms.number ASC'
+  has_many :days,                   :through => :weeks,      :order => 'days.date ASC'
+  has_many :groups,                 :through => :timetables, :order => 'groups.title ASC'
+  has_many :published_weeks,        :through => :timetables, :order => 'weeks.number ASC, weeks.starts_on ASC', :conditions => "timetables.status = 'published'", :source => :weeks
+  has_many :timetable_lesson_times, :through => :timetables, :order => 'timetables.starts_on ASC, timetables.created_at ASC', :source => :lesson_times
+  has_many :weeks,                  :through => :timetables, :order => 'weeks.number ASC, weeks.starts_on ASC'
 
   accepts_nested_attributes_for :lesson_times, :allow_destroy => true
   accepts_nested_attributes_for :organization_holidays, :allow_destroy => true
