@@ -63,6 +63,12 @@ class Group < ActiveRecord::Base
   private
 
   def check_can_be_created
-    organization.available_group_count > 0
+    if organization.available_group_count.zero?
+      errors[:base] = 'organization group limit'
+
+      return false
+    end
+
+    true
   end
 end

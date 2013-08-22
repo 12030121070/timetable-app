@@ -25,9 +25,9 @@ class Pdf::Cell
   end
 
   def content
-    return lessons_content if lessons.any?
+    @content = lessons_content if lessons.any?
 
-    @content
+    @content.gsub('&nbsp;', ' ')
   end
 
   def ==(other_cell)

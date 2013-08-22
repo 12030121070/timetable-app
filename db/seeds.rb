@@ -15,6 +15,16 @@ organization = user.organizations.find_or_initialize_by_title('Томский Г
   o.set_owner(user)
 end
 
+(1..6).each do |day|
+  organization.lesson_times.create :day => day, :number => 1, :starts_at =>  '8:50', :ends_at => '10:25'
+  organization.lesson_times.create :day => day, :number => 2, :starts_at => '10:40', :ends_at => '12:15'
+  organization.lesson_times.create :day => day, :number => 3, :starts_at => '13:15', :ends_at => '14:50'
+  organization.lesson_times.create :day => day, :number => 4, :starts_at => '15:00', :ends_at => '16:35'
+  organization.lesson_times.create :day => day, :number => 5, :starts_at => '16:45', :ends_at => '18:20'
+  organization.lesson_times.create :day => day, :number => 6, :starts_at => '18:30', :ends_at => '20:05'
+  organization.lesson_times.create :day => day, :number => 7, :starts_at => '20:15', :ends_at => '21:50'
+end
+
 gk = organization.buildings.find_or_initialize_by_title('Главный корпус') do |b|
   b.address = '634050, г. Томск, пр. Ленина, 40'
   b.save!

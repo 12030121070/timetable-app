@@ -3,22 +3,40 @@ require 'open-uri'
 
 desc "Import lessons form tusur.timetable"
 task :import => :environment do
+  create_tariff
+  create_subscription
   create_timetables
+end
+
+def create_tariff
+  Tariff.destroy_all
+
+  Tariff.create! :min_month => 1, :max_month => 12,
+    :min_group => 5, :max_group => 200,
+    :cost => 100,
+    :discount_small => 5, :discount_medium => 10, :discount_large => 15,
+    :discount_half_year => 5, :discount_year => 10
+end
+
+def create_subscription
+  organization.subscriptions.create! :starts_on => Date.today, :ends_on => Date.today + 6.month, :groups_count => 100, :active => true
 end
 
 def create_timetables
   bar = ProgressBar.new(faculties.count*courses.count*(period.first..period.last).count)
+
   organization.timetables.destroy_all
   organization.lecturers.destroy_all
   organization.buildings.destroy_all
   organization.disciplines.destroy_all
+
   faculties.each do |faculty|
     courses.each do |course|
       timetable = organization.timetables.create(:title => "#{faculty} #{course} курс", :parity => true, :first_week_parity => 1, :starts_on => period.first, :ends_on => period.last)
       timetable.publish
 
       remote_groups.select{|group| group['course'] == course && group['faculty_name'] == faculty}.each do |group|
-        timetable.groups.create :title => group['number']
+        timetable.groups.create! :title => group['number']
       end
 
       timetable.weeks.each do |week|
@@ -43,8 +61,12 @@ def create_timetables
 
               remote_building, remote_classroom = remote_lesson['classroom'].split(' ')
               building = organization.buildings.find_or_create_by_address_and_title(:address => 'г.Томск', :title => remote_building)
-              classroom = building.classrooms.find_or_create_by_number(remote_classroom)
-              local_lesson.classrooms << classroom unless local_lesson.classrooms.include?(classroom)
+              begin
+                classroom = building.classrooms.find_or_create_by_number(remote_classroom)
+                local_lesson.classrooms << classroom unless local_lesson.classrooms.include?(classroom)
+              rescue Exception => e
+                puts e.message
+              end
             end
           end
         end
@@ -54,7 +76,7 @@ def create_timetables
 end
 
 def remote_groups
-    @remote_groups ||= JSON.parse(open('http://timetable.tusur.ru/api/v1/groups/internal.json').read)['groups'].select{|item| faculties.include?(item['faculty_name']) && courses.include?(item['course'])}
+  @remote_groups ||= JSON.parse(open('http://timetable.tusur.ru/api/v1/groups/internal.json').read)['groups'].select{|item| faculties.include?(item['faculty_name']) && courses.include?(item['course'])}
 end
 
 def faculties
@@ -66,7 +88,7 @@ def courses
 end
 
 def period
-  [Time.zone.parse('2013-02-11').beginning_of_week.to_date, Time.zone.parse('2013-02-22').end_of_week.to_date]
+  [Time.zone.parse('2013-09-02').beginning_of_week.to_date, Time.zone.parse('2013-12-31').end_of_week.to_date]
 end
 
 def organization

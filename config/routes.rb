@@ -15,6 +15,9 @@ TimetableApp::Application.routes.draw do
     resources :organizations, :except => :index do
       get :edit_holidays, :to => 'organization_holidays#edit'
       put :update_holidays, :to => 'organization_holidays#update'
+
+      get :edit_lesson_times, :to => 'organization_lesson_times#edit'
+      put :update_lesson_times, :to => 'organization_lesson_times#update'
     end
 
     resources :disciplines, :except => :show
