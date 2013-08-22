@@ -1,0 +1,27 @@
+<table class='week_timetable'>
+  <thead>
+    <tr>
+      <% @table[:header].each do |cell| %>
+        <% if cell.colspan > 1 %>
+          <th <%= "colspan=#{cell.colspan}" %> class="group_label">
+            Группа
+          </th>
+        <% else %>
+          <th class="group_number">
+            <%= cell.content %>
+          </th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @table[:days].each do |day, rows| %>
+      <% if day.holiday? %>
+        <%= render :partial => 'workplace/weeks/holiday', :locals => { :day => day, :rows => rows } %>
+      <% else %>
+        <%= render :partial => 'workplace/weeks/day', :locals => { :day => day, :rows => rows } %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

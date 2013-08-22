@@ -12,6 +12,6 @@
           link.click()
           input.val('')
           new_fileds = link.prev('.fields')
-          $('.value', new_fileds).html(ui.item.link)
+          $('.value', new_fileds).html(ui.item.link || ui.item.label)
           $('div.hidden input.hidden', new_fileds).val(ui.item.value)
           return false

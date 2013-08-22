@@ -1,12 +1,11 @@
-<% dom_id = 'id_'+SecureRandom.hex %>
-<td id='<%= dom_id %>' <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %> <%= "class=\"#{td_class}\"".html_safe if local_assigns.has_key?(:td_class) %>>
+<td <%= "colspan=#{cell.colspan}" if cell.colspan > 1 %> <%= "rowspan=#{cell.rowspan}" if cell.rowspan > 1 %> <%= "class=\"#{td_class}\"".html_safe if local_assigns.has_key?(:td_class) %>>
   <% if cell.can_have_more_lesson? && cell.lesson_time.present? %>
     <div class="lesson <%= "subgroup_#{(Lesson.subgroup.values - ['whole', cell.lessons.last.subgroup]).first}_wrapper" if cell.lessons.any? && !cell.lessons.first.subgroup_whole? %>">
       <%= link_to "+ добавить",
-        polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group, 'lesson[sibling_id]' => cell.lessons.first.try(:id)),
+        polymorphic_path([:new, :workplace, @timetable, @week, cell.day, :lesson], 'lesson[lesson_time_id]' => cell.lesson_time.id, 'lesson[group_lessons_attributes][0][group_id]' => cell.group),
         :class => "add yellow_button faded in_frame",
         'data-parent' => '.workplace_wrapper',
-        'data-target' => "##{dom_id}",
+        'data-target' => ".week_timetable",
         'data-kind'   => 'update_record',
         :remote => true,
         :title => "добавить" %>
@@ -26,10 +25,10 @@
         </div>
         <div class="lesson_actions">
           <%= link_to 'редактировать',
-            polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson], 'lesson[sibling_id]' => (cell.lessons - [lesson]).first.try(:id)),
+            polymorphic_path([:edit, :workplace, @timetable, @week, cell.day, lesson]),
             :class => 'grey_button faded edit in_frame',
             'data-parent' => '.workplace_wrapper',
-            'data-target' => "##{dom_id}",
+            'data-target' => ".week_timetable",
             'data-kind'   => 'update_record',
             :title => 'редактировать',
             :remote => true

@@ -1,6 +1,5 @@
 <%= simple_nested_form_for [:workplace, @timetable, @week, @day, @lesson], :remote => true, :html => { :class => 'scrollable' }  do |f| %>
   <%= f.input :lesson_time_id, :as => :hidden %>
-  <%= f.input :sibling_id, :as => :hidden, :input_html => { :value => params.try(:[], :lesson).try(:[], :sibling_id)} %>
   <%= f.input :kind, :as => :hidden %>
   <%= f.input :subgroup, :as => :hidden %>
 

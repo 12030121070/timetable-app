@@ -9,22 +9,22 @@
   </td>
 
   <td class="lesson_time">
-    <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[1] } %>
+    <%= render :partial => 'workplace/weeks/lesson_time_cell', :locals => { :cell => row[1] } %>
   </td>
 
   <% row[2..-1].select(&:visible?).each do |cell| %>
-    <%= render :partial => 'cell', :locals => { :cell => cell } %>
+    <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => cell } %>
   <% end %>
 </tr>
 
 <% rows[1..-1].each do |row| %>
   <tr>
     <td class="lesson_time">
-      <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[0] } %>
+      <%= render :partial => 'workplace/weeks/lesson_time_cell', :locals => { :cell => row[0] } %>
     </td>
 
     <% row[1..-1].select(&:visible?).each do |cell| %>
-      <%= render :partial => 'cell', :locals => { :cell => cell } %>
+      <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => cell } %>
     <% end %>
   </tr>
 <% end %>

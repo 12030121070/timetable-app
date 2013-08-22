@@ -9,18 +9,22 @@ class Workplace::LessonsController < Workplace::WorkplaceController
 
   def create
     create! do |success, failure|
-      @sibling = @day.lessons.find_by_id(params[:lesson][:sibling_id])
+      pdf_week = Pdf::Week.new(@week)
+      @table = pdf_week.table_data
+      pdf_week.set_colspans(@table)
       success.html {
-        render :partial => 'workplace/weeks/cell', :locals => { :cell => Pdf::Cell.new(:day => resource.day, :lesson_time => resource.lesson_time, :lessons => [resource, @sibling].compact) } and return
+        render :partial => 'workplace/weeks/week_timetable' and return
       }
     end
   end
 
   def update
     update! do |success, failure|
-      @sibling = @day.lessons.find_by_id(params[:lesson][:sibling_id])
+      pdf_week = Pdf::Week.new(@week)
+      @table = pdf_week.table_data
+      pdf_week.set_colspans(@table)
       success.html {
-        render :partial => 'workplace/weeks/cell', :locals => { :cell => Pdf::Cell.new(:day => resource.day, :lesson_time => resource.lesson_time, :lessons => [resource, @sibling].compact) } and return
+        render :partial => 'workplace/weeks/week_timetable' and return
       }
     end
   end

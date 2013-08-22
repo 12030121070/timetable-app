@@ -10,34 +10,34 @@
   </td>
 
   <td class="lesson_time holiday_blt holiday_<%= day.id %>">
-    <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[1] } %>
+    <%= render :partial => 'workplace/weeks/lesson_time_cell', :locals => { :cell => row[1] } %>
   </td>
 
   <% visible_cells = row[2..-1].select(&:visible?) %>
 
   <% if visible_cells.any? %>
     <% visible_cells[0..-2].each do |cell| %>
-      <%= render :partial => 'cell', :locals => { :cell => cell, :td_class => 'holiday_bt' } %>
+      <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => cell, :td_class => 'holiday_bt' } %>
     <% end %>
 
-    <%= render :partial => 'cell', :locals => { :cell => visible_cells[-1], :td_class => 'holiday_brt' } %>
+    <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => visible_cells[-1], :td_class => 'holiday_brt' } %>
   <% end %>
 </tr>
 
 <% rows[1..-2].each do |row| %>
   <tr>
     <td class="lesson_time holiday_bl">
-      <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[0] } %>
+      <%= render :partial => 'workplace/weeks/lesson_time_cell', :locals => { :cell => row[0] } %>
     </td>
 
     <% visible_cells = row[1..-1].select(&:visible?) %>
 
     <% if visible_cells.any? %>
       <% visible_cells[0..-2].each do |cell| %>
-        <%= render :partial => 'cell', :locals => { :cell => cell } %>
+        <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => cell } %>
       <% end %>
 
-      <%= render :partial => 'cell', :locals => { :cell => visible_cells[-1], :td_class => 'holiday_br' } %>
+      <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => visible_cells[-1], :td_class => 'holiday_br' } %>
     <% end %>
   </tr>
 <% end %>
@@ -46,16 +46,16 @@
   <% row = rows[-1] %>
 
   <td class="lesson_time holiday_blb">
-    <%= render :partial => 'lesson_time_cell', :locals => { :cell => row[0] } %>
+    <%= render :partial => 'workplace/weeks/lesson_time_cell', :locals => { :cell => row[0] } %>
   </td>
 
   <% visible_cells = row[1..-1].select(&:visible?) %>
 
   <% if visible_cells.any? %>
     <% visible_cells[0..-2].each do |cell| %>
-      <%= render :partial => 'cell', :locals => { :cell => cell, :td_class => 'holiday_bb' } %>
+      <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => cell, :td_class => 'holiday_bb' } %>
     <% end %>
 
-    <%= render :partial => 'cell', :locals => { :cell => visible_cells[-1], :td_class => "holiday_brb holiday_#{day.id}" } %>
+    <%= render :partial => 'workplace/weeks/cell', :locals => { :cell => visible_cells[-1], :td_class => "holiday_brb holiday_#{day.id}" } %>
   <% end %>
 </tr>
