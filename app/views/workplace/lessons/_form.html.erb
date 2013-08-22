@@ -74,6 +74,7 @@
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to 'Удалить', workplace_timetable_week_day_lesson_path(@timetable, @week, @day, f.object), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' if f.object.persisted? %>
     <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
   </div>
   <div class="bottom_empty"></div>
