@@ -1,11 +1,13 @@
+# encoding: utf-8
+
 class LessonTime < ActiveRecord::Base
-  attr_accessible :day, :ends_at, :number, :starts_at
+  attr_accessible :day, :ends_at, :starts_at
 
   belongs_to :context, :polymorphic => true
 
   has_many :lessons, :dependent => :destroy
 
-  validates_presence_of :day, :number, :starts_at, :ends_at
+  validates_presence_of :day, :starts_at, :ends_at
   validates_uniqueness_of :number, :scope => [:day, :context_type, :context_id]
   validate :format_of_time
 
@@ -17,8 +19,8 @@ class LessonTime < ActiveRecord::Base
   end
 
   def format_of_time
-    errors.add(:starts_at, 'Wrong format') unless self.starts_at.match(/\A\d{,2}:\d{2}\Z/)
-    errors.add(:ends_at, 'Wrong format') unless self.ends_at.match(/\A\d{,2}:\d{2}\Z/)
+    errors.add(:starts_at, 'Неверный формат') unless self.starts_at.match(/\A\d{,2}:\d{2}\Z/)
+    errors.add(:ends_at, 'Неверный формат') unless self.ends_at.match(/\A\d{,2}:\d{2}\Z/)
   end
 
   def to_s

@@ -36,6 +36,7 @@ class Organization < ActiveRecord::Base
     value.present? && value.is_a?(String) ? value.downcase : value
   end
 
+  before_validation :set_lesson_times_number
   validate :format_of_domain
 
   def set_owner(user)
@@ -66,6 +67,14 @@ class Organization < ActiveRecord::Base
 
 private
   def format_of_domain
-    errors.add(:subdomain, 'Wrong subdomain') unless self.subdomain.match(/\A[a-z0-9]+[a-z0-9-]+[a-z0-9]+\Z/)
+    errors.add(:subdomain, 'Неверный домен') unless self.subdomain.match(/\A[a-z0-9]+[a-z0-9-]+[a-z0-9]+\Z/)
+  end
+
+  def set_lesson_times_number
+    lesson_times.group_by(&:day).each do |day, lts|
+      lts.select{|lt| lt.starts_at.present?}.sort_by{|lt| Time.zone.parse(lt.starts_at)}.each_with_index do |lt, index|
+        lt.number = index+1
+      end
+    end
   end
 end

@@ -904,3 +904,68 @@ form
 
           &:hover
             background-position: -540px -73px
+
+.days_wrapper
+  +clearfix
+
+  .day_nav
+    float: left
+
+    li
+      display: block
+      height: 18px
+      padding: 8px 8px
+
+      a
+        border-bottom: 1px dashed #4498FF
+        display: block
+        font-weight: 600
+        line-height: 17px
+        height: 17px
+        text-decoration: none
+        text-transform: uppercase
+
+        &:hover
+          border: none
+          padding: 0 0 1px 0
+
+      &.error_tab
+        background: #eeb3b7 !important
+
+      &.active
+        +border-top-left-radius(4px)
+        +border-bottom-left-radius(4px)
+        background: #fff
+        a
+          border: none
+          color: #555
+          padding: 0 0 1px 0
+
+
+  .lesson_times_wrapper
+    background: #fff
+    padding: 8px 15px
+    width: 235px
+
+    .lesson_time_block
+      +min-height(238px)
+      display: none
+
+      &.active
+        display: block
+
+      .inline_edit
+        background: #fff
+
+      .fields
+        padding: 0 0 10px 0
+        position: relative
+
+      .error
+        font-size: 9px
+        margin-left: -76px
+        position: absolute
+        top: 25px
+
+        &:before
+          content: '\2191'

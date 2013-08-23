@@ -7,6 +7,8 @@
  * = require 'commons/autocomplete'
  * = require 'commons/radio_buttons'
  * = require 'commons/timepicker'
+ * = require 'commons/tabs'
+ * = require 'commons/lesson_times'
  * = require 'commons/checked'
  * = require 'commons/flash_messages'
  * = require 'commons/frame_handler'

@@ -1,4 +1,5 @@
 ru:
+  day_names: ['', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
   activerecord:
     state_machines:
       timetable:
