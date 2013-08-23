@@ -1,5 +1,5 @@
 <h2 class='thin'>Праздники организации</h2>
-<%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization) do |f| %>
+<%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization), :remote => true do |f| %>
   <%= f.fields_for :organization_holidays do |oh_f| %>
     <%= oh_f.input :date %>
     <%= oh_f.link_to_remove 'Удалить праздник' %>

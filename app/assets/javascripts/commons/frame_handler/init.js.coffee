@@ -63,6 +63,8 @@ frame_handler = (parent, response, options = {}) ->
     init_checked()
     init_autcomplete()
     init_radio_buttons()
+    $(document).on 'nested:fieldAdded', (event) ->
+      init_timepicker()
 
     $(window).on 'beforeunload', ->
       return 'Не сохраненные данные будет потеряны!' if parent.hasClass('not_active')
@@ -90,6 +92,8 @@ frame_handler = (parent, response, options = {}) ->
           init_checked()
           init_autcomplete()
           init_radio_buttons()
+          $(document).on 'nested:fieldAdded', (event) ->
+            init_timepicker()
         else
           _.container_hide()
           if options.kind == 'new_record'

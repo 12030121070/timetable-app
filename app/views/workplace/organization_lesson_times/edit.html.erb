@@ -1,9 +1,9 @@
 <h2 class='thin'>Расписание звонков организации</h2>
-<%= simple_nested_form_for @organization, :url => workplace_organization_update_lesson_times_path(@organization) do |f| %>
+<%= simple_nested_form_for @organization, :url => workplace_organization_update_lesson_times_path(@organization), :remote => true do |f| %>
   <%= f.fields_for :lesson_times do |lt_f| %>
-    <%= lt_f.input :starts_at %>
-    <%= lt_f.input :ends_at %>
-    <%= lt_f.link_to_remove 'Удалить урок' %>
+    <%= lt_f.input :starts_at, :input_html => { :class => 'timepicker inline_edit tight' } %>
+    <%= lt_f.input :ends_at, :input_html => { :class => 'timepicker inline_edit tight' } %>
+    <%= lt_f.link_to_remove 'Удалить', :class => 'delete_button faded' %>
   <% end %>
   <%= f.link_to_add 'Добавить урок', :lesson_times %>
 
