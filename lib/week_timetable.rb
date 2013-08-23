@@ -12,20 +12,17 @@ module WeekTimetable
         hash[date] = {}
 
         days.each do |day|
-          lesson_times = organization.lesson_times.where('lesson_times.day = ?', day.cwday)
+          lesson_times = organization.timetable_lesson_times.where('lesson_times.day = ?', day.cwday)
 
           next if lesson_times.empty?
 
-          curr_lt = lesson_times.first
-
-          k = 1
           lesson_times.each do |lt|
-            k += 1 and curr_lt = lt if curr_lt.starts_at != lt.starts_at && curr_lt.ends_at != lt.ends_at
+            k = "#{lt.starts_at} - #{lt.ends_at}"
 
             hash[date][k] ||= {}
 
-            hash[date][k][:starts_at] = curr_lt.starts_at
-            hash[date][k][:ends_at]   = curr_lt.ends_at
+            hash[date][k][:starts_at] = lt.starts_at
+            hash[date][k][:ends_at]   = lt.ends_at
 
             hash[date][k][:lessons] = []
             hash[date][k][:lesson_times] ||= []
