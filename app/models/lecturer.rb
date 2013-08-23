@@ -1,5 +1,8 @@
+# encoding: utf-8
+
 class Lecturer < ActiveRecord::Base
   include WeekTimetable
+  include WithBusy
 
   attr_accessible :name, :patronymic, :surname
 
@@ -14,6 +17,8 @@ class Lecturer < ActiveRecord::Base
   scope :published, ->(i) { joins(:timetables).where("timetables.status = 'published'") }
 
   normalize_attributes :name, :patronymic, :surname
+
+  with_busy :method => :full_name, :message => 'уже ведет занятие в это время'
 
   searchable do
     text :full_name

@@ -1,4 +1,8 @@
+# encoding: utf-8
+
 class Group < ActiveRecord::Base
+  include WithBusy
+
   attr_accessible :title
 
   belongs_to :timetable
@@ -18,6 +22,8 @@ class Group < ActiveRecord::Base
   scope :published, ->(i) { joins(:timetable).where("timetables.status = 'published'") }
 
   before_create :check_can_be_created
+
+  with_busy :method => :title, :message => 'уже есть занятие в это время'
 
   searchable do
     text :title

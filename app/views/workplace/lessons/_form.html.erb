@@ -35,10 +35,14 @@
   <div class="multicomplete">
     <div class="string">
       <label>Группа</label>
-      <input type="text" placeholder='Номер группы' class='inline_edit need_autocomplete with_id', data-autocomplete-source='<%= @timetable.groups.sort.map{ |g| { 'value' => g.id, 'label' => g.title }}.to_json %>' />
+      <input type="text"
+        placeholder='Номер группы'
+        class='inline_edit need_autocomplete with_id'
+        data-autocomplete-source='<%= @timetable.groups.sort.map{ |g| { 'value' => g.id, 'label' => g.title_with_busy(@day, @lesson.lesson_time, @lesson) }}.to_json %>' />
     </div>
+
     <%= f.fields_for :group_lessons do |gl_f| %>
-      <span class="value"><%= gl_f.object.group.title if gl_f.object.group %></span>
+      <span class="value"><%= gl_f.object.group.title_with_busy(@day, @lesson.lesson_time, @lesson) if gl_f.object.group %></span>
       <%= gl_f.input :group_id, :as => :hidden %>
       <%= gl_f.link_to_remove 'убрать', :class => 'delete_button faded' %>
     <% end %>
@@ -48,10 +52,14 @@
   <div class="multicomplete">
     <div class="string">
       <label>Аудитория</label>
-      <input type="text" placeholder='Номер аудитории' class='inline_edit need_autocomplete with_id', data-autocomplete-source='<%= @organization.classrooms.sort.map{ |c| { 'value' => c.id, 'label' => c.to_s, 'link' => link_to(c.to_s, workplace_classroom_path(c), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container' ) }}.to_json %>' />
+      <input type="text"
+        placeholder='Номер аудитории'
+        class='inline_edit need_autocomplete with_id'
+        data-autocomplete-source='<%= @organization.classrooms.sort.map{ |c| { 'value' => c.id, 'label' => c.to_s_with_busy(@day, @lesson.lesson_time, @lesson), 'link' => link_to(c.to_s_with_busy(@day, @lesson.lesson_time, @lesson), workplace_classroom_path(c), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container' ) }}.to_json %>' />
     </div>
+
     <%= f.fields_for :classroom_lessons do |crl_f| %>
-      <span class="value"><%= link_to(crl_f.object.classroom.to_s, workplace_classroom_path(crl_f.object.classroom), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container') if crl_f.object.classroom %></span>
+      <span class="value"><%= link_to(crl_f.object.classroom.to_s_with_busy(@day, @lesson.lesson_time, @lesson), workplace_classroom_path(crl_f.object.classroom), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container') if crl_f.object.classroom %></span>
       <%= crl_f.input :classroom_id, :as => :hidden %>
       <%= crl_f.link_to_remove 'убрать', :class => 'delete_button faded' %>
     <% end %>
@@ -61,10 +69,12 @@
   <div class="multicomplete">
     <div class="string">
       <label>Лектор</label>
-      <input type="text" placeholder='ФИО лектора' class='inline_edit need_autocomplete normal with_id', data-autocomplete-source='<%= @organization.lecturers.sort.map{ |c| { 'value' => c.id, 'label' => c.full_name, 'link' => link_to(c.full_name, workplace_lecturer_path(c), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container' ) }}.to_json %>' />
+      <input type="text"
+      placeholder='ФИО лектора' class='inline_edit need_autocomplete normal with_id'
+      data-autocomplete-source='<%= @organization.lecturers.sort.map{ |c| { 'value' => c.id, 'label' => c.full_name_with_busy(@day, @lesson.lesson_time, @lesson), 'link' => link_to(c.full_name_with_busy(@day, @lesson.lesson_time, @lesson), workplace_lecturer_path(c), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container' ) }}.to_json %>' />
     </div>
     <%= f.fields_for :lecturer_lessons do |ll_f| %>
-      <span class="value"><%= link_to(ll_f.object.lecturer.full_name, workplace_lecturer_path(ll_f.object.lecturer), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container') if ll_f.object.lecturer %></span>
+      <span class="value"><%= link_to(ll_f.object.lecturer.full_name_with_busy(@day, @lesson.lesson_time, @lesson), workplace_lecturer_path(ll_f.object.lecturer), :class => 'in_frame', :remote => true, 'data-parent' => '.frame_container') if ll_f.object.lecturer %></span>
       <%= ll_f.input :lecturer_id, :as => :hidden %>
       <%= ll_f.link_to_remove 'убрать', :class => 'delete_button faded' %>
     <% end %>

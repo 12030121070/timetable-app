@@ -2,6 +2,7 @@
 
 class Classroom < ActiveRecord::Base
   include WeekTimetable
+  include WithBusy
 
   attr_accessible :number
 
@@ -14,6 +15,8 @@ class Classroom < ActiveRecord::Base
   validates_uniqueness_of :number, :scope => :building_id
 
   normalize_attributes :number
+
+  with_busy :method => :to_s, :message => 'уже занята в это время'
 
   delegate :organization, :to => :building
 
