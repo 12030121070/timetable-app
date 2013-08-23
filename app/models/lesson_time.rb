@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class LessonTime < ActiveRecord::Base
-  attr_accessible :day, :ends_at, :starts_at
+  attr_accessible :day, :ends_at, :starts_at, :number
 
   belongs_to :context, :polymorphic => true
 
