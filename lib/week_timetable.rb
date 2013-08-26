@@ -1,12 +1,17 @@
 # TODO: шитокод ;(
 module WeekTimetable
-  def beginning_of_weeks
+  def beginning_of_published_weeks
     organization.published_weeks.pluck(:starts_on).uniq.sort
   end
 
-  def table(week_start_on)
+  def beginning_of_weeks
+    organization.weeks.pluck(:starts_on).uniq.sort
+  end
+
+  def table(week_start_on, only_published = true)
     @table ||= {}.tap do |hash|
-      weeks = organization.published_weeks.includes(:days => { :week => { :timetable => :lesson_times } }).where(:starts_on => week_start_on)
+      weeks = (only_published ? organization.published_weeks : organization.weeks)
+        .includes(:days => { :week => { :timetable => :lesson_times } }).where(:starts_on => week_start_on)
 
       weeks.flat_map(&:days).group_by(&:date).each do |date, days|
         hash[date] = {}

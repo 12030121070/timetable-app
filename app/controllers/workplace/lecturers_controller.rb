@@ -12,7 +12,7 @@ class Workplace::LecturersController < Workplace::WorkplaceController
   def show
     show!{
       @beginning_of_week = params[:week] ? params[:week] : @lecturer.beginning_of_weeks.first
-      @table = @lecturer.table(@beginning_of_week)
+      @table = @lecturer.table(@beginning_of_week, false)
     }
   end
 
