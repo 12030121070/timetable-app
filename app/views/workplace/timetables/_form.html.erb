@@ -18,14 +18,33 @@
     </ul>
   </div>
 
-  <%= f.fields_for :lesson_times do |lt_f| %>
-    <%= lt_f.input :starts_at %>
-    <%= lt_f.input :ends_at %>
-    <%= lt_f.input :day, :as => :hidden %>
-    <%= lt_f.input :number, :as => :hidden %>
-    <%= lt_f.link_to_remove 'Удалить урок' %>
-  <% end %>
-  <%= f.link_to_add 'Добавить урок', :lesson_times %>
+  <h6>Расписание звонков</h6>
+  <div class="days_wrapper tabs">
+    <ul class='day_nav'>
+      <% (1..7).each do |cwday_number| %>
+        <li><%= link_to t('day_names')[cwday_number], '#', :class => "lesson_time_for_#{cwday_number} tab_nav" %></li>
+      <% end %>
+    </ul>
+    <div class="lesson_times_wrapper">
+      <% (1..7).each do |cwday_number| %>
+        <div id='lesson_time_for_<%= cwday_number %>' class='lesson_time_block'>
+          <div class='fields_for_<%= cwday_number %>' data-value='<%= cwday_number %>'>
+            <%= f.fields_for :lesson_times, :wrapper => false do |lt_f| %>
+              <% if (lt_f.object.day.present? && lt_f.object.day == cwday_number) || (lt_f.object.day.blank? && lt_f.object.new_record?) %>
+                <div class="fields">
+                  <%= lt_f.link_to_remove 'Удалить', :class => 'delete_button faded to_right', :style => 'margin: 2px 0 0 0' %>
+                  <%= lt_f.input :day, :as => :hidden, :input_html => { :class => 'lesson_time_day' } %>
+                  <%= lt_f.input :starts_at, :input_html => { :class => 'timepicker inline_edit tight' }, :wrapper_html => { :class => 'left_col' }, :label => false %>
+                  <%= lt_f.input :ends_at, :input_html => { :class => 'timepicker inline_edit tight' }, :wrapper_html => { :class => 'right_col' }, :label => false %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <%= f.link_to_add '+ Добавить', :lesson_times, :class => 'yellow_button', :data => { :target => ".fields_for_#{cwday_number}" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
