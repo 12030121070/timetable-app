@@ -1,11 +1,14 @@
+show_or_hide = (checkbox) ->
+  if checkbox.prop('checked')
+    checkbox.closest('div').next('.radio_buttons').slideDown()
+  else
+    checkbox.closest('div').next('.radio_buttons').slideUp()
+
 @init_checked = () ->
   inputs = $('input.boolean:not(.charged)')
   inputs.each (index, item) ->
     $item = $(item).addClass('charged')
+    show_or_hide($item)
 
     $item.on 'change', ->
-      checkbox = $(this)
-      if checkbox.prop('checked')
-        checkbox.closest('div').next('.radio_buttons').slideDown()
-      else
-        checkbox.closest('div').next('.radio_buttons').slideUp()
+      show_or_hide($(this))

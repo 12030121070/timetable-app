@@ -1,9 +1,22 @@
 <%= simple_nested_form_for [:workplace, @timetable].flatten, :remote => true, :html => { :class => 'scrollable' } do |f| %>
-  <%= f.input :title, :input_html => { :class => 'inline_edit large' } %>
-  <%= f.input :starts_on, :as => :date_picker, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :ends_on, :as => :date_picker, :input_html => { :class => 'inline_edit' }, :label => false %>
+  <%= f.input :first_week_parity, :as => :hidden %>
+  <%= f.input :title, :input_html => { :class => 'inline_edit large' }, :placeholder => 'Название расписания' %>
+  <%= f.input :starts_on, :as => :date_picker, :input_html => { :class => 'inline_edit' }, :placeholder => 'Начало' %>
+  <%= f.input :ends_on, :as => :date_picker, :input_html => { :class => 'inline_edit' }, :label => false, :placeholder => 'Конец' %>
+
   <%= f.input :parity, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :first_week_parity, :as => :radio_buttons, :input_html => { :class => 'inline_edit' } %>
+
+  <div class="radio_buttons" data-target='#timetable_first_week_parity'>
+    <label>Начинать с</label>
+    <% if f.object.errors.messages[:first_week_parity].present? %>
+      <span class="error"><%= f.object.errors.messages[:first_week_parity].join(', ') %></span>
+    <% end %>
+    <ul>
+      <% Hash[Timetable.first_week_parity.values.map{|v| [v.to_s, v.text]}].each do |value, title| %>
+        <li class='<%= value %> <%= 'checked' if f.object.first_week_parity == value %>' data-value='<%= value %>'><%= title %></li>
+      <% end %>
+    </ul>
+  </div>
 
   <%= f.fields_for :lesson_times do |lt_f| %>
     <%= lt_f.input :starts_at %>
