@@ -1,6 +1,6 @@
 <%= simple_nested_form_for [:workplace, @building].flatten, :remote => true, :html => { :class => 'scrollable' } do |f| %>
-  <%= f.input :title, :input_html => { :class => 'inline_edit large' } %>
-  <%= f.input :address, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :title, :input_html => { :class => 'inline_edit large', :autofocus => true }, :placeholder => 'Название корпуса' %>
+  <%= f.input :address, :input_html => { :class => 'inline_edit' }, :placeholder => 'Адрес корпуса' %>
   <label>Список аудиторий</label>
   <input type="text" class='search_in_list tight' data-list='#classroom_list'/>
   <%= link_to "+ Добавить", '#', :class => 'yellow_button search_in_list_add faded' %>

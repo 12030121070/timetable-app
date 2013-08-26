@@ -1,7 +1,7 @@
 <%= simple_form_for [:workplace, @lecturer].flatten, :remote => true, :html => { :class => 'scrollable' } do |f| %>
-  <%= f.input :surname, :input_html => { :class => 'inline_edit large' } %>
-  <%= f.input :name, :input_html => { :class => 'inline_edit' } %>
-  <%= f.input :patronymic, :input_html => { :class => 'inline_edit' } %>
+  <%= f.input :surname, :input_html => { :class => 'inline_edit large', :autofocus => true }, :placeholder => 'Фамилия лектора' %>
+  <%= f.input :name, :input_html => { :class => 'inline_edit' }, :placeholder => 'Имя лектора' %>
+  <%= f.input :patronymic, :input_html => { :class => 'inline_edit' }, :placeholder => 'Отчество лектора' %>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>

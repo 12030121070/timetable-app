@@ -11,14 +11,5 @@
     <%= link_to 'удалить', workplace_lecturer_path(lecturer), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
   </div>
 
-  <%= link_to lecturer.full_name,
-              edit_workplace_lecturer_path(lecturer),
-              :class => 'title in_frame',
-              'data-parent' => '.workplace_wrapper',
-              'data-target' => "#lecturer_#{ lecturer.id }",
-              'data-list' => '#lecturer_list',
-              'data-kind' => 'update_record',
-              :remote => true %>
-
-  <%= link_to "посмотреть загрузку", workplace_lecturer_path(lecturer), :class => 'show_loadings in_frame', :remote => true, :data => { :parent => '.workplace_wrapper' } %>
+  <%= link_to lecturer.full_name, workplace_lecturer_path(lecturer), :class => 'title in_frame', :remote => true, :data => { :parent => '.workplace_wrapper' } %>
 </li>

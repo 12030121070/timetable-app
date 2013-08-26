@@ -15,8 +15,8 @@
                 <div class="fields">
                   <%= lt_f.link_to_remove 'Удалить', :class => 'delete_button faded to_right', :style => 'margin: 2px 0 0 0' %>
                   <%= lt_f.input :day, :as => :hidden, :input_html => { :class => 'lesson_time_day' } %>
-                  <%= lt_f.input :starts_at, :input_html => { :class => 'timepicker inline_edit tight' }, :wrapper_html => { :class => 'left_col' }, :label => false %>
-                  <%= lt_f.input :ends_at, :input_html => { :class => 'timepicker inline_edit tight' }, :wrapper_html => { :class => 'right_col' }, :label => false %>
+                  <%= lt_f.input :starts_at, :input_html => { :class => 'timepicker inline_edit tight' }, :wrapper_html => { :class => 'left_col' }, :label => false, :placeholder => 'Начало' %>
+                  <%= lt_f.input :ends_at, :input_html => { :class => 'timepicker inline_edit tight' }, :wrapper_html => { :class => 'right_col' }, :label => false, :placeholder => 'Конец' %>
                 </div>
               <% end %>
             <% end %>
