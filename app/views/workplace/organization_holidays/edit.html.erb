@@ -1,27 +1,21 @@
 <h2 class='thin'>Праздники организации</h2>
 
-<div class="scrollable">
-  <ul>
-    <% @organization.holidays.each do |holiday| %>
-      <li>
-        <%= l holiday, :format => '%d %B %Y' %>
-      </li>
-    <% end %>
-  </ul>
+<%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization), :remote => true, :html => { :class => 'scrollable' } do |f| %>
+  <%= f.link_to_add '+ добавить праздник', :organization_holidays, :class => 'yellow_button', :data => { :target => '#organization_holidays' } %>
 
-  <% if false %>
-    <%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization), :remote => true do |f| %>
-      <%= f.fields_for :organization_holidays do |oh_f| %>
-        <%= oh_f.input :date, :as => :date_picker, :input_html => { :class => 'inline_edit' } %>
-        <%= oh_f.link_to_remove 'Удалить праздник' %>
-      <% end %>
-      <%= f.link_to_add 'Добавить праздник', :organization_holidays %>
-
-      <div class="buttons sticky bottom">
-        <%= f.submit "Сохранить", :class => 'yellow_button' %>
-        <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
+  <div id="organization_holidays">
+    <%= f.fields_for :organization_holidays, :wrapper => false do |oh_f| %>
+      <div class="fields">
+        <%= oh_f.link_to_remove 'Удалить', :class => 'delete_button to_right' %>
+        <%= oh_f.input :date, :as => :date_picker, :input_html => { :class => 'inline_edit date_picker' }, :wrapper_html => { :class => 'left_col' }, :label => false, :placeholder => 'Дата' %>
+        <%= oh_f.input :title, :input_html => { :class => 'inline_edit normal' }, :wrapper_html => { :class => 'right_col' }, :label => false, :placeholder => 'Название праздника' %>
       </div>
-      <div class="bottom_empty"></div>
     <% end %>
-  <% end %>
-</div>
+  </div>
+
+  <div class="buttons sticky bottom">
+    <%= f.submit "Сохранить", :class => 'yellow_button' %>
+    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
+  </div>
+  <div class="bottom_empty"></div>
+<% end %>

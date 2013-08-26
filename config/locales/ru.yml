@@ -63,6 +63,7 @@ ru:
 
       organization_holiday:
         date: Дата праздника
+        title: Название праздника
 
       subscription:
         starts_on: Начало подписки

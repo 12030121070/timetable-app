@@ -34,6 +34,6 @@ class Day < ActiveRecord::Base
   end
 
   def set_status
-    self.status = :holiday if organization.holidays.include?(self.date)
+    self.status = :holiday if organization.holidays.map(&:date).include?(self.date)
   end
 end

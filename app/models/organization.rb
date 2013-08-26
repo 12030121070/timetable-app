@@ -50,7 +50,7 @@ class Organization < ActiveRecord::Base
   end
 
   def holidays
-    (organization_holidays.pluck(:date) | Holiday.pluck(:date)).sort
+    (organization_holidays.where('date >= ?', Time.zone.today) | Holiday.where('date >= ?', Time.zone.today)).sort_by(&:date)
   end
 
   def available_group_count

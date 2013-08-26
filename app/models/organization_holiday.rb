@@ -1,5 +1,5 @@
 class OrganizationHoliday < ActiveRecord::Base
-  attr_accessible :date
+  attr_accessible :date, :title
 
   belongs_to :organization
 

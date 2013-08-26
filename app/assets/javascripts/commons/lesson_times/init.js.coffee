@@ -5,3 +5,4 @@
     value = div_field.parent().data('value')
     $('input.lesson_time_day', div_field).val(value)
     init_timepicker()
+    init_date_picker()
