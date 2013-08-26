@@ -149,5 +149,8 @@ $(window).load ->
                                         target: $(link.data('target')),
                                         list: $(link.data('list'))
                                       })
+    if link.hasClass('self_ajaxed')
+      parent = $(link.data('target'))
+      parent.replaceWith(response)
     link.removeClass('busy')
   )

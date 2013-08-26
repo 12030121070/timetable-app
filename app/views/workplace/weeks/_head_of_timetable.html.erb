@@ -1,0 +1,26 @@
+<% if local_assigns.has_key?(:flash) %>
+  <script type="text/javascript">
+    $(function(){
+      $('.message_wrapper').addClass('<%= flash.keys.first.to_s %>').text('<%= flash.send(flash.keys.first) %>').show(function(){
+        $(this).delay(4000).fadeOut('slow');
+      });
+    });
+  </script>
+  <% flash.clear %>
+<% end %>
+
+<div style='overflow: hidden' class='timetable_header'>
+  <div class="actions to_right">
+    <% if @timetable.draft? %>
+      <%= link_to "Опубликовать", to_published_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button self_ajaxed', :data => {:target => '.timetable_header'}, :remote => true %>
+    <% else %>
+      <%= link_to "Вернуть в черновики", to_draft_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button self_ajaxed', :data => {:target => '.timetable_header'}, :remote => true %>
+    <% end %>
+    <%= link_to 'редактировать', edit_workplace_timetable_path(@timetable), :class => 'yellow_button faded' %>
+    <%= link_to 'удалить', workplace_timetable_path(@timetable), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
+  </div>
+
+  <div class="status <%= @timetable.status %>"><%= @timetable.human_status_name %></div>
+  <h2 class='thin border_bottom'><%= @timetable.title %></h2>
+</div>
+

@@ -19,7 +19,7 @@ class Workplace::TimetablesController < Workplace::WorkplaceController
         flash[:alert] = 'Вы не можете опубликаовать расписание, вам необходимо расширить вашу подписку.'
       end
 
-      redirect_to workplace_timetable_path(@timetable) and return
+      render :partial => 'workplace/weeks/head_of_timetable', :locals => { :flash => flash } and return
     }
   end
 
@@ -35,7 +35,7 @@ class Workplace::TimetablesController < Workplace::WorkplaceController
         flash[:alert] = 'Расписание уже находится в состоянии черновика.'
       end
 
-      redirect_to workplace_timetable_path(@timetable) and return
+      render :partial => 'workplace/weeks/head_of_timetable', :locals => { :flash => flash } and return
     }
   end
 

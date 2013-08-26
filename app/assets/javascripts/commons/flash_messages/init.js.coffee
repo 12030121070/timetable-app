@@ -1,2 +1,2 @@
 $ ->
-  $('.message_wrapper').delay(4000).fadeOut('slow')
+  $('.message_wrapper:visible').delay(4000).fadeOut('slow')
