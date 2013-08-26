@@ -1,14 +1,27 @@
 <h2 class='thin'>Праздники организации</h2>
-<%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization), :remote => true do |f| %>
-  <%= f.fields_for :organization_holidays do |oh_f| %>
-    <%= oh_f.input :date %>
-    <%= oh_f.link_to_remove 'Удалить праздник' %>
-  <% end %>
-  <%= f.link_to_add 'Добавить праздник', :organization_holidays %>
 
-  <div class="buttons sticky bottom">
-    <%= f.submit "Сохранить", :class => 'yellow_button' %>
-    <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
-  </div>
-  <div class="bottom_empty"></div>
-<% end %>
+<div class="scrollable">
+  <ul>
+    <% @organization.holidays.each do |holiday| %>
+      <li>
+        <%= l holiday, :format => '%d %B %Y' %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if false %>
+    <%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization), :remote => true do |f| %>
+      <%= f.fields_for :organization_holidays do |oh_f| %>
+        <%= oh_f.input :date, :as => :date_picker, :input_html => { :class => 'inline_edit' } %>
+        <%= oh_f.link_to_remove 'Удалить праздник' %>
+      <% end %>
+      <%= f.link_to_add 'Добавить праздник', :organization_holidays %>
+
+      <div class="buttons sticky bottom">
+        <%= f.submit "Сохранить", :class => 'yellow_button' %>
+        <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
+      </div>
+      <div class="bottom_empty"></div>
+    <% end %>
+  <% end %>
+</div>

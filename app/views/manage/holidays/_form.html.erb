@@ -1,0 +1,6 @@
+<%= simple_form_for [:manage, @holiday] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :date, :as => :date_picker %>
+
+  <%= f.submit %>
+<% end %>

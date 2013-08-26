@@ -1,0 +1,12 @@
+<h1>Список праздников</h1>
+<%= link_to "new", new_manage_holiday_path %>
+<ul>
+  <% collection.each do |holiday| %>
+    <li>
+      <%= l holiday.date, :format => '%d %B %Y' %>
+      <%= holiday.title || 'Без названия' %>
+      <%= link_to "edit", edit_manage_holiday_path(holiday) %>
+      <%= link_to 'delete', manage_holiday_path(holiday), :method => :delete %>
+    </li>
+  <% end %>
+</ul>

@@ -14,6 +14,8 @@ class Day < ActiveRecord::Base
 
   normalize_attributes :status
 
+  before_create :set_status
+
   def today?
     date == Date.today
   end
@@ -29,5 +31,9 @@ class Day < ActiveRecord::Base
 
   def lesson_times
     timetable.lesson_times.for_day(wday)
+  end
+
+  def set_status
+    self.status = :holiday if organization.holidays.include?(self.date)
   end
 end

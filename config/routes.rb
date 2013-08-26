@@ -3,6 +3,7 @@ TimetableApp::Application.routes.draw do
 
   namespace :manage do
     root :to => 'manage#index'
+    resources :holidays, :except => [:show]
     resource :tariff, :only => [:edit, :update]
     resources :organizations do
       resources :subscriptions, :except => [:show] do
