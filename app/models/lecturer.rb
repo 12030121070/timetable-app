@@ -9,8 +9,11 @@ class Lecturer < ActiveRecord::Base
   belongs_to :organization
 
   has_many :lecturer_lessons, :dependent => :destroy
-  has_many :lessons, :through => :lecturer_lessons
-  has_many :timetables, :through => :lessons, :uniq => true
+
+  has_many :days,            :through => :lessons
+  has_many :lessons,         :through => :lecturer_lessons
+  has_many :timetables,      :through => :lessons, :uniq => true
+  has_many :weeks,           :through => :days
 
   validates_presence_of :name, :patronymic, :surname
 

@@ -9,7 +9,10 @@ class Classroom < ActiveRecord::Base
   belongs_to :building
 
   has_many :classroom_lessons, :dependent => :destroy
+
+  has_many :days,    :through => :lessons
   has_many :lessons, :through => :classroom_lessons
+  has_many :weeks,   :through => :days
 
   validates_presence_of :number
   validates_uniqueness_of :number, :scope => :building_id

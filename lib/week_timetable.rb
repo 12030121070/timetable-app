@@ -1,11 +1,10 @@
-# TODO: шитокод ;(
 module WeekTimetable
   def beginning_of_published_weeks
-    organization.published_weeks.pluck(:starts_on).uniq.sort
+    weeks.joins(:timetable).where('timetables.status = ?', :published).pluck(:starts_on).uniq.sort
   end
 
   def beginning_of_weeks
-    organization.weeks.pluck(:starts_on).uniq.sort
+    weeks.pluck(:starts_on)
   end
 
   def table(week_start_on, only_published = true)
