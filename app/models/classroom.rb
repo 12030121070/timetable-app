@@ -12,7 +12,7 @@ class Classroom < ActiveRecord::Base
 
   has_many :days,    :through => :lessons
   has_many :lessons, :through => :classroom_lessons
-  has_many :weeks,   :through => :days
+  has_many :weeks,   :through => :days, :uniq => true, :order => 'weeks.starts_on'
 
   validates_presence_of :number
   validates_uniqueness_of :number, :scope => :building_id

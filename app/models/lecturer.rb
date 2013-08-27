@@ -10,10 +10,10 @@ class Lecturer < ActiveRecord::Base
 
   has_many :lecturer_lessons, :dependent => :destroy
 
-  has_many :days,            :through => :lessons
-  has_many :lessons,         :through => :lecturer_lessons
-  has_many :timetables,      :through => :lessons, :uniq => true
-  has_many :weeks,           :through => :days
+  has_many :days,       :through => :lessons
+  has_many :lessons,    :through => :lecturer_lessons
+  has_many :timetables, :through => :lessons, :uniq => true
+  has_many :weeks,      :through => :days, :uniq => true, :order => 'weeks.starts_on'
 
   validates_presence_of :name, :patronymic, :surname
 
