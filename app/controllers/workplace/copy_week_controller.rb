@@ -10,13 +10,13 @@ class Workplace::CopyWeekController < Workplace::WorkplaceController
     begin
       recipients = @timetable.weeks.find(params[:recipients])
       @week.copy_to(recipients)
-      flash[:notice] = 'Занятия успешно скопированы'
+      flash[:notice] = 'Занятия успешно скопированы.'
     rescue => e
       logger.error "ERROR: #{e}"
-      flash[:alert] = 'Во время копирования произошла ошибка'
+      flash[:alert] = 'Во время копирования произошла ошибка.'
     end
 
-    redirect_to workplace_organization_timetable_path(@organization, @timetable)
+    redirect_to request.referer
   end
 
 private

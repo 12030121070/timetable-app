@@ -1,6 +1,11 @@
 <%= render 'head_of_timetable' %>
 <div class="scrollable">
-  <%= link_to "Скопировать", workplace_timetable_week_new_copy_path(@timetable, @week), :class => 'yellow_button faded to_right' %>
+  <%= link_to "Скопировать",
+              workplace_timetable_week_new_copy_path(@timetable, @week),
+              :class => 'yellow_button faded to_right in_frame',
+              :remote => true,
+              'data-parent' => '.workplace_wrapper'
+  %>
   <%= link_to 'Расписание в формате pdf', [:pdf, :workplace, @timetable, @week], :class => 'yellow_button faded to_right', :style => 'margin: 0 5px 0 0' %>
   <div class="inner_navigation">
     <div class="inner_wrapper">

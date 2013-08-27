@@ -18,5 +18,6 @@
  * = require 'commons/scrollable'
  * = require 'commons/date_picker'
  * = require 'commons/holiday_border'
+ * = require 'commons/check_helper'
  * = require_tree .
  */

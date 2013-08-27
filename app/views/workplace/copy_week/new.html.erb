@@ -1,25 +1,33 @@
-<h1>Копирование недели</h1>
+<h2 class='thin'>Копирование недели</h2>
 
-<p><%= @week %> скопировать на:</p>
-<%= link_to "на все недели",  '#', :id => 'copy_all', :class => 'copy_link' %>
-<% if @timetable.parity? %>
-  <%= link_to 'на четные недели', '#', :id => 'copy_even', :class => 'copy_link' %>
-  <%= link_to 'на нечетные недели',  '#', :id => 'copy_odd', :class => 'copy_link' %>
-<% end %>
-<%= link_to "сброс",  '#', :id => 'uncheck', :class => 'copy_link' %>
+<div class="scrollable">
+  <div class='copy_week_header'><span class='bold'>Неделя <%= @week.number %></span> (<%= l @week.starts_on.beginning_of_week, :format => '%e %B' %> &mdash; <%= l @week.starts_on.end_of_week, :format => '%e %B' %>) скопировать на:</div>
 
-<%= form_tag workplace_timetable_week_copy_path(@timetable, @week), :method => :post, :class => 'copy_week' do %>
-  <% @recipients.group_by(&:parity).each do |parity, weeks| %>
-    <h4><%= Hash[Week.parity.options.map(&:reverse)][parity] %> недели</h4>
-    <% weeks.each do |week| %>
-      <div class="check_box">
-        <%= label_tag "recipient_#{week.id}", week %>
-        <%= check_box_tag 'recipients[]', week.id, false, :id => "recipient_#{week.id}", :class => "#{parity}_checkbox" %>
+  <div class="check_helper">
+    <%= link_to "Все недели",  '#', :id => 'copy_all', :class => 'copy_link' %>
+    <% if @timetable.parity? %>
+      <%= link_to 'Четные недели', '#', :id => 'copy_even', :class => 'copy_link' %>
+      <%= link_to 'Нечетные недели',  '#', :id => 'copy_odd', :class => 'copy_link' %>
+    <% end %>
+    <%= link_to "Сброс",  '#', :id => 'uncheck', :class => 'copy_link uncheck' %>
+  </div>
+
+  <%= form_tag workplace_timetable_week_copy_path(@timetable, @week), :method => :post, :class => 'copy_week' do %>
+    <% @recipients.group_by(&:parity).each do |parity, weeks| %>
+      <div class="weeks_wrapper">
+        <h6><%= Hash[Week.parity.options.map(&:reverse)][parity] %> недели</h6>
+        <% weeks.each do |week| %>
+          <div class="check_box">
+            <%= check_box_tag 'recipients[]', week.id, false, :id => "recipient_#{week.id}", :class => "#{parity}_checkbox" %>
+            <%= label_tag "recipient_#{week.id}", "<span class='bold'>#{week.number}</span>, #{l week.starts_on.beginning_of_week, :format => '%e %B'} &mdash; #{l week.starts_on.end_of_week, :format => '%e %B'}".html_safe %>
+          </div>
+        <% end %>
       </div>
     <% end %>
+    <div class="buttons sticky bottom">
+      <%= submit_tag "Сохранить", :class => 'yellow_button' %>
+      <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
+    </div>
+    <div class='bottom_empty'></div>
   <% end %>
-  <div class="buttons">
-    <%= submit_tag 'Копировать' %>
-    <%= link_to 'Отмена', :back %>
-  </div>
-<% end %>
+</div>

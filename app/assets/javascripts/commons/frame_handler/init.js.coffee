@@ -65,6 +65,7 @@ frame_handler = (parent, response, options = {}) ->
     init_radio_buttons()
     init_timepicker()
     init_lesson_times()
+    init_check_helper()
 
     $(window).on 'beforeunload', ->
       return 'Не сохраненные данные будет потеряны!' if parent.hasClass('not_active')
@@ -94,6 +95,7 @@ frame_handler = (parent, response, options = {}) ->
           init_radio_buttons()
           init_timepicker()
           init_lesson_times()
+          init_check_helper()
         else
           _.container_hide()
           if options.kind == 'new_record'

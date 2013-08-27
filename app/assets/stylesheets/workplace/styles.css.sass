@@ -365,6 +365,13 @@ body
         color: #6d6d6d
         font-size: 12px
         font-style: italic
+        margin: 0
+        padding: 0
+
+        &:before
+          content: ''
+          margin: 0
+          padding: 0
 
       .file_input_wrapper
         .upload_file
@@ -992,3 +999,48 @@ form
 
     .delete_button
       margin: 3px 0 0 0
+
+.copy_week_header
+  font-size: 14px
+
+.check_helper
+  +inline-block
+  background: #fff
+  padding: 30px
+  margin: 10px 0 25px 0
+
+  a
+    margin: 0 5px
+    font-size: 16px
+    padding: 5px 8px
+
+    &.active
+      +border-radius(4px)
+      background: #ffbe00
+      color: #555
+      text-decoration: none
+
+.weeks_wrapper
+  float: left
+  width: 314px
+
+  h6
+    font-size: 14px
+    font-weight: 600
+
+  .check_box
+    +clearfix
+    height: 24px
+    line-height: 24px
+    margin: 0 0 10px 0
+
+    input
+      +inline-block
+      margin: 0 5px 0 0
+
+    label
+      +inline-block
+      font-size: 14px
+      font-weight: 400
+      line-height: 16px
+      height: 16px
