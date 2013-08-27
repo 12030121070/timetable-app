@@ -66,7 +66,7 @@ class Pdf::Week
   def table_data(groups = timetable.groups)
     {}.tap do |table_data|
       table_data[:header] = [Pdf::Cell.new(:colspan => 2)]
-      groups.each { |group| table_data[:header] << Pdf::Cell.new(:content => group.title) }
+      groups.each { |group| table_data[:header] << Pdf::Cell.new(:group => group, :content => group.title) }
 
       table_data[:days] = {}
 

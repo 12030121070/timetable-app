@@ -18,6 +18,17 @@
     </div>
   </div>
 
+  <%= simple_form_for [:workplace, @timetable, @timetable.groups.build], :html => { :style => 'margin: 0 0 15px 0' } do |f| %>
+    <%= f.input :title,
+      :label => false,
+      :placeholder => 'Номер',
+      :wrapper_html => { :class => 'left_col' },
+      :input_html => { :class => 'inline_edit tight', :autofocus => true }
+    %>
+
+    <%= f.submit 'Добавить группу', :class => 'yellow_button' %>
+  <% end %>
+
   <%= render :partial => 'week_timetable' %>
 
   <% @table[:days].keys.select{ |d| d.holiday? }.each do |holiday| %>

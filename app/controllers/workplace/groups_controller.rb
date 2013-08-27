@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Workplace::GroupsController < Workplace::WorkplaceController
   inherit_resources
 
@@ -6,7 +8,14 @@ class Workplace::GroupsController < Workplace::WorkplaceController
   belongs_to :timetable
 
   def create
-    create!( :notice => "Dude! Nice job creating that group." ) { request.referer }
+    create! do |success, failure|
+      success.html { redirect_to request.referer, :notice => 'Группа успешно создана.' }
+      failure.html { redirect_to request.referer, :alert => 'Ошибка при создании группы.' }
+    end
+  end
+
+  def destroy
+    destroy!(:notice => 'Группа удалена.') { request.referer }
   end
 
   protected

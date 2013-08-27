@@ -2,7 +2,7 @@
 <html>
   <%= yield :head %>
   <body>
-    <div class="message_wrapper <%= 'notice' if notice %> <%= 'alert' if alert %>" <%= "style=display:none;" unless notice && alert %>>
+    <div class="message_wrapper <%= 'notice' if notice %> <%= 'alert' if alert %>" <%= "style=display:none;" unless notice || alert %>>
       <%= notice %>
       <%= alert %>
     </div>
