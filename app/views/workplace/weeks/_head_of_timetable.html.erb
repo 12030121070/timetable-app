@@ -16,7 +16,7 @@
     <% else %>
       <%= link_to "Вернуть в черновики", to_draft_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button self_ajaxed', :data => {:target => '.timetable_header'}, :remote => true %>
     <% end %>
-    <%= link_to 'редактировать', edit_workplace_timetable_path(@timetable), :class => 'yellow_button faded' %>
+    <%= link_to 'редактировать', edit_workplace_timetable_path(@timetable), :class => 'yellow_button faded in_frame', :remote => true, :data => { :parent => '.workplace_wrapper' } %>
     <%= link_to 'удалить', workplace_timetable_path(@timetable), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
   </div>
 
