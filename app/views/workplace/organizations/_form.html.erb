@@ -1,10 +1,9 @@
-<%= simple_nested_form_for resource, :url => workplace_organization_path, :html => { :multipart => true, :class => 'scrollable' } do |f| %>
+<%= simple_nested_form_for resource, :url => workplace_organization_path, :html => { :multipart => true, :class => 'scrollable' }, :remote => true do |f| %>
   <%= f.input :title, :input_html => { :class => 'inline_edit wide large', :placeholder => 'Название организации' } %>
   <%= f.input :email, :input_html => { :class => 'inline_edit', :placeholder => 'Электронная почта' } %>
   <%= f.input :phone, :input_html => { :class => 'inline_edit', :placeholder => 'Телефон' } %>
   <%= f.input :site, :input_html => { :class => 'inline_edit', :placeholder => 'Сайт' } %>
-  <%= f.input :subdomain, :input_html => { :class => 'inline_edit', :placeholder => 'Поддомен' } %>
-  <%= f.input :logotype, :as => :file, :hint => 'Необходима картинка размером 128x128' %>
+  <%= f.input :subdomain, :input_html => { :class => 'inline_edit normal', :placeholder => 'Поддомен' } %>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
