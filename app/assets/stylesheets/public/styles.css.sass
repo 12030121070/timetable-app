@@ -6,6 +6,139 @@
 @import 'commons/forms'
 @import 'commons/tables'
 
+.main_wrapper
+  font-weight: 200
+  margin: 0 auto
+  padding: 30px
+  width: 960px
+
+  a
+    font-weight: 200
+
+  .log_info
+    width: auto
+
+  h1
+    line-height: 1.2em
+
+    img
+      +inline-block
+      margin: 0 10px 0 0
+
+  .search_form
+    +border-radius(4px)
+    background: #4d4d4d
+    margin: 0 0 20px 0
+    padding: 20px
+    width: 920px
+
+    input
+      font-size: 24px
+      padding: 5px 12px
+      width: 895px
+
+  .results_list
+    li
+      font-size: 24px
+      font-weight: 200
+      padding: 10px 20px
+
+      &:nth-child(even)
+        background: #f2f2f2
+
+      a
+        font-weight: 200
+
+      .additional
+        display: block
+        font-size: 14px
+        font-weight: 200
+
+
+.inner_navigation
+  margin: 0 0 15px 0
+
+  .inner_wrapper
+    +clearfix
+
+  .grey_button
+    +border-radius(4px)
+    +inline-block
+    +clearfix
+    +background-image(linear-gradient(#d5d5d5, #cbcbcb))
+    +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
+    border: none
+    color: #141414
+    font-size: 10px
+    font-weight: 400
+    letter-spacing: 1px
+    line-height: 14px
+    padding: 5px 20px
+    text-decoration: none
+    text-transform: uppercase
+
+    &:active
+      +single-box-shadow(#000, 0, 0, 4px, false, true)
+
+    &:hover
+      cursor: pointer
+
+    &.faded
+      +single-box-shadow(none)
+      background: none
+      border: 1px solid #e6e6e6
+      color: #ccc
+
+      &:hover
+        +background-image(linear-gradient(#d5d5d5, #cbcbcb))
+        +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
+        color: #141414
+
+        &.edit
+          @include background(image_url('actions_buttons.png') no-repeat 0 -33px, linear-gradient(#d5d5d5, #cbcbcb))
+        &.move
+          @include background(image_url('actions_buttons.png') no-repeat -60px -33px, linear-gradient(#d5d5d5, #cbcbcb))
+        &.copy
+          @include background(image_url('actions_buttons.png') no-repeat -30px -33px, linear-gradient(#d5d5d5, #cbcbcb))
+
+      &:active
+        +single-box-shadow(#000, 0, 0, 4px, false, true)
+
+  .prev, .next, .current_week
+    +clearfix
+    float: left
+
+  .prev, .next
+    font-size: 24px
+    padding: 4px 10px 10px 10px
+
+    &.inactive
+      pointer-events: none
+
+      &:hover
+        +single-box-shadow(none)
+        background: none
+        color: #ccc
+        cursor: pointer
+
+  .prev
+    margin: 0 15px 0 0
+
+  .next
+    margin: 0 0 0 15px
+
+  .current_week
+    +border-radius(3px)
+    -webkit-text-decoration-style: dashed
+    border: none
+    color: #4498ff
+    font-size: 18px
+    height: 26px
+    padding: 1px
+    text-align: center
+    //text-decoration: underline
+    width: 480px
+
 .group_timetable
   width: auto
 
@@ -47,7 +180,7 @@
         display: block
         font-size: 11px
         line-height: 14px
-        margin: 5px 55px 8px
+        margin: 5px 45px 8px
         text-align: center
 
       .lesson

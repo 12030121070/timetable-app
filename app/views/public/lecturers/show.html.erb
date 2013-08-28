@@ -1,8 +1,7 @@
-<h1><%= @organization.title %></h1>
-<h2><%= @lecturer.full_name %></h2>
-<h3>Расписание преподавателя</h3>
+<h2 class='thin'><%= @lecturer.full_name %></h2>
+<h3 class='thin'>Расписание преподавателя</h3>
 
-<ul>
+<ul class='week_list'>
   <% @lecturer.beginning_of_weeks.each do |starts_on| %>
     <li>
       <%= link_to starts_on, organization_lecturer_path(@lecturer, :week => starts_on) %>

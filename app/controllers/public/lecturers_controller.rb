@@ -11,8 +11,8 @@ class Public::LecturersController < Public::PublicController
 
   def show
     show! {
-      beginning_of_week = params[:week] ? params[:week] : @lecturer.beginning_of_published_weeks.first
-      @table = @lecturer.table(beginning_of_week)
+      @week = params[:week] ? params[:week] : @lecturer.beginning_of_published_weeks.first
+      @table = @lecturer.table(@week)
     }
   end
 

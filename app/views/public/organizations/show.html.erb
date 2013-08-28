@@ -1,14 +1,20 @@
-<h1><%= @organization.title %></h1>
-
-<%= simple_form_for :search, :method => :get do |f| %>
-  <%= f.input :q, :label => false, :input_html => { :placeholder => 'Введите номер группы или ФИО преподавателя', :autofocus => true, :value =>  params[:search].present? ? params[:search][:q] : '' } %>
-  <%= f.submit 'Искать' %>
+<%= simple_form_for :search, :method => :get, :html => { :class => 'search_form' } do |f| %>
+  <%= f.input :q,
+              :label => false,
+              :input_html => {
+                :class => 'thin',
+                :placeholder => 'Введите номер группы или ФИО преподавателя',
+                :autofocus => true,
+                :value =>  params[:search].present? ? params[:search][:q] : ''
+              } %>
 <% end %>
 
-
-<ul>
+<ul class='results_list'>
   <% @groups.each do |group| %>
-    <li><%= link_to "#{group.title} (#{group.timetable.title})", organization_group_path(group.title) %></li>
+    <li>
+      <%= link_to group.title, organization_group_path(group.title) %>
+      <span class='additional'><%= group.timetable.title %></span>
+    </li>
   <% end %>
   <% @lecturers.each do |lecturer| %>
     <li><%= link_to lecturer.full_name, organization_lecturer_path(lecturer) %></li>

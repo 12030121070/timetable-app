@@ -1,15 +1,21 @@
-<h1><%= @organization.title %></h1>
+<h2 class='thin'><%= @group.timetable.title %></h2>
+<h3 class='thin'>Расписание для <%= @group.title %> группы</h3>
 
-<h2><%= @group.timetable.title %></h2>
-<h3>Расписание для <%= @group.title %> группы</h3>
-
-<ul class='week_list'>
-  <% @group.weeks.each do |week| %>
-    <li class='<%= week == @week ? 'selected' : 'not_selected' %>'>
-      <%= link_to "#{l(week.days.first.date, :format => "%d %b %Y")} &mdash; #{l(week.days.last.date, :format => "%d %b %Y")}".html_safe, organization_group_path(@group.title, :week => week.starts_on)  %>
-    </li>
-  <% end %>
-</ul>
+<div class="inner_navigation">
+  <div class="inner_wrapper">
+    <% if @week.prev %>
+      <%= link_to "&#x2039;".html_safe, organization_group_path(@group.title, :week => @week.prev.starts_on), :class => 'prev grey_button' %>
+    <% else %>
+      <%= link_to "&#x2039;".html_safe, '#', :class => 'inactive faded prev grey_button' %>
+    <% end %>
+    <div class="current_week"><%= l @week.starts_on.beginning_of_week, :format => '%d %B' %> &mdash; <%= l @week.starts_on.end_of_week, :format => '%d %B' %></div>
+    <% if @week.next %>
+      <%= link_to "&#x203A;".html_safe, organization_group_path(@group.title, :week => @week.next.starts_on), :class => 'next grey_button'%>
+    <% else %>
+      <%= link_to "&#x203A;".html_safe, '#', :class => 'inactive faded next grey_button'%>
+    <% end %>
+  </div>
+</div>
 
 <table class='group_timetable'>
   <thead>
@@ -38,7 +44,7 @@
                 <% unless lesson.subgroup_whole? %>
                   <span class='subgroup'><%= lesson.subgroup_text %></span>
                 <% end %>
-                <span class='lecturers' title='<%= lesson.lecturers.join(', ') %>'><%= lesson.lecturers.many? ? "#{lesson.lecturers.first}, ..." : lesson.lecturers.first %></span>
+                <span class='lecturers' title='<%= lesson.lecturers.join(', ').html_safe %>'><%= lesson.lecturers.many? ? "#{lesson.lecturers.first}, ...".html_safe : lesson.lecturers.first %></span>
               </div>
             <% end %>
           </td>
