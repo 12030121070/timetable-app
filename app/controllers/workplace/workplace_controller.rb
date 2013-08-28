@@ -13,4 +13,8 @@ class Workplace::WorkplaceController < ApplicationController
   def find_organization
     @organization = current_user.organization
   end
+
+  def begin_of_association_chain
+    @organization
+  end
 end

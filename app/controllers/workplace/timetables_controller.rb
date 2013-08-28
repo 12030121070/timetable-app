@@ -50,10 +50,4 @@ class Workplace::TimetablesController < Workplace::WorkplaceController
       success.html { render :partial => 'timetable', :locals => { :timetable => resource } and return }
     end
   end
-
-  protected
-
-  def begin_of_association_chain
-    @organization
-  end
 end

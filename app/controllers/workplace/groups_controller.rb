@@ -17,10 +17,4 @@ class Workplace::GroupsController < Workplace::WorkplaceController
   def destroy
     destroy!(:notice => 'Группа удалена.') { request.referer }
   end
-
-  protected
-
-  def begin_of_association_chain
-    @organization
-  end
 end

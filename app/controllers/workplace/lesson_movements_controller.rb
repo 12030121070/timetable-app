@@ -18,10 +18,6 @@ class Workplace::LessonMovementsController < Workplace::WorkplaceController
 
   protected
 
-  def begin_of_association_chain
-    @organization
-  end
-
   def build_resource
   end
 

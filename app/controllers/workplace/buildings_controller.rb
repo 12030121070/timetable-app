@@ -36,10 +36,4 @@ class Workplace::BuildingsController < Workplace::WorkplaceController
       success.html { render :partial => 'building', :locals => { :building => resource } and return }
     end
   end
-
-  protected
-
-  def begin_of_association_chain
-    @organization
-  end
 end
