@@ -67,7 +67,8 @@ class Organization < ActiveRecord::Base
     subscriptions.actual.sum(:groups_count)
   end
 
-private
+  private
+
   def format_of_domain
     errors.add(:subdomain, 'Неверный домен') unless self.subdomain.match(/\A[a-z0-9]+[a-z0-9-]+[a-z0-9]+\Z/)
   end

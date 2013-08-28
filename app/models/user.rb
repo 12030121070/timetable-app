@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   normalize_attributes :email
 
   after_create :activate_memberships
+  #after_create :create_organization, :unless => :has_organization?
 
   def has_organization?
     memberships.joins(:organization).any?
@@ -29,5 +30,13 @@ class User < ActiveRecord::Base
     Membership.inactive.where(:email => email).each { |membership|
       membership.update_attributes :user_id => id, :email => nil
     }
+  end
+
+  def create_organization
+    organization = Organization.new
+    organization.save(:validate => false)
+    organization.set_owner self
+
+    true
   end
 end

@@ -21,7 +21,8 @@ class Workplace::OrganizationsController < Workplace::WorkplaceController
     end
   end
 
-private
+  protected
+
   def begin_of_association_chain
     current_user
   end
