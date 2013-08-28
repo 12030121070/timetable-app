@@ -7,6 +7,7 @@ class Workplace::LogosController < Workplace::WorkplaceController
 
   def create
     create! do |success, failure|
+      success.html { redirect_to workplace_organization_path, :notice => 'Логотип успешно сохранен.' and return }
       failure.html { redirect_to workplace_organization_path, :alert => "Ошибка при загрузке картинки (#{resource.errors.messages.values.join(', ')})." and return }
     end
   end
