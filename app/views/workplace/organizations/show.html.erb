@@ -9,7 +9,7 @@
   <%= image_tag @organization.logo.image.url, :class => 'to_left', :style => 'margin: 0 15px 0 0' if @organization.logo %>
   <%= link_to "удалить логотип", workplace_logo_path, :method => :delete %>
 <% else %>
-  <%= simple_form_for @organization.build_logo, :url => workplace_logo_path, :html => { :style => 'width: 700px; margin: 0 0 15px 0' } do |f| %>
+  <%= simple_form_for @organization.build_logo, :url => workplace_logo_path, :html => { :style => 'width: 735px; margin: 0 0 15px 0' } do |f| %>
     <div class="buttons to_right">
       <%= f.submit "Сохранить логотип", :class => 'yellow_button', :style => 'margin: 0' %>
     </div>
