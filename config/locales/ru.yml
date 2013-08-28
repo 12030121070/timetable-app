@@ -97,6 +97,13 @@ ru:
         password: Пароль
         remember_me: Запомнить меня
 
+    errors:
+      models:
+        logo:
+          attributes:
+            image_file_size:
+              less_than: 'слишком большой размер файла, должен быть не больше 1Mb'
+
   app:
     title: 'Расписание'
 

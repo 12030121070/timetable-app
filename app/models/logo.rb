@@ -12,6 +12,7 @@ class Logo < ActiveRecord::Base
 
 private
   def dimensions
+    return unless ['image/jpeg', 'image/jpg', 'image/png'].include?(image_content_type)
     temp_file = image.queued_for_write[:original]
     unless temp_file.nil?
       dimensions = Paperclip::Geometry.from_file(temp_file)
