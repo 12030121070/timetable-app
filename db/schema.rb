@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826045015) do
+ActiveRecord::Schema.define(:version => 20130828062040) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -154,6 +154,18 @@ ActiveRecord::Schema.define(:version => 20130826045015) do
   add_index "lessons", ["discipline_id"], :name => "index_lessons_on_discipline_id"
   add_index "lessons", ["lesson_time_id"], :name => "index_lessons_on_lesson_time_id"
 
+  create_table "logos", :force => true do |t|
+    t.integer  "organization_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "logos", ["organization_id"], :name => "index_logos_on_organization_id"
+
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -182,10 +194,8 @@ ActiveRecord::Schema.define(:version => 20130826045015) do
     t.string   "phone"
     t.string   "site"
     t.string   "subdomain"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "logotype_uid"
-    t.string   "logotype_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "subscriptions", :force => true do |t|

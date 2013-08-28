@@ -59,7 +59,9 @@ ru:
         phone: Телефон
         subdomain: Доменное имя
         site: Сайт
-        logotype: Логотип организации
+
+      logo:
+        image: Логотип организации
 
       organization_holiday:
         date: Дата праздника

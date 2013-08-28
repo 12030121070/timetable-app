@@ -1,18 +1,25 @@
 <h2 class='thin'><%= @organization.title %></h2>
-<%= image_tag @organization.logotype.url, :class => 'to_left', :style => 'margin: 0 15px 0 0' if @organization.logotype_uid? %>
 <p>Электронная почта: <%= mail_to @organization.email %></p>
 <p>Телефон: <%= @organization.phone %></p>
 <p>Сайт организации: <%= link_to @organization.site, @organization.site, :target => '_blank' %></p>
 <p>Ссылка на расписание: <%= link_to "http://#{@organization.subdomain}.fliptable.ru", "http://#{@organization.subdomain}.fliptable.ru", :target => '_blank' %></p>
 
-<%= simple_form_for @organization, :url => workplace_organization_path do |f| %>
-  <div class="buttons to_right">
-    <%= f.submit "Сохранить логотип", :class => 'yellow_button' %>
-  </div>
+<h6>Логотип организации:</h6>
+<% if @organization.logo %>
+  <%= image_tag @organization.logo.image.url, :class => 'to_left', :style => 'margin: 0 15px 0 0' if @organization.logo %>
+  <%= link_to "удалить логотип", workplace_logo_path, :method => :delete %>
+<% else %>
+  <%= simple_form_for @organization.build_logo, :url => workplace_logo_path, :html => { :style => 'width: 700px; margin: 0 0 15px 0' } do |f| %>
+    <div class="buttons to_right">
+      <%= f.submit "Сохранить логотип", :class => 'yellow_button', :style => 'margin: 0' %>
+    </div>
 
-  <%= f.input :logotype, :as => :file, :hint => 'Необходима картинка размером 128x128' %>
+    <%= f.input :image, :as => :file, :hint => 'Необходима картинка размером не менее 128x128', :label => false %>
+  <% end %>
 <% end %>
 
+
+<div style='width: 100%; overflow: hidden; padding: 15px 0 0 0'>
 <%= link_to 'редактировать',
             edit_workplace_organization_path,
             :class => 'yellow_button in_frame',
@@ -38,3 +45,4 @@
             'data-target' => '',
             'data-kind' => 'update_record'
           %>
+</div>

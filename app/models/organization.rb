@@ -1,11 +1,13 @@
 # encoding: utf-8
 
 class Organization < ActiveRecord::Base
-  attr_accessible :email, :phone, :site, :subdomain, :title, :logotype,
+  attr_accessible :email, :phone, :site, :subdomain, :title,
     :organization_holidays_attributes, :lesson_times_attributes
 
   validates_presence_of :email, :title, :subdomain
   validates_uniqueness_of :subdomain
+
+  has_one :logo,                   :dependent => :destroy
 
   has_many :buildings,             :dependent => :destroy, :order => 'buildings.title ASC'
   has_many :disciplines,           :dependent => :destroy, :order => 'disciplines.title ASC'
@@ -25,11 +27,6 @@ class Organization < ActiveRecord::Base
 
   accepts_nested_attributes_for :lesson_times, :allow_destroy => true
   accepts_nested_attributes_for :organization_holidays, :allow_destroy => true
-
-  image_accessor :logotype
-  validates_property :mime_type, :of => :logotype, :in => %w(image/png image/jpg image/jpeg)
-  validates_property :width, :of => :logotype, :in => [128]
-  validates_property :height, :of => :logotype, :in => [128]
 
   normalize_attributes :phone, :site, :title
   normalize_attribute :subdomain, :with => [:strip] do |value|

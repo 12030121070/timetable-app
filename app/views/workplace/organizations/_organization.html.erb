@@ -2,7 +2,7 @@
   <div class="organization_info data_presentation">
     <%= link_to workplace_organization_path do %>
       <span>
-        <%= image_tag @organization.logotype.thumb('32x32').url if @organization.logotype_uid? %>
+        <%= image_tag @organization.logo.image.url(:thumb) if @organization.logo.present? && @organization.logo.persisted? %>
       </span>
       <b><%= @organization.title %></b>
     <% end %>
