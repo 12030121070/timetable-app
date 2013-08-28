@@ -1,4 +1,4 @@
-<%= simple_nested_form_for resource, :url => [:workplace, @organization], :html => { :multipart => true, :class => 'scrollable' } do |f| %>
+<%= simple_nested_form_for resource, :url => workplace_organization_path, :html => { :multipart => true, :class => 'scrollable' } do |f| %>
   <%= f.input :title, :input_html => { :class => 'inline_edit wide large', :placeholder => 'Название организации' } %>
   <%= f.input :email, :input_html => { :class => 'inline_edit', :placeholder => 'Электронная почта' } %>
   <%= f.input :phone, :input_html => { :class => 'inline_edit', :placeholder => 'Телефон' } %>

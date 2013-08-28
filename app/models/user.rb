@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   normalize_attributes :email
 
   after_create :activate_memberships
-  #after_create :create_organization, :unless => :has_organization?
+  after_create :create_organization, :unless => :has_organization?
 
   def has_organization?
     memberships.joins(:organization).any?

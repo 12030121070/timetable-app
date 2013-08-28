@@ -1,7 +1,7 @@
 class Workplace::OrganizationLessonTimesController < Workplace::WorkplaceController
   def update
     if @organization.update_attributes(params[:organization])
-      redirect_to workplace_organization_path(@organization)
+      redirect_to workplace_organization_path
     else
       render :edit
     end

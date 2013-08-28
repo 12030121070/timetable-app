@@ -6,13 +6,13 @@ user = User.find_or_initialize_by_email('demo@demo.de') do |u|
   u.save!
 end
 
-organization = user.organizations.find_or_initialize_by_title('Томский Государственный Университет Систем Управления и Радиоэлектроники') do |o|
+organization = user.organization.tap do |o|
+  o.title = 'Томский Государственный Университет Систем Управления и Радиоэлектроники'
   o.email = 'mail@tusur.ru'
   o.phone = '(3822) 51-05-30'
   o.site = 'http://tusur.ru'
   o.subdomain = 'tusur'
   o.save!
-  o.set_owner(user)
 end
 
 gk = organization.buildings.find_or_initialize_by_title('Главный корпус') do |b|

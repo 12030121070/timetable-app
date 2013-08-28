@@ -13,7 +13,7 @@ TimetableApp::Application.routes.draw do
   end
 
   namespace :workplace do
-    resources :organizations, :except => :index do
+    resource :organization, :only => [:edit, :update, :show] do
       get :edit_holidays, :to => 'organization_holidays#edit'
       put :update_holidays, :to => 'organization_holidays#update'
 

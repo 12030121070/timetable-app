@@ -1,6 +1,6 @@
 <h2 class='thin'>Праздники организации</h2>
 
-<%= simple_nested_form_for @organization, :url => workplace_organization_update_holidays_path(@organization), :remote => true, :html => { :class => 'scrollable' } do |f| %>
+<%= simple_nested_form_for @organization, :url => update_holidays_workplace_organization_path, :remote => true, :html => { :class => 'scrollable' } do |f| %>
   <%= f.link_to_add '+ добавить праздник', :organization_holidays, :class => 'yellow_button', :data => { :target => '#organization_holidays' } %>
 
   <div id="organization_holidays">

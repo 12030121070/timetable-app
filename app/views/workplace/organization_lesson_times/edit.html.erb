@@ -1,5 +1,5 @@
 <h2 class='thin'>Расписание звонков организации</h2>
-<%= simple_nested_form_for @organization, :url => workplace_organization_update_lesson_times_path(@organization), :remote => true do |f| %>
+<%= simple_nested_form_for @organization, :url => update_lesson_times_workplace_organization_path, :remote => true do |f| %>
   <div class="days_wrapper tabs">
     <ul class='day_nav'>
       <% (1..7).each do |cwday_number| %>
