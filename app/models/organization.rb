@@ -37,7 +37,7 @@ class Organization < ActiveRecord::Base
   end
 
   before_validation :set_lesson_times_number
-  validate :format_of_domain
+  validate :format_of_domain, :if => :subdomain?
 
   after_create :create_lesson_times
 
