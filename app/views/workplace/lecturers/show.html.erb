@@ -1,12 +1,12 @@
-<% if @table.any? %>
-  <% weeks = @lecturer.beginning_of_weeks %>
-  <% current = weeks.index(@beginning_of_week.to_date) %>
-  <% prev_week = current.zero? ? nil : weeks[current-1]   %>
-  <% next_week = current+1 == weeks.count ? nil : weeks[current+1] %>
+<h2 class='thin'>Загруженность лектора <%= @lecturer %></h1>
 
-  <h2 class='thin'>Загруженность лектора <%= @lecturer %></h1>
+<div class="scrollable">
+  <% if @table.any? %>
+    <% weeks = @lecturer.beginning_of_weeks %>
+    <% current = weeks.index(@beginning_of_week.to_date) %>
+    <% prev_week = current.zero? ? nil : weeks[current-1]   %>
+    <% next_week = current+1 == weeks.count ? nil : weeks[current+1] %>
 
-  <div class="scrollable">
     <div class="inner_navigation">
       <div class="inner_wrapper">
         <% if prev_week %>
@@ -82,6 +82,10 @@
       <%= link_to "Готово", :back, :class => 'cancel yellow_button' %>
     </div>
     <div class='bottom_empty'></div>
-  </div>
-<% else %>
-<% end %>
+  <% else %>
+    <div class="empty">
+      У лектора нет занятий.
+    </div>
+  <% end %>
+</div>
+
