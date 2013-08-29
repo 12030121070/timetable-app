@@ -30,7 +30,7 @@ class Day < ActiveRecord::Base
   end
 
   def lesson_times
-    timetable.lesson_times.for_day(wday)
+    timetable.lesson_times.for_day(cwday)
   end
 
   def set_status
