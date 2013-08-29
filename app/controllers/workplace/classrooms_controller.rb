@@ -9,4 +9,10 @@ class Workplace::ClassroomsController < Workplace::WorkplaceController
       @table = @classroom.table(@beginning_of_week, false)
     }
   end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end

@@ -33,4 +33,10 @@ class Workplace::LessonsController < Workplace::WorkplaceController
   def destroy
     destroy! { redirect_to [:workplace, @timetable, @week] and return }
   end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end

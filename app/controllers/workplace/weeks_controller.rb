@@ -22,4 +22,10 @@ class Workplace::WeeksController < Workplace::WorkplaceController
       send_data Pdf::Week.new(@week).render, :type => 'application/pdf', :filename => 'week.pdf', :disposition => :inline and return
     }
   end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end

@@ -10,4 +10,10 @@ class Workplace::SubscriptionsController < Workplace::WorkplaceController
   def find_tariff
     @tariff = Tariff.instance
   end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end

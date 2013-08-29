@@ -20,4 +20,10 @@ class Workplace::LessonTimesController < Workplace::WorkplaceController
       render :text => "#{object.number} нет занятия в это время"
     end
   end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end

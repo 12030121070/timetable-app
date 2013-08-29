@@ -25,4 +25,8 @@ class Workplace::CopyWeekController < Workplace::WorkplaceController
     @timetable    = @organization.timetables.find(params[:timetable_id])
     @week         = @timetable.weeks.find(params[:week_id])
   end
+
+  def begin_of_association_chain
+    @organization
+  end
 end

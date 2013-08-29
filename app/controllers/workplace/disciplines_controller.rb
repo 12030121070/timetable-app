@@ -14,4 +14,10 @@ class Workplace::DisciplinesController < Workplace::WorkplaceController
       success.html { render :partial => 'discipline', :locals => { :discipline => resource } and return }
     end
   end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end
