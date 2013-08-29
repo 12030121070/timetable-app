@@ -1,49 +1,44 @@
 <h2 class='thin'><%= @lecturer.full_name %></h2>
 <h3 class='thin'>Расписание преподавателя</h3>
 
-<ul class='week_list'>
-  <% @lecturer.beginning_of_weeks.each do |starts_on| %>
-    <li>
-      <%= link_to starts_on, organization_lecturer_path(@lecturer, :week => starts_on) %>
-    </li>
-  <% end %>
-</ul>
+<% weeks = @lecturer.beginning_of_weeks %>
+<% current = weeks.index(@week.to_date) %>
+<% prev_week = current.zero? ? nil : weeks[current-1]   %>
+<% next_week = current+1 == weeks.count ? nil : weeks[current+1] %>
 
-<table>
-  <% @table.each do |date, hash| %>
-    <% next if hash.empty? %>
-
-    <tr>
-      <td rowspan='<%= hash.values.count %>'>
-        <span class='day_name'><%= l date, :format => '%a' %></span>
-        <span class='date'><%= l date, :format => :long %></span>
-      </td>
-
-      <td>
-        <%= hash.to_a.first.last[:starts_at] %>
-        <%= hash.to_a.first.last[:ends_at] %>
-      </td>
-
-      <td>
-        <% hash.to_a.first.last[:lessons].each do |lesson| %>
-          <%= lesson %>
-        <% end %>
-      </td>
-    </tr>
-
-    <% hash.to_a[1..-1].each do |_, data| %>
-      <tr>
-        <td>
-          <%= data[:starts_at] %>
-          <%= data[:ends_at] %>
-        </td>
-
-        <td>
-          <% data[:lessons].each do |lessons| %>
-            <%= lessons %>
-          <% end %>
-        </td>
-      </tr>
+<div class="inner_navigation">
+  <div class="inner_wrapper">
+    <% if prev_week %>
+      <%= link_to "&#x2039;".html_safe, organization_lecturer_path(@lecturer, :week => prev_week), :class => 'prev grey_button' %>
+    <% else %>
+      <%= link_to "&#x2039;".html_safe, '#', :class => 'inactive faded prev grey_button' %>
     <% end %>
-  <% end %>
+    <div class="current_week"><%= l @week.to_date.beginning_of_week, :format => '%d %B' %> &mdash; <%= l @week.to_date.end_of_week, :format => '%d %B' %></div>
+    <% if next_week %>
+      <%= link_to "&#x203A;".html_safe, organization_lecturer_path(@lecturer, :week => next_week), :class => 'next grey_button'%>
+    <% else %>
+      <%= link_to "&#x203A;".html_safe, '#', :class => 'inactive faded next grey_button'%>
+    <% end %>
+  </div>
+</div>
+
+<%= raise @table.values.first.keys.inspect %>
+<table class='lecturer_table'>
+  <thead>
+    <tr>
+      <% @table.keys.each do |day| %>
+        <th>
+          <span class='day_name'><%= l day, :format => '%a' %></span>
+          <span class='date'><%= l day, :format => :long %></span>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @table.values.each_with_index do |day, index| %>
+        <td><%= day.inspect %></td>
+      <% end %>
+    </tr>
+  </tbody>
 </table>

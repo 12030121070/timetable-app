@@ -21,4 +21,3 @@ private
     params.merge! :organization_id => request.subdomain
   end
 end
-

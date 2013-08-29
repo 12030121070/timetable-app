@@ -8,7 +8,7 @@
 <% end %>
 
 <%= content_for :content do %>
-  <h1 class="thin"><%= image_tag @organization.logo.image.url(:thumb), :width => 32, :height => 32 if @organization.logo.image %><%= @organization.title %></h1>
+  <h1 class="thin"><a href='/' title='На главную'><%= image_tag @organization.logo.image.url(:thumb), :width => 32, :height => 32 if @organization.logo.image %><%= @organization.title %></a></h1>
   <%= yield %>
 <% end %>
 
