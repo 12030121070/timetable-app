@@ -1,18 +1,20 @@
 # encoding: utf-8
 
 class Week < ActiveRecord::Base
+  extend Enumerize
+
   attr_accessible :number, :starts_on, :parity
 
   belongs_to :timetable
 
-  has_many :days, :order => 'days.date ASC'
-  has_many :lessons, :through => :days
+  has_many :days, :dependent => :destroy, :order => 'days.date ASC'
+
+  has_many :lessons,    :through => :days
   has_many :study_days, :through => :lessons, :source => :day, :uniq => true, :order => 'days.date ASC'
 
   has_one :organization, :through => :timetable
 
-  extend Enumerize
-  enumerize :parity, in: [:odd, :even], predicates: true
+  enumerize :parity, :in => [:odd, :even], predicates: true
 
   scope :even, -> { where(parity: :even) }
   scope :odd, -> { where(parity: :odd) }
@@ -22,6 +24,10 @@ class Week < ActiveRecord::Base
 
   def to_s
     "неделя #{number}, #{starts_on}"
+  end
+
+  def ends_on
+    starts_on.end_of_week
   end
 
   def copy_to(recipients)

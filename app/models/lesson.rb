@@ -11,20 +11,19 @@ class Lesson < ActiveRecord::Base
   belongs_to :lesson_time
 
   has_many :classroom_lessons, :dependent => :destroy
+  has_many :group_lessons,     :dependent => :destroy
+  has_many :lecturer_lessons,  :dependent => :destroy
+
   has_many :classrooms, :through => :classroom_lessons
+  has_many :groups,     :through => :group_lessons
+  has_many :lecturers,  :through => :lecturer_lessons
 
-  has_many :group_lessons, :dependent => :destroy
-  has_many :groups, :through => :group_lessons
-
-  has_many :lecturer_lessons, :dependent => :destroy
-  has_many :lecturers, :through => :lecturer_lessons
-
-  has_one :week, :through => :day
   has_one :timetable, :through => :week
+  has_one :week,      :through => :day
 
   accepts_nested_attributes_for :classroom_lessons, :allow_destroy => true
-  accepts_nested_attributes_for :group_lessons, :allow_destroy => true
-  accepts_nested_attributes_for :lecturer_lessons, :allow_destroy => true
+  accepts_nested_attributes_for :group_lessons,     :allow_destroy => true
+  accepts_nested_attributes_for :lecturer_lessons,  :allow_destroy => true
 
   validates_presence_of :discipline, :kind, :subgroup
 
