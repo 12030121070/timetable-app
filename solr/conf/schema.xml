@@ -63,7 +63,6 @@
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.StandardFilterFactory"/>
-        <filter class="solr.LengthFilterFactory" min="3" max='256' />
         <filter class="solr.LowerCaseFilterFactory"/>
         <filter class="solr.PorterStemFilterFactory"/>
         <filter class='solr.WordDelimiterFilterFactory'
