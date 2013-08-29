@@ -14,7 +14,11 @@ class Workplace::LessonCopiesController < Workplace::WorkplaceController
         @lesson.copy_to day, lesson_time
       end
 
-      redirect_to [:workplace, @timetable, @week] and return
+      pdf_week = Pdf::Week.new(@week)
+      @table = pdf_week.table_data
+      pdf_week.set_colspans(@table)
+
+      render :partial => 'workplace/weeks/week_timetable', :notice => 'Урок скопирован.' and return
     end
   end
 

@@ -23,6 +23,7 @@ class Workplace::LessonsController < Workplace::WorkplaceController
       pdf_week = Pdf::Week.new(@week)
       @table = pdf_week.table_data
       pdf_week.set_colspans(@table)
+
       success.html {
         render :partial => 'workplace/weeks/week_timetable' and return
       }
