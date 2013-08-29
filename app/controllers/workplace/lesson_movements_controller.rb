@@ -17,7 +17,8 @@ class Workplace::LessonMovementsController < Workplace::WorkplaceController
       @table = pdf_week.table_data
       pdf_week.set_colspans(@table)
 
-      render :partial => 'workplace/weeks/week_timetable', :notice => 'Урок перенесен.' and return
+      #render :partial => 'workplace/weeks/week_timetable', :notice => 'Урок перенесен.' and return
+      render :partial => 'workplace/weeks/week_timetable' and return
     end
   end
 

@@ -1,5 +1,12 @@
 <h2 class='thin'>Копирование недели</h2>
 
+<div class="important_wrapper import_help">
+  <div class="inner_wrapper">
+    <p>Все занятия на неделях, на которые предполагается копирование, будут заменены занятиями с копируемой недели.</p>
+    <p>&nbsp;</p>
+  </div>
+</div>
+
 <div class="scrollable">
   <div class='copy_week_header'><span class='bold'>Неделя <%= @week.number %></span> (<%= l @week.starts_on.beginning_of_week, :format => '%e %B' %> &mdash; <%= l @week.starts_on.end_of_week, :format => '%e %B' %>) скопировать на:</div>
 
@@ -12,7 +19,7 @@
     <%= link_to "Сброс",  '#', :id => 'uncheck', :class => 'copy_link uncheck' %>
   </div>
 
-  <%= form_tag workplace_timetable_week_copy_path(@timetable, @week), :method => :post, :class => 'copy_week' do %>
+  <%= form_tag workplace_timetable_week_copy_path(@timetable, @week), :method => :post, :class => 'copy_week', :remote => true do %>
     <% @recipients.group_by(&:parity).each do |parity, weeks| %>
       <div class="weeks_wrapper">
         <h6><%= Hash[Week.parity.options.map(&:reverse)][parity] %> недели</h6>

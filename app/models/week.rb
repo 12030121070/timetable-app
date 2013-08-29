@@ -32,6 +32,8 @@ class Week < ActiveRecord::Base
 
   def copy_to(recipients)
     recipients.each do |recipient|
+      recipient.lessons.map(&:destroy)
+
       self.days.each do |day|
         recipient_day = recipient.days.select{|d| d.date.cwday == day.date.cwday }.first
         day.lessons.each do |lesson|

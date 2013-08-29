@@ -10,13 +10,17 @@ class Workplace::CopyWeekController < Workplace::WorkplaceController
     begin
       recipients = @timetable.weeks.find(params[:recipients])
       @week.copy_to(recipients)
-      flash[:notice] = 'Занятия успешно скопированы.'
+      #flash[:notice] = 'Занятия успешно скопированы.'
     rescue => e
       logger.error "ERROR: #{e}"
-      flash[:alert] = 'Во время копирования произошла ошибка.'
+      #flash[:alert] = 'Во время копирования произошла ошибка.'
     end
 
-    redirect_to request.referer
+    pdf_week = Pdf::Week.new(@week)
+    @table = pdf_week.table_data
+    pdf_week.set_colspans(@table)
+
+    render :partial => 'workplace/weeks/week_timetable' and return
   end
 
   private
