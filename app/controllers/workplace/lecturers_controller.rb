@@ -43,4 +43,10 @@ class Workplace::LecturersController < Workplace::WorkplaceController
       success.html { render :partial => 'lecturer', :locals => { :lecturer => resource } and return }
     end
   end
+
+  protected
+
+  def begin_of_association_chain
+    @organization
+  end
 end
