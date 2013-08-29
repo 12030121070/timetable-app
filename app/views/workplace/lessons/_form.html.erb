@@ -26,7 +26,7 @@
       <span class="error"><%= f.object.errors.messages[:subgroup].join(', ') %></span>
     <% end %>
     <ul>
-      <% Hash[Lesson.subgroup.values.map{|v| [v.to_s, v.text]}].each do |value, title| %>
+      <% @lesson.available_subgroup_options.each do |title, value|  %>
         <li class='<%= value %> <%= 'checked' if f.object.subgroup == value %>' data-value='<%= value %>'><%= title %></li>
       <% end %>
     </ul>
