@@ -3,18 +3,18 @@
   copy_check.on 'click', ->
     $this = $(this)
     checkbox = $this.find('input')
-    if checkbox.prop('checked')
-      checkbox.prop('checked', false)
+    if checkbox.attr('checked') == 'checked'
+      checkbox.removeAttr('checked')
       $this.removeClass('active')
     else
-      checkbox.prop('checked', true)
+      checkbox.prop('checked', 'checked').attr('checked', 'checked')
       $this.addClass('active')
 
   move_radio = $('.move_radio').parent().css('cursor', 'pointer')
   move_radio.on 'click', ->
     $this = $(this)
     radio = $this.find('input')
-    unless radio.prop('checked')
+    unless radio.attr('checked') == 'checked'
       move_radio.removeClass('active')
       $this.addClass('active')
-      radio.prop('checked', true)
+      radio.prop('checked', 'checked')
