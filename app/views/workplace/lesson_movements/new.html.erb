@@ -10,7 +10,7 @@
     <span class="lecturers"><%= @lesson.lecturers.map{ |l| link_to(l, workplace_lecturer_path(l), 'data-parent' => '.frame_container', :class => 'in_frame', :remote => true) }.join(', ').html_safe %></span>
   </div>
 
-  <%= form_tag polymorphic_path([:workplace, @timetable, @week, @day, @lesson, :movements]) do %>
+  <%= form_tag polymorphic_path([:workplace, @timetable, @week, @day, @lesson, :movements]), :remote => true do %>
     <table class='slave_table'>
       <% @week.cells.each do |day, lesson_times| %>
         <% next if lesson_times.empty? %>
