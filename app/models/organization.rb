@@ -34,9 +34,8 @@ class Organization < ActiveRecord::Base
   end
 
   before_validation :set_lesson_times_number
-  validate :format_of_domain, :if => :subdomain?
 
-  after_create :create_lesson_times
+  validate :format_of_domain, :if => :subdomain?
 
   def set_owner(user)
     memberships.create! :user_id => user.id, :role => :owner
@@ -75,18 +74,6 @@ class Organization < ActiveRecord::Base
       lts.select{|lt| lt.starts_at.present?}.sort_by{|lt| Time.zone.parse(lt.starts_at)}.each_with_index do |lt, index|
         lt.number = index+1
       end
-    end
-  end
-
-  def create_lesson_times
-    (1..6).each do |day|
-      lesson_times.create :day => day, :number => 1, :starts_at =>  '8:50', :ends_at => '10:25'
-      lesson_times.create :day => day, :number => 2, :starts_at => '10:40', :ends_at => '12:15'
-      lesson_times.create :day => day, :number => 3, :starts_at => '13:15', :ends_at => '14:50'
-      lesson_times.create :day => day, :number => 4, :starts_at => '15:00', :ends_at => '16:35'
-      lesson_times.create :day => day, :number => 5, :starts_at => '16:45', :ends_at => '18:20'
-      lesson_times.create :day => day, :number => 6, :starts_at => '18:30', :ends_at => '20:05'
-      lesson_times.create :day => day, :number => 7, :starts_at => '20:15', :ends_at => '21:50'
     end
   end
 end
