@@ -66,6 +66,7 @@ frame_handler = (parent, response, options = {}) ->
     init_timepicker()
     init_lesson_times()
     init_check_helper()
+    init_copy_and_move()
 
     $(window).on 'beforeunload', ->
       return 'Не сохраненные данные будет потеряны!' if parent.hasClass('not_active')
@@ -96,6 +97,7 @@ frame_handler = (parent, response, options = {}) ->
           init_timepicker()
           init_lesson_times()
           init_check_helper()
+          init_copy_and_move()
         else
           _.container_hide()
           if options.kind == 'new_record'

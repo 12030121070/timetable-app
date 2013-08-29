@@ -1,33 +1,57 @@
-<%= form_tag polymorphic_path([:workplace, @timetable, @week, @day, @lesson, :movements]) do %>
-  <table>
-    <% @week.cells.each do |day, lesson_times| %>
-      <% next if lesson_times.empty? %>
-      <tr>
-        <th rowspan="<%= lesson_times.count %>" class="abbr_day_name">
-          <b><%= day.day_name %><br /><br /><%= l(@week.days.first.date + day.date.day - 1.days, :format => '%e %b') %></b>
-        </th>
-        <th class="lesson_interval">
-          <p><%= lesson_times.first.starts_at %></p>
-          <p><%= lesson_times.first.ends_at %></p>
-        </th>
-        <td>
-          <%= radio_button_tag "cell", "#{day.id}_#{lesson_times.first.id}" if @lesson.available_cells_for_copy_and_move[day].include?(lesson_times.first) %>
-        </td>
-      </tr>
+<h2 class='thin'>Перемещение занятия</h2>
 
-      <% lesson_times[1..-1].each do |lesson_time| %>
+<div class="scrollable">
+  <div class="lesson_wrapper <%= @lesson.kind %>" style='margin: 0 0 20px 0; width: 216px;'>
+    <% unless @lesson.subgroup_whole? %>
+      <span class='subgroup_<%= @lesson.subgroup %>'>(<span><%= @lesson.subgroup_text %></span>)</span>
+    <% end %>
+    <span class='discipline' title='<%= @lesson.discipline.title %>'><%= @lesson.discipline.abbr %></span>
+    <span class='kind'><%= @lesson.kind_text %> в <%= @lesson.classrooms.map{|c| link_to(c, workplace_classroom_path(c), 'data-parent' => '.frame_container', :class => 'in_frame', :remote => true)}.join(', ').html_safe %></span>
+    <span class="lecturers"><%= @lesson.lecturers.map{ |l| link_to(l, workplace_lecturer_path(l), 'data-parent' => '.frame_container', :class => 'in_frame', :remote => true) }.join(', ').html_safe %></span>
+  </div>
+
+  <%= form_tag polymorphic_path([:workplace, @timetable, @week, @day, @lesson, :movements]) do %>
+    <table class='slave_table'>
+      <% @week.cells.each do |day, lesson_times| %>
+        <% next if lesson_times.empty? %>
         <tr>
-          <th class="lesson_interval">
-            <p><%= lesson_time.starts_at %></p>
-            <p><%= lesson_time.ends_at %></p>
-          </th>
-          <td>
-            <%= radio_button_tag "cell", "#{day.id}_#{lesson_time.id}" if @lesson.available_cells_for_copy_and_move[day].include?(lesson_time) %>
+          <td rowspan='<%= lesson_times.count %>' class='no_bg day'>
+            <span class='week_day'><%= day.day_name %></span>
+            <span class='date'><%= l(day.date, :format => '%e.%m') %></span>
+          </td>
+
+          <td class='lesson_time'>
+            <div class="time">
+              <span class="hours"><%= l Time.zone.parse(lesson_times.first.starts_at), :format => '%k' %></span><span class="minutes"><%= l Time.zone.parse(lesson_times.first.starts_at), :format => '%M' %></span>&mdash;
+              <span class="hours"><%= l Time.zone.parse(lesson_times.first.ends_at), :format => '%k' %></span><span class="minutes"><%= l Time.zone.parse(lesson_times.first.ends_at), :format => '%M' %></span>
+            </div>
+          </td>
+
+          <td class='lesson'>
+            <%= radio_button_tag "cell", "#{day.id}_#{lesson_times.first.id}", false, :class => 'move_radio' if @lesson.available_cells_for_copy_and_move[day].include?(lesson_times.first) %>
           </td>
         </tr>
-      <% end %>
-    <% end %>
-  </table>
 
-  <%= submit_tag 'apply'  %>
-<% end %>
+        <% lesson_times[1..-1].each do |lesson_time| %>
+          <tr>
+            <td class='lesson_time'>
+              <div class="time">
+                <span class="hours"><%= l Time.zone.parse(lesson_time.starts_at), :format => '%k' %></span><span class="minutes"><%= l Time.zone.parse(lesson_time.starts_at), :format => '%M' %></span>&mdash;
+                <span class="hours"><%= l Time.zone.parse(lesson_time.ends_at), :format => '%k' %></span><span class="minutes"><%= l Time.zone.parse(lesson_time.ends_at), :format => '%M' %></span>
+              </div>
+            </td>
+            <td class='lesson'>
+              <%= radio_button_tag "cell", "#{day.id}_#{lesson_time.id}", false, :class => 'move_radio' if @lesson.available_cells_for_copy_and_move[day].include?(lesson_time) %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+
+    <div class="buttons sticky bottom">
+      <%= submit_tag "Сохранить", :class => 'yellow_button' %>
+      <%= link_to "Отмена", :back, :class => 'cancel grey_button' %>
+    </div>
+    <div class='bottom_empty'></div>
+  <% end %>
+</div>

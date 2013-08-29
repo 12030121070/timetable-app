@@ -19,5 +19,6 @@
  * = require 'commons/date_picker'
  * = require 'commons/holiday_border'
  * = require 'commons/check_helper'
+ * = require 'commons/copy_and_move'
  * = require_tree .
  */

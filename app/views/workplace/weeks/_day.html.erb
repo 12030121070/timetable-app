@@ -2,7 +2,7 @@
 <tr>
   <td rowspan="<%= row[0].rowspan %>" class='day'>
     <span class="week_day"><%= row[0].day.day_name %></span>
-    <span class="date"><%= l row[0].day.date, :format => '%d.%m' %></span>
+    <span class="date"><%= l row[0].day.date, :format => '%e.%m' %></span>
     <% if row[0].day.today? %>
       <span class="today">Сегодня</span>
     <% end %>

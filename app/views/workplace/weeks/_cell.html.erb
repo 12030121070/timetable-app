@@ -33,9 +33,25 @@
             :title => 'редактировать',
             :remote => true
           %>
-        <%= link_to 'скопировать', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_copy]), :class => 'grey_button faded copy' %>
-        <%= link_to 'переместить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_movement]), :class => 'grey_button faded move' %>
-        <%= link_to 'удалить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson]),  :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
+          <%= link_to 'скопировать',
+                      polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_copy]),
+                      :class => 'grey_button faded copy in_frame',
+                      'data-parent' => '.workplace_wrapper',
+                      'data-target' => ".week_timetable",
+                      'data-kind'   => 'update_record',
+                      :title => 'скопировать',
+                      :remote => true
+          %>
+          <%= link_to 'переместить',
+                      polymorphic_path([:workplace, @timetable, @week, cell.day, lesson, :new_movement]),
+                      :class => 'grey_button faded move in_frame',
+                      'data-parent' => '.workplace_wrapper',
+                      'data-target' => ".week_timetable",
+                      'data-kind'   => 'update_record',
+                      :title => 'переместить',
+                      :remote => true
+          %>
+          <%= link_to 'удалить', polymorphic_path([:workplace, @timetable, @week, cell.day, lesson]),  :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' %>
       </div>
     </div>
   <% end %>

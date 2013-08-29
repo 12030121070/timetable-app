@@ -454,6 +454,9 @@ div.status
     font-size: 12px
     width: auto
 
+    .active
+      background: #FFBE00
+
     tr:nth-child(odd)
       background: #fff
 
@@ -498,6 +501,14 @@ div.status
 
     .lesson
       +min-width(100px)
+      text-align: left !important
+      padding: 0 7px
+
+    .lesson_time
+      .time
+        +min-height(16px)
+        height: 16px !important
+        padding: 7px 0
 
 .sticky
   &.bottom
@@ -601,7 +612,7 @@ div.status
       //padding: 0
       //text-decoration: none
 
-.week_timetable
+.week_timetable, .slave_table
   width: auto
 
   tr:nth-child(odd)
@@ -723,57 +734,57 @@ div.status
   .subgroup_b
     float: right
 
-  .lesson_wrapper
-    +clearfix
-    height: 70px
-    padding: 10px
-    text-align: left
+.lesson_wrapper
+  +clearfix
+  height: 70px
+  padding: 10px
+  text-align: left
 
-    &.lecture
-      background: #DDECCF
-    &.practice
-      background: #D8F0F0
-    &.laboratory
-      background: #EBE1F4
-    &.n1
-      background: #F8EAEA
-    &.n2
-      background: #FBF3F3
+  &.lecture
+    background: #DDECCF
+  &.practice
+    background: #D8F0F0
+  &.laboratory
+    background: #EBE1F4
+  &.n1
+    background: #F8EAEA
+  &.n2
+    background: #FBF3F3
 
-    .discipline
-      display: block
-      font-size: 14px
-      line-height: 16px
-      margin: 0 0 3px 0
+  .discipline
+    display: block
+    font-size: 14px
+    line-height: 16px
+    margin: 0 0 3px 0
 
-    .kind
-      display: block
-      color: #808080
-      font-size: 12px
-      line-height: 18px
-
-      a
-        color: #808080
-
-    .lecturers
-      display: block
-      font-size: 12px
-      line-height: 18px
+  .kind
+    display: block
+    color: #808080
+    font-size: 12px
+    line-height: 18px
 
     a
-      line-height: 18px !important
+      color: #808080
 
-  .lesson_actions
-    +clearfix
-    height: 26px
-    padding: 10px 10px 10px 10px
+  .lecturers
+    display: block
+    font-size: 12px
+    line-height: 18px
 
-    .grey_button
-      float: left
-      margin: 0 4px 0 0
+  a
+    line-height: 18px !important
 
-    .delete_button
-      float: right
+.lesson_actions
+  +clearfix
+  height: 26px
+  padding: 10px 10px 10px 10px
+
+  .grey_button
+    float: left
+    margin: 0 4px 0 0
+
+  .delete_button
+    float: right
 
 .holiday
   .date
