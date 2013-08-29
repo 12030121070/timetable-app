@@ -3,14 +3,16 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
-  <body>
-    <h1>Привет, <%= @membership.email %></h1>
-    <p>Вас пригласили в систему управления расписанием <%= @membership.organization.title %></p>
 
-    <% if User.find_by_email(@membership.email) %>
-      <%= link_to t('devise.actions.sign_in'), new_user_registration_url %>
-    <% else %>
-      <%= link_to t('devise.actions.sign_up'), new_user_registration_url %>
-    <% end %>
+  <body>
+    <p>Здравствуйте, <%= @membership.email %>!</p>
+    <p>Вас пригласили в систему управления расписанием <%= @membership.organization.title %>.</p>
+    <p>
+      <% if User.find_by_email(@membership.email) %>
+        Для начала работы Вам нужно <%= link_to 'войти', new_user_session_path %>.
+      <% else %>
+        Для начала работы Вам нужно <%= link_to 'зарегистрироваться', new_user_registration_url %>.
+      <% end %>
+    </p>
   </body>
 </html>

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :organizations, :through => :memberships
 
   devise :database_authenticatable, :registerable, :recoverable,
-    :rememberable, :trackable, :validatable, :confirmable, :async
+    :rememberable, :trackable, :validatable, :async
 
   normalize_attributes :email
 
