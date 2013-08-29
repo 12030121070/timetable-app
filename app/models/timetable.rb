@@ -19,6 +19,7 @@ class Timetable < ActiveRecord::Base
 
   accepts_nested_attributes_for :lesson_times, :allow_destroy => true
 
+  before_validation :set_lesson_times_number
   after_initialize :initialize_lesson_times, :if => ->(timetable) { timetable.new_record? && timetable.lesson_times.empty? }
   after_save :create_weeks_and_days
 
@@ -57,6 +58,14 @@ class Timetable < ActiveRecord::Base
     organization.lesson_times.each do |lesson_time|
       day, number, starts_at, ends_at = lesson_time.day, lesson_time.number, lesson_time.starts_at, lesson_time.ends_at
       lesson_times.build :day => day, :number => number, :starts_at => starts_at, :ends_at => ends_at
+    end
+  end
+
+  def set_lesson_times_number
+    lesson_times.group_by(&:day).each do |day, lts|
+      lts.select{|lt| lt.starts_at.present?}.sort_by{|lt| Time.zone.parse(lt.starts_at)}.each_with_index do |lt, index|
+        lt.number = index+1
+      end
     end
   end
 
