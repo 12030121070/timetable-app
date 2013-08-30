@@ -5,6 +5,7 @@ desc "Import lessons form tusur.timetable"
 task :import => :environment do
   create_tariff
   create_subscription
+  create_lesson_times
   create_timetables
 end
 
@@ -20,6 +21,18 @@ end
 
 def create_subscription
   organization.subscriptions.create! :starts_on => Date.today, :ends_on => Date.today + 6.month, :groups_count => 100, :active => true
+end
+
+def create_lesson_times
+  (1..6).each do |day|
+    organization.lesson_times.create :day => day, :number => 1, :starts_at =>  '8:50', :ends_at => '10:25'
+    organization.lesson_times.create :day => day, :number => 2, :starts_at => '10:40', :ends_at => '12:15'
+    organization.lesson_times.create :day => day, :number => 3, :starts_at => '13:15', :ends_at => '14:50'
+    organization.lesson_times.create :day => day, :number => 4, :starts_at => '15:00', :ends_at => '16:35'
+    organization.lesson_times.create :day => day, :number => 5, :starts_at => '16:45', :ends_at => '18:20'
+    organization.lesson_times.create :day => day, :number => 6, :starts_at => '18:30', :ends_at => '20:05'
+    organization.lesson_times.create :day => day, :number => 7, :starts_at => '20:15', :ends_at => '21:50'
+  end
 end
 
 def create_timetables

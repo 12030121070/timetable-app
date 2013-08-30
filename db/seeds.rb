@@ -2,7 +2,6 @@
 
 user = User.find_or_initialize_by_email('demo@demo.de') do |u|
   u.password = 'demodemo'
-  u.skip_confirmation!
   u.save!
 end
 
