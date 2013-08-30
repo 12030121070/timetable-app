@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class Lecturer < ActiveRecord::Base
+  include TableForWeek
   include WeekTimetable
   include WithBusy
 

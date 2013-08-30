@@ -1,16 +1,23 @@
 # encoding: utf-8
 
 class Group < ActiveRecord::Base
+  include TableForWeek
   include WithBusy
+
+  def timetables
+    [timetable]
+  end
 
   attr_accessible :title
 
   belongs_to :timetable
 
   has_many :group_lessons, :dependent => :destroy
-  has_many :lessons, :through => :group_lessons, :order => 'lessons.subgroup ASC'
-  has_many :weeks, :through => :timetable, :order => 'weeks.number ASC'
-  has_many :published_weeks, :through => :timetable, :order => 'weeks.number ASC', :conditions => "timetables.status = 'published'", :source => :weeks
+
+  has_many :lessons,         :through => :group_lessons, :order => 'lessons.subgroup ASC'
+  has_many :published_weeks, :through => :timetable,     :order => 'weeks.number ASC', :conditions => "timetables.status = 'published'", :source => :weeks
+  has_many :weeks,           :through => :timetable,     :order => 'weeks.number ASC'
+
   has_one :organization, :through => :timetable
 
   validates_presence_of :title
@@ -52,18 +59,6 @@ class Group < ActiveRecord::Base
     end
 
     week
-  end
-
-  def table_on(week = closest_week)
-    return { :days => [], :rows => [] } if week.nil?
-    {
-      :days => week.study_days,
-      :rows => timetable.lesson_times.group_by(&:number).map do |lesson_time_number, lesson_times|
-        lesson_times.map do |lesson_time|
-          [lesson_time, lesson_time.lessons.joins(:group_lessons).where(:group_lessons => { :group_id => self.id }, :lessons => {:day_id => week.study_days.map(&:id)}) ]
-        end
-      end
-    }
   end
 
   private

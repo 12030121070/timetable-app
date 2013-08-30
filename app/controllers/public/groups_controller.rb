@@ -12,7 +12,7 @@ class Public::GroupsController < Public::PublicController
   def show
     show!{
       @week = params[:week] ? resource.published_weeks.find_by_starts_on(params[:week]) : resource.closest_week
-      @table = resource.table_on(@week)
+      @table = @group.table_for(@week.starts_on)
     }
   end
 

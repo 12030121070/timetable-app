@@ -29,11 +29,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @table[:rows].each do |row| %>
+    <% @table[:lessons].each do |time, data| %>
       <tr>
-        <% row.each do |lesson_time, lessons| %>
+        <% data.each do |date, lessons| %>
           <td class='<%= lessons.empty? ? 'empty_cell' : 'filled' %>'>
-            <span class='time'><%= lesson_time %></span>
+            <span class='time'><%= time %></span>
 
             <% lessons.sort_by{|l| l.subgroup}.each do |lesson| %>
               <div class="lesson <%= lesson.kind %>">
