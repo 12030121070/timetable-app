@@ -20,7 +20,7 @@ module WeekTimetable
 
           next if lesson_times.empty?
 
-          lesson_times.each do |lt|
+          lesson_times.sort_by{|lt| Time.zone.parse(lt.starts_at) }.each do |lt|
             k = "#{lt.starts_at} - #{lt.ends_at}"
 
             hash[date][k] ||= {}
