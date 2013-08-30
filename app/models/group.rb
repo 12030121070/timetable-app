@@ -4,10 +4,6 @@ class Group < ActiveRecord::Base
   include TableForWeek
   include WithBusy
 
-  def timetables
-    [timetable]
-  end
-
   attr_accessible :title
 
   belongs_to :timetable

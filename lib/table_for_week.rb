@@ -1,4 +1,14 @@
 module TableForWeek
+  extend ActiveSupport::Concern
+
+  included do
+    if self == Group
+      def timetables
+        Timetable.where :id => timetable.id
+      end
+    end
+  end
+
   def table_for(week_starts_on)
     table = {}
 
@@ -25,7 +35,7 @@ module TableForWeek
 
   def uniq_lesson_time_borders
     uniq_lesson_time_borders = {}.tap do |hash|
-      timetables.each do |timetable|
+      timetables.includes(:weeks => [:days]).includes(:lesson_times).each do |timetable|
         timetable.days.each do |day|
           timetable.lesson_times.where(:day => day.cwday).each do |lesson_time|
             hash["#{lesson_time.starts_at}-#{lesson_time.ends_at}"] = { :starts_at => Time.zone.parse(lesson_time.starts_at), :ends_at => Time.zone.parse(lesson_time.ends_at) }
