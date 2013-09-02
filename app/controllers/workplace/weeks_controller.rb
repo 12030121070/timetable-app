@@ -11,6 +11,7 @@ class Workplace::WeeksController < Workplace::WorkplaceController
 
   def show
     show! {
+      @weeks = @timetable.weeks
       pdf_week = Pdf::Week.new(@week)
       @table = pdf_week.table_data
       pdf_week.set_colspans(@table)

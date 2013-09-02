@@ -14,6 +14,13 @@
     <% else %>
       <%= link_to "&#x203A;".html_safe, '#', :class => 'inactive faded next grey_button'%>
     <% end %>
+    <div class='collection_wrapper'>
+      <ul>
+        <% @weeks.each do |week| %>
+          <li class="<%= week.starts_on == @week.starts_on ? 'current' : 'fake' %>"><%= link_to "#{l(week.starts_on.beginning_of_week, :format => '%d %B')} &mdash; #{l(week.starts_on.end_of_week, :format => '%d %B')}".html_safe, organization_group_path(@group.title, :week => week.starts_on) %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
 

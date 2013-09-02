@@ -20,5 +20,6 @@
  * = require 'commons/holiday_border'
  * = require 'commons/check_helper'
  * = require 'commons/copy_and_move'
+ * = require 'commons/inner_navigation'
  * = require_tree .
  */

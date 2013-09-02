@@ -1,3 +1,3 @@
 /*
- * = requier 'public/index'
+ * = require 'public/index'
  */

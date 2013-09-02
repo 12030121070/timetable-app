@@ -22,6 +22,14 @@
         <% else %>
           <%= link_to "&#x203A;".html_safe, '#', :class => 'inactive faded next grey_button'%>
         <% end %>
+
+        <div class='collection_wrapper'>
+          <ul>
+            <% weeks.each do |week| %>
+              <li class="<%= week == @beginning_of_week.to_date ? 'current' : 'fake' %>"><%= link_to "#{l(week.beginning_of_week, :format => '%d %B')} &mdash; #{l(week.end_of_week, :format => '%d %B')}".html_safe, workplace_lecturer_path(@lecturer, :week => week), :class => 'in_same_frame', :remote => true %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
     <table class='slave_table'>

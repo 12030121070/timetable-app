@@ -59,9 +59,48 @@
         font-size: 14px
         font-weight: 200
 
-
 .inner_navigation
   margin: 0 0 15px 0
+  position: relative
+
+  .collection_wrapper
+    +clearfix
+    +border-radius(3px)
+    background: #fff
+    border: 1px solid #ccc
+    display: none
+    height: 240px
+    margin: 0 0 0 45px
+    overflow-y: auto
+    position: absolute
+    top: 30px
+    width: 480px
+    z-index: 3
+
+    ul
+      li
+        +clearfix
+        font-size: 18px
+        line-height: 30px
+        height: 30px
+        text-align: center
+
+        a
+          display: block
+
+          &:hover
+            background: #CCE3FF
+            color: #555
+
+        &.current
+          font-weight: 600
+
+          a
+            color: #555
+            text-decoration: none
+
+            &:hover
+              cursor: default
 
   .inner_wrapper
     +clearfix
@@ -115,9 +154,10 @@
 
   .prev, .next
     font-size: 24px
-    padding: 4px 10px 10px 10px
+    padding: 5px 11px 11px 11px
 
     &.inactive
+      padding: 4px 10px 10px 10px
       pointer-events: none
 
       &:hover
@@ -134,15 +174,22 @@
 
   .current_week
     +border-radius(3px)
-    -webkit-text-decoration-style: dashed
+    background: image_url('list.png') no-repeat 460px center
     border: none
     color: #4498ff
     font-size: 18px
-    height: 26px
+    height: 28px
     padding: 1px
     text-align: center
-    //text-decoration: underline
     width: 480px
+
+    &:hover, &.active
+      background: #fff image_url('list.png') no-repeat 460px center
+      border: 1px solid #ccc
+      border-bottom: none
+      cursor: pointer
+      padding: 0 0 1px 0
+      text-decoration: none
 
 .group_timetable, .lecturer_table
   width: auto
