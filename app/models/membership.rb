@@ -22,6 +22,6 @@ class Membership < ActiveRecord::Base
   private
 
   def send_invitation
-    MembershipMailer.invitation_email(self).deliver
+    MembershipMailer.delay.invitation_email(self)
   end
 end
