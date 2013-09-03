@@ -8,9 +8,11 @@
         <li>
           Доступно <%= @organization.available_group_count %> из <%= @organization.groups_count_by_subscriptions %> гр.
       </li>
-      <li>
-        Подписка закончится через <%= distance_of_time_in_words_to_now @subscriptions.active.active.by_ends_on.last.ends_on %> (<%= l @subscriptions.active.active.by_ends_on.last.ends_on, :format => '%e %B %Y' %>)
-      </li>
+      <% if @subscriptions.active.actual.any? %>
+        <li>
+          Подписка закончится через <%= distance_of_time_in_words_to_now @subscriptions.active.actual.by_ends_on.last.ends_on %> (<%= l @subscriptions.active.actual.by_ends_on.last.ends_on, :format => '%e %B %Y' %>)
+        </li>
+      <% end %>
     </ul>
     <div class="separator"></div>
     <p>Если у вас меньше <%= @tariff.min_group %> групп &mdash; подписка бесплатна на любой срок.</p>
