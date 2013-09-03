@@ -20,7 +20,7 @@ def create_tariff
 end
 
 def create_subscription
-  organization.subscriptions.create! :starts_on => Date.today, :ends_on => Date.today + 6.month, :groups_count => 100, :active => true
+  organization.subscriptions.create! :month_count => 12, :groups_count => 100, :active => true
 end
 
 def create_lesson_times

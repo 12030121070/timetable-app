@@ -5,6 +5,7 @@
 @import 'commons/fonts'
 @import 'jquery.ui.datepicker'
 @import 'jquery.ui.autocomplete'
+@import 'jquery.ui.slider'
 @import 'commons/jquery.timepicker'
 @import 'commons/forms'
 @import 'commons/tables'
@@ -408,10 +409,10 @@ body
   margin: 0 5px 0 0
   padding: 2px 4px
 
-  &.published
+  &.published, &.active
     background: #8CD999
 
-  &.draft
+  &.draft, &.not_active
     background: #4d4d4d
     color: #f2f2f2
 

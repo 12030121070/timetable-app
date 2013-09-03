@@ -5,7 +5,9 @@ class Subscription < ActiveRecord::Base
   belongs_to :organization
   before_create :set_dates, :set_sum
 
-  scope :actual, -> { where('active = :active AND starts_on <= :today AND ends_on >= :today', :active => true,  :today => Time.zone.today) }
+  scope :active, -> { where('active = :active', :active => true) }
+  scope :actual, -> { where('starts_on <= :today AND ends_on >= :today', :today => Time.zone.today) }
+  scope :by_ends_on, -> { order('ends_on ASC') }
 
   def change_active_state
     self.active = (active? ? false : true)

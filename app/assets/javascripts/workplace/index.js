@@ -2,6 +2,7 @@
  * = require jquery
  * = require jquery.ui.datepicker
  * = require jquery.ui.autocomplete
+ * = require jquery.ui.slider
  * = require jquery_ujs
  * = require jquery_nested_form
  * = require 'commons/autocomplete'
@@ -21,5 +22,6 @@
  * = require 'commons/check_helper'
  * = require 'commons/copy_and_move'
  * = require 'commons/inner_navigation'
+ * = require 'commons/subscription'
  * = require_tree .
  */

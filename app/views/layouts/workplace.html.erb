@@ -16,8 +16,8 @@
     </div>
     <div class="footer">
       <ul>
-        <li id='subscribes'>
-          <%= link_to "<span title='Подписки'></span><b>Подписки</b>".html_safe, workplace_subscriptions_path %>
+        <li id='subscribes' class='<%= controller_name == 'subscriptions' ? 'selected' : 'fake' %>'>
+          <%= link_to "<span title='Подписка'></span><b>Подписка</b>".html_safe, workplace_subscriptions_path %>
         </li>
       </ul>
       <div class="separator"></div>

@@ -1,9 +1,9 @@
 class Workplace::SubscriptionsController < Workplace::WorkplaceController
   inherit_resources
 
-  actions :index, :new, :create
+  actions :index, :create
 
-  before_filter :find_tariff, :only => :new
+  before_filter :find_tariff
 
   private
 

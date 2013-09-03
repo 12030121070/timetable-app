@@ -1,14 +1,33 @@
-<h2 class='thin'>Список подписок (<%= link_to 'новая подписка', new_workplace_subscription_path %>)</h2>
+<h2 class='thin'>Подписка</h2>
+
+<div class='scrollable'>
+  <div class='important_wrapper opened'>
+    <h5 class='thin'>Итоговая подписка</h5>
+    <div class="inner_wrapper" style='display: block !important'>
+      <ul>
+        <li>
+          Доступно <%= @organization.available_group_count %> из <%= @organization.groups_count_by_subscriptions %> гр.
+      </li>
+      <li>
+        Подписка закончится через <%= distance_of_time_in_words_to_now @subscriptions.active.active.by_ends_on.last.ends_on %> (<%= l @subscriptions.active.active.by_ends_on.last.ends_on, :format => '%e %B %Y' %>)
+      </li>
+    </ul>
+    <div class="separator"></div>
+    <p>Если у вас меньше <%= @tariff.min_group %> групп &mdash; подписка бесплатна на любой срок.</p>
+    <p>&nbsp;</p>
+  </div>
+</div>
 
 <% if @organization %>
-  <ul>
-    <% @organization.subscriptions.each do |subscription| %>
-      <li>
-        Кол-во групп: <%= subscription.groups_count %><br/>
-        <%= l subscription.starts_on, :format => :long %> &mdash; <%= l subscription.ends_on, :format => :long %><br/>
-        Сумма: <%= number_to_currency subscription.sum %>
-    </li>
-  <% end %>
-</ul>
+  <ul class='subscription_list list'>
+    <% @subscriptions.actual.each do |subscription| %>
+      <li class='item'>
+        <span class="status <%= subscription.active? ? 'active' : 'not_active' %>"><%= subscription.active? ? 'Подтверждена оплата' : 'Оплата не подтверждена' %></span>
+        Подписка на <%= subscription.groups_count %> гр. c <%= l subscription.starts_on, :format => '%e %B %Y' %> по <%= l subscription.ends_on, :format => '%e %B %Y' %><br/>
+        <div class='additional'>Сумма: <%= number_to_currency subscription.sum, :precision => 0 %></div>
+      </li>
+    <% end %>
+  </ul>
+  <%= render 'form' %>
 <% end %>
-
+</div>

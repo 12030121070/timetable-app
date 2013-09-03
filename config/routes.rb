@@ -33,7 +33,7 @@ TimetableApp::Application.routes.draw do
     end
 
     resources :memberships, :except => [:show, :edit, :update]
-    resources :subscriptions, :only => [:index, :new, :create]
+    resources :subscriptions, :only => [:index, :create]
 
     resources :classrooms, :only => :show
 

@@ -183,4 +183,85 @@ form
       input, a
         font-weight: 200
 
+.new_subscription
+  margin: 20px 0 0 0
+  overflow: visible
+  padding: 0 15px
 
+  h6
+    font-size: 14px
+    font-weight: 600
+    line-height: 25px
+
+  .sum
+    font-size: 30px
+    font-weight: 200
+
+    .without_discount
+    .discount
+
+    .value
+      color: #000
+      font-weight: 400
+
+  .buttons
+    text-align: left
+
+    .yellow_button
+      margin-left: 0
+
+  .range_wrapper
+    overflow: visible
+
+    label
+      float: left
+      margin: 0 10px 0 0
+
+    .counter
+      +clearfix
+      color: #0095ff
+      display: block
+      font-size: 14px
+      font-weight: 600
+      line-height: 25px
+
+      .discount
+        color: #939393
+        font-style: italic
+        font-weight: 400
+
+    .range
+      +border-radius(3px)
+      +single-box-shadow(#c4c4c4, 0, 1px, 3px, 0, inset)
+      background: #e6e6e6
+      border-bottom: 1px solid #dadada
+      border-left: 1px solid #c4c4c4
+      border-right: 1px solid #c4c4c4
+      border-top: 1px solid #b8b8b8
+      height: 23px
+      overflow: visible
+      margin: 20px 0
+      width: 712px
+
+      .min, .max
+        color: #000
+        font-size: 10px
+        font-weight: 400
+        position: absolute
+
+      .min
+        left: 10px
+
+      .max
+        right: 10px
+
+      .ui-slider-handle
+        +border-radius(3px)
+        +single-box-shadow(#73c5ff, 0, 1px, 0)
+        background: #009fff image_url('slider_handler.png') no-repeat center center
+        @include background(image_url('slider_handler.png') no-repeat center center, linear-gradient(#00a0ff, #008aff))
+        border: none
+        height: 45px
+        outline: none
+        top: -10px
+        width: 29px
