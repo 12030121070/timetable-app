@@ -6,7 +6,7 @@ class Timetable < ActiveRecord::Base
 
   belongs_to :organization
 
-  has_many :groups,       :dependent => :destroy, :order => 'groups.title ASC'
+  has_many :groups,       :dependent => :destroy, :order => 'groups.id ASC'
   has_many :lesson_times, :dependent => :destroy, :order => 'day ASC, number ASC', :as => :context
   has_many :weeks,        :dependent => :destroy, :order => 'starts_on ASC, number ASC'
 
