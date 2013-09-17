@@ -55,10 +55,17 @@
                 </div>
 
                 <div>
+                  Гр.:
                   <span class="groups"><%= lesson.groups.map(&:title).join(', ') %></span>
                 </div>
 
-                <span class='classrooms' title='<%= lesson.classrooms.map(&:to_s).join(', ') %>'><%= lesson.classrooms.many? ? "#{lesson.classrooms.first}, ..." : lesson.classrooms.first %></span>
+                <div>
+                  Ауд.:
+                  <span title='<%= lesson.classrooms.map(&:to_s).join(', ') %>'>
+                    <%= lesson.classrooms.many? ? "#{lesson.classrooms.first}, ..." : lesson.classrooms.first %>
+                  </span>
+                </div>
+
                 <% unless lesson.subgroup_whole? %>
                   <span class='subgroup'><%= lesson.subgroup_text %></span>
                 <% end %>
