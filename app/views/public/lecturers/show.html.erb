@@ -49,14 +49,21 @@
 
             <% lessons.sort_by{|l| l.subgroup}.each do |lesson| %>
               <div class="lesson <%= lesson.kind %>">
-                <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
-                <span class='kind'><%= lesson.kind_text %></span>
+                <div>
+                  <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
+                  <span class='kind'><%= lesson.kind_text %></span>
+                </div>
+
+                <div>
+                  <span class="groups"><%= lesson.groups.map(&:title).join(', ') %></span>
+                </div>
 
                 <span class='classrooms' title='<%= lesson.classrooms.map(&:to_s).join(', ') %>'><%= lesson.classrooms.many? ? "#{lesson.classrooms.first}, ..." : lesson.classrooms.first %></span>
                 <% unless lesson.subgroup_whole? %>
                   <span class='subgroup'><%= lesson.subgroup_text %></span>
                 <% end %>
                 <span class='lecturers' title='<%= lesson.lecturers.join(', ').html_safe %>'><%= lesson.lecturers.many? ? "#{lesson.lecturers.first}, ...".html_safe : lesson.lecturers.first %></span>
+
               </div>
             <% end %>
           </td>
