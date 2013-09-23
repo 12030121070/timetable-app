@@ -1,5 +1,5 @@
 <h2 class='thin'><%= @group.timetable.title %></h2>
-<h3 class='thin'>Расписание для <%= @group.title %> группы</h3>
+<h3 class='thin'>Расписание для <%= @group.title %> группы <%= link_to 'Расписание в формате iCal', organization_group_path(@group.title, :format => :ics), :class => 'ical_link' %></h3>
 
 <div class="inner_navigation">
   <div class="inner_wrapper">

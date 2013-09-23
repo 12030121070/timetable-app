@@ -1,5 +1,5 @@
 <h2 class='thin'><%= @lecturer.full_name %></h2>
-<h3 class='thin'>Расписание преподавателя</h3>
+<h3 class='thin'>Расписание преподавателя <%= link_to 'Расписание в формате iCal', organization_lecturer_path(@lecturer, :format => :ics), :class => 'ical_link' %></h3>
 
 <% weeks = @lecturer.beginning_of_weeks %>
 <% current = weeks.index(@week.to_date) %>

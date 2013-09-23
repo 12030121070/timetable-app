@@ -27,6 +27,7 @@ group :default do
   gem 'prawn', '1.0.0.rc2'
   gem 'progress_bar'
   gem 'rails', '~> 3.2'
+  gem 'ri_cal'
   gem 'russian'
   gem 'simple-navigation'
   gem 'simple_form'
