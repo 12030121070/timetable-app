@@ -69,7 +69,7 @@ class API < Grape::API
                     parity:       nil,
                     date_start:   nil,
                     date_end:     nil,
-                    dates:        [I18n.l(date, :format => '%d.%m.%Y')],
+                    dates:        [I18n.l(Time.zone.parse(date), :format => '%d.%m.%Y')],
                     teachers:     lesson.lecturers.map{|l| { teacher_name: l.short_name.gsub('&nbsp;', ' ') } },
                     auditoriums:  lesson.classrooms.map{|c| { auditory_name: c.to_s, auditory_address: c.building.address }}
                   }
