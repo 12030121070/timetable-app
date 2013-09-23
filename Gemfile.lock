@@ -53,6 +53,7 @@ GEM
       json
     arel (3.0.2)
     attribute_normalizer (1.1.0)
+    backports (2.6.7)
     bcrypt-ruby (3.0.1)
     brakeman (2.0.0)
       erubis (~> 2.6)
@@ -103,6 +104,7 @@ GEM
     delayed_job_active_record (0.4.4)
       activerecord (>= 2.1.0, < 4)
       delayed_job (~> 3.0)
+    descendants_tracker (0.0.1)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -120,10 +122,21 @@ GEM
     fastercsv (1.5.5)
     fattr (2.2.1)
     fssm (0.2.10)
+    grape (0.2.6)
+      activesupport
+      builder
+      hashie (~> 1.2)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      rack
+      rack-accept
+      rack-mount
+      virtus
     haml (4.0.3)
       tilt
     has_scope (0.5.1)
     hashery (2.1.0)
+    hashie (1.2.0)
     highline (1.6.19)
     hike (1.2.3)
     hirb (0.7.1)
@@ -150,6 +163,7 @@ GEM
     mime-types (1.23)
     mini_portile (0.5.0)
     multi_json (1.7.7)
+    multi_xml (0.5.3)
     nested_form (0.3.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
@@ -198,8 +212,12 @@ GEM
       highline (~> 1.6.1)
       options (~> 2.3.0)
     rack (1.4.5)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-mount (0.8.3)
+      rack (>= 1.0.0)
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -301,6 +319,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    virtus (0.5.4)
+      backports (~> 2.6.1)
+      descendants_tracker (~> 0.0.1)
     warden (1.2.1)
       rack (>= 1.0)
     whenever (0.8.2)
@@ -325,6 +346,7 @@ DEPENDENCIES
   enumerize
   execjs
   fabrication
+  grape
   has_scope
   hirb
   inherited_resources

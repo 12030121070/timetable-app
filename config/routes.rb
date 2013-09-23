@@ -70,5 +70,7 @@ TimetableApp::Application.routes.draw do
     get '/lecturers/:id' => 'lecturers#show', :constraints => -> (r) { r.subdomain.present? }, :as => :organization_lecturer
   end
 
+  mount API => '/', :constraints => -> (r) { r.subdomain.present? }
+
   root :to => 'application#main_page'
 end

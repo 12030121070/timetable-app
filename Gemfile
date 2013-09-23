@@ -18,6 +18,7 @@ group :default do
   gem 'devise', '~> 2.2'
   gem 'devise-async'
   gem 'enumerize'
+  gem 'grape'
   gem 'has_scope'
   gem 'inherited_resources'
   gem 'nested_form'
