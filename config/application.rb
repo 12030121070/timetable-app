@@ -16,7 +16,7 @@ module TimetableApp
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.paths.add 'app/api', :glod => '**/*.rb'
+    config.paths.add 'app/api', :glob => '*.rb'
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/api)
 
     # Only load the plugins named here, in the order given (default is alphabetical).

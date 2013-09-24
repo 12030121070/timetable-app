@@ -1,3 +1,4 @@
+require_dependency 'app/api/api' if Rails.env.development?
 TimetableApp::Application.routes.draw do
   devise_for :users
 

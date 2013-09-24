@@ -13,6 +13,7 @@ class Group < ActiveRecord::Base
   has_many :lessons,         :through => :group_lessons, :order => 'lessons.subgroup ASC'
   has_many :published_weeks, :through => :timetable,     :order => 'weeks.number ASC', :conditions => "timetables.status = 'published'", :source => :weeks
   has_many :weeks,           :through => :timetable,     :order => 'weeks.number ASC'
+  has_many :lesson_times,    :through => :lessons
 
   has_one :organization, :through => :timetable
 

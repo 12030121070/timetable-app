@@ -30,10 +30,10 @@ class API < Grape::API
     def get_faculties_list
       organization.published_timetables.map do |timetable|
         {
-          faculty_name: timetable.title,
-          faculty_id:   timetable.id,
-          date_start:   I18n.l(timetable.starts_on, :format => '%d.%m.%Y'),
-          date_end:     I18n.l(timetable.ends_on, :format => '%d.%m.%Y')
+          :faculty_name => timetable.title,
+          :faculty_id   => timetable.id,
+          :date_start   => I18n.l(timetable.starts_on, :format => '%d.%m.%Y'),
+          :date_end     => I18n.l(timetable.ends_on, :format => '%d.%m.%Y')
         }
       end
     end
@@ -42,44 +42,55 @@ class API < Grape::API
       timetable = organization.published_timetables.find(timetable_id)
       timetable.groups.map do |group|
         {
-          group_name: group.title,
-          group_id:   group.id
+          :group_name => group.title,
+          :group_id   => group.id
         }
       end
     end
 
     def lessons_for_group(group)
-      schedule = []
-      group.published_weeks.each do |week|
-        group.table_for(week.starts_on)[:lessons].each do |lesson_time, lessons_hash|
-          lessons_hash.each do |date, lessons|
-            lessons.each do |lesson|
-              if schedule.select{|s| s['weekday'] == lesson.lesson_time.day.to_s }.empty?
-                schedule << { 'weekday' => lesson.lesson_time.day.to_s }
-              end
+      schedule = Set.new
 
-              schedule.map! do |item|
-                if item['weekday'] == lesson.lesson_time.day.to_s
-                  item['lessons'] ||= []
-                  item['lessons'] << {
-                    subject:      lesson.discipline.title,
-                    type:         training_code(lesson.kind),
-                    time_start:   lesson.lesson_time.starts_at,
-                    time_end:     lesson.lesson_time.ends_at,
-                    parity:       nil,
-                    date_start:   nil,
-                    date_end:     nil,
-                    dates:        [I18n.l(Time.zone.parse(date), :format => '%d.%m.%Y')],
-                    teachers:     lesson.lecturers.map{|l| { teacher_name: l.short_name.gsub('&nbsp;', ' ') } },
-                    auditoriums:  lesson.classrooms.map{|c| { auditory_name: c.to_s, auditory_address: c.building.address }}
-                  }
+      group.lessons.group_by{ |l| l.lesson_time.day }.each do |day, lessons|
+        weekday_hash = {
+          :weekday => day,
+          :lessons => Set.new
+        }
+
+        lessons.group_by(&:discipline_title).each do |discipline_title, lessons|
+          lesson_hash = { :subject => discipline_title }
+
+          lessons.group_by(&:kind).each do |kind, lessons|
+            lesson_hash[:kind] = training_code(kind)
+
+            lessons.group_by{ |l| l.lesson_time.starts_at }.each do |time_start, lessons|
+              lesson_hash[:time_start] = time_start
+
+              lessons.group_by{ |l| l.lesson_time.ends_at }.each do |time_end, lessons|
+                lesson_hash[:time_end] = time_end
+
+                lessons.group_by{ |l| l.lecturers.map{ |lecturer| { :teacher_name => lecturer.short_name.gsub('&nbsp;', ' ') } } }.each do |teachers, lessons|
+                  lesson_hash[:teachers] = teachers
+
+                  lessons.group_by{ |l| l.classrooms.includes(:building).map{|c| { auditory_name: c.to_s, auditory_address: c.building.address } } }.each do |auditories, lessons|
+                    lesson_hash[:auditories] = auditories
+                    lesson_hash[:parity]     = nil
+                    lesson_hash[:date_start] = nil
+                    lesson_hash[:date_end]   = nil
+                    lesson_hash[:dates]      = lessons.map(&:day).map{|d| I18n.l(d.date, :format => '%d.%m.%Y')}.flatten
+                  end
                 end
-                item
               end
             end
+
           end
+
+          weekday_hash[:lessons] << lesson_hash
         end
+
+        schedule << weekday_hash
       end
+
       schedule
     end
   end
@@ -97,7 +108,7 @@ class API < Grape::API
   desc 'Get faculties list'
   get :get_faculties do
     {
-      faculties: get_faculties_list
+      :faculties => get_faculties_list
     }
   end
 
@@ -107,7 +118,7 @@ class API < Grape::API
   end
   get :get_groups do
     {
-      groups: get_groups_list(params[:faculty_id])
+      :groups => get_groups_list(params[:faculty_id])
     }
   end
 
@@ -117,8 +128,8 @@ class API < Grape::API
   end
   get :get_schedule do
     {
-      group_name: group(params[:group_id]).title,
-      days: lessons_for_group(group(params[:group_id]))
+      :group_name => group(params[:group_id]).title,
+      :days       => lessons_for_group(group(params[:group_id]))
     }
   end
 end
