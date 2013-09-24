@@ -61,7 +61,7 @@ class API < Grape::API
           lesson_hash = { :subject => discipline_title }
 
           lessons.group_by(&:kind).each do |kind, lessons|
-            lesson_hash[:kind] = training_code(kind)
+            lesson_hash[:type] = training_code(kind)
 
             lessons.group_by{ |l| l.lesson_time.starts_at }.each do |time_start, lessons|
               lesson_hash[:time_start] = time_start
@@ -95,10 +95,10 @@ class API < Grape::API
     end
   end
 
-  #rescue_from :all do |e|
-    #Airbrake.notify_or_ignore(e)
-    #Rack::Response.new(["rescued from #{e.class.name}"], 500, { "Content-type" => "text/error" }).finish
-  #end
+  rescue_from :all do |e|
+    Airbrake.notify_or_ignore(e)
+    Rack::Response.new(["rescued from #{e.class.name}"], 500, { "Content-type" => "text/error" }).finish
+  end
 
   desc "Ping method"
   get :ping do
