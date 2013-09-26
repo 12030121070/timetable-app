@@ -56,7 +56,7 @@
 
                 <div>
                   Гр.:
-                  <span class="groups"><%= lesson.groups.map(&:title).join(', ') %></span>
+                  <span class="groups"><%= lesson.groups.map{|g| link_to g.title, organization_group_path(g.title)}.join(', ').html_safe %></span>
                 </div>
 
                 <div>

@@ -51,7 +51,7 @@
                 <% unless lesson.subgroup_whole? %>
                   <span class='subgroup'><%= lesson.subgroup_text %></span>
                 <% end %>
-                <span class='lecturers' title='<%= lesson.lecturers.join(', ').html_safe %>'><%= lesson.lecturers.many? ? "#{lesson.lecturers.first}, ...".html_safe : lesson.lecturers.first %></span>
+                <span class='lecturers' title='<%= lesson.lecturers.join(', ').html_safe %>'><%= lesson.lecturers.map {|l| link_to l.to_s, organization_lecturer_path(l)}.join(', ').html_safe %></span>
               </div>
             <% end %>
           </td>
