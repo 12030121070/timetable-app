@@ -26,6 +26,7 @@ class Lecturer < ActiveRecord::Base
 
   searchable do
     text :full_name
+    text :full_name_as, :using => 'full_name'
     string :full_name
     integer :organization_id
     integer :published_lessons_count
@@ -43,4 +44,5 @@ class Lecturer < ActiveRecord::Base
     "#{surname.mb_chars.capitalize}&nbsp;#{name.first.mb_chars.capitalize}.#{patronymic.first.mb_chars.capitalize}.".html_safe
   end
   alias_method :to_s, :short_name
+  alias_method :title, :full_name
 end

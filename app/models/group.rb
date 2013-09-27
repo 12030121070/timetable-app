@@ -28,9 +28,11 @@ class Group < ActiveRecord::Base
   before_create :check_can_be_created
 
   with_busy :method => :title, :message => 'уже есть занятие в это время'
+  alias_attribute :to_s, :title
 
   searchable do
     text :title
+    text :title_as, :using => 'title'
     string :title
     string :timetable_status
     integer :organization_id

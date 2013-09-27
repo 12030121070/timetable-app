@@ -2,10 +2,11 @@
   <%= f.input :q,
               :label => false,
               :input_html => {
-                :class => 'thin',
+                :class => 'thin need_autocomplete',
                 :placeholder => 'Введите номер группы или ФИО преподавателя',
                 :autofocus => true,
-                :value =>  params[:search].present? ? params[:search][:q] : ''
+                :name => :term,
+                :value =>  params[:term]
               } %>
 <% end %>
 
