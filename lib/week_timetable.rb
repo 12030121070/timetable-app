@@ -7,6 +7,14 @@ module WeekTimetable
     weeks.pluck(:starts_on)
   end
 
+  def closest_published_week
+    beginning_of_published_weeks.each do |beginning_of_week|
+      return beginning_of_week if beginning_of_week == Date.today.beginning_of_week
+    end
+
+    beginning_of_published_weeks.first
+  end
+
   def table(week_start_on, only_published = true)
     @table ||= {}.tap do |hash|
       weeks = (only_published ? organization.published_weeks : organization.weeks)

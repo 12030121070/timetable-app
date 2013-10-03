@@ -13,9 +13,10 @@ class Public::LecturersController < Public::PublicController
     show! do |format|
       format.html {
         @weeks = @lecturer.beginning_of_published_weeks
-        @week = params[:week] ? params[:week] : @weeks.first
+        @week = params[:week] ? params[:week] : @lecturer.closest_published_week
         @table = @lecturer.table_for(@week)
       }
+
       format.ics {
         calendar = RiCal.Calendar do |cal|
           cal.prodid = "#{@organization.subdomain}.fliptable.ru"
