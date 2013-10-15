@@ -7,17 +7,7 @@
       <%= alert %>
     </div>
     <div class='main_wrapper'>
-      <div class="log_info">
-        <div class="wrapper">
-          <% if user_signed_in? %>
-            <%= current_user.email %>
-            <%= link_to t('devise.actions.sign_out'), destroy_user_session_path, :method => :delete %>
-          <% else %>
-            <%= link_to t('devise.actions.sign_up'), new_user_registration_path %>
-            <%= link_to t('devise.actions.sign_in'), new_user_session_path %>
-          <% end %>
-        </div>
-      </div>
+      <%= yield :log_info %>
       <%= yield :content %>
     </div>
   </body>

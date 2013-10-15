@@ -7,307 +7,77 @@
 @import 'commons/forms'
 @import 'commons/tables'
 
+body
+  background: image_url('public_bg.png') no-repeat center center
+  height: auto
+
 .main_wrapper
   font-weight: 200
-  margin: 0 auto
-  padding: 30px
-  width: 960px
+  margin: 68px auto
+  padding: 0
+  width: 1183px
 
-  h3
+.header
+  +clearfix
+  background: #84c5fd
+
+  .logo
     +clearfix
-
-    .ical_link
-      background: image_url('calendar-blue.png') no-repeat left center
-      display: block
-      float: right
-      font-size: 14px
-      height: 24px
-      line-height: 24px
-      padding: 0 0 0 30px
-
-  a
-    font-weight: 200
-
-  .log_info
-    display: none
-    width: auto
-
-  h1
-    line-height: 1.2em
+    background: #fff
+    display: block
+    float: left
+    height: 104px
+    width: 104px
 
     a
-      color: #555
-      text-decoration: none
+      display: block
 
-    img
-      +inline-block
-      margin: 0 10px 0 0
-
-  .search_form
-    +border-radius(4px)
-    background: #4d4d4d
-    margin: 0 0 20px 0
-    padding: 20px
-    width: 920px
-
-    input
-      font-size: 24px
-      padding: 5px 12px
-      width: 895px
-
-  .results_list
-    li
-      font-size: 24px
-      font-weight: 200
-      padding: 10px 20px
-
-      &:nth-child(even)
-        background: #f2f2f2
-
-      a
-        font-weight: 200
-
-      .additional
+      img
         display: block
-        font-size: 14px
-        font-weight: 200
+        margin: 22px auto
+        height: 60px
+        width: 60px
 
-.inner_navigation
-  margin: 0 0 15px 0
-  position: relative
-
-  .collection_wrapper
+  .title
     +clearfix
-    +border-radius(3px)
-    background: #fff
-    border: 1px solid #ccc
-    display: none
-    height: 240px
-    margin: 0 0 0 45px
-    overflow-y: auto
-    position: absolute
-    top: 30px
-    width: 480px
-    z-index: 3
+    color: #fff
+    float: left
+    padding: 27px 20px 0
+    width: 722px
 
-    ul
-      li
-        +clearfix
-        font-size: 18px
-        line-height: 30px
-        height: 30px
-        text-align: center
+    h1
+      font-size: 20px
+      margin: 0
 
-        a
-          display: block
-
-          &:hover
-            background: #CCE3FF
-            color: #555
-
-        &.current
-          font-weight: 600
-
-          a
-            color: #555
-            text-decoration: none
-
-            &:hover
-              cursor: default
-
-  .inner_wrapper
-    +clearfix
-
-  .grey_button
-    +border-radius(4px)
-    +inline-block
-    +clearfix
-    +background-image(linear-gradient(#d5d5d5, #cbcbcb))
-    +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
-    border: none
-    color: #141414
-    font-size: 10px
-    font-weight: 400
-    letter-spacing: 1px
-    line-height: 14px
-    padding: 5px 20px
-    text-decoration: none
-    text-transform: uppercase
-
-    &:active
-      +single-box-shadow(#000, 0, 0, 4px, false, true)
-
-    &:hover
-      cursor: pointer
-
-    &.faded
-      +single-box-shadow(none)
-      background: none
-      border: 1px solid #e6e6e6
-      color: #ccc
-
-      &:hover
-        +background-image(linear-gradient(#d5d5d5, #cbcbcb))
-        +single-box-shadow(#b1b1b1, 0, -4px, 0, false, true)
-        color: #141414
-
-        &.edit
-          @include background(image_url('actions_buttons.png') no-repeat 0 -33px, linear-gradient(#d5d5d5, #cbcbcb))
-        &.move
-          @include background(image_url('actions_buttons.png') no-repeat -60px -33px, linear-gradient(#d5d5d5, #cbcbcb))
-        &.copy
-          @include background(image_url('actions_buttons.png') no-repeat -30px -33px, linear-gradient(#d5d5d5, #cbcbcb))
-
-      &:active
-        +single-box-shadow(#000, 0, 0, 4px, false, true)
-
-  .prev, .next, .current_week
+  .apps
     +clearfix
     float: left
+    width: 317px
 
-  .prev, .next
-    font-size: 24px
-    padding: 5px 11px 11px 11px
+    div
+      float: left
 
-    &.inactive
-      padding: 4px 10px 10px 10px
-      pointer-events: none
+    a
+      color: #fff
+      display: block
+      font-size: 14px
+      height: 69px
+      line-height: 16px
+      padding: 35px 0 0 60px
+      text-decoration: none
+      text-transform: uppercase
+      width: 98px
 
       &:hover
-        +single-box-shadow(none)
-        background: none
-        color: #ccc
-        cursor: pointer
+        background-color: #71b5ef !important
 
-  .prev
-    margin: 0 15px 0 0
+      span
+        font-size: 10px
 
-  .next
-    margin: 0 0 0 15px
+    .ios
+      a
+        background: image_url('shops.png') no-repeat 15px 0px
 
-  .current_week
-    +border-radius(3px)
-    background: image_url('list.png') no-repeat 460px center
-    border: none
-    color: #4498ff
-    font-size: 18px
-    height: 28px
-    padding: 1px
-    text-align: center
-    width: 480px
-
-    &:hover, &.active
-      background: #fff image_url('list.png') no-repeat 460px center
-      border: 1px solid #ccc
-      border-bottom: none
-      cursor: pointer
-      padding: 0 0 1px 0
-      text-decoration: none
-
-.group_timetable, .lecturer_table
-  width: auto
-
-  thead
-    tr
-      th
-        border-color: #aaa
-        text-align: center
-        padding: 0
-        width: 200px
-
-        .day_name
-          display: block
-          color: #555
-
-        .date
-          display: block
-          color: #777
-          font-size: 12px
-
-  tbody
-    tr
-      td
-        border-color: #aaa
-        font-size: 12px
-        padding: 0
-        vertical-align: top
-        width: 200px
-
-        &.empty_cell
-          background: #fdfdfd
-
-          span
-            display: none
-
-      .time
-        border-bottom: 1px solid #aaa
-        color: #777
-        display: block
-        font-size: 11px
-        line-height: 14px
-        margin: 5px 45px 8px
-        text-align: center
-
-      .lesson
-        +clearfix
-        background: yellow
-        padding: 3px
-
-        span
-          height: 14px
-          line-height: 14px
-
-        .discipline
-          +clearfix
-          display: block
-          float: left
-          font-weight: 600
-          margin: 0 0 5px 0
-          width: 50%
-
-          &:hover
-            cursor: pointer
-
-        .kind
-          +clearfix
-          display: block
-          float: left
-          text-align: right
-          margin: 0 0 5px 0
-          width: 50%
-
-        .classrooms
-          +clearfix
-          display: block
-          float: left
-          margin: 0 0 5px 0
-
-          &:hover
-            cursor: pointer
-
-        .subgroup
-          +clearfix
-          display: block
-          float: left
-          margin: 0 0 5px 0
-          text-align: right
-          width: 50%
-
-        .lecturers
-          +clearfix
-          display: block
-          width: 100%
-
-          &:hover
-            cursor: pointer
-
-        &.lecture
-          background: #DDECCF
-        &.practice
-          background: #D8F0F0
-        &.laboratory
-          background: #EBE1F4
-        &.n1
-          background: #F8EAEA
-        &.n2
-          background: #FBF3F3
+    .andriod
+      a
+        background: image_url('shops.png') no-repeat 15px -104px

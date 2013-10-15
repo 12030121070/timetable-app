@@ -1,6 +1,7 @@
 <%= content_for :head do %>
   <head>
     <title>Управление системой расписаний</title>
+    <%= favicon_link_tag '/myicon.ico', :rel => 'shortcut icon', :type => 'image/ico' %>
     <%= stylesheet_link_tag    'manage', :media => 'all' %>
     <%= javascript_include_tag 'manage' %>
     <%= csrf_meta_tags %>

@@ -3,7 +3,7 @@
 class Logo < ActiveRecord::Base
   attr_accessible :image
   belongs_to :organization
-  has_attached_file :image, :styles => { :thumb => '32x32' }
+  has_attached_file :image, :styles => { :thumb => '60x60' }
   validates_attachment :image,
                        :content_type => { :content_type => ['image/jpeg', 'image/jpg', 'image/png'] },
                        :presence => true,

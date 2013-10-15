@@ -1,6 +1,7 @@
 <%= content_for :head do %>
   <head>
     <title><%= @organization.title %> | Расписание занятий</title>
+    <%= favicon_link_tag '/myicon.ico', :rel => 'shortcut icon', :type => 'image/ico' %>
     <%= stylesheet_link_tag    'public', :media => 'all' %>
     <%= javascript_include_tag 'public' %>
     <%= csrf_meta_tags %>
@@ -8,13 +9,23 @@
 <% end %>
 
 <%= content_for :content do %>
-  <h1 class="thin">
-    <a href='/' title='На главную'>
-      <%= image_tag @organization.logo.image.url(:thumb), :width => 32, :height => 32 if @organization.logo.try(:image) %><%= @organization.title %>
-    </a>
-  </h1>
-
-  <%= yield %>
+  <div class="header">
+    <div class="logo">
+      <%= link_to root_path do %>
+        <%= image_tag @organization.logo.image.url(:thumb), :width => 60, :height => 60, :title => 'Расписание занятий' if @organization.logo.try(:image) %>
+      <% end %>
+    </div>
+    <div class="title">
+      <h1><%= @organization.title %></h1>
+    </div>
+    <div class="apps">
+      <div class="ios"><%= link_to 'Скачать <span>для&nbsp;iPhone</span>'.html_safe, 'https://itunes.apple.com/us/app/raspisanie-vuzov/id631171099?ls=1&mt=8' %></div>
+      <div class="andriod"><%= link_to 'Скачать <span>для&nbsp;Android</span>'.html_safe, 'https://play.google.com/store/apps/details?id=com.raspisaniyevuzov.app' %></div>
+    </div>
+  </div>
+  <div class="content">
+    <%#= yield %>
+  </div>
 <% end %>
 
 <%= render :file => 'layouts/base' %>
