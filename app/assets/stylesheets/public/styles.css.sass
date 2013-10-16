@@ -81,3 +81,89 @@ body
     .andriod
       a
         background: image_url('shops.png') no-repeat 15px -104px
+
+.content
+  background: #fff
+
+.tight_block
+  +clearfix
+  background: #6f748f
+  height: 52px
+
+  .search_title
+    background: #ffbe00
+    font-size: 11px
+    font-weight: 400
+    float: left
+    height: 52px
+    line-height: 52px
+    text-align: center
+    text-transform: uppercase
+    width: 104px
+
+  form
+    +clearfix
+    float: left
+
+    div.string
+      float: left
+
+      input#search_q
+        +border-radius(0)
+        background: #fff
+        border: none
+        height: 52px
+        margin: 0
+        padding: 0 25px
+        width: 401px
+
+    div.submit
+      +clearfix
+      float: left
+
+      button
+        +clearfix
+        background: #ffbe00 image_url('search_icon.png') no-repeat center center
+        border: none
+        display: block
+        height: 52px
+        line-height: 52px
+        text-align: center
+        text-indent: -9999px
+        text-transform: uppercase
+        width: 52px
+
+        &:hover
+          cursor: pointer
+
+.results_list
+  list-style: decimal-leading-zero inside
+
+  li
+    color: #a5afb4
+    font-weight: 500
+    padding: 15px 43px
+
+    &:nth-child(odd)
+      background: #edf3f5
+
+    a
+      color: #35a8fa
+      font-size: 20px
+      font-weight: 200
+      margin: 0 10px 0 62px
+
+    span
+      font-weight: 200
+      color: #a5afb4
+
+.ui-autocomplete
+  +border-radius(0)
+
+  li
+    a
+      font-weight: 200 !important
+      line-height: 26px !important
+
+      &.ui-state-focus
+        +border-radius(0)

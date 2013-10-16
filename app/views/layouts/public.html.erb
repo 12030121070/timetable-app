@@ -19,12 +19,12 @@
       <h1><%= @organization.title %></h1>
     </div>
     <div class="apps">
-      <div class="ios"><%= link_to 'Скачать <span>для&nbsp;iPhone</span>'.html_safe, 'https://itunes.apple.com/us/app/raspisanie-vuzov/id631171099?ls=1&mt=8' %></div>
-      <div class="andriod"><%= link_to 'Скачать <span>для&nbsp;Android</span>'.html_safe, 'https://play.google.com/store/apps/details?id=com.raspisaniyevuzov.app' %></div>
+      <div class="ios"><%= link_to 'Скачать <span>для&nbsp;iPhone</span>'.html_safe, 'https://itunes.apple.com/us/app/raspisanie-vuzov/id631171099?ls=1&mt=8', :target => '_blank' %></div>
+      <div class="andriod"><%= link_to 'Скачать <span>для&nbsp;Android</span>'.html_safe, 'https://play.google.com/store/apps/details?id=com.raspisaniyevuzov.app', :target => '_blank' %></div>
     </div>
   </div>
   <div class="content">
-    <%#= yield %>
+    <%= yield %>
   </div>
 <% end %>
 

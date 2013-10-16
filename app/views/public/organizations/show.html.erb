@@ -1,14 +1,20 @@
-<%= simple_form_for :search, :method => :get, :html => { :class => 'search_form' } do |f| %>
-  <%= f.input :q,
-              :label => false,
-              :input_html => {
-                :class => 'thin need_autocomplete',
-                :placeholder => 'Введите номер группы или ФИО преподавателя',
-                :autofocus => true,
-                :name => :term,
-                :value =>  params[:term]
-              } %>
-<% end %>
+<div class="tight_block">
+  <div class="search_title">Поиск</div>
+  <%= simple_form_for :search, :method => :get, :html => { :class => 'search_form' } do |f| %>
+    <%= f.input :q,
+      :label => false,
+      :input_html => {
+        :class => 'thin need_autocomplete',
+        :placeholder => 'Введите номер группы или ФИО преподавателя',
+        :autofocus => true,
+        :name => :term,
+        :value =>  params[:term]
+      } %>
+    <div class="submit">
+      <%= f.button :button, 'Искать' %>
+    </div>
+  <% end %>
+</div>
 
 <ul class='results_list'>
   <% @groups.each do |group| %>

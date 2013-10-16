@@ -3,6 +3,7 @@ init_public_autocomplete = () ->
   $('.need_autocomplete', form).autocomplete
     source: '/'
     select: (evt, ui) ->
+      $(evt.target).val(ui.item.value)
       form.submit()
 
 $ ->
