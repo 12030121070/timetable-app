@@ -8,7 +8,8 @@
 @import 'commons/tables'
 
 body
-  background: image_url('public_bg.png') no-repeat center center
+  background: image_url('public_bg.png') repeat-y center center
+  @include background(image_url('public_bg.png') no-repeat center center, image_url('public_bg_bottom.png') repeat-y top)
   height: auto
 
 .main_wrapper
