@@ -137,6 +137,52 @@ body
         &:hover
           cursor: pointer
 
+  .inner_navigation
+    .nav_button
+      background: #ffbe00
+      color: #6f748f
+      display: block
+      font-size: 36px
+      float: left
+      height: 52px
+      line-height: 52px
+      text-align: center
+      text-decoration: none
+      width: 52px
+
+    .current_week
+      +clearfix
+      background: #edf3f5
+      float: left
+      height: 52px
+      line-height: 52px
+      text-align: center
+      width: 450px
+
+    .collection_wrapper
+      clear: both
+      display: block
+
+  .actions
+    font-size: 11px
+    float: right
+    line-height: 16px
+
+    a
+      color: #fff
+      text-decoration: none
+
+      &:hover
+        background: #ffbe00
+
+    .ical
+      a
+        display: block
+        padding: 10px 35px
+        text-align: center
+        text-transform: uppercase
+        width: 95px
+
 .results_list
   list-style: decimal-leading-zero inside
 
@@ -157,6 +203,93 @@ body
     span
       font-weight: 200
       color: #a5afb4
+
+.timetable
+  border-collapse: collapse
+  table-layout: fixed
+  width: 100%
+
+  thead
+    tr
+      background: #84c5fd
+      height: 52px
+
+  th, td
+    border: none
+    padding: 0
+
+  th
+    color: #fff
+    font-size: 12px
+    text-align: center
+    width: 169px
+
+    .day_name
+      font-size: 16px
+      font-weight: 500
+
+    .date
+      font-size: 14px
+      font-weight: 200
+
+  td
+    background: #fff
+    height: 112px
+
+    .time
+      display: block
+      font-size: 12px
+      font-weight: 500
+      height: 27px
+      text-align: center
+      width: 169px
+
+      .minutes
+        font-size: 9px
+        vertical-align: super
+
+    .lesson
+      background: #edf3f5
+      font-size: 12px
+      line-height: 14px
+      height: 65px
+      padding: 10px
+
+      &.lecture
+        background: #e5ffd5
+
+      &.practice
+        background: #d5f6ff
+
+      &.laboratory
+        background: #d7d7f4
+
+      &.research
+        background: #f4e3d7
+
+      &.design
+        background: #ffd5e5
+
+      &.exam
+        background: #fcc1b5
+
+      &.test
+        background: #fcc1b5
+
+      .discipline
+        margin: 0 0 5px 0
+
+      .lecturers, .groups
+        margin: 5px 0 0 0
+
+      .discipline, .groups
+        display: block
+
+      .kind, .classrooms
+        color: #a5afb4
+
+      .lecturers
+        display: block
 
 .ui-autocomplete
   +border-radius(0)
