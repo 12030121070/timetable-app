@@ -7,9 +7,12 @@
     current.add(list).hover (->
       list.show()
       current.addClass('active')
+      width = $(document).width()
+      $('body').css('overflow', 'hidden').css('width', width)
     ), (->
       list.hide()
       current.removeClass('active')
+      $('body').css('overflow', 'auto').css('width', '100%')
     )
 
 $ ->

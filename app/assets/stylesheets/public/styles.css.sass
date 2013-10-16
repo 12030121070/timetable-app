@@ -87,7 +87,6 @@ body
   background: #fff
 
 .tight_block
-  +clearfix
   background: #6f748f
   height: 52px
 
@@ -138,6 +137,8 @@ body
           cursor: pointer
 
   .inner_navigation
+    position: relative
+
     .nav_button
       background: #ffbe00
       color: #6f748f
@@ -150,6 +151,12 @@ body
       text-decoration: none
       width: 52px
 
+      &.inactive
+        background: #eee
+
+        &:hover
+          cursor: default
+
     .current_week
       +clearfix
       background: #edf3f5
@@ -159,9 +166,37 @@ body
       text-align: center
       width: 450px
 
+      &:hover
+        cursor: pointer
+
     .collection_wrapper
-      clear: both
-      display: block
+      +clearfix
+      background: #fff
+      border: 1px solid #ccc
+      display: none
+      height: 240px
+      margin: 0 0 0 52px
+      overflow-y: auto
+      position: absolute
+      top: 52px
+      width: 448px
+      z-index: 3
+
+      .current
+        a
+          background: #eee
+          color: #555
+          text-decoration: none
+
+          &:hover
+            cursor: default
+
+      a
+        display: block
+        padding: 5px 15px
+
+        &:hover
+          background: #eee
 
   .actions
     font-size: 11px
