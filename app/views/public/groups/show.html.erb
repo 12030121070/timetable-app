@@ -49,7 +49,7 @@
       <% time = time.split('-').map{|t| Time.zone.parse(t) } %>
       <tr>
         <% data.each do |date, lessons| %>
-          <td class='<%= lessons.empty? ? 'empty_cell' : 'filled' %>'>
+          <td class='<%= lessons.empty? ? 'empty_cell' : 'filled' %> <%= 'today' if Time.zone.now >= Time.zone.parse("#{date} #{time.first}") && Time.zone.now <= Time.zone.parse("#{date} #{time.last}") %>'>
             <div class='time'>
               <span class='hours'><%= l time.first, :format => '%k' %></span><span class='minutes'><%= l time.first, :format => '%M' %></span>&ndash;<span class='hours'><%= l time.last, :format => '%k' %></span><span class='minutes'><%= l time.last, :format => '%M' %>
             </div>
