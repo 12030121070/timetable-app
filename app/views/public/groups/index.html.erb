@@ -3,7 +3,7 @@
 <ul class="list">
   <% @groups.each do |group| %>
     <li>
-      <%= link_to "гр. #{group.title}", organization_group_path(group) %>
+      <%= link_to "гр. #{group.title}", organization_group_path(group.title) %>
       <span class='additional'><%= group.timetable.title %></span>
     </li>
   <% end %>
