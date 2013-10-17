@@ -1,0 +1,11 @@
+<%= render :file => 'public/commons/search_form' %>
+
+<ul class="list">
+  <% @classrooms.each do |classroom| %>
+    <li>
+      <%= link_to classroom, organization_classroom_path(classroom) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @classrooms %>

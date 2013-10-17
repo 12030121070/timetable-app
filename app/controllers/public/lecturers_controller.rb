@@ -3,9 +3,10 @@ class Public::LecturersController < Public::PublicController
 
   belongs_to :organization, :finder => :find_by_subdomain!
 
-  action :show
+  action :show, :index
 
   has_scope :published, :default => 1
+  has_scope :page, :default => 1
 
   before_filter :set_subdomain
 

@@ -1,25 +1,4 @@
-<div class="tight_block">
-  <div class="search_title">Поиск</div>
-  <%= simple_form_for :search, :method => :get, :html => { :class => 'search_form' } do |f| %>
-    <%= f.input :q,
-      :label => false,
-      :input_html => {
-        :class => 'thin need_autocomplete',
-        :placeholder => 'Введите номер группы или ФИО преподавателя',
-        :autofocus => true,
-        :name => :term,
-        :value =>  params[:term]
-      } %>
-    <div class="submit">
-      <%= f.button :button, 'Искать' %>
-    </div>
-  <% end %>
-  <div class="navigation">
-    <%= link_to "Расписание", '#' %>
-    <%= link_to "Лекторы", '#' %>
-    <%= link_to "Аудитории", '#' %>
-  </div>
-</div>
+<%= render :file => 'public/commons/search_form' %>
 
 <ul class='list'>
   <% @groups.each do |group| %>
@@ -28,6 +7,7 @@
       <span class='additional'><%= group.timetable.title %></span>
     </li>
   <% end %>
+
   <% @lecturers.each do |lecturer| %>
     <li><%= link_to lecturer.full_name, organization_lecturer_path(lecturer) %></li>
   <% end %>

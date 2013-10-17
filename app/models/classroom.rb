@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class Classroom < ActiveRecord::Base
+  include TableForWeek
   include WeekTimetable
   include WithBusy
 
@@ -12,6 +13,7 @@ class Classroom < ActiveRecord::Base
 
   has_many :days,    :through => :lessons
   has_many :lessons, :through => :classroom_lessons
+  has_many :timetables, :through => :lessons, :uniq => true
   has_many :weeks,   :through => :days, :uniq => true, :order => 'weeks.starts_on'
 
   validates_presence_of :number

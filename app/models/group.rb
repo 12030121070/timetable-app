@@ -23,7 +23,7 @@ class Group < ActiveRecord::Base
   delegate :status, :to => :timetable, :prefix => true
   delegate :id, :to => :organization, :prefix => true
 
-  scope :published, ->(i) { joins(:timetable).where("timetables.status = 'published'") }
+  scope :published, ->(i) { joins(:timetable).where("timetables.status = 'published'").uniq }
 
   before_create :check_can_be_created
 

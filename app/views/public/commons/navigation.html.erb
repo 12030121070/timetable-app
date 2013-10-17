@@ -1,0 +1,5 @@
+<div class="navigation">
+  <%= link_to "Расписание", organization_groups_path, :class => "#{'active' if controller_name =~ /groups/}" %>
+  <%= link_to "Лекторы", organization_lecturers_path, :class => "#{'active' if controller_name =~ /lecturer/}" %>
+  <%= link_to "Аудитории", organization_classrooms_path, :class => "#{'active' if controller_name =~ /classrooms/}" %>
+</div>

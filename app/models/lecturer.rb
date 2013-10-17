@@ -18,7 +18,7 @@ class Lecturer < ActiveRecord::Base
 
   validates_presence_of :name, :patronymic, :surname
 
-  scope :published, ->(i) { joins(:timetables).where("timetables.status = 'published'") }
+  scope :published, ->(i) { joins(:timetables).where("timetables.status = 'published'").order('lecturers.surname ASC, lecturers.name ASC, lecturers.patronymic ASC').uniq }
 
   normalize_attributes :name, :patronymic, :surname
 

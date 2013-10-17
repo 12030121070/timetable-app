@@ -1,15 +1,9 @@
 <%= content_for :show_title do %>
-  <div class="show_title"><%= @lecturer.title %></div>
+  <div class="show_title"><%= @classroom %></div>
 <% end %>
 
 <div class="tight_block">
-  <div class="actions">
-    <div class="ical">
-      <%= link_to 'Расписание в формате iCal', organization_lecturer_path(@lecturer, :format => :ics), :class => 'ical_link' %>
-    </div>
-  </div>
-
-  <% weeks = @lecturer.beginning_of_weeks %>
+  <% weeks = @classroom.beginning_of_weeks %>
   <% current = weeks.index(@week.to_date) %>
   <% prev_week = current.zero? ? nil : weeks[current-1]   %>
   <% next_week = current+1 == weeks.count ? nil : weeks[current+1] %>
@@ -17,20 +11,20 @@
   <div class="inner_navigation">
     <div class="inner_wrapper">
       <% if prev_week %>
-        <%= link_to "&#x2039;".html_safe, organization_lecturer_path(@lecturer, :week => prev_week), :class => 'prev nav_button' %>
+        <%= link_to "&#x2039;".html_safe, organization_classroom_path(@classroom, :week => prev_week), :class => 'prev nav_button' %>
       <% else %>
         <%= link_to "&#x2039;".html_safe, '#', :class => 'inactive faded prev nav_button' %>
       <% end %>
       <div class="current_week"><%= l @week.to_date.beginning_of_week, :format => '%d %B' %> &mdash; <%= l @week.to_date.end_of_week, :format => '%d %B' %></div>
       <% if next_week %>
-        <%= link_to "&#x203A;".html_safe, organization_lecturer_path(@lecturer, :week => next_week), :class => 'next nav_button'%>
+        <%= link_to "&#x203A;".html_safe, organization_classroom_path(@classroom, :week => next_week), :class => 'next nav_button'%>
       <% else %>
         <%= link_to "&#x203A;".html_safe, '#', :class => 'inactive faded next nav_button'%>
       <% end %>
       <div class='collection_wrapper'>
         <ul>
           <% @weeks.each do |week| %>
-            <li class="<%= week == @week.to_date ? 'current' : 'fake' %>"><%= link_to "#{l(week.beginning_of_week, :format => '%d %B')} &mdash; #{l(week.end_of_week, :format => '%d %B')}".html_safe, organization_lecturer_path(@lecturer, :week => week) %></li>
+            <li class="<%= week == @week.to_date ? 'current' : 'fake' %>"><%= link_to "#{l(week.beginning_of_week, :format => '%d %B')} &mdash; #{l(week.end_of_week, :format => '%d %B')}".html_safe, organization_classroom_path(@classroom, :week => week) %></li>
           <% end %>
         </ul>
       </div>
@@ -67,8 +61,8 @@
             <% lessons.sort_by{|l| l.subgroup}.each do |lesson| %>
               <div class="lesson <%= lesson.kind %>">
                   <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
-                  <span class='kind'><%= lesson.kind_text %> <%= lesson.classrooms.any? ? 'в' : '' %></span>
-                  <span class='classrooms' title='<%= lesson.classrooms.map(&:to_s).join(', ') %>'><%= lesson.classrooms.map { |c| link_to c, organization_classroom_path(c) }.join(', ').html_safe %></span>
+                  <span class='kind'><%= lesson.kind_text %></span>
+                  <span class='lecturers' title='<%= lesson.lecturers.join(', ').html_safe %>'><%= lesson.lecturers.map {|l| link_to l.to_s, organization_lecturer_path(l)}.join(', ').html_safe %></span>
                   <span class="groups"><%= lesson.groups.map{|g| link_to "гр.#{g.title}", organization_group_path(g.title)}.join(', ').html_safe %></span>
 
                 <% unless lesson.subgroup_whole? %>

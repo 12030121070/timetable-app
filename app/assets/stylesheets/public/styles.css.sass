@@ -105,6 +105,9 @@ body
       text-decoration: none
       text-transform: uppercase
 
+      &.active
+        background: #ffbe00
+
       &:hover
         background: #ffbe00
 
@@ -364,3 +367,18 @@ body
 
       &.ui-state-focus
         +border-radius(0)
+
+.pagination
+  display: block
+  padding: 5px 0 25px
+  text-align: center
+
+  span
+    +inline-block
+    font-size: 20px
+    font-weight: 200
+    margin: 0 3px
+
+    a
+      color: #35a8fa
+      font-weight: 200

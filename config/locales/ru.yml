@@ -136,3 +136,11 @@ ru:
       parity:
         even: Четные
         odd: Нечетные
+
+  views:
+    pagination:
+      next:       '&rarr;'
+      previous:   '&larr;'
+      last:       Последняя
+      first:      Первая
+      truncate:   '...'

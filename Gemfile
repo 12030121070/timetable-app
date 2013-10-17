@@ -21,6 +21,7 @@ group :default do
   gem 'grape'
   gem 'has_scope'
   gem 'inherited_resources'
+  gem 'kaminari'
   gem 'nested_form'
   gem 'openteam-commons'
   gem 'paperclip'
