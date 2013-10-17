@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<ul class='results_list'>
+<ul class='list'>
   <% @groups.each do |group| %>
     <li>
       <%= link_to group.title, organization_group_path(group.title) %>
@@ -32,7 +32,7 @@
     <li><%= link_to lecturer.full_name, organization_lecturer_path(lecturer) %></li>
   <% end %>
 
-  <% if @groups.empty? && @lecturers.empty? && params[:search].present? %>
-      <li class="empty">Не найдено ни одного расписания</li>
+  <% if @groups.empty? && @lecturers.empty? && params[:term].present? %>
+      <li class="empty">Ничего не найдено :(</li>
   <% end %>
 </ul>
