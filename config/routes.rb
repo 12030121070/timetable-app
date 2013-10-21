@@ -67,6 +67,7 @@ TimetableApp::Application.routes.draw do
 
   scope :module => :public do
     get '/' => 'groups#index',                    :constraints => -> (r) { r.subdomain.present? }, :as => :organization
+    get '/search' => 'organizations#show',        :constraints => -> (r) { r.subdomain.present? }, :as => :search_organization
     get '/classrooms' => 'classrooms#index',      :constraints => -> (r) { r.subdomain.present? }, :as => :organization_classrooms
     get '/classrooms/:id' => 'classrooms#show',   :constraints => -> (r) { r.subdomain.present? }, :as => :organization_classroom
     get '/groups' => 'groups#index',              :constraints => -> (r) { r.subdomain.present? }, :as => :organization_groups
