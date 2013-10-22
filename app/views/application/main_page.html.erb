@@ -1,7 +1,93 @@
 <div class='main_page'>
-  <div class='header'>
-    <h1>Расписание для вашего ВУЗа</h1>
+  <div class="header">
+    <div class="additional_wrapper">
+      <div class="inner_wrapper">
+        <div class="email_contact">
+          <div>Задайте свой вопрос по&nbsp;почте <%= mail_to 'ask@fliptable.ru', nil, :subject => 'У меня вопрос об электронном расписании' %><div class='appendix'></div></div>
+        </div>
+        <div class="logo"><%= link_to "Электронное расписание для учебных заведений", root_path %></div>
+        <div class="title">
+          <h1>Электронное расписание <span>для учебных заведений</span></h1>
+          <h2>Создавайте в одном месте &mdash; используйте везде!</h2>
+        </div>
+        <div class="auth_form">
+          <div class="actions">
+            <div class="sign_up"><%= link_to "Зарегистрироваться", user_registration_path %></div>
+            <div class="sign_in"><%= link_to "Войти", user_session_path %></div>
+          </div>
+          <%= simple_form_for :user, :url => user_registration_path, :method => :post do |f| %>
+            <%= f.input :email, :placeholder => 'Ваша электронная почта', :label => false %>
+            <%= f.input :password, :placeholder => 'Пароль', :label => false %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="intro">
+
+  <div class="carousel">
+    <div class="inner_wrapper">
+      <div class="controls">
+        <a href="#" class="prev">&larr;</a>
+        <a href="#" class="next">&rarr;</a>
+      </div>
+      <ul>
+        <li>
+          <div class="picture template_slide"></div>
+          <h2>Шаблон расписания звонков и&nbsp;выходных</h2>
+          <div class="desc">Создайте шаблон и применяйте&nbsp;его&nbsp;в<br/>каждом расписании</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="demo">
+    <div class="inner_wrapper">
+      <div class="picture"></div>
+      <h2>Попробуйте Fliptable</h2>
+      <div class="desc">Вы можете попробовать демо-версию бесплатно и&nbsp;без регистрации</div>
+      <div class="actions">
+        <div class="demo_link sign_in"><%= link_to "Войти в демо", '#' %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tariff">
+    <div class="additional_wrapper">
+      <div class="inner_wrapper">
+        <div class="tariff_wrapper">
+          <div class="slider_wrapper">
+            <div class='label'>Период действия подписки: <div class='counter'>12 мес. <span>(скидка 10%)</span></div></div>
+            <div class="slider">
+              <span class="min">1 месяц</span>
+              <span class="max">12 месяцев</span>
+            </div>
+          </div>
+          <div class="slider_wrapper">
+            <div class='label'>Количество групп: <div class='counter'>60 гр. <span>(скидка 5%)</span></div></div>
+            <div class="for_free">бесплатно</div>
+            <div class="slider without_left">
+              <span class="min">5 групп</span>
+              <span class="max">200 групп</span>
+            </div>
+          </div>
+          <div class="total">
+            <div class="label">Стоимость подписки:</div>
+            <div class="wrapper">
+              <div class="sum">23 000 рублей</div> - <div class="discount">15%</div> = <div class="sum_with_discount">20 000 рублей</div>
+            </div>
+          </div>
+        </div>
+        <h2>Тарифы</h2>
+        <div class="desc">Простой конструктор тарифов позволит подобрать для вас удобные условия</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner_wrapper">
+      <div class="go_top"><%= link_to "Наверх", '#' %></div>
+      <div class="logo"><%= link_to "Электронное расписание для учебных заведений", root_path %></div>
+      <div class='copyright'>&copy; Электронное расписание для учебных заведений, <%= Time.zone.today.year %></div>
+    </div>
   </div>
 </div>

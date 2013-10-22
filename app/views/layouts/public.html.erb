@@ -1,7 +1,7 @@
 <%= content_for :head do %>
   <head>
     <title><%= @organization.title %> | Расписание занятий</title>
-    <%= favicon_link_tag '/myicon.ico', :rel => 'shortcut icon', :type => 'image/ico' %>
+    <%= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon', :type => 'image/ico' %>
     <%= stylesheet_link_tag    'public', :media => 'all' %>
     <%= javascript_include_tag 'public' %>
     <%= csrf_meta_tags %>

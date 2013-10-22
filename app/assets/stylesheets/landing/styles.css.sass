@@ -2,15 +2,417 @@
 @import 'commons/auth'
 @import 'commons/color_scheme'
 @import 'commons/flash_messages'
-@import 'commons/fonts'
 @import 'commons/forms'
+@import url(http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic)
 
-body
-  font-weight: 200
+html, body, input, textarea, select, button, a, p, b, i
+  font-family: 'PT Sans', sans-serif
 
 h1,h2,h3,h4,h5,h6
-  font-weight: 200
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'PT Sans', 'Verdana', sans-serif
+  font-weight: normal
 
-h1
-  text-align: center
-  margin-top: 200px
+.inner_wrapper
+  +clearfix
+  margin: 0 auto
+  width: 1010px
+
+  .actions
+    +clearfix
+
+    div
+      +border-radius(4px)
+      +clearfix
+      float: left
+      padding: 0 0 4px 0
+
+      a
+        +border-radius(4px)
+        display: block
+        font-size: 14px
+        height: 14px
+        padding: 16px
+        text-align: center
+        text-decoration: none
+        text-transform: uppercase
+        width: 150px
+
+        &:active
+          position: relative
+          top: 1px
+          left: 1px
+
+      &.sign_up
+        background: #0061a6
+        margin: 0 15px 0 0
+
+        a
+          +single-text-shadow(1px, 1px, 1px, false, #777)
+          background: #0095fe
+          @include background(linear-gradient(#0095fe, #00a3fe))
+          color: #fff
+
+          &:hover
+            background: #0089EB
+
+      &.sign_in
+        background: #daa904
+        margin: 0 0 0 15px
+
+        a
+          background: #febe00
+          @include background(linear-gradient(#febe00, #fec800))
+          color: #a07d09
+          font-weight: bold
+
+          &:hover
+            background: #EBB000
+
+.header
+  background: #8ecbec
+  @include background(image_url('clouds.png') no-repeat center 125px, radial-gradient(top, #b5dfee, #93c6e2, #8ecbec, #a3e7ff, #9ce0ff))
+  height: 886px
+
+  .additional_wrapper
+    background: image_url('devices.png') no-repeat center 303px
+    height: 886px
+
+  .logo
+    margin: 30px 0 0 0
+
+    a
+      background: image_url('top_logo.png') no-repeat
+      display: block
+      height: 51px
+      text-indent: -9999px
+      width: 225px
+
+  .email_contact
+    +border-radius(18px)
+    background: #fff
+    color: #646464
+    float: right
+    font-size: 14px
+    line-height: 16px
+    margin: 25px 10px 0 0
+    padding: 15px 20px 14px
+    position: relative
+    width: 160px
+
+    .appendix
+      border-bottom: 14px solid transparent
+      border-left: 14px solid #fff
+      bottom: -13px
+      position: absolute
+
+    a
+      color: #0263a7
+
+  .title
+    margin: 40px 0 0 0
+    text-align: center
+
+    h1
+      +single-text-shadow(1px, 1px, 1px, false, #bbb)
+      color: #fff
+      font-size: 36px
+      text-transform: uppercase
+
+      span
+        display: block
+        font-size: 44px
+        font-weight: bold
+        margin: 15px 0 0 0
+
+    h2
+      color: #0061a6
+      font-size: 21px
+      margin: 20px 0 0 0
+
+  .auth_form
+    +clearfix
+    margin: 530px 0 0 0
+
+    form
+      +clearfix
+
+      div.input
+        +clearfix
+        float: left
+
+        &.email
+          margin: 0 15px 0 0
+
+        input
+          +border-radius(3px)
+          background: #fbfbfb
+          border: 1px solid #d3dce0
+          color: #47494b
+          font-size: 16px
+          height: 16px
+          line-height: 18px
+          height: 44px
+          margin: 0
+          outline: none
+          padding: 0 18px
+          width: 232px
+
+    .actions
+      float: right
+      margin: 0 30px 0 30px
+
+.carousel
+  @include background(linear-gradient(#d7f3fd, #d3f1fe))
+  border-top: 1px solid #c6eefd
+  height: 500px
+  position: relative
+
+  .inner_wrapper
+    width: 990px
+
+  ul
+    li
+      width: 990px
+
+      h2
+        +clearfix
+        color: #009aff
+        font-size: 34px
+        font-weight: bold
+        line-height: 44px
+        margin: 65px 0 0 0
+        text-transform: uppercase
+
+      .desc
+        +clearfix
+        color: #0061aa
+        font-size: 22px
+        line-height: 30px
+        margin: 18px 0 0 0
+
+      .picture
+        float: right
+        display: block
+        height: 404px
+        width: 611px
+
+        &.template_slide
+          background: image_url('template_slide.png') no-repeat
+
+  .controls
+    +clearfix
+    position: absolute
+    top: 420px
+
+    a
+      display: block
+      float: left
+      height: 50px
+      text-indent: -9999px
+      width: 50px
+
+    .prev
+      background: image_url('carousel_controls.png') no-repeat left top
+      margin: 0 15px 0 0
+
+    .next
+      background: image_url('carousel_controls.png') no-repeat right top
+
+.demo
+  @include background(linear-gradient(#27ccac, #18bd9a))
+  border-top: 1px solid #15b58c
+  border-bottom: 1px solid #fff
+  height: 505px
+
+  .picture
+    background: image_url('demo_slide.png') no-repeat
+    float: left
+    height: 432px
+    margin: 73px 45px 0 0
+    width: 684px
+
+  h2
+    +clearfix
+    color: #fff
+    font-size: 34px
+    font-weight: bold
+    line-height: 44px
+    margin: 65px 0 0 0
+    text-transform: uppercase
+
+  .desc
+    +clearfix
+    color: #fff
+    font-size: 22px
+    line-height: 30px
+    margin: 18px 0 0 0
+
+  .actions
+    +clearfix
+    margin: 150px 0 0 0
+
+.tariff
+  background: #f2f4f5
+  @include background(linear-gradient(#e6e9eb, #f2f4f5))
+  height: 550px
+
+  .additional_wrapper
+    background: image_url('tariff_bg.png') no-repeat center -123px
+    height: 550px
+
+  .inner_wrapper
+    width: 980px
+
+  h2
+    +clearfix
+    color: #0099ff
+    font-size: 34px
+    font-weight: bold
+    line-height: 44px
+    margin: 90px 0 0 0
+    text-transform: uppercase
+    width: 256px
+
+  .desc
+    +clearfix
+    color: #94979b
+    font-size: 22px
+    line-height: 30px
+    margin: 18px 0 0 0
+    width: 256px
+
+  .tariff_wrapper
+    color: #000
+    float: right
+    height: 246px
+    margin: 110px 11px 0 0
+    padding: 25px 20px
+    width: 664px
+
+    .slider_wrapper
+      .label
+        font-weight: bold
+        font-size: 16px
+        margin: 0 0 20px 0
+
+        .counter
+          +inline-block
+          color: #0095ff
+          font-size: 14px
+          margin: 0 0 0 5px
+
+          span
+            color: #808080
+            font-style: italic
+
+      .for_free
+        +border-top-left-radius(4px)
+        +border-bottom-left-radius(4px)
+        background: #57b700
+        border-bottom: 1px solid #53ae00
+        border-left: 1px solid #4a9c00
+        border-top: 1px solid #469200
+        color: #fff
+        float: left
+        font-size: 12px
+        height: 23px
+        line-height: 23px
+        padding: 0 5px
+
+      .slider
+        +border-radius(4px)
+        +clearfix
+        background: #e6e6e6
+        border-bottom: 1px solid #dadada
+        border-left: 1px solid #c4c4c4
+        border-right: 1px solid #c4c4c4
+        border-top: 1px solid #b8b8b8
+        margin: 0 0 25px 0
+        height: 23px
+
+        &.without_left
+          +border-top-left-radius(0)
+          +border-bottom-left-radius(0)
+
+        .min, .max
+          font-size: 12px
+          height: 23px
+          line-height: 23px
+
+        .min
+          float: left
+          margin: 0 0 0 5px
+
+        .max
+          float: right
+          margin: 0 5px 0 0
+
+    .total
+      .label
+        font-size: 16px
+        font-weight: bold
+        margin: 0 0 15px 0
+
+      .wrapper
+        font-size: 30px
+        font-weight: 200
+        height: 40px
+        line-height: 40px
+
+      .sum, .discount, .sum_with_discount
+        +inline-block
+        height: 40px
+        line-height: 40px
+
+      .sum_with_discount
+        color: #009eff
+        font-weight: bold
+
+.footer
+  background: #3a4144
+  color: #989999
+  padding: 30px 0 20px
+
+  .inner_wrapper
+    width: 980px
+
+    .logo
+      a
+        +clearfix
+        background: image_url('footer_logo.png') no-repeat
+        display: block
+        height: 40px
+        text-indent: -9999px
+        width: 164px
+
+    .copyright
+      font-size: 12px
+
+    .go_top
+      +border-radius(3px)
+      +clearfix
+      background: #afafaf
+      float: right
+      padding: 0 0 4px 0
+
+      a
+        +border-radius(3px)
+        background: #dadada image_url('go_top.png') no-repeat 12px center
+        color: #838383
+        display: block
+        font-size: 14px
+        height: 38px
+        line-height: 38px
+        padding: 0 0 0 34px
+        text-align: left
+        text-decoration: none
+        text-transform: uppercase
+        width: 81px
+
+        &:hover
+          background-color: #C9C9C9
+
+        &:active
+          position: relative
+          top: 1px
+          left: 1px
