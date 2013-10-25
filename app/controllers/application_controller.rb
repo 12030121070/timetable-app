@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   def main_page
     redirect_to workplace_root_path if user_signed_in?
+    @tariff = Tariff.instance
   end
 
 private

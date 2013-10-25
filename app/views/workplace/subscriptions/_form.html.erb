@@ -12,9 +12,9 @@
     <div class='range_wrapper'>
       <label for="groups_counter">Количество групп:</label>
       <span class='counter groups_counter'><span class='value'></span> гр. <span class='discount'></span></span>
-      <div id='groups_counter' class="range" data-min='<%= @tariff.min_group %>' data-max='<%= @tariff.max_group*2 %>' data-step='1' data-init='<%= @tariff.half_groups %>'>
+      <div id='groups_counter' class="range" data-min='<%= @tariff.min_group %>' data-max='<%= @tariff.max_group %>' data-step='1' data-init='<%= @tariff.half_groups %>'>
         <span class="min"><%= @tariff.min_group %> гр.</span>
-        <span class="max"><%= @tariff.max_group*2 %> гр.</span>
+        <span class="max"><%= @tariff.max_group %> гр.</span>
       </div>
     </div>
 

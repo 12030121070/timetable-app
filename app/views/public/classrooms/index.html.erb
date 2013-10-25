@@ -2,6 +2,7 @@
 
 <ul class="list">
   <% @classrooms.each do |classroom| %>
+    <% next if classroom.classroom_lessons.empty? %>
     <li>
       <%= link_to classroom, organization_classroom_path(classroom) %>
     </li>

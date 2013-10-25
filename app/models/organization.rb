@@ -60,7 +60,7 @@ class Organization < ActiveRecord::Base
   end
 
   def groups_count_by_subscriptions
-    return 5 if subscriptions.empty?
+    return ((Tariff.instance.min_group||1)-1) if subscriptions.empty?
 
     subscriptions.active.actual.sum(:groups_count)
   end

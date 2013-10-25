@@ -36,6 +36,46 @@
           <h2>Шаблон расписания звонков и&nbsp;выходных</h2>
           <div class="desc">Создайте шаблон и применяйте&nbsp;его&nbsp;в<br/>каждом расписании</div>
         </li>
+        <li>
+          <div class="picture dict_slide"></div>
+          <h2>Импорт справочников</h2>
+          <div class="desc">Загружайте списки аудиторий и преподавателей, чтобы не переносить их вручную</div>
+        </li>
+        <li>
+          <div class="picture print_slide"></div>
+          <h2>Печать в один клик</h2>
+          <div class="desc">Экономьте время &mdash; версия для печати формируется автоматически</div>
+        </li>
+        <li>
+          <div class="picture share_slide"></div>
+          <h2>Размещение на вашем сайте</h2>
+          <div class="desc">Транслируйте расписание на своем ресурсе, чтобы студентам было просто его найти</div>
+        </li>
+        <li>
+          <div class="picture ical_slide"></div>
+          <h2>Импорт в GOOGLE CALENDAR, ICAL, OUTLOOK</h2>
+          <div class="desc">Легко импортируйте расписание в удобный для вас сервис</div>
+        </li>
+        <li>
+          <div class="picture mobile_slide"></div>
+          <h2>Мобильная версия</h2>
+          <div class="desc">Позвольте студентам сверяться с расписанием с любого устройства</div>
+        </li>
+        <li>
+          <div class="picture copy_slide"></div>
+          <h2>Быстрое наполнение</h2>
+          <div class="desc">Копируйте неделю, чтобы быстро заполнить всё расписание</div>
+        </li>
+        <li>
+          <div class="picture collaboration_slide"></div>
+          <h2>Совместная работа</h2>
+          <div class="desc">Назначайте нескольких менеджеров, чтобы ускорить работу с системой</div>
+        </li>
+        <li>
+          <div class="picture create_slide"></div>
+          <h2>Меньше рутины</h2>
+          <div class="desc">Создавайте расписание быстро и без лишних действий</div>
+        </li>
       </ul>
     </div>
   </div>
@@ -54,26 +94,26 @@
   <div class="tariff">
     <div class="additional_wrapper">
       <div class="inner_wrapper">
-        <div class="tariff_wrapper">
+        <div class="tariff_wrapper" data-tariff='<%= @tariff.to_json %>'>
           <div class="slider_wrapper">
-            <div class='label'>Период действия подписки: <div class='counter'>12 мес. <span>(скидка 10%)</span></div></div>
-            <div class="slider">
+            <div class='label'>Период действия подписки: <div class='counter month'>12 мес. <span>(скидка 10%)</span></div></div>
+            <div class="slider month" data-min='<%= @tariff.min_month %>' data-max='<%= @tariff.max_month %>' data-step='1' data-init='<%= @tariff.half_months %>'>
               <span class="min">1 месяц</span>
               <span class="max">12 месяцев</span>
             </div>
           </div>
           <div class="slider_wrapper">
-            <div class='label'>Количество групп: <div class='counter'>60 гр. <span>(скидка 5%)</span></div></div>
-            <div class="for_free">бесплатно</div>
-            <div class="slider without_left">
-              <span class="min">5 групп</span>
-              <span class="max">200 групп</span>
+            <div class='label'>Количество групп: <div class='counter group'>60 гр. <span>(скидка 5%)</span></div></div>
+            <div class="slider group without_left" data-min='1' data-sale='<%= @tariff.min_group %>' data-max='<%= @tariff.max_group %>' data-step='1' data-init='<%= @tariff.half_groups %>'>
+              <div class="for_free">бесплатно</div>
+              <span class="min"><%= @tariff.min_group - 1 %> групп</span>
+              <span class="max"><%= @tariff.max_group %> групп</span>
             </div>
           </div>
           <div class="total">
             <div class="label">Стоимость подписки:</div>
             <div class="wrapper">
-              <div class="sum">23 000 рублей</div> - <div class="discount">15%</div> = <div class="sum_with_discount">20 000 рублей</div>
+              <div class="sum"></div> <div class="discount"></div> = <div class="sum_with_discount"></div>
             </div>
           </div>
         </div>

@@ -171,7 +171,15 @@ h1,h2,h3,h4,h5,h6
     width: 990px
 
   ul
+    +clearfix
+    height: 500px
+    position: relative
+    width: 8910px
+    z-index: 1
+
     li
+      +clearfix
+      float: left
       width: 990px
 
       h2
@@ -193,16 +201,41 @@ h1,h2,h3,h4,h5,h6
       .picture
         float: right
         display: block
-        height: 404px
-        width: 611px
+        height: 500px
+        width: 684px
 
         &.template_slide
-          background: image_url('template_slide.png') no-repeat
+          background: image_url('template_slide.png') no-repeat center center
+
+        &.dict_slide
+          background: image_url('dict_slide.png') no-repeat center center
+
+        &.print_slide
+          background: image_url('print_slide.png') no-repeat center center
+
+        &.share_slide
+          background: image_url('share_slide.png') no-repeat center center
+
+        &.ical_slide
+          background: image_url('ical_slide.png') no-repeat center center
+
+        &.mobile_slide
+          background: image_url('mobile_slide.png') no-repeat center center
+
+        &.copy_slide
+          background: image_url('copy_slide.png') no-repeat center center
+
+        &.collaboration_slide
+          background: image_url('collaboration_slide.png') no-repeat center center
+
+        &.create_slide
+          background: image_url('create_slide.png') no-repeat center center
 
   .controls
     +clearfix
     position: absolute
     top: 420px
+    z-index: 2
 
     a
       display: block
@@ -318,21 +351,33 @@ h1,h2,h3,h4,h5,h6
         height: 23px
         line-height: 23px
         padding: 0 5px
+        position: relative
+        top: -1px
 
       .slider
         +border-radius(4px)
-        +clearfix
         background: #e6e6e6
         border-bottom: 1px solid #dadada
         border-left: 1px solid #c4c4c4
         border-right: 1px solid #c4c4c4
         border-top: 1px solid #b8b8b8
-        margin: 0 0 25px 0
+        float: left
         height: 23px
+        margin: 0 0 25px 0
+        overflow: visible
+        width: 662px
 
-        &.without_left
-          +border-top-left-radius(0)
-          +border-bottom-left-radius(0)
+        .ui-slider-handle
+          +border-radius(3px)
+          +single-box-shadow(#73c5ff, 0, 1px, 0)
+          background: #009fff image_url('slider_handler.png') no-repeat center center
+          @include background(image_url('slider_handler.png') no-repeat center center, linear-gradient(#00a0ff, #008aff))
+          border: none
+          height: 45px
+          outline: none
+          top: -10px
+          margin-left: -15px
+          width: 30px
 
         .min, .max
           font-size: 12px
