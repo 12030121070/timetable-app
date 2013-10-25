@@ -57,8 +57,8 @@ class API < Grape::API
           :lessons => Set.new
         }
 
-        lessons.group_by(&:discipline_title).each do |discipline_title, lessons|
-          lesson_hash = { :subject => discipline_title }
+        lessons.group_by{ |l| "#{l.discipline_title}_#{l.kind}_#{l.lesson_time.starts_at}" }.each do |discipline_title, lessons|
+          lesson_hash = { :subject => lessons.first.discipline_title }
 
           lessons.group_by(&:kind).each do |kind, lessons|
             lesson_hash[:type] = training_code(kind)
