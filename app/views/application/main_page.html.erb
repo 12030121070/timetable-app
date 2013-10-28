@@ -96,17 +96,17 @@
       <div class="inner_wrapper">
         <div class="tariff_wrapper" data-tariff='<%= @tariff.to_json %>'>
           <div class="slider_wrapper">
-            <div class='label'>Период действия подписки: <div class='counter month'>12 мес. <span>(скидка 10%)</span></div></div>
+            <div class='label'>Период действия подписки: <div class='counter month'></div></div>
             <div class="slider month" data-min='<%= @tariff.min_month %>' data-max='<%= @tariff.max_month %>' data-step='1' data-init='<%= @tariff.half_months %>'>
-              <span class="min">1 месяц</span>
-              <span class="max">12 месяцев</span>
+              <span class="min"><%= @tariff.min_month %> месяц</span>
+              <span class="max"><%= @tariff.max_month %> месяцев</span>
             </div>
           </div>
           <div class="slider_wrapper">
-            <div class='label'>Количество групп: <div class='counter group'>60 гр. <span>(скидка 5%)</span></div></div>
+            <div class='label'>Количество групп: <div class='counter group'></div></div>
             <div class="slider group without_left" data-min='1' data-sale='<%= @tariff.min_group %>' data-max='<%= @tariff.max_group %>' data-step='1' data-init='<%= @tariff.half_groups %>'>
               <div class="for_free">бесплатно</div>
-              <span class="min"><%= @tariff.min_group - 1 %> групп</span>
+              <span class="min"><%= @tariff.min_group %> групп</span>
               <span class="max"><%= @tariff.max_group %> групп</span>
             </div>
           </div>

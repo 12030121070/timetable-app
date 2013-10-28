@@ -120,8 +120,8 @@ tariff_handler = () ->
       slide: (event, ui) ->
         value = ui.value
         if slider.hasClass('group')
-          if ui.value < 23
-            value = 'меньше '+(tariff.min_group-1)+' '
+          if ui.value < 25
+            value = 'меньше '+tariff.min_group+' '
           else
             value = ui.value - 19
 
