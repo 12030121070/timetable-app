@@ -7,9 +7,9 @@
     <%= f.input :password_confirmation, :required => false %>
     <%= f.input :current_password, :hint => "необходим текущий пароль для сохранения изменений", :required => true %>
 
-    <div class="buttons">
-      <%= f.button :submit, "Обновить" %>
-      <%= link_to "Отмена", root_path %>
+    <div class="actions">
+      <%= f.button :submit, "Обновить", :class => 'submit' %>
+      <%= link_to "Отмена", root_path, :class => 'cancel' %>
     </div>
   <% end %>
 

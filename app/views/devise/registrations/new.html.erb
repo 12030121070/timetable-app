@@ -4,11 +4,10 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :password, :required => true %>
 
-    <div class="buttons">
-      <%= f.button :submit, "Зарегистрироваться" %>
-      <%= link_to "Отмена", root_path %>
+    <div class="actions">
+      <%= f.button :submit, "Зарегистрироваться", :class => 'submit' %>
+      <%= link_to "Отмена", root_path, :class => 'cancel' %>
     </div>
+    <%= render "devise/shared/links" %>
   <% end %>
-
-  <%= render "devise/shared/links" %>
 </div>

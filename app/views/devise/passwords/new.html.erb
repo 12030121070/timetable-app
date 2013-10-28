@@ -4,11 +4,10 @@
   <%= simple_form_for resource, :url => password_path(resource_name), :as => resource_name do |f| %>
     <%= f.input :email, :input_html => { :autofocus => true } %>
 
-    <div class="buttons">
-      <%= f.submit "Отправить инструкции для восстановления" %>
-      <%= link_to "Отмена", root_path %>
+    <div class="actions">
+      <%= f.submit "Отправить инструкции для восстановления", :class => 'submit' %>
+      <%= link_to "Отмена", root_path, :class => 'cancel' %>
     </div>
+    <%= render "devise/shared/links" %>
   <% end %>
-
-  <%= render "devise/shared/links" %>
 </div>

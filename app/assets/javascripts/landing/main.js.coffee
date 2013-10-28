@@ -41,6 +41,7 @@ carousel_handler = () ->
 
 tariff_handler = () ->
   tariff_wrapper = $('.tariff_wrapper')
+  return unless tariff_wrapper.length
   sliders = $('.slider', tariff_wrapper)
   tariff = tariff_wrapper.data('tariff')
 

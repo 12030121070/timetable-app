@@ -23,11 +23,105 @@
       color: #f2f2f2
 
 .auth_form_wrapper
+  background: #8ecbec
+  @include background(image_url('clouds.png') no-repeat center 125px, radial-gradient(top, #b5dfee, #93c6e2, #8ecbec, #a3e7ff, #9ce0ff))
   margin: 0 auto
-  width: 400px
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
 
-  label
-    display: block
+  h3
+    +single-text-shadow(1px, 1px, 1px, false, #bbb)
+    color: #fff
+    font-size: 36px
+    margin: 70px 0 30px 0
+    text-align: center
+    text-transform: uppercase
 
-  input
-    width: 394px
+  form
+    +clearfix
+    +border-radius(3px)
+    background: rgba(#fff, 0.3)
+    border: 1px solid #93c6e2
+    margin: 0 auto
+    padding: 15px 10px
+    width: 440px
+
+    .error
+      margin: 0 0 0 15px
+
+    div.input
+      margin: 0 0 20px 0
+
+    div.boolean
+      label
+        input
+          height: auto
+          width: auto
+
+    label
+      font-size: 18px
+      line-height: 26px
+      font-weight: 200
+
+    input
+      +border-radius(3px)
+      background: #fbfbfb
+      border: 1px solid #d3dce0
+      color: #47494b
+      font-size: 16px
+      line-height: 18px
+      height: 44px
+      margin: 0
+      outline: none
+      padding: 0 18px
+      width: 232px
+
+    .actions
+      +clearfix
+
+      .submit, .cancel
+        +border-radius(4px)
+        background: #febe00
+        @include background(linear-gradient(#febe00, #fec800))
+        border: none
+        color: #47494b
+        display: block
+        float: left
+        font-size: 14px
+        line-height: 14px
+        margin: 0
+        padding: 16px
+        text-align: center
+        text-decoration: none
+        width: auto
+
+        &:hover
+          background: #EBB000
+          cursor: pointer
+
+        &:active
+          position: relative
+          top: 1px
+          left: 1px
+
+      .submit
+        height: 46px
+        margin: 0 15px 0 0
+        +min-width(112px)
+
+      .cancel
+        +min-width(80px)
+
+    .shared_links
+      +clearfix
+      margin: 15px 0 0 0
+
+      a
+        clear: both
+        display: block
+        float: left
+        font-size: 16px
+        line-height: 24px
