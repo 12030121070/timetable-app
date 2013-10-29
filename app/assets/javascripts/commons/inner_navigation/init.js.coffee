@@ -8,11 +8,11 @@
       list.show()
       current.addClass('active')
       width = $(document).width()
-      $('body').css('overflow', 'hidden').css('width', width)
+      $('body, .scrollable').css('overflow', 'hidden').css('width', width)
     ), (->
       list.hide()
       current.removeClass('active')
-      $('body').css('overflow', 'auto').css('width', '100%')
+      $('body, .scrollable').css('overflow', 'auto').css('width', '100%')
     )
 
 $ ->
