@@ -651,6 +651,28 @@ div.status
       padding: 0 0 1px 0
       text-decoration: none
 
+.week_timetable
+  .sticky_header
+    position: fixed
+    z-index: 2
+
+  thead
+    .group_label
+      width: 101px
+
+    .group_number
+      width: 174px
+
+  tbody
+    td
+      width: 180px
+
+    .lesson_time
+      width: 80px
+
+    .day
+      width: 40px
+
 .week_timetable, .slave_table
   width: auto
 
@@ -684,7 +706,6 @@ div.status
     padding: 0 10px
 
   .group_number
-    +min-width(180px)
     font-size: 14px
     font-weight: 600
 
@@ -694,7 +715,6 @@ div.status
     line-height: 16px
     margin: 10px 0
     text-transform: uppercase
-    width: 38px
 
   .date
     display: block

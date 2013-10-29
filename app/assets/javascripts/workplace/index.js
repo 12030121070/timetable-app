@@ -23,5 +23,6 @@
  * = require 'commons/copy_and_move'
  * = require 'commons/inner_navigation'
  * = require 'commons/subscription'
+ * = require 'commons/sticky_table_header'
  * = require_tree .
  */
