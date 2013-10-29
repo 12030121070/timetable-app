@@ -57,7 +57,7 @@ class API < Grape::API
           :lessons => Set.new
         }
 
-        lessons.group_by{ |l| "#{l.discipline_title}_#{l.kind}_#{l.lesson_time.starts_at}" }.each do |discipline_title, lessons|
+        lessons.group_by{ |l| "#{l.discipline_title}_#{l.kind}_#{l.lesson_time.starts_at}_#{l.classrooms.map(&:id).join('_')}_#{l.lecturers.map(&:id).join('_')}" }.each do |discipline_title, lessons|
           lesson_hash = { :subject => lessons.first.discipline_title }
 
           lessons.group_by(&:kind).each do |kind, lessons|
@@ -72,12 +72,12 @@ class API < Grape::API
                 lessons.group_by{ |l| l.lecturers.map{ |lecturer| { :teacher_name => lecturer.short_name.gsub('&nbsp;', ' ') } } }.each do |teachers, lessons|
                   lesson_hash[:teachers] = teachers
 
-                  lessons.group_by{ |l| l.classrooms.includes(:building).map{|c| { auditory_name: c.to_s, auditory_address: c.building.address } } }.each do |auditories, lessons|
+                  lessons.group_by{ |l| l.classrooms.includes(:building).map{|c| { :auditory_name => c.to_s, :auditory_address => c.building.address } } }.each do |auditories, lessons|
                     lesson_hash[:auditories] = auditories
                     lesson_hash[:parity]     = nil
                     lesson_hash[:date_start] = nil
                     lesson_hash[:date_end]   = nil
-                    lesson_hash[:dates]      = lessons.map(&:day).map{|d| I18n.l(d.date, :format => '%d.%m.%Y')}.flatten
+                    lesson_hash[:dates]      = lessons.map{ |l| I18n.l(l.day.date, :format => '%d.%m.%Y') }
                   end
                 end
               end
