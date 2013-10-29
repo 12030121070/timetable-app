@@ -49,7 +49,25 @@ class Timetable < ActiveRecord::Base
   end
 
   def closest_week
-    weeks.first
+    week = weeks.current.first
+
+    if week.nil?
+      past_week = weeks.past.last
+      future_week = weeks.future.first
+
+      if past_week && future_week
+        if (past_week.date_on.end_of_week..Time.zone.today).count < (Time.zone.today..future_week.date_on.beginning_of_week).count
+          week = past_week
+        else
+          week = future_week
+        end
+      else
+        week = past_week if past_week
+        week = future_week if future_week
+      end
+    end
+
+    week
   end
 
   private
