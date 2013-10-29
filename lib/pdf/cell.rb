@@ -40,7 +40,8 @@ class Pdf::Cell
       return false unless lesson.discipline == other_lesson.discipline &&
         lesson.kind == other_lesson.kind &&
         lesson.classrooms == other_lesson.classrooms &&
-        lesson.lecturers == other_lesson.lecturers
+        lesson.lecturers == other_lesson.lecturers &&
+        lesson.groups == other_lesson.groups
     end
 
     true
