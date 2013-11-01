@@ -108,6 +108,7 @@ frame_handler = (parent, response, options = {}) ->
             options.target.replaceWith($(response).hide().fadeIn(700))
           options.list.trigger('changed')
           sort(options.list)
+          init_sticky_table_handler()
 
   off_callbacks = () ->
     $(document).off('keyup') unless $('.not_active').length
