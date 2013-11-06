@@ -1,6 +1,9 @@
 <% if user_signed_in? %>
   <div class="log_info">
     <div class="wrapper">
+      <% if controller_path =~ /workplace/ && @organization.subdomain %>
+        <%= link_to "Публичный вид", "http://#{@organization.subdomain}.#{request.domain}#{request.port_string}", :target => '_blank' %> |
+      <% end %>
       <%= current_user.email %>
       <%= link_to "Выход", destroy_user_session_path, :method => :delete %>
     </div>

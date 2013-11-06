@@ -7,7 +7,8 @@
       <%= alert %>
     </div>
     <div class='main_wrapper'>
-      <%= yield :log_info %>
+      <%= render :file => 'commons/log_info' %>
+
       <%= yield :content %>
     </div>
     <% if Rails.env.production? %>
