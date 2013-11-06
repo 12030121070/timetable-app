@@ -8,6 +8,10 @@
   </head>
 <% end %>
 
+<%= content_for :log_info do %>
+  <%= render :file => 'commons/log_info' %>
+<% end %>
+
 <%= content_for :content do %>
   <%= yield %>
 <% end %>

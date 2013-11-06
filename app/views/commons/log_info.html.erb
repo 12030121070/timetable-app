@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+  <div class="log_info">
+    <div class="wrapper">
+      <%= current_user.email %>
+      <%= link_to "Выход", destroy_user_session_path, :method => :delete %>
+    </div>
+  </div>
+<% end %>
