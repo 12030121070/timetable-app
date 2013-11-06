@@ -1,8 +1,7 @@
 <%= simple_form_for [:manage, @organization, @subscription] do |f| %>
   <%= f.input :starts_on %>
-  <%= f.input :ends_on %>
-  <%= f.input :month_count %>
-  <%= f.input :groups_count %>
+  <%= f.input :month_count,  :as => :string %>
+  <%= f.input :groups_count, :as => :string %>
   <%= f.input :active %>
 
   <div class="buttons">

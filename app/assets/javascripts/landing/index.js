@@ -4,5 +4,6 @@
  * = require jquery_ujs
  * = require 'commons/subscription/accounting.min'
  * = require 'commons/flash_messages'
+ * = require 'commons/subscription'
  * = require_tree .
  */

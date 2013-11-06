@@ -1,0 +1,103 @@
+.tariff_wrapper
+  color: #000
+  height: 246px
+  margin: 0 0 0 15px
+  width: 664px
+
+  form
+    overflow: visible
+    padding: 0
+
+    div
+      overflow: visible
+
+  .slider_wrapper
+    .label
+      font-weight: bold
+      font-size: 16px
+      margin: 0 0 20px 0
+
+      .counter
+        +inline-block
+        color: #0095ff
+        font-size: 14px
+        margin: 0 0 0 5px
+
+        span
+          color: #808080
+          font-style: italic
+
+    .for_free
+      +border-top-left-radius(4px)
+      +border-bottom-left-radius(4px)
+      background: #57b700
+      border-bottom: 1px solid #53ae00
+      border-left: 1px solid #4a9c00
+      border-top: 1px solid #469200
+      color: #fff
+      float: left
+      font-size: 12px
+      height: 23px
+      line-height: 23px
+      padding: 0 5px
+      position: relative
+      top: -1px
+
+    .slider
+      +border-radius(4px)
+      background: #e6e6e6
+      border-bottom: 1px solid #dadada
+      border-left: 1px solid #c4c4c4
+      border-right: 1px solid #c4c4c4
+      border-top: 1px solid #b8b8b8
+      float: left
+      height: 23px
+      margin: 0 0 25px 0
+      overflow: visible
+      width: 662px
+
+      .ui-slider-handle
+        +border-radius(3px)
+        +single-box-shadow(#73c5ff, 0, 1px, 0)
+        background: #009fff image_url('slider_handler.png') no-repeat center center
+        @include background(image_url('slider_handler.png') no-repeat center center, linear-gradient(#00a0ff, #008aff))
+        border: none
+        height: 45px
+        outline: none
+        top: -10px
+        margin-left: -15px
+        width: 30px
+
+      .min, .max
+        font-size: 12px
+        height: 23px
+        line-height: 23px
+
+      .min
+        float: left
+        margin: 0 0 0 5px
+
+      .max
+        float: right
+        margin: 0 5px 0 0
+
+  .total
+    .label
+      font-size: 16px
+      font-weight: bold
+      margin: 0 0 15px 0
+
+    .wrapper
+      font-size: 30px
+      font-weight: 200
+      height: 40px
+      line-height: 40px
+
+    .sum, .discount, .sum_with_discount
+      +inline-block
+      height: 40px
+      line-height: 40px
+
+    .sum_with_discount
+      color: #009eff
+      font-weight: bold

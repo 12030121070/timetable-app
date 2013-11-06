@@ -1,1 +1,5 @@
-<%= link_to organization.title, manage_organization_subscriptions_path(organization) %>
+<% if organization.subdomain %>
+  <%= link_to organization.title, manage_organization_subscriptions_path(organization) %>
+<% else %>
+  <%= organization.inspect %>
+<% end %>

@@ -1,28 +1,32 @@
-<div data-tariff='<%= @tariff.to_json %>'>
+<div class='tariff_wrapper' data-tariff='<%= @tariff.to_json %>'>
   <%= simple_form_for [:workplace, @organization.subscriptions.build] do |f| %>
-    <div class='range_wrapper'>
-      <label for="months_counter">Период действия подписки:</label>
+    <div class='slider_wrapper'>
+      <div class='label'>Период действия подписки: <div class='counter month'></div></div>
       <span class='counter months_counter'><span class='value'></span> мес. <span class='discount'></span></span>
-      <div id='months_counter' class="range" data-min='<%= @tariff.min_month %>' data-max='<%= @tariff.max_month %>' data-step='1' data-init='<%= @tariff.half_months %>'>
-        <span class="min"><%= @tariff.min_month %> мес.</span>
-        <span class="max"><%= @tariff.max_month %> мес.</span>
+      <div class="slider month" data-min='<%= @tariff.min_month %>' data-max='<%= @tariff.max_month %>' data-step='1' data-init='<%= @tariff.max_month/2 %>'>
+        <span class="min"><%= @tariff.min_month %> месяц</span>
+        <span class="max"><%= @tariff.max_month %> месяцев</span>
       </div>
     </div>
 
-    <div class='range_wrapper'>
-      <label for="groups_counter">Количество групп:</label>
-      <span class='counter groups_counter'><span class='value'></span> гр. <span class='discount'></span></span>
-      <div id='groups_counter' class="range" data-min='<%= @tariff.min_group %>' data-max='<%= @tariff.max_group %>' data-step='1' data-init='<%= @tariff.half_groups %>'>
-        <span class="min"><%= @tariff.min_group %> гр.</span>
-        <span class="max"><%= @tariff.max_group %> гр.</span>
+    <div class='slider_wrapper'>
+      <div class='label'>Количество групп: <div class='counter group'></div></div>
+      <div class="slider group without_left" data-min='1' data-sale='<%= @tariff.min_group %>' data-max='<%= @tariff.max_group %>' data-step='1' data-init='<%= @tariff.max_group/2 %>'>
+        <div class="for_free">бесплатно</div>
+        <span class="min"><%= @tariff.min_group %> групп</span>
+        <span class="max"><%= @tariff.max_group %> групп</span>
       </div>
     </div>
 
-    <%= f.input :month_count,  :as => :hidden, :input_html => { :class => 'months_counter range' } %>
-    <%= f.input :groups_count, :as => :hidden, :input_html => { :class => 'groups_counter range' } %>
+    <%= f.input :month_count,  :as => :hidden, :input_html => { :class => 'months_counter' } %>
+    <%= f.input :groups_count, :as => :hidden, :input_html => { :class => 'groups_counter' } %>
 
-    <h6>Стоимость подписки</h6>
-    <span class="sum"><span class='without_discount'></span> - <span class='discount'></span>% = <span class='value'></span></span>
+    <div class="total">
+      <div class="label">Стоимость подписки:</div>
+      <div class="wrapper">
+        <div class="sum"></div> <div class="discount"></div> = <div class="sum_with_discount"></div>
+      </div>
+    </div>
 
     <div class="buttons">
       <%= f.submit "Оформить подписку", :class => 'yellow_button' %>

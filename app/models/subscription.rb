@@ -3,7 +3,7 @@ class Subscription < ActiveRecord::Base
   attr_accessor :month_count
 
   belongs_to :organization
-  before_create :set_dates, :set_sum
+  before_create :set_dates, :set_groups_count, :set_sum
 
   scope :active, -> { where('active = :active', :active => true) }
   scope :actual, -> { where('starts_on <= :today AND ends_on >= :today', :today => Time.zone.today) }
@@ -20,37 +20,15 @@ private
     self.ends_on   = Time.zone.today + month_count.to_i.month
   end
 
+  def set_groups_count
+    self.groups_count = self.groups_count < tariff.min_group ? 5 : self.groups_count
+  end
+
   def set_sum
-    month_count = self.month_count.to_i
-    total = month_count * groups_count
+    months_count = self.month_count.to_i
+    groups_count = self.groups_count.to_i
 
-    if groups_count >= tariff.min_group && groups_count < tariff.half_groups
-      if month_count >= tariff.min_month && month_count < tariff.half_months
-        total *= tariff.first_plan
-      elsif month_count >= tariff.half_months && month_count < tariff.max_month
-        total *= tariff.second_plan
-      elsif month_count >= tariff.max_month
-        total *= tariff.third_plan
-      end
-    elsif groups_count >= tariff.half_groups && groups_count < tariff.max_group
-      if month_count >= tariff.min_month && month_count < tariff.half_months
-        total *= tariff.fourth_plan
-      elsif month_count >= tariff.half_months && month_count < tariff.max_month
-        total *= tariff.fith_plan
-      elsif month_count >= tariff.max_month
-        total *= tariff.sixth_plan
-      end
-    elsif groups_count >= tariff.max_group
-      if month_count >= tariff.min_month && month_count < tariff.half_months
-        total *= tariff.seventh_plan
-      elsif month_count >= tariff.half_months && month_count < tariff.max_month
-        total *= tariff.eighth_plan
-      elsif month_count >= tariff.max_month
-        total *= tariff.nineth_plan
-      end
-    end
-
-    self.sum = total
+    self.sum = tariff.choose_plan(months_count, groups_count)
   end
 
   def tariff

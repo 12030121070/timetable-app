@@ -10,56 +10,58 @@
       <%= yield :log_info %>
       <%= yield :content %>
     </div>
-    <!-- Start SiteHeart code -->
-    <script>
-      (function(){
-       // your widget ID
-       var widget_id = 644581;
-       _shcp =[{widget_id : widget_id}];
-       // set default language
-       var lang =(navigator.language || navigator.systemLanguage || navigator.userLanguage ||"en")
-       .substr(0,2).toLowerCase();
-       // script url
-       var url ="widget.siteheart.com/widget/sh/"+ widget_id +"/"+ lang +"/widget.js";
-       var hcc = document.createElement("script");
-       hcc.type ="text/javascript";
-       hcc.async =true;
-       hcc.src =("https:"== document.location.protocol ?"https":"http")
-       +"://"+ url;
-       var s = document.getElementsByTagName("script")[0];
-       s.parentNode.insertBefore(hcc, s.nextSibling);
-       })();
-     </script>
-     <!-- End SiteHeart code -->
-
-     <% unless controller_path =~ /workplace|manage/ %>
-       <!-- Yandex.Metrika counter -->
-       <script type="text/javascript">
-         (function (d, w, c) {
-          (w[c] = w[c] || []).push(function() {
-            try {
-            w.yaCounter22759936 = new Ya.Metrika({id:22759936,
-              webvisor:true,
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true});
-            } catch(e) { }
-            });
-
-          var n = d.getElementsByTagName("script")[0],
-          s = d.createElement("script"),
-          f = function () { n.parentNode.insertBefore(s, n); };
-          s.type = "text/javascript";
-          s.async = true;
-          s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-          if (w.opera == "[object Opera]") {
-          d.addEventListener("DOMContentLoaded", f, false);
-          } else { f(); }
-         })(document, window, "yandex_metrika_callbacks");
+    <% if Rails.env.production? %>
+      <!-- Start SiteHeart code -->
+      <script>
+        (function(){
+         // your widget ID
+         var widget_id = 644581;
+         _shcp =[{widget_id : widget_id}];
+         // set default language
+         var lang =(navigator.language || navigator.systemLanguage || navigator.userLanguage ||"en")
+         .substr(0,2).toLowerCase();
+         // script url
+         var url ="widget.siteheart.com/widget/sh/"+ widget_id +"/"+ lang +"/widget.js";
+         var hcc = document.createElement("script");
+         hcc.type ="text/javascript";
+         hcc.async =true;
+         hcc.src =("https:"== document.location.protocol ?"https":"http")
+         +"://"+ url;
+         var s = document.getElementsByTagName("script")[0];
+         s.parentNode.insertBefore(hcc, s.nextSibling);
+         })();
        </script>
-       <noscript><div><img src="//mc.yandex.ru/watch/22759936" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-       <!-- /Yandex.Metrika counter -->
-     <% end %>
+       <!-- End SiteHeart code -->
+
+       <% unless controller_path =~ /workplace|manage/ %>
+         <!-- Yandex.Metrika counter -->
+         <script type="text/javascript">
+           (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+              try {
+              w.yaCounter22759936 = new Ya.Metrika({id:22759936,
+                webvisor:true,
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true});
+              } catch(e) { }
+              });
+
+            var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+           })(document, window, "yandex_metrika_callbacks");
+         </script>
+         <noscript><div><img src="//mc.yandex.ru/watch/22759936" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+         <!-- /Yandex.Metrika counter -->
+       <% end %>
+    <% end %>
   </body>
 </html>
