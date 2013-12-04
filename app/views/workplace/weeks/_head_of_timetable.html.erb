@@ -11,6 +11,8 @@
 
 <div style='overflow: hidden' class='timetable_header'>
   <div class="actions to_right">
+    <%= link_to "Статистика", statistics_workplace_timetable_path(@timetable), :class => 'yellow_button' %>
+
     <% if @timetable.draft? %>
       <%= link_to "Опубликовать", to_published_workplace_timetable_path(@timetable), method: :put, :class => 'yellow_button self_ajaxed', :data => {:target => '.timetable_header'}, :remote => true %>
     <% else %>
