@@ -44,6 +44,7 @@ group :development do
   gem 'hirb'
   gem 'letter_opener'
   gem 'openteam-capistrano'
+  gem 'pry'
   gem 'rails-erd'
   gem 'sunspot_solr'
 end

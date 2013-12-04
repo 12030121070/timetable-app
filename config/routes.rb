@@ -39,6 +39,8 @@ TimetableApp::Application.routes.draw do
     resources :classrooms, :only => :show
 
     resources :timetables, :except => [:show] do
+      get :statistics, :on => :member
+
       put 'to_draft'     => 'timetables#to_draft',     :on => :member
       put 'to_published' => 'timetables#to_published', :on => :member
 

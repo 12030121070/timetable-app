@@ -14,6 +14,7 @@ class Group < ActiveRecord::Base
   has_many :published_weeks, :through => :timetable,     :order => 'weeks.number ASC', :conditions => "timetables.status = 'published'", :source => :weeks
   has_many :weeks,           :through => :timetable,     :order => 'weeks.number ASC'
   has_many :lesson_times,    :through => :lessons
+  has_many :disciplines,     :through => :lessons, :uniq => true
 
   has_one :organization, :through => :timetable
 
