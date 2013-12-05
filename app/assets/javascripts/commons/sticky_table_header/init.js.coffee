@@ -1,5 +1,5 @@
 @init_sticky_table_handler = () ->
-  table = $('.week_timetable:not(.handler_added)').addClass('handler_added')
+  table = $('.week_timetable, .timetable_statistics').not('.handler_added').addClass('handler_added')
   return unless table.length
   wrapper = table.parent()
   header = $('thead', table)

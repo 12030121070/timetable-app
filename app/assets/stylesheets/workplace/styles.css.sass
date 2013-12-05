@@ -652,14 +652,14 @@ div.status
       padding: 0 0 1px 0
       text-decoration: none
 
-.week_timetable
+.week_timetable, .timetable_statistics
   .sticky_header
     position: fixed
     z-index: 2
 
+.week_timetable
   .lesson_at_week
     cursor: help
-
 
   thead
     .group_label
@@ -1124,6 +1124,23 @@ form
       height: 16px
 
 .timetable_statistics
+  width: auto
+
+  th
+    background: #b7b7b7
+
+  td, th
+    width: auto
+
+  .num_col
+    +min-width(35px)
+
+  .desc_col
+    //+min-width(500px)
+    width: 500px
+    padding-left: 20px
+    padding-right: 3px
+
   font-size: 12px
 
   .group_row

@@ -1,13 +1,16 @@
 <%= render :partial => 'workplace/weeks/head_of_timetable' %>
 
 <div class="scrollable">
+  <div>
+    Статистика
+  </div>
   <table class="timetable_statistics">
     <thead>
       <tr>
-        <td></td>
-        <td>Всего</td>
+        <th class='desc_col'><%= link_to 'Назад к составлению расписания', workplace_timetable_week_path(@timetable, @timetable.closest_week) %></th>
+        <th class='num_col'>Всего</th>
         <% @statistics.weeks.each do |week| %>
-          <td><%= week.number %></td>
+          <th class='num_col'><%= week.number %></th>
         <% end %>
       </tr>
     </thead>
@@ -15,31 +18,31 @@
     <tbody>
       <% @statistics.data.each do |group, group_data| %>
         <tr class="group_row">
-          <td><%= group.title %></td>
-          <td><%= group_data.values.flat_map(&:values).flat_map(&:values).sum %></td>
+          <td class='desc_col'><%= group.title %></td>
+          <td class='num_col'><%= group_data.values.flat_map(&:values).flat_map(&:values).sum %></td>
 
           <% @statistics.weeks.each do |week| %>
-            <td><%= group_data.values.flat_map(&:values).map { |e| e[week] }.sum %></td>
+            <td class='num_col'><%= group_data.values.flat_map(&:values).map { |e| e[week] }.sum %></td>
           <% end %>
         </tr>
 
         <% group_data.each do |discipline, discipline_data| %>
           <tr class="discipline_row">
-            <td class="discipline"><%= discipline.title %></td>
-            <td><%= discipline_data.values.flat_map(&:values).sum %></td>
+            <td class="desc_col discipline"><%= discipline.title %></td>
+            <td class='num_col'><%= discipline_data.values.flat_map(&:values).sum %></td>
 
             <% @statistics.weeks.each do |week| %>
-              <td><%= discipline_data.values.map { |weeks_data| weeks_data[week] }.sum %></td>
+              <td class='num_col'><%= discipline_data.values.map { |weeks_data| weeks_data[week] }.sum %></td>
             <% end %>
           </tr>
 
           <% discipline_data.each do |kind, kind_data| %>
             <tr>
-              <td class="kind"><%= kind %></td>
-              <td><%= kind_data.values.sum %></td>
+              <td class="kind desc"><%= kind %></td>
+              <td class='num_col'><%= kind_data.values.sum %></td>
 
               <% @statistics.weeks.each do |week| %>
-                <td><%= kind_data[week] %></td>
+                <td class='num_col'><%= kind_data[week] %></td>
               <% end %>
             </tr>
           <% end %>
