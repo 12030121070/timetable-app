@@ -1,26 +1,24 @@
 <%= render :partial => 'workplace/weeks/head_of_timetable' %>
 
-<% data = TimetableStatistics.new(@timetable).data  %>
-
 <div class="scrollable">
   <table class="timetable_statistics">
     <thead>
       <tr>
         <td></td>
         <td>Всего</td>
-        <% @timetable.weeks.each do |week| %>
+        <% @statistics.weeks.each do |week| %>
           <td><%= week.number %></td>
         <% end %>
       </tr>
     </thead>
 
     <tbody>
-      <% data.each do |group, group_data| %>
+      <% @statistics.data.each do |group, group_data| %>
         <tr class="group_row">
           <td><%= group.title %></td>
           <td><%= group_data.values.flat_map(&:values).flat_map(&:values).sum %></td>
 
-          <% @timetable.weeks.each do |week| %>
+          <% @statistics.weeks.each do |week| %>
             <td><%= group_data.values.flat_map(&:values).map { |e| e[week] }.sum %></td>
           <% end %>
         </tr>
@@ -30,7 +28,7 @@
             <td class="discipline"><%= discipline.title %></td>
             <td><%= discipline_data.values.flat_map(&:values).sum %></td>
 
-            <% @timetable.weeks.each do |week| %>
+            <% @statistics.weeks.each do |week| %>
               <td><%= discipline_data.values.map { |weeks_data| weeks_data[week] }.sum %></td>
             <% end %>
           </tr>
@@ -40,13 +38,12 @@
               <td class="kind"><%= kind %></td>
               <td><%= kind_data.values.sum %></td>
 
-              <% @timetable.weeks.each do |week| %>
+              <% @statistics.weeks.each do |week| %>
                 <td><%= kind_data[week] %></td>
               <% end %>
             </tr>
           <% end %>
         <% end %>
-
       <% end %>
     </tbody>
   </table>

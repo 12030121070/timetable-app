@@ -39,6 +39,10 @@ class Workplace::TimetablesController < Workplace::WorkplaceController
     }
   end
 
+  def statistics
+    statistics! { @statistics = TimetableStatistics.new(@timetable) }
+  end
+
   def create
     create! do |success, failure|
       success.html { render :partial => 'timetable', :locals => { :timetable => resource } and return }

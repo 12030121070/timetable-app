@@ -61,6 +61,10 @@ class Group < ActiveRecord::Base
     week
   end
 
+  def lessons_at_week(week)
+    lessons.joins(:week).where('weeks.id = ?', week.id).count
+  end
+
   private
 
   def check_can_be_created

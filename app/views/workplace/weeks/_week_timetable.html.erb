@@ -9,6 +9,7 @@
         <% else %>
           <th class="group_number">
             <%= cell.content %>
+            <span class="lesson_at_week" title="Уроков в неделю">(<%= cell.group.lessons_at_week(@week) %>)</span>
             <%= link_to 'удалить', workplace_timetable_group_path(@timetable, cell.group), :class => 'delete_button faded to_right', :method => :delete, :confirm => 'Вы уверены?' %>
           </th>
         <% end %>

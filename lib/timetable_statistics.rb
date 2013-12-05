@@ -1,8 +1,14 @@
 class TimetableStatistics
+  extend ActiveSupport::Memoizable
+
   attr_accessor :timetable
 
   def initialize(timetable)
     @timetable = timetable
+  end
+
+  def weeks
+    @weeks ||= timetable.weeks
   end
 
   def data
@@ -17,7 +23,7 @@ class TimetableStatistics
         lessons_for(g, d).pluck('lessons.kind').each do |k|
           hash[g][d][kinds(k)] = {}
 
-          timetable.weeks.each do |w|
+          weeks.each do |w|
             hash[g][d][kinds(k)][w] = lessons_for(g, d, w).count
           end
         end
@@ -38,4 +44,6 @@ class TimetableStatistics
   def kinds(kind)
     Hash[Lesson.kind.options].invert[kind]
   end
+
+  memoize :lessons_for, :kinds
 end
