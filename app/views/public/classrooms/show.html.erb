@@ -8,7 +8,7 @@
   <% prev_week = current.zero? ? nil : weeks[current-1]   %>
   <% next_week = current+1 == weeks.count ? nil : weeks[current+1] %>
 
-  <div class="inner_navigation">
+  <div class="inner_navigation" data-wrapper='body' >
     <div class="inner_wrapper">
       <% if prev_week %>
         <%= link_to "&#x2039;".html_safe, organization_classroom_path(@classroom, :week => prev_week), :class => 'prev nav_button' %>

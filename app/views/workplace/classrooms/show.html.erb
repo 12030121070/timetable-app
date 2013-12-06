@@ -8,7 +8,7 @@
     <% next_week = current+1 == weeks.count ? nil : weeks[current+1] %>
 
 
-    <div class="inner_navigation">
+    <div class="inner_navigation" data-wrapper='.scrollable'>
       <div class="inner_wrapper">
         <% if prev_week %>
           <%= link_to "&#x2039;".html_safe, workplace_classroom_path(@classroom, :week => prev_week), :class => 'prev grey_button in_same_frame', :remote => true %>

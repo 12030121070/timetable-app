@@ -7,7 +7,7 @@
               'data-parent' => '.workplace_wrapper'
   %>
   <%= link_to 'Расписание в формате pdf', [:pdf, :workplace, @timetable, @week], :class => 'yellow_button faded to_right', :style => 'margin: 0 5px 0 0' %>
-  <div class="inner_navigation">
+  <div class="inner_navigation" data-wrapper='.scrollable'>
     <div class="inner_wrapper">
       <% if @week.prev %>
         <%= link_to "&#x2039;".html_safe, workplace_timetable_week_path(@timetable, @week.prev), :class => 'prev grey_button' %>

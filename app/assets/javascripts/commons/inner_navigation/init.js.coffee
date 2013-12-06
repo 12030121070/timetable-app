@@ -3,16 +3,17 @@
   inner_navigations.each (index, item) ->
     $this = $(item).addClass('charged')
     list = $('.collection_wrapper', $this)
+    wrapper = $($this.data('wrapper'))
     current = $('.current_week', $this)
     current.add(list).hover (->
       list.show()
       current.addClass('active')
-      width = $(document).width()
-      $('body, .scrollable').css('overflow', 'hidden').css('width', width)
+      width = wrapper.width()
+      wrapper.css('overflow', 'hidden').css('width', width)
     ), (->
       list.hide()
       current.removeClass('active')
-      $('body, .scrollable').css('overflow', 'auto').css('width', '100%')
+      wrapper.css('overflow', 'auto').css('width', '100%')
     )
 
 $ ->

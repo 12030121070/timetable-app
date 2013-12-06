@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div class="inner_navigation">
+  <div class="inner_navigation" data-wrapper='body'>
     <div class="inner_wrapper">
       <% if @week.prev %>
         <%= link_to "&#x2039;".html_safe, organization_group_path(@group.title, :week => @week.prev.starts_on), :class => 'prev nav_button' %>
