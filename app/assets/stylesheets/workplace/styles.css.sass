@@ -653,8 +653,11 @@ div.status
       text-decoration: none
 
 .week_timetable, .timetable_statistics
+  position: relative
+  z-index: 3
+
   .sticky_header
-    position: fixed
+    position: absolute
     z-index: 2
 
 .week_timetable
@@ -664,6 +667,7 @@ div.status
   thead
     .group_label
       width: 101px
+      min-width: 100px
 
     .group_number
       width: 174px

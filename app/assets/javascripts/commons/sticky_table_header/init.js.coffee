@@ -5,12 +5,13 @@
   header = $('thead', table)
   margin = $.makeArray(table.prevAll('div, form').map (index, item) -> $(item).outerHeight(true)).reduce (a,b) => a+b
   width  = table.width()
+  table.css({ 'width': width })
 
   wrapper.on 'scroll', ->
     if wrapper.scrollTop() >= margin
-      header.addClass('sticky_header').css({ 'margin-top': -margin })
+      header.addClass('sticky_header').css({ 'margin-top': this.scrollTop-margin, 'width': width+1 })
     else
-      header.removeClass('sticky_header').css({ 'margin-top': 0 })
+      header.removeClass('sticky_header').css({ 'margin-top': 0, 'width': width })
 
   wrapper.trigger('scroll')
 
