@@ -20,11 +20,11 @@ class TimetableStatistics
       g.disciplines.each do |d|
         hash[g][d] = {}
 
-        lessons_for(g, d).pluck('lessons.kind').each do |k|
+        lessons_for(g, d).map(&:kind).each do |k|
           hash[g][d][kinds(k)] = {}
 
           weeks.each do |w|
-            hash[g][d][kinds(k)][w] = lessons_for(g, d, w).count
+            hash[g][d][kinds(k)][w] = lessons_for(g, d, week: w, kind: k).count
           end
         end
       end
@@ -33,10 +33,11 @@ class TimetableStatistics
     hash
   end
 
-  def lessons_for(group, discipline, week = nil)
+  def lessons_for(group, discipline, week: nil, kind: nil)
     association = group.lessons.joins(:discipline).where('disciplines.id = ?', discipline.id)
 
     association = association.joins(:week).where('weeks.id = ?', week.id) if week
+    association = association.where('lessons.kind = ?', kind) if kind
 
     association
   end
