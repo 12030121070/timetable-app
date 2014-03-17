@@ -7,7 +7,7 @@ module UserImpersonate
     config.user_is_staff_method = "admin?" # current_user.staff?
 
     config.redirect_on_impersonate = "/"
-    config.redirect_on_revert = "/impersonate"
+    config.redirect_on_revert = "/manage/users"
 
     config.authenticate_user_method = "authenticate_user!" # protect impersonation controller
     config.sign_in_user_method      = "sign_in"            # sign_in(user)

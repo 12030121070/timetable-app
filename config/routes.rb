@@ -5,6 +5,8 @@ TimetableApp::Application.routes.draw do
 
   mount UserImpersonate::Engine => "/impersonate", as: "impersonate_engine"
 
+  get '/impersonate/users/:user_id' => 'user_impersonate/impersonate#create', :as => :impersonate_user
+
   namespace :manage do
     root :to => 'manage#index'
 

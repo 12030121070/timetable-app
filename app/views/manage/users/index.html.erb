@@ -15,22 +15,19 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
-          <td><%= user.email %></td>
+          <td><%= link_to user, impersonate_user_path(user) %></td>
           <td><%= l user.last_sign_in_at %></td>
           <td>
-            <% if user.organizations.any? %>
-              <ul>
-                <% user.organizations.each do |organization| %>
-                  <li>
-                    <p><%= organization.title? ? organization.title : "##{organization.id}" %></p>
-                    <p><%= organization.email %></p>
-                    <p><%= organization.phone %></p>
-                    <p><%= organization.site %></p>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-            <% end %>
+            <ul>
+              <% user.organizations.each do |organization| %>
+                <li>
+                  <p><%= organization.title? ? organization.title : "##{organization.id}" %></p>
+                  <p><%= organization.email %></p>
+                  <p><%= organization.phone %></p>
+                  <p><%= organization.site %></p>
+                </li>
+              <% end %>
+            </ul>
           </td>
         </tr>
       <% end %>
