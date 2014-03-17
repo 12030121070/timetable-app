@@ -2,6 +2,10 @@
 <html>
   <%= yield :head %>
   <body>
+    <% if current_staff_user %>
+      <%= render 'user_impersonate/header' %>
+    <% end %>
+
     <div class="message_wrapper <%= 'notice' if notice %> <%= 'alert' if alert %>" <%= "style=display:none;" unless notice || alert %>>
       <%= notice %>
       <%= alert %>

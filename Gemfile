@@ -35,6 +35,7 @@ group :default do
   gem 'simple_form'
   gem 'state_machine'
   gem 'sunspot_rails'
+  gem 'user_impersonate2', :require => 'user_impersonate'
 end
 
 group :development do

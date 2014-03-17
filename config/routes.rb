@@ -1,6 +1,9 @@
 require_dependency 'app/api/api' if Rails.env.development?
+
 TimetableApp::Application.routes.draw do
   devise_for :users
+
+  mount UserImpersonate::Engine => "/impersonate", as: "impersonate_engine"
 
   namespace :manage do
     root :to => 'manage#index'

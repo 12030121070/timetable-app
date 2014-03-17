@@ -329,6 +329,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    user_impersonate2 (0.9.1)
+      rails (>= 3.2.0)
     virtus (0.5.4)
       backports (~> 2.6.1)
       descendants_tracker (~> 0.0.1)
@@ -386,3 +388,4 @@ DEPENDENCIES
   sunspot_solr
   uglifier
   unicorn
+  user_impersonate2
