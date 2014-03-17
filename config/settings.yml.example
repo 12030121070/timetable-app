@@ -17,3 +17,9 @@ mail:
   password:     SECRET
   from:         USER
 
+solr:
+  url:          http://localhost:8982/solr
+
+storage:
+  url:          http://localhost:5000
+

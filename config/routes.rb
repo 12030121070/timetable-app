@@ -4,8 +4,14 @@ TimetableApp::Application.routes.draw do
 
   namespace :manage do
     root :to => 'manage#index'
+
     resources :holidays, :except => [:show]
+
+    resources :users, :only => :index
+
     resource :tariff, :only => [:edit, :update]
+
+
     resources :organizations do
       resources :subscriptions, :except => [:show] do
         get '/change_active_state' => 'subscriptions#change_active_state', :as => :change_active_state, :on => :member

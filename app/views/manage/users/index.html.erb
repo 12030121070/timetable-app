@@ -1,0 +1,39 @@
+<div class="users_wrapper">
+  <h1>Список пользователей</h1>
+
+  <table class='users'>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Last sign in at</th>
+        <th>Organizations</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td><%= l user.last_sign_in_at %></td>
+          <td>
+            <% if user.organizations.any? %>
+              <ul>
+                <% user.organizations.each do |organization| %>
+                  <li>
+                    <p><%= organization.title? ? organization.title : "##{organization.id}" %></p>
+                    <p><%= organization.email %></p>
+                    <p><%= organization.phone %></p>
+                    <p><%= organization.site %></p>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

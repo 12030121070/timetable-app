@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  alias_attribute :to_s, :email
+
   attr_accessible :email, :password, :remember_me
 
   has_many :memberships, :dependent => :destroy
