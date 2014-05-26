@@ -61,7 +61,12 @@
 
             <% lessons.sort_by{|l| l.subgroup}.each do |lesson| %>
               <div class="lesson <%= lesson.kind %>">
-                <span class='discipline' title='<%= lesson.discipline.title %>'><%= lesson.discipline.abbr %></span>
+
+                <span class='discipline' title='<%= lesson.discipline.title %>'>
+                  <%= lesson.discipline.abbr %>
+                  <%= content_tag :span, '', :class => 'note', :title => lesson.note if lesson.note? %>
+                </span>
+
                 <span class='kind'><%= lesson.kind_text %> <%= lesson.classrooms.any? ? 'в' : '' %></span>
                 <span class='classrooms' title='<%= lesson.classrooms.map(&:to_s).join(', ') %>'><%= lesson.classrooms.map { |c| link_to c, organization_classroom_path(c) }.join(', ').html_safe %></span>
 

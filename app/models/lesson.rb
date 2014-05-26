@@ -39,6 +39,8 @@ class Lesson < ActiveRecord::Base
     :default => :whole,
     :predicates => { :prefix => true }
 
+  normalize_attribute :note
+
   delegate :week, :to => :day
 
   def discipline_title
