@@ -2,7 +2,8 @@ class Lesson < ActiveRecord::Base
   extend Enumerize
 
   attr_accessible :kind, :lesson_time_id, :discipline_id, :subgroup,
-    :classroom_lessons_attributes, :lecturer_lessons_attributes, :group_lessons_attributes, :sibling_id, :discipline_title
+    :classroom_lessons_attributes, :lecturer_lessons_attributes,
+    :group_lessons_attributes, :sibling_id, :discipline_title, :note
 
   attr_accessor :sibling_id
 

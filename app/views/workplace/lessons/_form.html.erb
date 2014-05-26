@@ -81,6 +81,8 @@
     <%= f.link_to_add 'добавить лектора', :lecturer_lessons, :class => 'hidden' %>
   </div>
 
+  <%= f.input :note, :input_html => { :class => 'inline_edit', :placeholder => 'Примечание' } %>
+
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
     <%= link_to 'Удалить', workplace_timetable_week_day_lesson_path(@timetable, @week, @day, f.object), :method => :delete, :confirm => 'Вы уверены?', :class => 'delete_button faded' if f.object.persisted? %>

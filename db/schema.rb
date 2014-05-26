@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140317073210) do
+ActiveRecord::Schema.define(:version => 20140526034727) do
 
   create_table "buildings", :force => true do |t|
     t.string   "title"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20140317073210) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "subgroup"
+    t.text     "note"
   end
 
   add_index "lessons", ["day_id"], :name => "index_lessons_on_day_id"

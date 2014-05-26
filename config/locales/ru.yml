@@ -44,6 +44,7 @@ ru:
         kind: Тип занятия
         subgroup: Подгруппа
         discipline_title: Дисциплина
+        note: Примечание
 
       lesson_time:
         number: Номер занятия
