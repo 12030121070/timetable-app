@@ -3,20 +3,20 @@ require 'open-uri'
 
 desc "Import lessons form tusur.timetable"
 task :import => :environment do
-  create_tariff
+  #create_tariff
   create_subscription
   create_lesson_times
   create_timetables
 end
 
-def create_tariff
-  Tariff.destroy_all
+#def create_tariff
+  #Tariff.destroy_all
 
-  Tariff.create! :min_month => 1, :max_month => 12,
-    :min_group => 5, :max_group => 200,
-    :cost => 100,
-    :discount_small => 5, :discount_medium => 10, :discount_large => 15
-end
+  #Tariff.create! :min_month => 1, :max_month => 12,
+    #:min_group => 5, :max_group => 200,
+    #:cost => 100,
+    #:discount_small => 5, :discount_medium => 10, :discount_large => 15
+#end
 
 def create_subscription
   organization.subscriptions.create! :month_count => 12, :groups_count => 100, :active => true
