@@ -15,8 +15,7 @@ def create_tariff
   Tariff.create! :min_month => 1, :max_month => 12,
     :min_group => 5, :max_group => 200,
     :cost => 100,
-    :discount_small => 5, :discount_medium => 10, :discount_large => 15,
-    :discount_half_year => 5, :discount_year => 10
+    :discount_small => 5, :discount_medium => 10, :discount_large => 15
 end
 
 def create_subscription
@@ -101,9 +100,9 @@ def courses
 end
 
 def period
-  [Time.zone.parse('2013-09-02').beginning_of_week.to_date, Time.zone.parse('2013-12-31').end_of_week.to_date]
+  [Time.zone.parse('2014-01-01').beginning_of_week.to_date, Time.zone.parse('2014-08-01').end_of_week.to_date]
 end
 
 def organization
-  @organization ||= Organization.find_by_subdomain!('tusur')
+  @organization ||= Organization.find_by_subdomain!('demo')
 end
