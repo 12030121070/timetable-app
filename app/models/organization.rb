@@ -37,6 +37,8 @@ class Organization < ActiveRecord::Base
 
   before_validation :set_lesson_times_number
 
+  after_create :create_default_lesson_times
+
   validate :format_of_domain, :if => :subdomain?
 
   def set_owner(user)
@@ -77,5 +79,9 @@ class Organization < ActiveRecord::Base
         lt.number = index+1
       end
     end
+  end
+
+  def create_default_lesson_times
+    LessonTimeCreator.new(self).create
   end
 end
