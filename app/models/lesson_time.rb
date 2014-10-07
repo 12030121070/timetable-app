@@ -8,7 +8,7 @@ class LessonTime < ActiveRecord::Base
   has_many :lessons, :dependent => :destroy
 
   validates_presence_of :day, :starts_at, :ends_at
-  validates_uniqueness_of :number, :scope => [:day, :context_type, :context_id]
+  validates_uniqueness_of :starts_at, :scope => [:ends_at, :day, :context_type, :context_id]
   validate :format_of_time
 
   scope :for_day, -> (day) { where :day => day }
