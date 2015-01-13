@@ -5,7 +5,7 @@ frame_handler = (parent, response, options = {}) ->
   container_width = Math.round(parent_width*0.90)
   container_styles = {
     'background': () ->
-      $('.main_wrapper').css('background')
+      $('.main_wrapper').css('background-color')
     'bottom': () ->
       '0'
     'border-left': () ->
