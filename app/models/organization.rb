@@ -7,6 +7,7 @@ class Organization < ActiveRecord::Base
   validates_email_format_of :email, :check_mx => true
   validates_presence_of :email, :title, :subdomain
   validates_uniqueness_of :subdomain
+  validates_format_of :phone, :with => /\A[0-9()\-]+\z/, :message => :invalid_format
 
   has_one :logo,                   :dependent => :destroy
 
