@@ -29,14 +29,16 @@
             'data-kind' => 'update_record'
           %>
 
-<%= link_to 'управление праздниками',
-            edit_holidays_workplace_organization_path,
-            :class => 'yellow_button in_frame',
-            :remote => true,
-            'data-parent' => '.workplace_wrapper',
-            'data-target' => '',
-            'data-kind' => 'update_record'
-          %>
+<% if false %>
+  <%= link_to 'управление праздниками',
+              edit_holidays_workplace_organization_path,
+              :class => 'yellow_button in_frame',
+              :remote => true,
+              'data-parent' => '.workplace_wrapper',
+              'data-target' => '',
+              'data-kind' => 'update_record'
+            %>
+<% end %>
 
 <%= link_to 'управление расписанием звонков',
             edit_lesson_times_workplace_organization_path,
