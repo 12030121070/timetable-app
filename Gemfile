@@ -34,7 +34,7 @@ group :default do
   gem 'simple-navigation'
   gem 'simple_form'
   gem 'state_machine'
-  gem 'sunspot_rails'
+  gem 'sunspot_rails',          '~> 2.1.1'
   gem 'user_impersonate2', :require => 'user_impersonate'
 end
 

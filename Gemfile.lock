@@ -174,7 +174,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.23)
-    mini_portile (0.5.0)
+    mini_portile (0.6.2)
     multi_json (1.7.7)
     multi_xml (0.5.3)
     nested_form (0.3.2)
@@ -185,8 +185,8 @@ GEM
     net-ssh (2.6.8)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
     openteam-capistrano (0.0.13)
       capistrano-db-tasks
       capistrano-ext
@@ -266,7 +266,7 @@ GEM
     responders (0.9.3)
       railties (~> 3.1)
     ri_cal (0.8.8)
-    rsolr (1.0.9)
+    rsolr (1.0.10)
       builder (>= 2.1.2)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
@@ -314,12 +314,13 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.7)
     state_machine (1.1.2)
-    sunspot (2.0.0)
+    sunspot (2.1.1)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
-    sunspot_rails (2.0.0)
+    sunspot_rails (2.1.1)
       nokogiri
-      sunspot (= 2.0.0)
+      rails (>= 3)
+      sunspot (= 2.1.1)
     sunspot_solr (2.0.0)
     temple (0.6.5)
     terminal-table (1.4.5)
@@ -395,7 +396,7 @@ DEPENDENCIES
   simple_form
   sqlite3
   state_machine
-  sunspot_rails
+  sunspot_rails (~> 2.1.1)
   sunspot_solr
   uglifier
   unicorn
