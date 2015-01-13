@@ -1,13 +1,16 @@
 # encoding: utf-8
+require 'uri'
 
 class Organization < ActiveRecord::Base
   attr_accessible :email, :phone, :site, :subdomain, :title,
     :organization_holidays_attributes, :lesson_times_attributes
 
   validates_email_format_of :email, :check_mx => true
+  validates_format_of :phone, :with => /\A[0-9()\-]+\z/, :message => :invalid_format
+  validates_format_of :site, :with => /\A#{URI::regexp(['http', 'https'])}\z/
+  validates_format_of :subdomain, :with => /\A[[:alpha:]]+\z/
   validates_presence_of :email, :title, :subdomain
   validates_uniqueness_of :subdomain
-  validates_format_of :phone, :with => /\A[0-9()\-]+\z/, :message => :invalid_format
 
   has_one :logo,                   :dependent => :destroy
 
