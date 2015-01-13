@@ -4,6 +4,7 @@ class Organization < ActiveRecord::Base
   attr_accessible :email, :phone, :site, :subdomain, :title,
     :organization_holidays_attributes, :lesson_times_attributes
 
+  validates_email_format_of :email, :check_mx => true
   validates_presence_of :email, :title, :subdomain
   validates_uniqueness_of :subdomain
 

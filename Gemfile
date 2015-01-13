@@ -36,6 +36,7 @@ group :default do
   gem 'state_machine'
   gem 'sunspot_rails',          '~> 2.1.1'
   gem 'user_impersonate2', :require => 'user_impersonate'
+  gem 'validates_email_format_of'
 end
 
 group :development do

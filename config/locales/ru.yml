@@ -98,6 +98,11 @@ ru:
 
     errors:
       models:
+        organization:
+          attributes:
+            email:
+              invalid_email_address: 'неверный формат электронной почты'
+              email_address_not_routable: 'почтовый сервис недоступен'
         logo:
           attributes:
             image_file_size:
