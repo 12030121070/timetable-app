@@ -6,12 +6,25 @@
     source = input.data('autocomplete-source')
     input.autocomplete
       source: source
+      focus: (evt, ui) ->
+        $(evt.target).val ui.item.label
+        return false
+
       select: (evt, ui) ->
-        if input.hasClass('with_id')
+        existing = []
+        fields =  $('.fields', input.closest('.multicomplete'))
+        for itm in fields
+          itm_val = $('.value', itm).text()
+          existing.push ui.item.label if ui.item.label.match(new RegExp("^#{itm_val.replace(')', '\\)').replace('(', '\\(')}.*"))
+
+        if existing.length
+
+        else if input.hasClass('with_id')
           link = $('.add_nested_fields', input.closest('.multicomplete'))
           link.click()
-          input.val('')
           new_fileds = link.prev('.fields')
           $('.value', new_fileds).html(ui.item.link || ui.item.label)
           $('div.hidden input.hidden', new_fileds).val(ui.item.value)
-          return false
+
+        $(evt.target).val('')
+        return false
