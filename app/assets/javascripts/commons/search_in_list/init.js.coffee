@@ -41,7 +41,16 @@ reindex = (list) ->
 
       add_link.on 'click', ->
         val = input.val()
-        if val.length > 0
+        existing = []
+        inputs = $('.input input', '.fields', '#classroom_list')
+
+        for itm in inputs
+          itm_val = $(itm).val()
+          existing.push val if val == itm_val
+
+        if existing.length
+
+        else if val.length > 0
           $('.empty', list).remove()
           $('.add_nested_fields', list.parent()).click()
           added_li = $('li:last', list)
