@@ -666,14 +666,13 @@ div.status
 
   thead
     .group_label
-      width: 101px
-      min-width: 100px
+      width: 121px
 
     .group_number
-      width: 174px
+      width: 180px
 
   tbody
-    td
+    .lesson
       width: 180px
 
     .lesson_time
@@ -683,6 +682,9 @@ div.status
       width: 40px
 
 .week_timetable, .slave_table
+  box-sizing: content-box
+  empty-cells: show
+  table-layout: fixed
   width: auto
 
   tr:nth-child(odd)
@@ -710,13 +712,16 @@ div.status
     text-align: center
 
   .group_label
-    text-align: left
+    margin: 0
+    padding: 0
+    text-align: center
     text-transform: uppercase
-    padding: 0 10px
 
   .group_number
     font-size: 14px
     font-weight: 600
+    margin: 0
+    padding: 0
 
   .week_day
     display: block
@@ -724,11 +729,13 @@ div.status
     line-height: 16px
     margin: 10px 0
     text-transform: uppercase
+    width: 40px
 
   .date
     display: block
     font-size: 10px
     line-height: 12px
+    width: 40px
 
   .today
     display: block
@@ -737,9 +744,14 @@ div.status
     text-transform: lowercase
 
   .day
+    margin: 0
+    padding: 0
     vertical-align: top
 
   .lesson_time
+    margin: 0
+    padding: 0
+
     .time
       +min-height(126px)
       line-height: 14px
@@ -757,19 +769,20 @@ div.status
       left: 0px
       top: -4px
 
-  .subgroup_a_wrapper, .subgroup_b_wrapper
-    +single-box-shadow(#333, 0, 0, 100px)
-    height: 137px
-    position: absolute
-    top: 0
-    width: 153px
-    z-index: 1
+  tbody
+    .subgroup_a_wrapper, .subgroup_b_wrapper
+      +single-box-shadow(#333, 0, 0, 100px)
+      height: 137px
+      position: absolute
+      top: 0
+      width: 153px
+      z-index: 1
 
-    &:hover
-      z-index: 2
+      &:hover
+        z-index: 2
 
-    .add
-      margin-top: 51px
+      .add
+        margin-top: 51px
 
   .subgroup_a_wrapper
     left: 0
