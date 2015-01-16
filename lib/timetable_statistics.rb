@@ -1,4 +1,5 @@
 class TimetableStatistics
+  include LessonsFor
   extend ActiveSupport::Memoizable
 
   attr_accessor :timetable
@@ -31,15 +32,6 @@ class TimetableStatistics
     end
 
     hash
-  end
-
-  def lessons_for(group, discipline, week: nil, kind: nil)
-    association = group.lessons.joins(:discipline).where('disciplines.id = ?', discipline.id)
-
-    association = association.joins(:week).where('weeks.id = ?', week.id) if week
-    association = association.where('lessons.kind = ?', kind) if kind
-
-    association
   end
 
   def kinds(kind)

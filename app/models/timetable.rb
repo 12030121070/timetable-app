@@ -70,6 +70,10 @@ class Timetable < ActiveRecord::Base
     week
   end
 
+  def to_s
+    "#{title} (#{I18n.l starts_on}-#{I18n.l ends_on}, #{human_status_name})"
+  end
+
   private
 
   def initialize_lesson_times

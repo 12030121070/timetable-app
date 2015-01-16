@@ -7,7 +7,13 @@ class Workplace::LecturersController < Workplace::WorkplaceController
 
   actions :all
 
-  custom_actions :collection => :import
+  custom_actions :collection => :import, :resource => :statistic
+
+  def statistic
+    statistic! do
+      @statistic = LecturerStatistic.new(@lecturer, params[:timetable_ids])
+    end
+  end
 
   def show
     show!{

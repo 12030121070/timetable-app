@@ -37,6 +37,7 @@ TimetableApp::Application.routes.draw do
     resources :disciplines, :except => :show
 
     resources :lecturers do
+      get  :statistic, :on => :member
       post :import, :on => :collection
     end
 

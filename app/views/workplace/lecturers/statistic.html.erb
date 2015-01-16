@@ -1,0 +1,64 @@
+<h2 class="thin">Статистика преподавателя <%= @lecturer %></h2>
+
+<div class="scrollable">
+  <div>
+    Статистика
+  </div>
+  <div>
+    <form>
+      <% @lecturer.timetables.each_with_index do |timetable, index| %>
+        <div class="checkbox">
+          <input id="timetable_<%= index %>" type="checkbox" name="timetable_ids[]" value="<%= timetable.id %>" <%= 'checked="checked"' if params['timetable_ids'].nil? || params['timetable_ids'].include?(timetable.id.to_s) %>>
+          <label for="timetable_<%= index %>"><%= timetable %></label>
+        </div>
+      <% end %>
+      <input type="submit" value="Показать статистику">
+    </form>
+  </div>
+  <table class="timetable_statistics">
+    <thead>
+      <tr>
+        <th class='desc_col'><%= link_to 'Назад к списку преподавателей', workplace_lecturers_path %></th>
+        <th class='num_col'>Всего</th>
+        <% @statistic.weeks.each do |week| %>
+          <th class='num_col'><%= week %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @statistic.data.each do |group, group_data| %>
+        <tr class="group_row">
+          <td class='desc_col'><%= group.title %></td>
+          <td class='num_col'><%= group_data.values.flat_map(&:values).flat_map(&:values).sum %></td>
+
+          <% @statistic.weeks.each do |week| %>
+            <td class='num_col'><%= group_data.values.flat_map(&:values).map { |e| e[week] }.sum %></td>
+          <% end %>
+        </tr>
+
+        <% group_data.each do |discipline, discipline_data| %>
+          <tr class="discipline_row">
+            <td class="desc_col discipline"><%= discipline %></td>
+            <td class='num_col'><%= discipline_data.values.flat_map(&:values).sum %></td>
+
+            <% @statistic.weeks.each do |week| %>
+              <td class='num_col'><%= discipline_data.values.map { |weeks_data| weeks_data[week] }.sum %></td>
+            <% end %>
+          </tr>
+
+          <% discipline_data.each do |kind, kind_data| %>
+            <tr>
+              <td class="kind desc"><%= kind %></td>
+              <td class='num_col'><%= kind_data.values.sum %></td>
+
+              <% @statistic.weeks.each do |week| %>
+                <td class='num_col'><%= kind_data[week] %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

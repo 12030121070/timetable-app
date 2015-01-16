@@ -1,5 +1,6 @@
 <li class='item' id='lecturer_<%= lecturer.id%>' data-value='<%= lecturer.full_name %>'>
   <div class="actions">
+    <%= link_to "статистика", statistic_workplace_lecturer_path(lecturer), :class => 'yellow_button faded' %>
     <%= link_to 'редактировать',
                 edit_workplace_lecturer_path(lecturer),
                 :class => 'yellow_button faded in_frame',
