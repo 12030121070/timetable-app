@@ -11,7 +11,11 @@ class LecturerStatistic
   end
 
   def timetables
-    @timetables ||= lecturer.timetables.where(:id => timetable_ids.to_a.compact.map(&:to_i))
+    if timetable_ids
+      @timetables ||= lecturer.timetables.where(:id => timetable_ids.to_a.compact.map(&:to_i))
+    else
+      @timetables ||= lecturer.timetables
+    end
   end
 
   def weeks
