@@ -5,7 +5,7 @@
   header = $('thead', table)
   margin = $.makeArray(table.prevAll('div, form').map (index, item) -> $(item).outerHeight(true)).reduce (a,b) => a+b
   width  = table.width()
-  table.css({ 'width': width })
+  #table.css({ 'width': width })
 
   wrapper.on 'scroll', ->
     if wrapper.scrollTop() >= margin
