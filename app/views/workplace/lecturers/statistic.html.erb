@@ -29,11 +29,11 @@
     <tbody>
       <% @statistic.data.each do |group, group_data| %>
         <tr class="group_row">
-          <td class='desc_col'><%= group.title %></td>
+          <td class='desc_col'><%= group %></td>
           <td class='num_col'><%= group_data.values.flat_map(&:values).flat_map(&:values).sum %></td>
 
           <% @statistic.weeks.each do |week| %>
-            <td class='num_col'><%= group_data.values.flat_map(&:values).map { |e| e[week] }.sum %></td>
+            <td class='num_col'><%= group_data.values.flat_map(&:values).map { |e| e[week] || 0 }.sum %></td>
           <% end %>
         </tr>
 
@@ -43,7 +43,7 @@
             <td class='num_col'><%= discipline_data.values.flat_map(&:values).sum %></td>
 
             <% @statistic.weeks.each do |week| %>
-              <td class='num_col'><%= discipline_data.values.map { |weeks_data| weeks_data[week] }.sum %></td>
+              <td class='num_col'><%= discipline_data.values.map { |weeks_data| weeks_data[week] || 0 }.sum %></td>
             <% end %>
           </tr>
 
