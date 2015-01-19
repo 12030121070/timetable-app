@@ -1,10 +1,8 @@
 <h2 class="thin">Статистика преподавателя <%= @lecturer %></h2>
 
 <div class="scrollable">
-  <div>
-    Статистика
-  </div>
-  <div>
+  <div class="statistic">
+    <span>Статистика</span>
     <form>
       <% @lecturer.timetables.each_with_index do |timetable, index| %>
         <div class="checkbox">
@@ -12,9 +10,10 @@
           <label for="timetable_<%= index %>"><%= timetable %></label>
         </div>
       <% end %>
-      <input type="submit" value="Показать статистику">
+      <input type="submit" value="Показать статистику" class="grey_button">
     </form>
   </div>
+
   <table class="timetable_statistics">
     <thead>
       <tr>
