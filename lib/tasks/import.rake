@@ -57,7 +57,7 @@ def create_timetables
           bar.increment!
 
           timetable.groups.each do |group|
-            remote_lessons = JSON.parse(open("http://timetable.tusur.ru/api/v1/timetables/#{group.title}/#{date}").read)['lessons']
+            remote_lessons = JSON.parse(open("https://timetable.tusur.ru/api/v1/timetables/#{group.title}/#{date}").read)['lessons']
             remote_lessons.each do |remote_lesson|
               discipline = organization.disciplines.find_or_create_by_title(remote_lesson['discipline']['title'])
               next if day.date.cwday > 6
@@ -88,7 +88,7 @@ def create_timetables
 end
 
 def remote_groups
-  @remote_groups ||= JSON.parse(open('http://timetable.tusur.ru/api/v1/groups/internal.json').read)['groups'].select{|item| faculties.include?(item['faculty_name']) && courses.include?(item['course'])}
+  @remote_groups ||= JSON.parse(open('https://timetable.tusur.ru/api/v1/groups/internal.json').read)['groups'].select{|item| faculties.include?(item['faculty_name']) && courses.include?(item['course'])}
 end
 
 def faculties
@@ -100,7 +100,7 @@ def courses
 end
 
 def period
-  [Time.zone.parse('2014-01-01').beginning_of_week.to_date, Time.zone.parse('2014-08-01').end_of_week.to_date]
+  [Time.zone.parse('2015-01-05').beginning_of_week.to_date, Time.zone.parse('2015-08-01').end_of_week.to_date]
 end
 
 def organization
