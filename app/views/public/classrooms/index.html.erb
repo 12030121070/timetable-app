@@ -1,9 +1,11 @@
 <%= render :file => 'public/commons/search_form' %>
 
 <ul class="list">
+  <% i = -1 %>
   <% @classrooms.each do |classroom| %>
     <% next if classroom.classroom_lessons.empty? %>
     <li>
+      <%= render :partial => 'commons/counter', :locals => { :page => params[:page], :index => i += 1 } %>
       <%= link_to classroom, organization_classroom_path(classroom) %>
     </li>
   <% end %>

@@ -1,8 +1,9 @@
 <%= render :file => 'public/commons/search_form' %>
 
 <ul class="list">
-  <% @lecturers.each do |lecturer| %>
+  <% @lecturers.each_with_index do |lecturer, i| %>
     <li>
+      <%= render :partial => 'commons/counter', :locals => { :page => params[:page], :index => i } %>
       <%= link_to lecturer.full_name, organization_lecturer_path(lecturer) %>
     </li>
   <% end %>

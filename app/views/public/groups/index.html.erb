@@ -1,8 +1,9 @@
 <%= render :file => 'public/commons/search_form' %>
 
 <ul class="list">
-  <% @groups.each do |group| %>
+  <% @groups.each_with_index do |group, i| %>
     <li>
+      <%= render :partial => 'commons/counter', :locals => { :page => params[:page], :index => i } %>
       <%= link_to "гр. #{group.title}", organization_group_path(group.title) %>
       <span class='additional'><%= group.timetable.title %></span>
     </li>
