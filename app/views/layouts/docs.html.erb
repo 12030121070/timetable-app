@@ -1,0 +1,31 @@
+<%= content_for :head do %>
+  <head>
+    <title>Электронное расписание для учебных заведений</title>
+    <%= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon', :type => 'image/ico' %>
+    <%= stylesheet_link_tag    'landing', :media => 'all' %>
+    <%= javascript_include_tag 'landing' %>
+    <%= csrf_meta_tags %>
+    <meta name='yandex-verification' content='48ad41564d12379c' />
+  </head>
+<% end %>
+
+<%= content_for :content do %>
+  <div class="main_page">
+    <div class="header">
+      <div class="inner_wrapper">
+        <div class="logo"><%= link_to "Электронное расписание для учебных заведений", root_path %></div>
+      </div>
+
+      <div class="docs">
+        <%= render 'docs/sidebar' %>
+
+        <div class="content">
+          <%= yield %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+<%= render :file => 'layouts/base' %>
