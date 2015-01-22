@@ -2,7 +2,7 @@
 
 <%= simple_form_for [:workplace, @membership], :remote => true do |f| %>
 
-  <%= f.input :email, :input_html => { :class => 'inline_edit', :autofocus => true }, :placeholder => 'Адрес электронной почты' %>
+  <%= f.input :email, :as => :string, :input_html => { :class => 'inline_edit', :autofocus => true }, :placeholder => 'Адрес электронной почты' %>
 
   <div class="buttons sticky bottom">
     <%= f.submit "Сохранить", :class => 'yellow_button' %>
