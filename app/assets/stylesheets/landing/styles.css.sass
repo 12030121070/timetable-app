@@ -297,7 +297,7 @@ h1,h2,h3,h4,h5,h6
 
   .actions
     +clearfix
-    margin: 80px 0 0 0
+    margin: 30px 0 0 0
 
 .tariff
   background: #f2f4f5
@@ -382,3 +382,27 @@ h1,h2,h3,h4,h5,h6
           position: relative
           top: 1px
           left: 1px
+
+.documentation
+  +clearfix
+
+  a
+    background: image_url('help.png') no-repeat left center
+    display: block
+    height: 32px
+    line-height: 32px
+    padding: 0 0 0 40px
+    text-decoration: none
+
+.header
+  .documentation
+    position: relative
+    top: 30px
+
+.demo
+  .documentation
+    margin: 18px 0 0 0
+
+    a
+      color: #fff
+      font-size: 18px
