@@ -20,7 +20,6 @@ group :default do
   gem 'enumerize'
   gem 'grape'
   gem 'has_scope'
-  gem 'high_voltage', '~> 2.2.1'
   gem 'inherited_resources'
   gem 'kaminari'
   gem 'nested_form'

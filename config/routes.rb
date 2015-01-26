@@ -7,8 +7,7 @@ TimetableApp::Application.routes.draw do
 
   get '/impersonate/users/:user_id' => 'user_impersonate/impersonate#create', :as => :impersonate_user
 
-  get '/pages/*id' => 'docs#show', :as => :page, :format => false
-  get '/docs', to: redirect('/docs/about')
+  get '/docs' => 'docs#index'
 
   namespace :manage do
     root :to => 'manage#index'
@@ -18,7 +17,6 @@ TimetableApp::Application.routes.draw do
     resources :users, :only => :index
 
     resource :tariff, :only => [:edit, :update]
-
 
     resources :organizations do
       resources :subscriptions, :except => [:show] do

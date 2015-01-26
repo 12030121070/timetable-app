@@ -1,0 +1,6 @@
+<% docs_pages.each do |page, title| %>
+  <div class="<%= page %>_wrapper sly_wrapper">
+    <h1><%= title %></h1>
+    <%= render :file => "docs/#{page}" %>
+  </div>
+<% end %>

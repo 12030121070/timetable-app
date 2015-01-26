@@ -1,3 +1,4 @@
 class DocsController < ApplicationController
-  include HighVoltage::StaticPage
+  def index
+  end
 end
