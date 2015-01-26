@@ -1,6 +1,4 @@
 @init_sticky_sidebar = ->
-  console.log 'init'
-
   isScrolledTo = (elem) ->
     docViewTop = $(window).scrollTop()
     docViewBottom = docViewTop + $(window).height()
