@@ -1,18 +1,7 @@
 <ul class="sidebar js-sidebar">
-  <li><%= link_to 'Что такое FlipTable?', '/docs/about' %></li>
-  <li><%= link_to 'Начало работы с FlipTable', '/docs/getting-started' %></li>
-  <li><%= link_to 'Настройки учреждения', '/docs/organization-settings' %></li>
-  <li><%= link_to 'Справочник преподавателей', '/docs/lecturers' %></li>
-  <li><%= link_to 'Справочник аудиторного фонда', '/docs/buildings' %></li>
-  <li><%= link_to 'Справочник дисциплин', '/docs/disciplines' %></li>
-  <li><%= link_to 'Составление расписания', '/docs/timetable' %></li>
-  <li><%= link_to 'Копирование и перенос урока', '/docs/copy-move-lesson' %></li>
-  <li><%= link_to 'Копирование недель', '/docs/copy-weeks' %></li>
-  <li><%= link_to 'Публикация расписания', '/docs/timetable-publication' %></li>
-  <li><%= link_to 'Статистика нагрузки по расписанию', '/docs/timetable-statistics' %></li>
-  <li><%= link_to 'Многопользовательский режим работы', '/docs/managers' %></li>
-  <li><%= link_to 'Публичный вид расписания', '/docs/timetable-in-public' %></li>
-  <li><%= link_to 'Подписки', '/docs/subscription' %></li>
-  <li><%= link_to 'Поддержка пользователей и гарантии', '/docs/support' %></li>
-  <li><%= link_to 'Контакты', '/docs/contacts' %></li>
+  <% docs_pages.each do |page, title| %>
+    <li class="item <%= 'active' if params[:id] == page %>">
+      <%= link_to title, page_path(page) %>
+    </li>
+  <% end %>
 </ul>
