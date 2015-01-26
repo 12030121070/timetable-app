@@ -7,7 +7,7 @@ TimetableApp::Application.routes.draw do
 
   get '/impersonate/users/:user_id' => 'user_impersonate/impersonate#create', :as => :impersonate_user
 
-  get 'docs/' => 'high_voltage/docs#show', :id => 'show'
+  get '/pages/*id' => 'docs#show', :as => :page, :format => false
 
   namespace :manage do
     root :to => 'manage#index'
