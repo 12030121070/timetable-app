@@ -18,7 +18,7 @@
     <div class="footer">
       <ul>
         <li id="documentation" class='<%= controller_name == 'docs' ? 'selected' : 'fake' %>'>
-          <%= link_to "<span title='Документация'></span><b>Документация</b>".html_safe, '/docs/about', :target => '_blank' %>
+          <%= link_to "<span title='Документация'></span><b>Документация</b>".html_safe, '/docs', :target => '_blank' %>
         </li>
         <li id='subscribes' class='<%= controller_name == 'subscriptions' ? 'selected' : 'fake' %>'>
           <%= link_to "<span title='Подписка'></span><b>Подписка</b>".html_safe, workplace_subscriptions_path %>

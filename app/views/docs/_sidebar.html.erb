@@ -1,6 +1,6 @@
 <ul class="sidebar js-sidebar">
   <% docs_pages.each do |page, title| %>
-    <li class="item <%= 'active' if params[:id] == page %>">
+    <li class="item <%= 'active' if params[:id] == page %> <%= page %>_link">
       <%= link_to title, docs_path(:anchor => page) %>
     </li>
   <% end %>
