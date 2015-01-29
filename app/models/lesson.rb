@@ -67,7 +67,7 @@ class Lesson < ActiveRecord::Base
     return self.class.subgroup.options.select { |title, value| subgroups.include?(value) }
   end
 
-  def available_cells_for_copy_and_move
+  def available_cells_for_copy_and_move(week = self.week)
     cells = week.cells
     (lecturers + groups + classrooms).flat_map(&:lessons).each do |lesson|
       # TODO: little poo

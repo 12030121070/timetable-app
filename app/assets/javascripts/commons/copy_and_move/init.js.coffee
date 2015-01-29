@@ -18,3 +18,10 @@
       move_radio.removeClass('active')
       $this.addClass('active')
       radio.prop('checked', 'checked')
+
+  $('.weeks_list_wrapper').on 'click', (evt) ->
+    $this = $(evt.target)
+    if $this.is('a')
+      $this.parent().addClass('selected').siblings().removeClass('selected')
+      $('.sly_table').hide().filter($this.attr('href')).show()
+      false
